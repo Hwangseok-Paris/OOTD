@@ -9,30 +9,32 @@
 <head>
     <meta charset="UTF-8">
     <title>brand</title>
+    <c:import url="../common/header.jsp"/>
     <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/brandInput.css" />
 </head>
 <body>
-   <h1 style="text-align: center;">  ( -- Header 영역 -- )</h1>
-<hr>
-<h1 style="text-align: center;">상품 등록 </h1>
+<br />
+<br />
+
+	<h1 style="text-align: center;">상품 등록 </h1><br />
 <hr>
     <div class="package">
         <div id="insertArea" class="inputBox1" style="margin-left: 25%;">
             <div id="contentImgArea1" class="imgInput">
-                <img src="../resources/images/imgInput.png" 
+                <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" 
                     id="contentImg1" style="height: 150px; width: 120px;"/>
             </div>
             <div id="contentImgArea2" class="imgInput">
-                <img src="../resources/images/imgInput.png" 
+                <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" 
                     id="contentImg2" style="height: 150px; width: 120px;"/>
             </div>
             <div id="contentImgArea3" class="imgInput">
-                <img src="../resources/images/imgInput.png" 
+                <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" 
                     id="contentImg3" style="height: 150px; width: 120px;"/>
             </div>
             <div id="contentImgArea4" class="imgInput">
-                <img src="../resources/images/imgInput.png" 
+                <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" 
                     id="contentImg4" style="height: 150px; width: 120px;"/>
             </div>
         </div>
@@ -88,7 +90,7 @@
         </div>
     </div>
 
-
+<c:import url="../common/footer.jsp"/>
 
 
 
