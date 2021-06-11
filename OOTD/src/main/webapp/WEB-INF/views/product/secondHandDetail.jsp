@@ -1,42 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <title>second-handDetail</title>
+    <c:import url="../common/header.jsp"/>
    
+   <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-    <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src='${pageContext.request.contextPath }/resources/asset/js/jquery.zoom.js'></script>
-    <script src='${pageContext.request.contextPath }/resources/asset/js/jquery.Wheelzoom.js'></script>
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/secondHandDetail.css" />
+    <script src='${pageContext.request.contextPath }/resources/js/jquery.zoom.js'></script>
+    <script src='${pageContext.request.contextPath }/resources/js/jquery.Wheelzoom.js'></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/secondHandDetail.css" />
 </head>
 <body>
-<h1>중고 상품 디테일 ( -- Header 영역 -- )</h1><hr><br>
+<hr><br>
 <section>
     <div class="product_detail">
         <div class="package" >
             <div id="insertArea" class="inputBox1" style="margin-left: 20%;">
                 <div id="contentImgArea1" class="imgInput">
-                    <img src="../resources/images/second-hand sample1.jpg" 
+                    <img src="${pageContext.request.contextPath }/resources/images/second-hand sample1.jpg" 
                         id="contentImg1" style="height: 150px; width: 120px;"/>
                 </div>
                 <div id="contentImgArea2" class="imgInput">
-                    <img src="../resources/images/second-hand sample2.jpg" 
+                    <img src="${pageContext.request.contextPath }/resources/images/second-hand sample2.jpg" 
                         id="contentImg2" style="height: 150px; width: 120px;"/>
                 </div>
                 <div id="contentImgArea3" class="imgInput">
-                    <img src="../resources/images/second-hand sample3.jpg" 
+                    <img src="${pageContext.request.contextPath }/resources/images/second-hand sample3.jpg" 
                         id="contentImg3" style="height: 150px; width: 120px;"/>
                 </div>
                 <div id="contentImgArea4" class="imgInput">
-                    <img src="../resources/images/second-hand sample4.jpg" 
+                    <img src="${pageContext.request.contextPath }/resources/images/second-hand sample4.jpg" 
                         id="contentImg4" style="height: 150px; width: 120px;"/>
                 </div>
             </div>
@@ -45,7 +49,7 @@
         
             <div id="imgDetail" class="inputBox2">
                 <div class='inputBox2 zoom' id='ex1'>
-                    <img src='../resources/images/second-hand sample1.jpg' id='jack' width='540' height='620' alt='Daisy on the Ohoopee'/>
+                    <img src='${pageContext.request.contextPath }/resources/images/second-hand sample1.jpg' id='jack' width='540' height='620' alt='Daisy on the Ohoopee'/>
                     
                 </div>
             </div>
@@ -110,7 +114,7 @@
                         <div id="origin">
                             <span>Special Premium Ultra Super Cap Jacket<b class="selectedSize"></b> </span> 
                             <input type="number" id="pQuan" name="pQuan" value="1" min="1"> <!-- input value 값 ??  -->
-                            <img src="../resources/images/xx.png" alt="" style="width: 15px; height: 15px; margin-right: 5px;" id="pDelete">
+                            <img src="${pageContext.request.contextPath }/resources/images/xx.png" alt="" style="width: 15px; height: 15px; margin-right: 5px;" id="pDelete">
                             <span>￦</span><span class="pPrice">29800</span>
                         </div>
                     </dt>
@@ -136,16 +140,18 @@
 
 </section>
 
-
+<c:import url="../common/footer.jsp"/>
     
 
         
-<script>
+	<script>
 
-        $(document).ready(function(){
-            $('#ex1').zoom();
-
-        });
+		$(function() {
+		    $(document).ready(function(){
+		        $('#ex1').zoom();
+		      
+		    });
+		});
     
 
 
