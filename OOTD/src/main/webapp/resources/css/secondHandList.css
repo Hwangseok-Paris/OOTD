@@ -95,7 +95,7 @@ li {
     position: relative;
 }
 
-img {
+.thumbnail-area img {
     width: 200px;
     height: 250px;
 }
