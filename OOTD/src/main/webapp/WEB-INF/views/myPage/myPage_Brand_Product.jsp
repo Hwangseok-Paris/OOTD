@@ -20,7 +20,7 @@
     <div class="container">
         <div class="body-title">MY PAGE</div>
        
-        <!-- 좌측 aside 메뉴 (BRAND)-->
+        <!-- 좌측 aside 메뉴 (BRAND)1-->
         <%@ include file="myPage_Brand_Menu.jsp" %>
      
         <section class="main">
