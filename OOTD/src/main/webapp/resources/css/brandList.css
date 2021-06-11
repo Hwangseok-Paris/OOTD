@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@CHARSET "UTF-8";
 
 body {
     width: 1200px;
@@ -33,7 +33,12 @@ div[class$=cate]  {
     margin-bottom: 5px;
 }
 
-li {
+#_title {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.hiddenArea li {
     list-style: none;
     cursor: pointer;
 }
@@ -98,7 +103,7 @@ li {
     position: relative;
 }
 
-img {
+.thumbnail-area img {
     width: 200px;
     height: 250px;
 }
