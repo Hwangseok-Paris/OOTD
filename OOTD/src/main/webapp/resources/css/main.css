@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+article {
+	margin-top: 150px;
+}
+
+article > #main_video {
+    width: 100%;
+    height: 945px;
+    position: relative;
+}
+
+article > .video_content {
+    position: absolute;
+    width: 100%;
+    height: 945px;
+    top: 345px;
+    left: 0px;
+    display: flex;
+}
+
+article > .video_content > .video_Brand {
+    width: 50%;
+    height: 945px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+article > .video_content > .video_Brand:hover {
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+article > .video_content > .video_Brand > p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: #FFFFF0;
+    visibility: hidden;
+}
+
+article > .video_content > .video_Brand:hover > p {
+    visibility: visible;
+}
+
+article > .video_content > .video_SHand {
+    width: 50%;
+    height: 945px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+article > .video_content > .video_SHand:hover {
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+article > .video_content > .video_SHand > p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: #FFFFF0;
+    visibility: hidden;
+}
+
+article > .video_content > .video_SHand:hover > p {
+    visibility: visible;
+}
+
+.product_slide {
+    width: 100%;
+    height: 500px;
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+
+.slide_wrapper ul li {
+    list-style: none;
+    
+}
+
+.slide_wrapper {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.bxslider li {
+    height: 310px;
+    background-color: gray;
+}
