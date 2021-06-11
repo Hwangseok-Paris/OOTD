@@ -9,7 +9,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/common/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/common/css/header.css">
 	
 	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 	
