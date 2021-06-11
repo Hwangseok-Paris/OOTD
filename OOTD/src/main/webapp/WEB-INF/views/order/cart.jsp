@@ -62,9 +62,9 @@
                         <input type="hidden" class="realPrice" value="25900">
                      </td> 
                      <td style="width: 100px;">
-                        <button class="button1" id="button" type ="button"  value='-' >-</button>
+                        <button class="button1 quanBtn" id="button" type ="button"  value='-' >-</button>
                        <div id="result" class="result">1</div>
-                       <button class="button2" id="button" type="button"  value='+'>+</button>
+                       <button class="button2 quanBtn" id="button" type="button"  value='+'>+</button>
                      </td>
                      
                      <td>
@@ -86,9 +86,9 @@
                         <input type="hidden" class="realPrice" value="25900">
                      </td>
                      <td style="width: 100px;">
-                        <button class="button1" id="button" type ="button" value='-' >-</button>
+                        <button class="button1 quanBtn" id="button" type ="button" value='-' >-</button>
                           <div id="result"  class="result">1</div>
-                          <button class="button2" id="button" type="button" value='+'>+</button>
+                          <button class="button2 quanBtn" id="button" type="button" value='+'>+</button>
                      </td>
                      
                      <td>

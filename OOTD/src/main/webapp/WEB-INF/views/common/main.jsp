@@ -26,8 +26,9 @@
 </head>
 <body>
 	<article>
-        <video id="main_video" src="${pageContext.request.contextPath }/resources/images/main_video.mp4" muted="muted" autoplay="autoplay" loop=""></video>
-    
+		<div id="main_video">
+	        <video  src="${pageContext.request.contextPath }/resources/images/main_video.mp4" muted="muted" autoplay="autoplay" loop=""></video>
+	    </div>
         <div class="video_content">
             <div class="video_Brand">
                 <p>Go to Brand Shop</p>
@@ -58,7 +59,7 @@
         </div>
     </div>
 
-   <!--  <script>
+   <script>
         $(function() {
 
             $('.bxslider').bxSlider({
@@ -84,7 +85,7 @@
         $('.video_SHand').on('click', function() {
             alert("중고 리스트 이동");
         })
-    </script> -->
+    </script>
     
 </body>
 </html>

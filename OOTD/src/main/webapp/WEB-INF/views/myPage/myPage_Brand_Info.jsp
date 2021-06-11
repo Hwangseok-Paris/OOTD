@@ -168,6 +168,7 @@
     
     <!-- FOOTER IMPORT -->
    	<%@ include file="../common/footer.jsp" %>
+   	
 </body>
 <script>
     $('#update-password').on('click', function () {

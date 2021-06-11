@@ -52,7 +52,7 @@
                     </li>
 
                     <li>
-                        <i class="fas fa-user fa-lg"></i>
+                        <i class="fas fa-user fa-lg" id="loginBtn" data-target="#loginModal" data-toggle="modal"></i>
                     </li>
                 </ul>
 
@@ -63,8 +63,11 @@
             </div>
         </div>
     </header>
+
+   
+   
     
-   <!--  <script>
+	<script>
         $(function() {
 
             var icon = document.getElementById("logo");
@@ -73,9 +76,9 @@
                 alert("css개빡치네");
             })
 
-            $('ul').children('li').find('.fa-user').click(function() {
-                alert("로그인 되있으면 마이페이지 안되있으면 로그인 페이지");
-            })
+          //  $('ul').children('li').find('.fa-user').click(function() {
+         //       alert("로그인 되있으면 마이페이지 안되있으면 로그인 페이지");
+          //  })
             
             $('.fa-moon').on('click', function() {
                 document.documentElement.classList.toggle("dark");
@@ -107,6 +110,6 @@
             })
             
         })
-    </script> -->
+    </script>
 </body>
 </html>

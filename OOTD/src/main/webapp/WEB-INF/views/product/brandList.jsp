@@ -9,18 +9,16 @@
 <meta charset="UTF-8">
 <title>브랜드리스트</title>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/brandList.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productList.css">
 </head>
 <body>
 
 	<c:import url="../common/header.jsp"/>
 
-    <div class="wrapper">
+    <div class="container">
         <!-- 스토어 이름 -->
-        <header>
+        <header class="list-title">
             <h2 align="center">BRAND STORE</h2>
-            <button id="toggleTheme">DARK MODE</button>
-            <a href="http://127.0.0.1:5500/SemiProject/Default/secondHandList.html">중고페이지</a>
         </header>
 
         <!-- 카테고리 사이드바 -->
@@ -102,10 +100,7 @@
             </div>
         </nav>
 
-        <!-- TOP 버튼 -->
-        <aside>
-            <div id="topBtn" href="#">TOP</div>
-        </aside>
+
         
 
         <section class="main-wrapper">
@@ -291,9 +286,17 @@
             
             
         </section>
+	    <!-- TOP 버튼 -->
+	    <aside>
+	        <div id="topBtn" href="#">TOP</div>
+	    </aside>        
+
         
     </div>
 
+    <!-- FOOTER IMPORT -->
+   	<%@ include file="../common/footer.jsp" %>
+   	
     <script>
         
 
@@ -354,5 +357,8 @@
         console.log(localStorage);
     });
     </script>
+    
+
 </body>
+
 </html>

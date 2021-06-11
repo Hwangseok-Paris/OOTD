@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+body{
+    /* 스크롤 바로 인해 body 영역이 밀리지 않도록 함 */
+    overflow: overlay;
+}
+
 /* 메신저 로그인 css 시작 */
 #login-service {
     margin : auto;

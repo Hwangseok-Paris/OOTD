@@ -124,7 +124,6 @@ padding: 8px 16px;
 text-decoration: none;
 }
 
-
 #prod-regis {
     float: right;
     border-radius: 5px;
@@ -132,6 +131,7 @@ text-decoration: none;
     color: white;
     margin-right: 15px;
 }
+
 
 #topBtn {
 	width:50px;

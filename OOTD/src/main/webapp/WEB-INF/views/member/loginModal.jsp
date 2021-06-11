@@ -20,11 +20,9 @@
 </head>
 <body>
     <div class="container">
-        <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-default btn-lg" id="loginBtn">Login</button>
-      
+       
         <!-- 로그인 Modal -->
-        <div class="modal modal-center fade" id="loginModal" role="dialog">
+        <div class="modal modal-center fade" id="loginModal" role="dialog" data-backdrop="static" data-keyboard="false">
           <div class="modal-dialog">
           
             <!-- Modal 컨텐츠 시작 -->
@@ -157,14 +155,13 @@
     </div> 
     <script>
         /* 버튼 클릭 시, 모달 pop-up */
-        $(document).ready(function(){
-            $("#loginBtn").click(function(){
+        $("#loginBtn").click(function(){
                 $("#loginModal").modal();
-            });
-        });
+          });
+      
 
         /* 모달 밖의 영역 클릭 시, 모달이 닫히는 것을 방지 */
-        $('#loginModal').modal({backdrop: 'static', keyboard: false}) ;
+   		//   $('#loginModal').modal({backdrop: 'static', keyboard: false}) ;
 
         /* 모달 내 JOIN 버튼 클릭 시, 회원가입 페이지로 이동 */
         function goJoinPage() {

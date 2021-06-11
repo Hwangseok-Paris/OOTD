@@ -12,7 +12,7 @@ div#backbody {
 #frame1{
    width: 100%;
    padding: 50px 50px;
-   background-color: #fff;
+   
 }
 
 #frame2{
@@ -249,4 +249,9 @@ input.underline {
 	padding-left: 10px; 
 	padding-top:20px;
 	color: gray;
+}
+
+.quanBtn{
+	width:25px;
+	height: 25px;
 }

@@ -10,15 +10,18 @@
 <meta charset="UTF-8">
 <title>중고리스트</title>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/secondHandList.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productList.css">
 </head>
 
 <body>
-    <div class="wrapper">
+
+	<c:import url="../common/header.jsp"/>
+	
+	
+    <div class="container">
         <!-- 스토어 이름영역 -->
-        <header>
+        <header class="list-title">
             <h2 align="center">SECOND HAND STORE</h2>
-            <button id="toggleTheme">DARK MODE</button>
         </header>
 
         <!-- 카테고리 사이드바 -->
@@ -58,10 +61,7 @@
             </div>
         </nav>
 
-        <!-- top 버튼 -->
-        <aside>
-            <div id="topBtn" href="#">TOP</div>
-        </aside>
+
         
 
         <section class="main-wrapper">
@@ -244,8 +244,16 @@
             
         </section>
         
+                <!-- top 버튼 -->
+	        <aside>
+	            <div id="topBtn" href="#">TOP</div>
+	        </aside>
     </div>
-
+	
+    <!-- FOOTER IMPORT -->
+   	<%@ include file="../common/footer.jsp" %>
+   	
+	
     <script>
         // Dropdown 
         $('.showArea').on('click', function() {

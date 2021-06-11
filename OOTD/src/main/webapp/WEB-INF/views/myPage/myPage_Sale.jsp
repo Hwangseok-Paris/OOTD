@@ -112,6 +112,7 @@
         </section>
     </div>
     
+    <!-- Order Detail(Mordal) -->
     <%@ include file="myPage_Order_Detail.jsp"%>
     
             
