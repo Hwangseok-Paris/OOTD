@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/common/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" rel="stylesheet" /> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <script>
+   <!--  <script>
         $(function() {
 
             $('.bxslider').bxSlider({
@@ -84,7 +84,7 @@
         $('.video_SHand').on('click', function() {
             alert("중고 리스트 이동");
         })
-    </script>
+    </script> -->
     
 </body>
 </html>
