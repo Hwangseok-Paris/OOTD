@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.imgInput{
+          border: rgb(165, 163, 163) solid;
+          margin-top: 5px;
+    }
+    [id*=ImgArea]:hover {
+		cursor : pointer;
+    }
+    .inputBox{
+        display: inline-block;
+        margin: 1%;
+    }
+    .inputBox2{
+        margin: 1%;
+        float: left;
+    }
+    .inputBox1, .inputBox3 {
+        /* display: inline-block; */
+        margin: 1%;
+        float: left;
+    }
+    #imgDetail{
+        width: 400px;
+        height: 700px;
+        margin-right: 20px;
+    }
+    .ininput{
+        width: 340px;
+    }
+    .ininput2{
+        width: 160px;
+    }
+    .package{
+        display: inline;
+    }
+    #btn{
+        margin-left: 80px;
+        border-radius: 15%;
+        background-color: white;
+        width: 180px;
+        height: 40px;
+        font-weight: bolder;
+    }
