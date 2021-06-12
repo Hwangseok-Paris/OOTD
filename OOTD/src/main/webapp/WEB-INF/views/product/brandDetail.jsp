@@ -12,17 +12,16 @@
 	<c:import url="../common/header.jsp"/>
    
     
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+     <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src='${pageContext.request.contextPath }/resources/js/jquery.zoom.js'></script>
     <script src='${pageContext.request.contextPath }/resources/js/jquery.Wheelzoom.js'></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/brandDetail.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productDetail.css" />
 </head>
 <body>
-<hr><br>
+
 <section>
     <div class="product_detail">
         <div class="package" >
@@ -222,15 +221,17 @@
         </table>
         <hr>
         <!-- 우선 틀만 잡아놓음 -->
-        <div class="text-center">
-            <ul class="pagination">
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-            </ul>
-        </div>
+            <!-- 페이지네이션 (임시) -->
+            <div class="pagination">
+                <a href="#">&laquo;</a>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">&raquo;</a>
+              </div>
 
 
 

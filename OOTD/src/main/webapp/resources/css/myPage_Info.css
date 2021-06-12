@@ -7,10 +7,10 @@ body{
 
 ul {
     padding-inline-start: 0px;
-    font-size: 13px;
+    
 }
 
-li {
+.category li {
     list-style: none;
     margin-bottom: 8px;
 }
@@ -21,10 +21,12 @@ th {
 }
 
 
-.container {
+.container-myPage {
     width: 1200px;
-    margin: 70px auto 70px auto;
+    margin: 70px auto 200px auto;
+
 }
+
 
 
 /* 좌측 메뉴 설정 */
@@ -39,6 +41,7 @@ th {
 .category-list ul{
 	margin-block-start : 1em;
 	margin-block-end: 1em;
+	font-size: 13px;
 }
 
 .category-list ul a{
@@ -95,6 +98,7 @@ tr>:first-child {
 .member-info tr>:last-child {
     width: 145px;
     text-align: left;
+    
 }
 
 .member-info th {
@@ -103,7 +107,7 @@ tr>:first-child {
     line-height: 50px;
 }
 
-button {
+.container-myPage button{
     background: black;
     border: black solid 0.5px;
     width: 120px;
@@ -111,6 +115,7 @@ button {
     color: white;
     position: relative;
     display: inline-block;
+    line-height: normal !important;
 }
 
 .section-title {
@@ -148,6 +153,15 @@ button {
     width: 150px;
 }
 
+.container-myPage input {
+    height: 25px;
+    width: 300px;
+    line-height: 20px;
+    border-style: none;
+    border: black solid 1px;
+    padding-left: 5px;
+}
+
 input[type=submit] {
     background: black;
     border: none;
@@ -158,6 +172,7 @@ input[type=submit] {
     display: inline-block;
     margin-left: 153px;
     margin-bottom: 20px;
+	line-height: normal ;
 }
 
 input[type=reset] {
@@ -168,16 +183,11 @@ input[type=reset] {
     color: black;
     position: relative;
     display: inline-block;
+   	line-height: normal ;
+   	margin-left: 15px;
 }
 
-input {
-    height: 25px;
-    width: 300px;
-    line-height: 20px;
-    border-style: none;
-    border: black solid 1px;
-    padding-left: 5px;
-}
+
 
 .select-bank {
     width: 100px;
@@ -201,3 +211,10 @@ select {
     margin-bottom: 11px;
     
 }
+
+
+
+
+
+
+

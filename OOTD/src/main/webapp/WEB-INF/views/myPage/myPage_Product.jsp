@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>마이페이지 - 상품리스트</title>
@@ -16,10 +15,10 @@
 <body>
 
 	<!-- HEADER IMPORT -->
-	<%@ include file="../common/header.jsp" %>
+	<c:import url="../common/header.jsp"/>
 
 
-    <div class="container">
+    <div class="container-myPage">
         <div class="body-title">MY PAGE</div>
         
         <!-- 마이페이지 메뉴 (일반) -->

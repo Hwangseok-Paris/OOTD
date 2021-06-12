@@ -9,22 +9,24 @@
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <title>second-handDetail</title>
+    
     <c:import url="../common/header.jsp"/>
    
    <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 얘는 문제없  -->
+     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+ -->     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> 얘가 문제네 -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src='${pageContext.request.contextPath }/resources/js/jquery.zoom.js'></script>
     <script src='${pageContext.request.contextPath }/resources/js/jquery.Wheelzoom.js'></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/secondHandDetail.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productDetail.css" />
 </head>
 <body>
-<hr><br>
+
+
 <section>
-    <div class="product_detail">
+    <div class="product_detail sh_detail">
         <div class="package" >
             <div id="insertArea" class="inputBox1" style="margin-left: 20%;">
                 <div id="contentImgArea1" class="imgInput">
@@ -325,6 +327,6 @@
 
 
     </script>
-    <br><br><br><br><br><br><br><br><br><br>
+
 </body>
 </html>

@@ -18,7 +18,7 @@
 	<c:import url="../common/header.jsp"/>
 	
 	
-    <div class="container">
+    <div class="container-List">
         <!-- 스토어 이름영역 -->
         <header class="list-title">
             <h2 align="center">SECOND HAND STORE</h2>

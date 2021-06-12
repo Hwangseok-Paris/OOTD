@@ -9,18 +9,14 @@
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width,initial-scale=1">
    <title>주문 페이지</title>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
    <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/order.css"/>
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/header.css"/>
-     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footer.css"/>
 </head>
  
 <body>
 <c:import url="../common/header.jsp"/>
-<div id="backbody">
+<div id="backbody order">
    <div id="frame1" style="align: center;">
       <form>
          <div id="frame2">
@@ -198,7 +194,7 @@
       </form>
    </div>
 </div>
-<!-- <script>
+<script>
    
    function addrSearch() {
        new daum.Postcode({
@@ -287,7 +283,7 @@
 	  
 	  
 	  });
-</script> -->
+</script>
 <c:import url="../common/footer.jsp"/>
 </body>
 </html>

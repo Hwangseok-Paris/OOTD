@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+.product_detail{
+	margin-top: 80px;
+}
+
+.review_list{
+	margin-bottom: 80px;
+}
+
 .imgInput{
           /* border: rgb(165, 163, 163) solid; */
           margin-top: 5px;
@@ -112,3 +120,22 @@
             height: 800px;
         }
 
+.sh_detail{
+	height:700px;
+}
+
+
+.pagination {
+    display: inline-block;
+    text-align: center;
+    padding-left : 35%;
+}
+
+.pagination a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	background:none;
+	text-align:center;
+}

@@ -9,12 +9,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>결제 완료 페이지</title>
-   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ 	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 	 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/paymentSuccess.css"/>
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/header.css"/>
-     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footer.css"/>
 </head>
 
 <body>

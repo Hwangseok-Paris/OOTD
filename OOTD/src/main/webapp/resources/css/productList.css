@@ -1,12 +1,11 @@
 @CHARSET "UTF-8";
 
 
-.container {
+.container-List {
     width: 1200px;
     height: auto;
     margin: 70px auto 200px auto;
-
-}
+  }
 
 nav {
     float: left;
@@ -16,7 +15,9 @@ section{
 	display: inline-block;
 }
 
-
+.main-wrapper{
+	display: inline-block;
+}
 
 section {
     margin-top: 20px;
@@ -132,6 +133,8 @@ div[class$=cate]  {
 .pagination {
     display: inline-block;
     text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .pagination a {
@@ -140,6 +143,9 @@ float: left;
 padding: 8px 16px;
 text-decoration: none;
 background:none;
+
+
+
 }
 
 #topBtn {
@@ -207,6 +213,11 @@ html.dark #prod-regis:hover {
     color: black;
     transition: 0.2s;
 }
+
+.side-bar{
+	margin-top: 60px;
+}
+
 /* @media (prefers-color-scheme: dark) {
     html.dark {
         background: black;

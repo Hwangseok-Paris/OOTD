@@ -10,16 +10,17 @@
     <title>second-hand</title>
     <c:import url="../common/header.jsp"/>
     <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/secondHandInput.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productInput.css" />
 </head>
-<body>
-<br />
-<br />
 
-    <h1 style="text-align: center;">상품 등록( Second-hand )</h1> <br />
-<hr>
-    <div class="package">
-        <div id="insertArea" class="inputBox1" style="margin-left: 25%;">
+<body>
+<div class="container">
+	<div class="brandInput-title">
+		<span>상품 등록</span>
+	</div>
+		<div class="input-area">
+		    <div class="input-img-area">
+        <div id="insertArea" class="inputBox1">
             <div id="contentImgArea1" class="imgInput">
                 <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" 
                     id="contentImg1" style="height: 150px; width: 120px;"/>
@@ -79,12 +80,23 @@
             <br><br>
             <button id="btn">등록하기</button>
             <br><br>
-        </div>
+	        </div>
+	    </div>
+	    	
+	    </div>
     </div>
 
-<c:import url="../common/footer.jsp"/>
 
 
+
+
+
+	<c:import url="../common/footer.jsp"/>
+
+
+
+
+</body>
 
 
     <script>
@@ -135,5 +147,4 @@
 
 		}
     </script>
-</body>
 </html>

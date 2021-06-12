@@ -7,10 +7,9 @@ body{
 
 ul {
     padding-inline-start: 0px;
-    font-size: 13px;
 }
 
-li {
+.category li {
     list-style: none;
     margin-bottom: 8px;
 }
@@ -20,7 +19,7 @@ br{
 }
 
 td,
-th {
+.main th {
     padding: unset;
     font-weight: unset;
     vertical-align: middle;
@@ -36,7 +35,7 @@ a {
 }
 
 
-.container {
+.container-myPage {
     width: 1200px;
     margin: 70px auto 200px auto;
 
@@ -54,6 +53,7 @@ a {
 .category-list ul{
 	margin-block-start : 1em;
 	margin-block-end: 1em;
+    font-size: 13px;
 }
 
 .category-list ul a{

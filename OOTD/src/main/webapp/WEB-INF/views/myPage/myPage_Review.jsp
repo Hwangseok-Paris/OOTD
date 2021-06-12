@@ -15,10 +15,10 @@
 <body>
 
 	<!-- HEADER IMPORT -->
-	<%@ include file="../common/header.jsp" %>
+	<c:import url="../common/header.jsp"/>
 
 
-    <div class="container">
+    <div class="container-myPage">
         <div class="body-title">REVIEW</div>
         <section class="main">
             <div class="wrap-section">

@@ -16,10 +16,10 @@
 <body>
 
 	<!-- HEADER IMPORT -->
-	<%@ include file="../common/header.jsp" %>
+	<c:import url="../common/header.jsp"/>
 
 
-    <div class="container">
+    <div class="container-myPage">
         <div class="body-title">MY PAGE</div>
         
         <!-- 마이페이지 메뉴 (일반) -->
