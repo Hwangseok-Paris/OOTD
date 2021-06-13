@@ -22,7 +22,7 @@
 
 </head>
 <body>
-  <form name="memberJoinFrm" action="memberJoinEnd.do" method="post">
+  <form name="memberJoinFrm" action="member/memberJoinEnd.do" method="post">
     <!-- wrapper -->
     <div id="wrapper">
         <h1 style="text-align: center;">JOIN</h1>
@@ -181,7 +181,7 @@
 
             <!-- JOIN BTN-->
             <div class="joinOrCancel">
-                <button type="button" id="joinBtn" class="btn btn-secondary btn-sm">가입하기</button>
+                <button type="submit" id="joinBtn" class="btn btn-secondary btn-sm">가입하기</button>
                 <button type="button" id="cancelBtn" class="btn btn-secondary btn-sm">작성 취소</button>
             </div>
             
@@ -417,11 +417,11 @@
 
           
         function moveBrandJoinPage() {
-            location.href = "brandJoin.html";
+        	location.href='${pageContext.request.contextPath}/member/brandJoin.do';
         }
         
         function moveMemberJoinPage() {
-            location.href = "memberJoin.html";
+        	location.href='${pageContext.request.contextPath}/member/memberJoin.do';
         }
 
         /* 주소 입력 */

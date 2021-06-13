@@ -12,6 +12,13 @@ public class MemberController {
 		return "member/memberJoin";
 	}
 	
+	@RequestMapping("/member/brandJoin.do")
+	public String brandJoin() {
+		
+		return "member/brandJoin";
+	}
+	
+	
 	@RequestMapping("/member/joinAccept.do")
 	public String memberJoinAccept() {
 		
@@ -20,8 +27,14 @@ public class MemberController {
 	
 	@RequestMapping("member/memberJoinEnd.do")
 	public String memberJoinEnd() {
-		
-		return "index";
+		System.out.println("joinEnd 확인");
+		return "redirect:/";
+	}
+	
+	@RequestMapping("member/memberLogin.do")
+	public String memberLogin() {
+		System.out.println("login 확인");
+		return "redirect:/";
 	}
 	
 	

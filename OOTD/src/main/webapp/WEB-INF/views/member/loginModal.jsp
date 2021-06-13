@@ -32,7 +32,7 @@
                 
                 <!-- Modal 내 ID/PW 입력 및 로그인/ 가입 버튼 시작 -->
                 <div class="modal-body" style="padding:40px 50px;">
-                    <form role="form" action="memberLogin.do">
+                    <form role="form" action="member/memberLogin.do">
                         <div class="form-group">
                             <label for="usrname"> ID</label>
                             <input type="text" class="form-control" id="usrname" placeholder="Enter ID">
@@ -48,7 +48,7 @@
                         <div class="join-btn-group">
                             <button type="button" id="join-btn" class="btn btn-link" onclick="goJoinPage()">JOIN</button>
                             |
-                            <button type="button" id="login-btn" class="btn btn-link">LOGIN</button>
+                            <button type="submit" id="login-btn" class="btn btn-link">LOGIN</button>
                         </div>
                     </form>
                 </div>
