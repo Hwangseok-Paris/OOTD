@@ -123,7 +123,7 @@
             <div align="center">
                <button type="button" class="btn default orderbtn" id="allProduct">전체상품주문</button>
                <button type="button" class="btn default" id="productClear">선택상품주문</button>
-               <button type="button" class="btn default footerbtn" id="footerbtn" type="button" onclick="location.href='${pageContext.request.contextPath}/order/order.do'" style="color: white;">쇼핑계속하기</button>
+               <button type="button" class="btn default footerbtn" id="footerbtn continueShopping" type="button" onclick="location.href='${pageContext.request.contextPath}/order/order.do'" style="color: white;">쇼핑계속하기</button>
                <span class="clearboth"></span>
             </div>
             <br /><br /><br /><br />
@@ -237,6 +237,19 @@
          console.log("장바구니가 비어있습니다.")
       }
    });
+   
+   $('#allProduct').click(function(){
+		location.href = "${pageContext.request.contextPath}/order/order.or";
+		console.log("링크 선택");  
+   })
+   
+   
+      $('#productClear').click(function(){
+		location.href = "${pageContext.request.contextPath}/order/order.or";
+	  
+   })
+   
+   
 </script>
 <c:import url="../common/footer.jsp"/>
 </body>

@@ -174,7 +174,7 @@
                <span style="display:inline-block; padding: 30px 10px; color: gray; font-weight: bold;">결제정보</span><br />
                <span style="display:inline-block; padding: 20px 10px;">주문상품금액</span>
                <span style="font-size: 20pt; font-weight: bold; float: right;">25,900원</span><br /><br />
-               <button type="button" class="btn default payBtn" onclick="location.href='${pageContext.request.contextPath}/order/paymentSuccess.do'">결제하기</button>
+               <button type="button" class="btn default payBtn" onclick="location.href='${pageContext.request.contextPath}/order/paymentSuccess.or'">결제하기</button>
             </div>
          </div>
          <br /><br />

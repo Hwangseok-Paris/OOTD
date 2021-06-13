@@ -10,8 +10,8 @@ div#backbody {
 }
 
 #frame1{
-   width: 100%;
-   margin: 0 atuo;
+   width: 1200px;
+   margin: 40px auto;
    padding: 50px 50px;
    background-color: #fff;
 }
