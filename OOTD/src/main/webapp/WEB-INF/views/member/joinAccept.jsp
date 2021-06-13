@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/joinAccept.css" />
 </head>
 <body>
-    <form action="" id="joinForm">
+    <form action="memberJoin.do" id="joinForm">
         <ul class="join_box">
             <li class="checkBox check01">
                 <ul class="clearfix">

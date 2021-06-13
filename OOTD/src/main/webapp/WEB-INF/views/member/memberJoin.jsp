@@ -19,7 +19,7 @@
 
 </head>
 <body>
-  <form>
+  <form name="memberJoinFrm" action="memberJoinEnd.do" method="post">
     <!-- wrapper -->
     <div id="wrapper">
         <h1 style="text-align: center;">JOIN</h1>

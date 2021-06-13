@@ -32,7 +32,7 @@
                 
                 <!-- Modal 내 ID/PW 입력 및 로그인/ 가입 버튼 시작 -->
                 <div class="modal-body" style="padding:40px 50px;">
-                    <form role="form">
+                    <form role="form" action="memberLogin.do">
                         <div class="form-group">
                             <label for="usrname"> ID</label>
                             <input type="text" class="form-control" id="usrname" placeholder="Enter ID">
@@ -165,7 +165,7 @@
 
         /* 모달 내 JOIN 버튼 클릭 시, 회원가입 페이지로 이동 */
         function goJoinPage() {
-            location.href="memberJoin.html";
+        	location.href='${pageContext.request.contextPath}/member/joinAccept.do';
         }
     </script>
 </body>
