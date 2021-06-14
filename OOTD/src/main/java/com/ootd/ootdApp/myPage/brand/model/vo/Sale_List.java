@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 
-public class SaleList implements Serializable {
+public class Sale_List implements Serializable {
 
 	private static final long serialVersionUID = 2L;
 

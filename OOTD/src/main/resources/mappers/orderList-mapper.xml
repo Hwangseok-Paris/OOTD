@@ -3,8 +3,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orderList-mapper"> 
 
-   <select id="selectBrandOrderList" resultType="MypageOrderList">
-		SELECT C.PRODUCT_NAME, B.ORDER_QUANTITY, A.ORDER_NO, A.ORDER_DATE, A.TOTAL_PRICE
+
+   <select id="selectBrandOrderList" resultType="O_Order">
+	SELECT C.PRODUCT_NAME as product_name, B.ORDER_QUANTITY as ORDER_QUANTITY, A.ORDER_NO as ORDER_NO, A.ORDER_DATE as ORDER_DATE, A.TOTAL_PRICE as TOTAL_PRICE
         FROM O_ORDER A, O_ORDER_LIST B, PRODUCT C
         WHERE A.ORDER_NO = B.ORDER_NO
         	AND B.PRODUCT_NO = C.PRODUCT_NO

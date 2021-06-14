@@ -1,14 +1,19 @@
 package com.ootd.ootdApp.myPage.brand.controller;
 
+import java.io.File;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ootd.ootdApp.myPage.brand.model.service.BrandService;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
+import com.ootd.ootdApp.product.model.vo.Product;
 
 @Controller
 public class BrandController {
@@ -44,23 +49,55 @@ public class BrandController {
 
 	}
 
+	// 등록 상품 - 업체가 등록한 상품 리스트
 	@RequestMapping("myPage/myPage_Brand_Product.mp")
 	public String myPage_Brand_Product(Model model) {
 		
-		List<MypageOrderList> list = brandService.selectBrandOrderList();
-		System.out.println("여기 왔나요");
-		System.out.println("selectBrandOrderList [list] : " + list);
+		List<Product> list = brandService.selectBrandProductList();
+		System.out.println("product :: 여기 왔나요");
+		System.out.println("selectBrandProductList [list] : " + list);
 
 		model.addAttribute("list", list);
 
 		return "myPage/myPage_Brand_Product";
 	}
+	
+	// 등록 상품 - 업체가 등록한 상품 리스트 - 삭제
+	@RequestMapping("myPage/myPage_Brand_Prdouct_Delete.mp")
+	public String myPage_Brand_Prdouct_Delete(@RequestParam int productNo, Model model) {
+		
+		int result = brandService.deleteBrandProductList(productNo);
+		System.out.println("result :: " + result );
+		System.out.println("product_delete :: 여기 왔나요"); // 여기 안옴
+		String loc = "/myPage/myPage_Brand_Product.mp";
+		String msg = "";
+		
+		if( result > 0) {
+			msg = "삭제 완료!";
+			
+		} else {
+			msg = "삭제 실패!";
+		}
+		
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+		
+		return "common/msg";		
+	}
+	
+	// 등록 상품 - 업체가 등록한 상품 리스트 - 수정
+	
+	
+	
+	
+	
 
 	@RequestMapping("myPage/myPage_Brand_Rank.mp")
 	public void myPage_Brand_Rank() {
 
 	}
 
+	// 주문 내역 - 소비자가 주문한 주문 내역(업체가 판매한 판매 내역)
 	@RequestMapping("myPage/myPage_Brand_Order.mp")
 	public String selectBrandOrderList(Model model) {
 
@@ -68,7 +105,7 @@ public class BrandController {
 		// 
 		// 파라미터로 회원 번호 넘겨주기? 
 		List<MypageOrderList> list = brandService.selectBrandOrderList();
-		System.out.println("여기 왔나요");
+		System.out.println("order :: 여기 왔나요");
 		System.out.println("selectBrandOrderList [list] : " + list);
 
 		model.addAttribute("list", list);

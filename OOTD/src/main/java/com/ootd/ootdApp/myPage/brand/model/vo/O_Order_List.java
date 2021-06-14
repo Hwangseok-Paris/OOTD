@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
-public class OrderList implements Serializable {
+public class O_Order_List implements Serializable {
 
 	private static final long serialVersionUID = 2L;
 

@@ -8,7 +8,8 @@
 	</settings>
 
 	<typeAliases>	
-		<typeAlias type="com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList" alias="MypageOrderList" />
+		<typeAlias type="com.ootd.ootdApp.myPage.brand.model.vo.O_Order" alias="O_Order" />
+		<typeAlias type="com.ootd.ootdApp.myPage.brand.model.vo.Product" alias="Product" />
 	</typeAliases>
 	
 	<typeHandlers>
