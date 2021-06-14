@@ -27,7 +27,7 @@ public class Order implements Serializable{
 	//	private String bank_code;
 
 	
-	// 결제완료시 input을 위한 order data
+	// 결제완료시 input을 위한 order datad
 	private int order_no;
 	private String receiver_name;
 	private String order_address;
