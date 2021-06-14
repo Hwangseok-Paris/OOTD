@@ -14,7 +14,7 @@
 <body>
 	<footer class="footer">
         <div class="wrapper">
-            <img src="${pageContext.request.contextPath }/resources/images/footerlogo.png" alt="풋터이미지">
+            <img src="${pageContext.request.contextPath }/resources/images/footerlogo.png" alt="풋터이미지" id="logo_footer">
         
             <div class="footer_contents">
 
@@ -52,4 +52,5 @@
         </div>
     </footer>
 </body>
+
 </html>
