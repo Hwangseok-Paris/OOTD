@@ -55,7 +55,7 @@
 
 					</li>
 
-					<li><i class="fas fa-shopping-cart fa-lg"></i></li>
+					<li><i class="fas fa-shopping-cart fa-lg" id="cart"></i></li>
 
 					<li><i class="fas fa-user fa-lg" id="loginBtn"
 						data-target="#loginModal" data-toggle="modal"></i></li>
@@ -143,6 +143,13 @@
 			})
 
 		})
+		
+	// 카트 아이콘 클릭시 장바구니 이동	
+	${'#cart'}.on('click', function(){
+		location.href = "${pageContext.request.contextPath}/order/cart.or";
+	});
+	
+	
 	</script>
 </body>
 </html>

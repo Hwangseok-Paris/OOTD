@@ -239,7 +239,7 @@
    });
    
    $('#allProduct').click(function(){
-		location.href = "${pageContext.request.contextPath}/order/order.or";
+		location.href = "${pageContext.request.contextPath}/order/cart.or";
 		console.log("링크 선택");  
    })
    

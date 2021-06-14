@@ -9,6 +9,7 @@
 
 	<typeAliases>	
 		<typeAlias type="com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList" alias="MypageOrderList" />
+		<typeAlias type="com.ootd.ootdApp.order.model.vo.Cart" alias="Cart" />
 	</typeAliases>
 	
 	<typeHandlers>
