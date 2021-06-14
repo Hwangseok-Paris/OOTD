@@ -20,6 +20,9 @@
 	<div class="brandInput-title">
 		<span>상품 등록</span>
 	</div>
+	<form name="brandFrm" action="${pageContext.request.contextPath}/product/productInput.do" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="product_type" value="1" />
+			<input type="hidden" name="member_no"value="/*회원번호 받아서 넣기*/"/>
 		<div class="input-area">
 		    <div class="input-img-area">
 		        <div id="insertArea" class="inputBox1">
@@ -66,33 +69,34 @@
 		                <option value="dottom">dottom</option>
 		            </select>
 		            <br>
-		            <input type="text" id="productName" class="ininput" placeholder="상품명">
+		            <input type="text" id="productName" class="ininput" placeholder="상품명" name="product_name">
 		            <br>
-		            <input type="number" id="productPrice" class="ininput" placeholder="가격(숫자만 입력)">
+		            <input type="number" id="productPrice" class="ininput" placeholder="가격(숫자만 입력)" name="product_price">
 		            <br><hr>
 		            <h5>Product Detail</h5>
-		            <textarea id="productDetail" cols="32" rows="8" class="ininput" placeholder="겉감 코튼100%/안감 폴리에스터100%" ></textarea>
+		            <textarea id="productDetail" cols="32" rows="8" class="ininput" placeholder="겉감 코튼100%/안감 폴리에스터100%" name="product_detail"></textarea>
 		            <br><hr>
 		            <h5>Size, Color</h5>
-		            <textarea id="productInfo" cols="32" rows="8" class="ininput" placeholder="- S 어깨 52.5cm 가슴 62cm         - Color : Black, Brown"></textarea>
+		            <textarea id="productInfo" cols="32" rows="8" class="ininput" placeholder="- S 어깨 52.5cm 가슴 62cm         - Color : Black, Brown" name="product_sizeinfo"></textarea>
 		            <br><hr>
 		            <h5>Option & Stock</h5>
 		            <!-- <input type="text" id="productOption" placeholder="옵션명" class="ininput"> -->
 		
-		            <input type="text" id="size1" class="ininput2" placeholder="사이즈 입력">
+					<span style="margin-right: 80px;"> S size</span>
 		            <input type="text" id="quantity1" class="ininput2" placeholder="수량 입력"><br>
-		            <input type="text" id="size2" class="ininput2" placeholder="사이즈 입력">
+		            <span style="margin-right: 80px;"> M size</span>
 		            <input type="text" id="quantity2" class="ininput2" placeholder="수량 입력"><br>
-		            <input type="text" id="size3" class="ininput2" placeholder="사이즈 입력">
+		            <span style="margin-right: 80px;"> L size</span>
 		            <input type="text" id="quantity3" class="ininput2" placeholder="수량 입력"><br>
 		            <hr>
 		
 		            
-		            <button id="btn">등록하기</button>
+		            <button id="btn" type="submit">등록하기</button>
 		        </div>
 		    </div>
 		
 	    </div>
+    </form>
     </div>
     	<c:import url="../common/footer.jsp"/>
 </body>

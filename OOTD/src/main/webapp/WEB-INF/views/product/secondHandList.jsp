@@ -255,6 +255,18 @@
    	
 	
     <script>
+    
+    $(function() {		
+		$('#prod-regis').on('click', function() {
+			
+			var pType = 2;
+			location.href="${pageContext.request.contextPath}/product/productInputForm.do?pType="+pType;
+		});
+	});
+    
+    
+    
+    
         // Dropdown 
         $('.showArea').on('click', function() {
             // 숨긴 영역 slide down

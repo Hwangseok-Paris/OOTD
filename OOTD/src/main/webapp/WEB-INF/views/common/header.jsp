@@ -34,10 +34,10 @@
 			<!-- Header Brand, Second Hands (클릭 시 하단에 메뉴바) -->
 			<div class="header_menu">
 				<div>
-					<a href="#"><h3 id="brand">BRAND</h3></a>
+					<h3 id="brand">BRAND</h3>
 				</div>
 				<div>
-					<a href="#"><h3 id="second_Hand">SECOND HAND</h3></a>
+					<h3 id="second_Hand">SECOND HAND</h3>
 				</div>
 			</div>
 
@@ -77,6 +77,27 @@
 
 
 	<script>
+	
+	$(function() {		
+		$('#brand').on('click', function() {
+			
+			var pType = 1;
+			location.href="${pageContext.request.contextPath}/product/productList.do?pType="+pType;
+		});
+	});
+	
+	$(function() {		
+		$('#second_Hand').on('click', function() {
+			
+			var pType = 2;
+			location.href="${pageContext.request.contextPath}/product/productList.do?pType="+pType;
+		});
+	});
+	
+	
+	
+	
+	
 		$(function() {
 
 			var icon = document.getElementById("logo");
