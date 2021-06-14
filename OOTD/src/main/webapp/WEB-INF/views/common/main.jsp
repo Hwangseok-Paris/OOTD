@@ -79,11 +79,15 @@
         //브랜드 리스트로 화면이동
         $('.video_Brand').on('click', function() {
             alert("브랜드 리스트 이동");
+            var pType = 1;
+			location.href="${pageContext.request.contextPath}/product/productList.do?pType="+pType;
         })
 
         //중고 리스트 화면이동
         $('.video_SHand').on('click', function() {
             alert("중고 리스트 이동");
+            var pType = 2;
+			location.href="${pageContext.request.contextPath}/product/productList.do?pType="+pType;
         })
     </script>
     
