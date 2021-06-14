@@ -36,8 +36,4 @@ public class MemberController {
 		System.out.println("login 확인");
 		return "redirect:/";
 	}
-	
-	
-	
-	
 }

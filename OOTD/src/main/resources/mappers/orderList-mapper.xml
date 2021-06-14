@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderList-mapper"> 
+
+   <select id="selectBrandOrderList" resultType="MypageOrderList">
+		SELECT C.PRODUCT_NAME, B.ORDER_QUANTITY, A.ORDER_NO, A.ORDER_DATE, A.TOTAL_PRICE
+        FROM O_ORDER A, O_ORDER_LIST B, PRODUCT C
+        WHERE A.ORDER_NO = B.ORDER_NO
+        	AND B.PRODUCT_NO = C.PRODUCT_NO
+        ORDER BY A.ORDER_DATE DESC
+   </select>
+   
+
+</mapper>
