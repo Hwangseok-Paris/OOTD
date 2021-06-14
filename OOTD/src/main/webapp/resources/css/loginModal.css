@@ -60,6 +60,10 @@ body{
     align-items: center;
 }
 
+#kakao-box:hover {
+	cursor: pointer;
+}
+
 #icon-img{
     margin-left: 50px;
     margin-right:26px;

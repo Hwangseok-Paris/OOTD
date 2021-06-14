@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/joinAccept.css" />
 </head>
 <body>
-    <form action="" id="joinForm">
+    <form action="memberJoin.do" id="joinForm">
         <ul class="join_box">
             <li class="checkBox check01">
                 <ul class="clearfix">
@@ -84,7 +84,7 @@ OOTD 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 
             // 필수 버튼 모두 클릭 시, 가입 페이지로 이동
             if($("input:checkbox[name=chk1]").is(":checked") == true && $("input:checkbox[name=chk2]").is(":checked") == true) {
-                location.href="memberJoin.html";
+            	location.href='${pageContext.request.contextPath}/member/memberJoin.do';
             }
             // 아닐 시, 경고창 팝업
             else 

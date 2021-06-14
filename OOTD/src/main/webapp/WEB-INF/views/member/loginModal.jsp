@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <!-- css 링크 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/loginModal.css" />
 
@@ -21,18 +21,18 @@
 <body>
     <div class="container">
        
-        <!-- 로그인 Modal -->
+       <!-- 내 정보 Modal -->
         <div class="modal modal-center fade" id="loginModal" role="dialog" data-backdrop="static" data-keyboard="false">
           <div class="modal-dialog">
           
             <!-- Modal 컨텐츠 시작 -->
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 id="modal-title">LOGIN</h4>
+                <h4 id="modal-title">000님</h4>
                 
                 <!-- Modal 내 ID/PW 입력 및 로그인/ 가입 버튼 시작 -->
                 <div class="modal-body" style="padding:40px 50px;">
-                    <form role="form">
+                    <form role="form" action="member/memberLogin.do">
                         <div class="form-group">
                             <label for="usrname"> ID</label>
                             <input type="text" class="form-control" id="usrname" placeholder="Enter ID">
@@ -48,7 +48,55 @@
                         <div class="join-btn-group">
                             <button type="button" id="join-btn" class="btn btn-link" onclick="goJoinPage()">JOIN</button>
                             |
-                            <button type="button" id="login-btn" class="btn btn-link">LOGIN</button>
+                            <button type="submit" id="login-btn" class="btn btn-link">LOGIN</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- 내 정보 모달 끝 -->
+
+            <!-- modal의 footer 시작 -->
+            <div class="modal-footer">
+                <div class="modal-footer-child">
+                    Forgot<button type="button" id="forgot-id" class="btn btn-link" data-toggle="modal" data-target="#findIdModal">ID?</button>
+                    Forgot<button type="button" id="forgot-pw" class="btn btn-link" data-toggle="modal" data-target="#findPwModal">Password?</button>
+                </div>
+            </div>
+            <!-- modal의 footer 끝 -->
+
+            </div>
+            <!-- Modal 컨텐츠 끝 -->
+
+          </div>
+        </div>
+       
+        <!-- 로그인 Modal -->
+        <div class="modal modal-center fade" id="loginModal" role="dialog" data-backdrop="static" data-keyboard="false">
+          <div class="modal-dialog">
+          
+            <!-- Modal 컨텐츠 시작 -->
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="modal-title">LOGIN</h4>
+                
+                <!-- Modal 내 ID/PW 입력 및 로그인/ 가입 버튼 시작 -->
+                <div class="modal-body" style="padding:40px 50px;">
+                    <form role="form" action="member/memberLogin.do">
+                        <div class="form-group">
+                            <label for="usrname"> ID</label>
+                            <input type="text" class="form-control" id="usrname" placeholder="Enter ID">
+                        </div>
+                        <div class="form-group">
+                            <label for="psw"> Password</label>
+                            <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" value="" checked>Remember me</label>
+                        </div>
+
+                        <div class="join-btn-group">
+                            <button type="button" id="join-btn" class="btn btn-link" onclick="goJoinPage()">JOIN</button>
+                            |
+                            <button type="submit" id="login-btn" class="btn btn-link">LOGIN</button>
                         </div>
                     </form>
                 </div>
@@ -165,8 +213,40 @@
 
         /* 모달 내 JOIN 버튼 클릭 시, 회원가입 페이지로 이동 */
         function goJoinPage() {
-            location.href="memberJoin.html";
+        	location.href='${pageContext.request.contextPath}/member/joinAccept.do';
         }
+        
+        /* componentDidMount() {
+        	Kakao.init('1da952139d172c0ac2c48f4a3ba9ca34');
+        } */
+        
+        $(function() {
+        	Kakao.init('1da952139d172c0ac2c48f4a3ba9ca34');
+        });
+        
+        $('#kakao-box').on('click', function() {
+        	try {
+        		return new Promise(function(resolve, reject) {
+        			if (!Kakao) {
+        				reject('Kakao 인스턴스가 존재하지 않습니다.')
+        			}
+        			
+        			Kakao.Auth.login({
+        				success: function(auth) {
+        					console.log('정상적으로 로그인', auth)
+        					this.setState({
+        						isLogin: true
+        					});
+        					
+        				}, fail: function(error) {
+        					console.log(error)
+        				}
+        			});
+        		});
+        	} catch (err) {
+        		console.log(err)
+        	}
+        });
     </script>
 </body>
 </html>
