@@ -38,80 +38,36 @@
                             <th></th>
                         </tr>
                     </thead>
+                    <c:forEach items="${list}" var="o"> 
                     <tbody>
                         <tr>
                             <td>
                                 <div class="product-info">
-                                    <span class="product-name">Round String Jacket Brown </span>
+                                    <span class="product-name">${o.product_name}</span>
                                     <span class="product-option">(small)</span>
                                 </div>
                             </td>
                             <td>
-                                <div class="order-quantity">3</div>
+                                <div class="order-quantity">${o.order_quantity}</div>
                             </td>
                             <td>
-                                <span class="order-no">0000001</span>
+                                <span class="order-no">${o.order_no}</span>
                             </td>
-                            <td class="order-date">2021.06.06</td>
-                            <td class="total-price">300,000&nbsp;&#8361;</td>
+                            <td class="order-date">${o.order_date}</td>
+                            <td class="total-price">${o.total_price}&nbsp;&#8361;</td>
                             <td>
                                 <span class="purchase-status">1</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
                             </td>
                             <td>
                                 <button class="complete-send">발송 완료</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product-info">
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                    <span class="product-option">(small)</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="order-quantity">3</div>
-                            </td>
-                            <td>
-                                <span class="order-no">0000001</span>
-                            </td>
-                            <td class="order-date">2021.06.06</td>
-                            <td class="total-price">300,000&nbsp;&#8361;</td>
-                            <td>
-                                <span class="purchase-status">2</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
-                            </td>
-                            <td>
-                                <button class="complete-send">발송 완료</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product-info">
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                    <span class="product-option">(small)</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="order-quantity">3</div>
-                            </td>
-                            <td>
-                                <span class="order-no">0000001</span>
-                            </td>
-                            <td class="order-date">2021.06.06</td>
-                            <td class="total-price">300,000&nbsp;&#8361;</td>
-                            <td>
-                                <span class="purchase-status">3</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
-                            </td>
-                            <td>
-                                <button class="complete-send">발송 완료</button>
-                            </td>
-                        </tr>
+                        </tr>                                    
                     </tbody>
+                    </c:forEach>
                 </table>
             </div>
         </section>
     </div>
-
-
 
    	<!-- Order Detail(Mordal) -->
     <%@ include file="myPage_Order_Detail.jsp"%>

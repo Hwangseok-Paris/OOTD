@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ootd.ootdApp.myPage.brand.model.service.BrandService;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
-import com.ootd.ootdApp.myPage.brand.model.vo.OrderList;
 
 @Controller
 public class BrandController {
 
-	  //@Autowired 
-	  //BrandService brandService;
+	  @Autowired 
+	  BrandService brandService;
 
 	/*
 	 * // 회원이 주문한 상품(주문)내역 불러오기
@@ -46,8 +45,15 @@ public class BrandController {
 	}
 
 	@RequestMapping("myPage/myPage_Brand_Product.mp")
-	public void myPage_Brand_Product() {
+	public String myPage_Brand_Product(Model model) {
+		
+		List<MypageOrderList> list = brandService.selectBrandOrderList();
+		System.out.println("여기 왔나요");
+		System.out.println("selectBrandOrderList [list] : " + list);
 
+		model.addAttribute("list", list);
+
+		return "myPage/myPage_Brand_Product";
 	}
 
 	@RequestMapping("myPage/myPage_Brand_Rank.mp")
@@ -60,27 +66,18 @@ public class BrandController {
 
 		// session으로 회원 정보 받기
 		// 
-		// 파라미터로 회원 번호 넘겨주기
-//		List<MypageOrderList> list = brandService.selectBrandOrderList();
+		// 파라미터로 회원 번호 넘겨주기? 
+		List<MypageOrderList> list = brandService.selectBrandOrderList();
 		System.out.println("여기 왔나요");
-//		System.out.println("selectBrandOrderList [list] : " + list);
+		System.out.println("selectBrandOrderList [list] : " + list);
 
-//		model.addAttribute("list", list);
+		model.addAttribute("list", list);
 
 		return "myPage/myPage_Brand_Order";
 	}
 
 
 
-
-
-
-
-	/*
-	 * @RequestMapping("/myPage_Brand_Rank.mp") public String myPage_Brand_Rank() {
-	 * 
-	 * return "myPage_Brand_Rank"; }
-	 */
 
 
 
