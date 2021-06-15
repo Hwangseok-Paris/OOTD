@@ -101,7 +101,7 @@ public class BrandController {
 	@RequestMapping("myPage/myPage_Brand_Order.mp")
 	public String selectBrandOrderList(Model model) {
 
-		// session으로 회원 정보 받기
+		// session으로 회원 정보 받기5
 		// 
 		// 파라미터로 회원 번호 넘겨주기? 
 		List<MypageOrderList> list = brandService.selectBrandOrderList();
