@@ -32,10 +32,11 @@
                     <tbody>
                         <tr class="id">
                             <td>아이디</td>
-                            <td>Paris</td>
+                            <td name="userID">${member.member_name }</td>
                             <td></td>
                             <td></td>
                         </tr>
+                        
                         <tr class="password" style>
                             <td>비밀번호</td>
                             <td colspan="2">*********</td>
@@ -43,10 +44,10 @@
                                 <button class="modify-btn" id="update-password">비밀번호 변경</button>
                             </td>
                         </tr>
+                        
                         <tr class="update-password" style="display: none">
-
                             <td colspan="4">
-                                <form action="" method="post">
+                                <form action="${pageContext.request.contextPath}/myPage/update_Pwd.do" method="post">
                                     <div class='passowrd-update-area'>
                                         <div class="input">
                                             <label for="password">현재 비밀번호</label>
@@ -54,11 +55,11 @@
                                         </div>
                                         <div class="input">
                                             <label for="new-password">새 비밀번호</label>
-                                            <input type="password" name="" id="new-password">
+                                            <input type="password" name="new_password" id="new-password">
                                         </div>
                                         <div class="input">
                                             <label for="new-password-confirm">새 비밀번호 확인</label>
-                                            <input type="password" name="" id="new-password-confirm">
+                                            <input type="password" name="confirm_password" id="new-password-confirm">
                                         </div>
                                         <div class="btn-group">
                                             <input type="submit" value="확인">
@@ -68,17 +69,20 @@
                                 </form>
                             </td>
                         </tr>
+                        
                         <tr>
                             <td>이름</td>
                             <td colspan="3">오오티디</td>
                         </tr>
+                        
                         <tr class='email'>
                             <td>이메일</td>
                             <td colspan="2">paris@gmail.com</td>
                             <td>
-                                <button id="update-email">이메일 변경</button>
+                                <button type="submit" id="update-email" href="${pageContext.request.contextPath} }/myPage/update_Email.do">이메일 변경</button>
                             </td>
                         </tr>
+                        
                         <tr class="update-email" style="display: none">
 
                             <td colspan="4">
@@ -98,6 +102,7 @@
                                 </form>
                             </td>
                         </tr>
+                        
                         <tr class="phone">
                             <td>휴대전화</td>
                             <td colspan="2">010-8888-8888</td>
@@ -105,6 +110,7 @@
                                 <button id="update-phone">휴대전화 변경</button>
                             </td>
                         </tr>
+                        
                         <tr class="update-phone" style="display: none">
                             <td colspan="4">
                                 <form action="">
@@ -122,6 +128,7 @@
                                 </form>
                             </td>
                         </tr>
+                        
                         <tr class="account">
                             <td>계좌번호</td>
                             <td>신한은행</td>
@@ -130,6 +137,7 @@
                                 <button id="update-account">계좌번호 변경</button>
                             </td>
                         </tr>
+                        
                         <tr class="update-account" style="display: none">
 
                             <td colspan="4">
