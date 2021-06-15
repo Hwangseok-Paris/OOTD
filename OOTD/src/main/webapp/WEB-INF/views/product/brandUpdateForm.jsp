@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>brand</title>
+    <title>brand Update</title>
     <c:import url="../common/header.jsp"/>
     <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productInput.css" />
@@ -18,9 +18,9 @@
 <body>
 <div class="container">
 	<div class="brandInput-title">
-		<span>상품 등록</span>
+		<span>상품 수정</span>
 	</div>
-	<form name="brandFrm" action="${pageContext.request.contextPath}/product/productInput.do" method="post" enctype="multipart/form-data">
+	<form name="brandFrm" action="${pageContext.request.contextPath}/product/productUpdate.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="product_type" value="1" />
 			<input type="hidden" name="member_no"value="/*회원번호 받아서 넣기*/"/>
 		<div class="input-area">
@@ -91,7 +91,7 @@
 		            <hr>
 		
 		            
-		            <button id="btn" type="submit">등록하기</button>
+		            <button id="btn" type="submit">수정완료</button>
 		        </div>
 		    </div>
 		
