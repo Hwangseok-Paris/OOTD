@@ -107,7 +107,7 @@
                     <hr>
                     <dt>
                         <b>Select Size</b>
-                        <select name="" id="selectSize" style="width: 130px;">
+                        <select name="" id="selectSize" style="width: 140px;">
                             <option value="">선택안함</option>
                             <option value="S">S</option>
                             <option value="M">M</option>
@@ -424,6 +424,5 @@
 
 
     </script>
-    <br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>

@@ -14,6 +14,5 @@
 	<c:import url="views/common/header.jsp"/>
 	<c:import url="views/common/main.jsp"/>
 	<c:import url="views/common/footer.jsp"/>
-
 </body>
 </html>

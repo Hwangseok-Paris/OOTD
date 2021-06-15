@@ -31,8 +31,8 @@
     .package{
         display: inline;
     }
+    
     #btn{
-        margin-left: 80px;
         border-radius: 15%;
         background-color: white;
         width: 180px;

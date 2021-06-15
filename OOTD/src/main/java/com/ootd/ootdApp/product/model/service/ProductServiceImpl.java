@@ -1,6 +1,7 @@
 package com.ootd.ootdApp.product.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,35 +14,62 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	ProductDAO productDAO;
+
+	// =========Product List (select) 조회=========
 	
 	@Override
-	public int insertProduct(Product product) {
+	public List<Map<String, String>> productSelectList(int cPage, int numPerPage, int pType) {
+		
+		if (pType == 1) {
+
+			return productDAO.brandSelectList(cPage, numPerPage);
+		} else {
+			
+			return productDAO.secondHandSelectList(cPage, numPerPage);
+		}
+	}
+
+	@Override
+	public int productSelectTotalContents(int pType) {
+		
+		if (pType == 1) {
+
+			return productDAO.brandSelectTotalContents();
+		} else {
+			
+			return productDAO.secondHandSelectTotalContents();
+		}
+	}
+	
+	
+
+	// =========Product Input (insert)=========
+	
+	@Override
+	public int productInsert(Product product) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public List<Product> selectProductList() {
+	public Product productSelectOne(int product_no) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Product selectProduct(int product_no) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int updateProduct(Product product) {
+	public int productUpdate(Product product) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int deleteProduct(int product_no) {
+	public int productDelete(int product_no) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
+	
 
 }

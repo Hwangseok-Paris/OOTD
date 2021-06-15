@@ -1,60 +1,71 @@
 package com.ootd.ootdApp.product.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ootd.ootdApp.product.model.vo.Product;
 
 public interface ProductService {
 
-	
-	//=========Product List 조회========= 
-	
+	// =========Product List (selectList) 조회=========
+
 	/**
-	 * brandList 조회를 위한 메소드 
+	 * productList 조회를 위한 메소드
+	 * 
+	 * @param numPerPage
+	 * @param cPage
+	 * @param pType = 1? brand : secondHand
+	 * 
 	 * @return List<Product>
 	 */
-	List<Product> selectBrandList();
-	
-	
+	List<Map<String, String>> productSelectList(int cPage, int numPerPage, int pType);
+
 	/**
-	 * secondHandList 조회를 위한 메소드 
-	 * @return List<Product>
+	 * 전체 상품 갯수 조회를 위한 메소드
+	 * 
+	 * @param pType = 1? brand : secondHand
+	 * 
 	 */
-	List<Product> selectSecondHandList();
-	
-	
-	//=========Product List 조회=========	
-	
-	
+	int productSelectTotalContents(int pType);
+
+	// =========Product Input (insert)=========
+
 	/**
-	 * 상품 등록을 위한 메소드 
+	 * 상품 등록을 위한 메소드
+	 * 
 	 * @param product
-	 * @return int 
+	 * @return int
 	 */
-	int insertProduct(Product product);
-	
-	
+	int productInsert(Product product);
+
+	// =========Product Detail (selectOne)=========
+
 	/**
-	 * 상품 번호로 상품 한 개 조회를 위한 메소드 
+	 * 상품 번호로 상품 한 개 조회를 위한 메소드
+	 * 
 	 * @param product_no
 	 * @return Product
 	 */
-	Product selectProduct(int product_no);
-	
+	Product productSelectOne(int product_no);
+
+	// =========Product Update (Update)=========
+
 	/**
-	 * 상품 수정하는 메소드 
+	 * 상품 수정하는 메소드
+	 * 
 	 * @param Product
 	 * @return int
 	 */
-	int updateProduct(Product product);
-	
+	int productUpdate(Product product);
+
+	// =========Product Delete( Delete )========
+
 	/**
-	 * 상품번호로 상품 삭제하는 메소드 
+	 * 상품번호로 상품 삭제하는 메소드
+	 * 
 	 * @param product_no
 	 * @return int
 	 */
-	int deleteProduct(int product_no);
-	
-	
-	
+	int productDelete(int product_no);
+
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product-mapper">
+
+	<select id="brandSelectList" resultType="Product_p">
+		SELECT P.*, (SELECT COUNT(*)
+					 FROM ATTACHMENT
+					 WHERE PRODUCT_NO = P.PRODUCT_NO) FILECOUNT,
+			  M.BRAND_NAME
+		FROM PRODUCT P, MEMBER M
+		WHERE P.MEMBER_NO = M.MEMBER_NO
+		  AND PRODUCT_TYPE = 1 
+	</select>
+	
+	<select id="secondHandSelectList" resultType="Product_p">
+		SELECT P.*, (SELECT COUNT(*)
+					 FROM ATTACHMENT
+					 WHERE PRODUCT_NO = P.PRODUCT_NO) FILECOUNT,
+			  M.BRAND_NAME
+		FROM PRODUCT P, MEMBER M
+		WHERE P.MEMBER_NO = M.MEMBER_NO
+		  AND PRODUCT_TYPE = 2
+	</select>
+	
+	<select id="brandSelectTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM PRODUCT WHERE PRODUCT_TYPE = 1
+	</select>
+	
+	<select id="secondHandSelectTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM PRODUCT WHERE PRODUCT_TYPE = 2
+	</select>
+	
+	
+	
+	
+	
+
+
+</mapper>

@@ -115,7 +115,7 @@
                     <dt class="pOrigin">
                         <div id="origin">
                             <span>Special Premium Ultra Super Cap Jacket<b class="selectedSize"></b> </span> 
-                            <input type="number" id="pQuan" name="pQuan" value="1" min="1"> <!-- input value 값 ??  -->
+                            <input type="number" id="pQuan" name="pQuan" value="1" min="1" max="1"> <!-- input value 값 ??  -->
                             <img src="${pageContext.request.contextPath }/resources/images/xx.png" alt="" style="width: 15px; height: 15px; margin-right: 5px;" id="pDelete">
                             <span>￦</span><span class="pPrice">29800</span>
                         </div>
@@ -171,12 +171,12 @@
 
         // }
         
-        // $(function() {
-        //     if($('.totalPD').text()== "") {
-        //         console.log("totalPD::" + $('.totalPD').text())
-        //         $('#won').text('0')
-        //     }
-        // });
+         /* $(function() {
+             if($('.totalPD').text()== "") {
+                 console.log("totalPD::" + $('.totalPD').text())
+                 $('#won').text('0')
+             }
+         });  */
         
         $('#pDelete').on('click', function() {
             $(this).parent().remove()
