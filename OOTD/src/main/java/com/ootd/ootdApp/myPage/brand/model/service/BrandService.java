@@ -12,5 +12,8 @@ public interface BrandService {
 	List<Product> selectBrandProductList();
 
 	int deleteBrandProductList(int productNo);
+	
+	// 주문 detail
+	List<MypageOrderList> selectBrandOrderDetail(int orderNo);
 
 }

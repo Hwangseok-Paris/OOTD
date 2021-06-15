@@ -84,9 +84,16 @@
             $('.modal').fadeOut()
         }
     });
-
+    
     $('.close-icon').click(function () {
         $('.modal').fadeOut();
     })
+    
+    
+    
+    
+    
+    
+    
 
 </script>

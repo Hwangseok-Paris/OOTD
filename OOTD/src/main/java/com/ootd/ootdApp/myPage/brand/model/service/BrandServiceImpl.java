@@ -33,5 +33,11 @@ public class BrandServiceImpl implements BrandService {
 		return brandDAO.deleteBrandProductList(productNo);
 	}
 
+	@Override
+	public List<MypageOrderList> selectBrandOrderDetail(int orderNo) {
+		System.out.println("order_detail :: 서비스 왔나요");
+		return brandDAO.selectBrandOrderDetail(orderNo);
+	}
+
 
 }

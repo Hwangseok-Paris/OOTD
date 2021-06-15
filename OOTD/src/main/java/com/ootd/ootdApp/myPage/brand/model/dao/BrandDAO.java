@@ -14,4 +14,6 @@ public interface BrandDAO {
 
 	int deleteBrandProductList(int productNo);
 
+	List<MypageOrderList> selectBrandOrderDetail(int orderNo);
+
 }

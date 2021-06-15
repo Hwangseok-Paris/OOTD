@@ -35,6 +35,12 @@ public class BrandDAOImpl implements BrandDAO {
 		System.out.println("product_delete :: DAO 왔나요");
 		return sqlSession.delete("productList-mapper.deleteBrandProductList", productNo);
 	}
+
+	@Override
+	public List<MypageOrderList> selectBrandOrderDetail(int orderNo) {
+		System.out.println("order_detail :: DAO 왔나요");
+		return sqlSession.selectList("orderList-mapper.selectBrandOrderDetail", orderNo);
+	}
 	
 
 

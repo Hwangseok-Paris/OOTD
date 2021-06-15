@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ootd.ootdApp.myPage.brand.model.service.BrandService;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
@@ -112,7 +113,18 @@ public class BrandController {
 
 		return "myPage/myPage_Brand_Order";
 	}
-
+	
+	// 주문 내역 - 소비자가 주문한 주문 내역 - 자세히 보기
+	@RequestMapping("myPage/myPage_Order_Detail.mp")
+	@ResponseBody
+	public List<MypageOrderList> selectBrandOrderDetail(@RequestParam int orderNo) {
+		
+		List<MypageOrderList> list = brandService.selectBrandOrderDetail(orderNo);
+		System.out.println("order_detail :: 여기 왔나요");
+		System.out.println("selectBrandOrderDetail [list] : " + list);
+		
+		return list;
+	}
 
 
 

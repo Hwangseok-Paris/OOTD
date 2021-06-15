@@ -11,6 +11,14 @@
         	AND B.PRODUCT_NO = C.PRODUCT_NO
         ORDER BY A.ORDER_DATE DESC
    </select>
+
+   <select id="selectBrandOrderDetail" resultType="O_Order" parameterType="_int">
+   		SELECT C.PRODUCT_NAME as product_name, A.ORDER_ADDRESS as address, A.RECEIVER_NAME as reciever, A.ORDER_DATE as ORDER_DATE, B.ORDER_QUANTITY as ORDER_QUANTITY
+   		FROM O_ORDER A, O_ORDER_LIST B, PRODUCT C
+   		WHERE A.ORDER_NO = B.ORDER_NO
+        	AND B.PRODUCT_NO = C.PRODUCT_NO AND 
+   		A.ORDER_NO = #{ order_no }
+   </select>
    
 
 </mapper>

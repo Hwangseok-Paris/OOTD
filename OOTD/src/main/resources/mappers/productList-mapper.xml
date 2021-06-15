@@ -6,7 +6,7 @@
 	<select id="selectBrandProductList" resultType="Product">
 		SELECT *
 		FROM PRODUCT
-		WHERE STATUS = 'Y'
+		WHERE PRODUCT_STATUS = 'Y'
 		ORDER BY PRODUCT_NO ASC
 	</select>
 	
