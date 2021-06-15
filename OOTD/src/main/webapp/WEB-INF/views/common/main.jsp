@@ -10,7 +10,7 @@
 <title>Insert title here</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css">
-
+	<script src="${pageContext.request.contextPath }/resources/asset/js/jquery-3.6.0.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" rel="stylesheet" /> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
 
@@ -79,15 +79,11 @@
         //브랜드 리스트로 화면이동
         $('.video_Brand').on('click', function() {
             alert("브랜드 리스트 이동");
-            var pType = 1;
-			location.href="${pageContext.request.contextPath}/product/productList.do?pType="+pType;
         })
 
         //중고 리스트 화면이동
         $('.video_SHand').on('click', function() {
             alert("중고 리스트 이동");
-            var pType = 2;
-			location.href="${pageContext.request.contextPath}/product/productList.do?pType="+pType;
         })
     </script>
     

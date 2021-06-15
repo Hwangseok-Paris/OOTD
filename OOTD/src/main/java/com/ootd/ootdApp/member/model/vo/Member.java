@@ -12,14 +12,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Member implements Serializable{
 	
-	private int member_no;
 	private String member_id;
 	private String member_nickname;
 	private String member_pw;
 	private String member_name;
 	private String email;
 	private String phone;
-	private String address;
+	private String[] address;
 	private Date enroll_date;
 	private String brand_name;
 	private String account_number;

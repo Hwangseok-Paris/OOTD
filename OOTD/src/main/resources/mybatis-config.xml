@@ -9,6 +9,9 @@
 
 	<typeAliases>	
 		<typeAlias type="com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList" alias="MypageOrderList" />
+		<typeAlias type="com.ootd.ootdApp.member.model.vo.Member" alias="Member"></typeAlias>
+		<typeAlias type="com.ootd.ootdApp.common.MyTypeHandler" alias="MyTypeHandler"></typeAlias>
+		
 	</typeAliases>
 	
 	<typeHandlers>

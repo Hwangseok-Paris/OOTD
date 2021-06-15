@@ -22,16 +22,16 @@
     <div class="container">
        
        <!-- 내 정보 Modal -->
-        <div class="modal modal-center fade" id="loginModal" role="dialog" data-backdrop="static" data-keyboard="false">
-          <div class="modal-dialog">
+        <!-- <div class="modal modal-center fade" id="loginModal" role="dialog" data-backdrop="static" data-keyboard="false">
+          <div class="modal-dialog"> -->
           
             <!-- Modal 컨텐츠 시작 -->
-            <div class="modal-content">
+            <!-- <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 id="modal-title">000님</h4>
+                <h4 id="modal-title">000님</h4> -->
                 
                 <!-- Modal 내 ID/PW 입력 및 로그인/ 가입 버튼 시작 -->
-                <div class="modal-body" style="padding:40px 50px;">
+                <!-- <div class="modal-body" style="padding:40px 50px;">
                     <form role="form" action="member/memberLogin.do">
                         <div class="form-group">
                             <label for="usrname"> ID</label>
@@ -51,23 +51,23 @@
                             <button type="submit" id="login-btn" class="btn btn-link">LOGIN</button>
                         </div>
                     </form>
-                </div>
+                </div> -->
                 <!-- 내 정보 모달 끝 -->
 
             <!-- modal의 footer 시작 -->
-            <div class="modal-footer">
+            <!-- <div class="modal-footer">
                 <div class="modal-footer-child">
                     Forgot<button type="button" id="forgot-id" class="btn btn-link" data-toggle="modal" data-target="#findIdModal">ID?</button>
                     Forgot<button type="button" id="forgot-pw" class="btn btn-link" data-toggle="modal" data-target="#findPwModal">Password?</button>
                 </div>
-            </div>
+            </div> -->
             <!-- modal의 footer 끝 -->
 
-            </div>
+            <!-- </div> -->
             <!-- Modal 컨텐츠 끝 -->
 
-          </div>
-        </div>
+         <!--  </div>
+        </div> -->
        
         <!-- 로그인 Modal -->
         <div class="modal modal-center fade" id="loginModal" role="dialog" data-backdrop="static" data-keyboard="false">
@@ -83,11 +83,11 @@
                     <form role="form" action="member/memberLogin.do">
                         <div class="form-group">
                             <label for="usrname"> ID</label>
-                            <input type="text" class="form-control" id="usrname" placeholder="Enter ID">
+                            <input type="text" class="form-control" id="member_id" placeholder="Enter ID">
                         </div>
                         <div class="form-group">
                             <label for="psw"> Password</label>
-                            <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                            <input type="text" class="form-control" id="member_pw" placeholder="Enter password">
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox" value="" checked>Remember me</label>
