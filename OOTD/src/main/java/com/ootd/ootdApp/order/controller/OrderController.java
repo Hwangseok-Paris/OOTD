@@ -21,14 +21,16 @@ public class orderController {
 	
 	// 카트 영역
 	@RequestMapping("/order/cart.or")
-	public String cartList(
+	public String cartList(Model model
 			) {
 		
-		int member_no = 1;		
+		int member_no = 1;
 		
-		List<Cart> result = orderService.selectCartList(member_no);
+		List<Cart> cart = orderService.selectCartList(member_no);
 		//System.out.println("받아옴");
-		System.out.println(result);
+		System.out.println(cart);
+		
+		model.addAttribute("cart", cart);
 				
 		return "/order/cart";
 	}
