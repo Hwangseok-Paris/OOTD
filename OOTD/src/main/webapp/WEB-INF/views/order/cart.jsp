@@ -47,16 +47,17 @@
                <tbody id="calculation1tbody">
                <c:forEach items="${cart}" var="a">
                   <tr class="calculation1_tbody_tr1" style="height: 90px; background-color: #fff;">
-                     <td style="text-align: left; text-align: center; border-right: none;">
-                        <input type="checkbox" id="cbtr1" name="checkbox" checked/>
+                     <td style="text-align: left; text-align: center; border-right: none;" class="chee">
+                        <input type="checkbox" class="chkbox"id="cbtr1" name="checkbox" checked/>
                      </td>
-                     <td style="border-left: none; border-right: none; width: 100px; text-align: center;"><img src="${pageContext.request.contextPath }/resources/images/sample.PNG" width="100px"></td>
+                     <td style="border-left: none; border-right: none; width: 100px; text-align: center;"><img src="${pageContext.request.contextPath }/resources/images/product/brand/${a.att_name}" width="100px"></td>
+
                      <td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;">
-                     <span>[${a.brand_name}]</span> <br/><span>${a.product_name}</span> <br /><br />옵션 : <span>${a.cart_size}</span>
+                     <span>[${a.brand_name}]</span> <br/><span>${a.product_name} </span> <br /><br />옵션 : <span>${a.cart_size}</span>
                      </td>
                      <td>
                         <span class="price1" style="padding-left: 10px;">${a.product_price}</span>원
-                        <input type="hidden" class="realPrice" value=${a.product_price}>
+                        <input type="hidden" class="realPrice" value="${a.product_price}"/>
                      </td> 
                      <td style="width: 100px;">
                         <button class="button1 quanBtn" id="button" type ="button"  value='-' >-</button>
@@ -121,10 +122,13 @@
    </div>
 
  <script>
+ 
+ 	
+ 
    $(document).ready(function(){
       
-      // 체크박스 전체 선택, 개별 선택, 선택 해제
-      $(".calculation1 thead input:checkbox[id=check]").click(function(){
+     // 체크박스 전체 선택, 개별 선택, 선택 해제
+       $(".calculation1 thead input:checkbox[id=check]").click(function(){
          var bool = $(this).prop("checked");
          $(".calculation1 tbody input:checkbox[name=checkbox]").prop("checked", bool);
       });
@@ -137,7 +141,11 @@
             if(!bool){
                $(".calculation1 thead input:checbox'id=check]").prop("checked", false);
                flag = true;
+               
+               calcPrice_all();
                return false;
+               
+               
             }
          });
          
@@ -151,31 +159,90 @@
          $("#domainName").val($(this).val());
       });
       
-      calcPrice();
+      calcPrice_all();
    });
-   
-   // 총합 계산
-   function calcPrice(){
-      var sum = 0;
-      if($('#cbtr1').is(':checked')){
-	      $('.price1').each(function(){
-	    	  
-	    	 var price = Number($(this).text());
-	         var quantity = Number($(this).parent().next().children('.result').text());
+  
+  
+  
+  /*** total price calculator ***/
+ /*   function calcPrice(){
+	  var sum = 0;
+	  
+	  $('.price1').each(function(){
+		
+		  var price = Number($(this).text());
+          var quantity = Number($(this).parent().next().children('.result').text());
 	         
-	         console.log(quantity);
+	       console.log(quantity);
 	
-	         sum += price*quantity;
-	      
-	      });
-	      
-	      $('.totalPrice').text(thousandComma(sum));
-      }
-   }
+	       sum += price*quantity;
+	  })
+	  $('.totalPrice').text(thousandComma(sum));
+  } */
+  
+  
+  /*** total price calculator ***/
+  function calcPrice_all(){
+	  var _totalPrice = 0;
+	  
+	$('.chkbox:checked').each(function(){
+		_totalPrice += Number($(this).parent().parent().find('.price1').text()) * Number($(this).parent().parent().find('.result').text());
+	}); 
+	
+	$('.totalPrice').text(_totalPrice);
+  }
+  
+  /* function calcPrice(){
+	  var sumPlus = 0;
+	  var sumMinus = 0;
+	  // var totalPrice = 0;
+	  
+		  $('.price1').each(function(){
+			if($(this).parent().parent().children('.chee').children('.chkbox').prop('checked') == true){
+				
+				console.log('come');
+			  var priceP = parseInt($(this).text());
+	          var quantityP = parseInt($(this).parent().next().children('.result').text());
+		         
+		       console.log(quantityM);
+		       alert("react");
+		
+		       sumPlus += priceP * quantityP;
+		       
+		       console.log(sumPlus);
+		  
+		       
+			} else if($(this).parent().parent().children('.chee').children('.chkbox').prop('checked') == false) {
+				
+				 var priceM = parseInt($(this).text());
+		         var quantityM = parseInt($(this).parent().next().children('.result').text());
+			         
+			     console.log(quantityM);
+			
+			     sumMinus -= priceM*quantityM;
+			     
+			     console.log(sumMinus);
+				
+			}
+			  var totalPrice = sumPlus + sumMinus;
+			  console.log(totalPrice);
+		  })
+		  
+
+	  
+	  $('.totalPrice').text(thousandComma(totalPrice));
+	}
+  
+  $('.chkbox').on('change', function(){
+	  calcPrice();
+  }) */
+  
    
-   $(function(){
-	   calcPrice();
-   })
+   // checkbox on change
+   $('.chkbox').on('change', function(){
+	   calcPrice_all();	   
+   });
+	  
    
    // 천단위 쉼표 함수
    function thousandComma(x){
@@ -185,7 +252,7 @@
    // 수량 -
    $('.button1').click(function(){
 	   var a = parseInt($(this).siblings('.result').text());
-	      console.log("a2", a);
+	    //  console.log("a2", a);
 	      a = a-1;
 	      if(a<1){
 	         alert("잘못된 수량입니다.") 
@@ -198,22 +265,22 @@
 	      console.log(price);
 	      $(this).parent().siblings().children('.price1').text(a*price); */
 	      
-	      calcPrice();
+	      calcPrice_all();
    });
    
    // 수량 +
    $('.button2').click(function(){
       var a = parseInt($(this).siblings('.result').text());
-      console.log("a1", a);
+     // console.log("a1", a);
       a= a+1;
       $(this).siblings('.result').text(a);
    
       // var b = parseInt($(this).parent().siblings().children('.price1').text());
       var price = $('.realPrice').val(); // span의 id값을 가져와서 a*price
-      console.log(price);
+      
       // $(this).parent().siblings().children('.price1').text(a*price);
       
-      calcPrice();
+      calcPrice_all();
       
    });
       
@@ -223,13 +290,14 @@
       
       var tr = $('#calculation1tbody tr').val();
       if(tr == null){
-         console.log("장바구니가 비어있습니다.")
+        // console.log("장바구니가 비어있습니다.")
       }
+      calcPrice_all();
    });
    
    $('#allProduct').click(function(){
 		location.href = "${pageContext.request.contextPath}/order/cart.or";
-		console.log("링크 선택");  
+	// console.log("링크 선택");  
    })
    
    
