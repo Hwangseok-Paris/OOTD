@@ -133,10 +133,19 @@
 			data: { "orderNo" : orderNo }, 
 
 			success: function(data){
-				alert('주문 상세보기 성공');
+				//alert('주문 상세보기 성공');
 				console.log(data[0].order_no);
 				console.log(data[0].receiver_name);
-				$('span.order-no').text(data[0].order_no);
+				console.log(data[0].order_date); // ? error
+				$('.order-no-area>span.order-no').text(data[0].order_no);
+				$('.customer-name').text(data[0].receiver_name);
+				$('.customer-address').text(data[0].order_address);
+				// $('.customer-phone').text(data[0].order_address);
+				$('.modal-product>span.product-name').text(data[0].product_name);
+				$('.customer-address').text(data[0].order_address);
+				$('.modal-date>div.order-date').text(data[0].order_date);
+				$('.modal-quantity>div.order-quantity').text(data[0].order_quantity);
+				$('.price-area>span.price-amount').text(data[0].total_price);
 			},
 			
 			error: function(){

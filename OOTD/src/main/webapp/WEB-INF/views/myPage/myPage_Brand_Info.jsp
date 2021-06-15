@@ -44,7 +44,7 @@
                         <tr class="update-password" style="display: none">
 
                             <td colspan="4">
-                                <form action="${pageContext.request.contextPath}/myPage/boardUpdate.do" method="post">
+                                <form action="${pageContext.request.contextPath}/myPage/myPage_Brand_Info_pwUpdate.mp" method="post">
                                     <div class='passowrd-update-area'>
                                         <div class="input">
                                             <label for="password">현재 비밀번호</label>

@@ -51,14 +51,14 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
+                            <td class="modal-product">
                                 <span class="product-name">Round String Jacket Brown </span>
                                 <span class="product-option">(small)</span>
                             </td>
-                            <td>
+                            <td class="modal-date">
                                 <div class="order-date">2021.06.06</div>
                             </td>
-                            <td>
+                            <td class="modal-quantity">
                                 <div class="order-quantity">3</div>
                             </td>
                         </tr>
@@ -66,7 +66,7 @@
                 </table>
                 <div class="price-area">
                     <span>주문금액 : </span>
-                    <span price-amount>200,000&nbsp;&#8361;</span>
+                    <span class="price-amount">200,000&nbsp;&#8361;</span>
                 </div>
             </div>
         </div>

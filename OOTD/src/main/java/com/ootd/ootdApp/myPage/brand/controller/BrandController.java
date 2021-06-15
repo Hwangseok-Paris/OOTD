@@ -45,10 +45,51 @@ public class BrandController {
 	 * }
 	 */
 
-	@RequestMapping("myPage/myPage_Brand_Info.mp")
-	public void myPage_Brand_Info() {
+	/*
+	 * @RequestMapping("myPage/myPage_Brand_Info.mp") public void
+	 * myPage_Brand_Info(@RequestParam String userId, Model model) {
+	 * 
+	 * Member result = memberService.selectOneMember(userId);
+	 * 
+	 * // member라는 이름으로 result 전달 model.addAttribute("member", result);
+	 * 
+	 * return "member/memberView"; }
+	 * 
+	 * }
+	 */
+	
+	// 마이페이지 - 회원(업체) 정보 수정
+	// 비밀번호 수정
+//	@RequestMapping("myPage/myPage_Brand_Info_pwUpdate.mp")
+//	public String myPage_Brand_Info_Update(Member member, Model model) {
+//		
+//		int result = brandService.updateMember(member);
+//		
+//		String loc = "/"; // 회원정보를 수정한 후에 이동할 곳
+//		String msg = "";
+//		
+//		if( result > 0 ) {
+//			msg = "회원 정보 수정 완료!";
+//			// 수정한 정보를 현재 로그인하고 있는 세션에 업데이트 해주어야 함
+//			model.addAttribute("member", member);
+//		} else {
+//			msg = "회원 정보 수정 실패";
+//		}
+//		
+//		model.addAttribute("loc", loc);
+//		model.addAttribute("msg", msg);
+//		
+//		return "common/msg";
+//
+//	}
+//	
+	
 
-	}
+	
+	
+	
+	
+	
 
 	// 등록 상품 - 업체가 등록한 상품 리스트
 	@RequestMapping("myPage/myPage_Brand_Product.mp")
