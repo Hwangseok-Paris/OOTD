@@ -139,7 +139,7 @@
 							})
 
 			$('.header_logo').on('click', function() {
-
+				location.href="${pageContext.request.contextPath}";
 			})
 
 		})
