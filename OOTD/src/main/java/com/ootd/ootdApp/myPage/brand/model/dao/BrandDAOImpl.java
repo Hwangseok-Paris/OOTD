@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
+import com.ootd.ootdApp.product.model.vo.Product;
 
 @Repository
 public class BrandDAOImpl implements BrandDAO {
@@ -16,9 +17,29 @@ public class BrandDAOImpl implements BrandDAO {
 
 	@Override
 	public List<MypageOrderList> selectBrandOrderList() {
-		System.out.println("DAO 왔나요");
-		return sqlSession.selectList("orderList-mapper.selectBrandOrderList");
+		System.out.println("order :: DAO 왔나요");
+		List<MypageOrderList> mypage = sqlSession.selectList("orderList-mapper.selectBrandOrderList");
+		System.out.println("test" + mypage);
+		return mypage;
 
+	}
+
+	@Override
+	public List<Product> selectBrandProductList() {
+		System.out.println("product :: DAO 왔나요");
+		return sqlSession.selectList("productList-mapper.selectBrandProductList");
+	}
+
+	@Override
+	public int deleteBrandProductList(int productNo) {
+		System.out.println("product_delete :: DAO 왔나요");
+		return sqlSession.delete("productList-mapper.deleteBrandProductList", productNo);
+	}
+
+	@Override
+	public List<MypageOrderList> selectBrandOrderDetail(int orderNo) {
+		System.out.println("order_detail :: DAO 왔나요");
+		return sqlSession.selectList("orderList-mapper.selectBrandOrderDetail", orderNo);
 	}
 	
 

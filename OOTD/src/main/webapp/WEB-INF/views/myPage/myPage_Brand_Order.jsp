@@ -83,6 +83,9 @@
     // 모달창 스크립트
     $('.order-no').click(function () {
         $('.modal').fadeIn();
+        var a = $(this).text();
+	    console.log(a);
+        // console.log($(this).text());
     })
 
     $('.modal').on('click', function (event) {
@@ -118,7 +121,30 @@
         })
     })
 
+    // 주문 번호를 클릭했을 때(span의 class가져옴)
+	 $('.order-no').click(function(){
+		 
+		 var orderNo = $(this).text();
+		 console.log(orderNo);
+		 
+		$.ajax({
+			type: "POST",
+			url: "${pageContext.request.contextPath}/myPage/myPage_Order_Detail.mp",
+			data: { "orderNo" : orderNo }, 
 
+			success: function(data){
+				alert('주문 상세보기 성공');
+				console.log(data[0].order_no);
+				console.log(data[0].receiver_name);
+				$('span.order-no').text(data[0].order_no);
+			},
+			
+			error: function(){
+				alert('주문 상세보기 실패');
+			}
+			
+		});
+	}); 
 
 </script>
 
