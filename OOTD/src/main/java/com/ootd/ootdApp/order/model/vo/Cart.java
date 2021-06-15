@@ -9,23 +9,18 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class cart implements Serializable{
+public class Cart implements Serializable{
 	
-	private static final long serialVersionUID = 8989L;
-	
+	private static final long serialVersionUID = 400L;
 	
 	private int member_no;
 	private int cart_quantity;
 	private String cart_size;
-
 	private int product_no;
-	private String product_name;
-	private String product_detail;
 	
-	private String product_size;
-	private int product_price;
-	private int product_type;
-	
-	
+	private String brand_name;
 
+	private String product_name;
+	private int product_price;
+	
 }

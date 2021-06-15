@@ -45,53 +45,29 @@
                </thead>
       
                <tbody id="calculation1tbody">
+               <c:forEach items="${cart}" var="a">
                   <tr class="calculation1_tbody_tr1" style="height: 90px; background-color: #fff;">
                      <td style="text-align: left; text-align: center; border-right: none;">
-                        <input type="checkbox" id="cbtr1" name="checkbox" />
+                        <input type="checkbox" id="cbtr1" name="checkbox" checked/>
                      </td>
                      <td style="border-left: none; border-right: none; width: 100px; text-align: center;"><img src="${pageContext.request.contextPath }/resources/images/sample.PNG" width="100px"></td>
                      <td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;">
-                     <span>[나이키]</span> <br /><span>엠버로이드 라운드 반팔티셔츠 707350-011</span> <br /><br />옵션 : <span>S</span>
+                     <span>[${a.brand_name}]</span> <br/><span>${a.product_name}</span> <br /><br />옵션 : <span>${a.cart_size}</span>
                      </td>
                      <td>
-                        <span class="price1" style="padding-left: 10px;">25900</span>원
-                        <input type="hidden" class="realPrice" value="25900">
+                        <span class="price1" style="padding-left: 10px;">${a.product_price}</span>원
+                        <input type="hidden" class="realPrice" value=${a.product_price}>
                      </td> 
                      <td style="width: 100px;">
                         <button class="button1 quanBtn" id="button" type ="button"  value='-' >-</button>
-                       <div id="result" class="result">1</div>
+                       <div id="result" class="result">${a.cart_quantity}</div>
                        <button class="button2 quanBtn" id="button" type="button"  value='+'>+</button>
                      </td>
-                     
                      <td>
                         <button class="btn default btndelete">삭제</button>
                      </td>
-                     
                   </tr>
-                  <!-- 임시-상품 추가했을 때 확인 -->
-                  <tr style="height: 90px; background-color: #fff;">
-                     <td style="text-align: left; text-align: center; border-right: none;">
-                        <input type="checkbox" id="cbtr2" name="checkbox" />
-                     </td>
-                     <td style="border-left: none; border-right: none; width: 100px; text-align: center;"><img src="${pageContext.request.contextPath }/resources/images/sample.PNG" width="100px"></td>
-                     <td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;">
-                     <span>[나이키]</span> <br /><span>엠버로이드 라운드 반팔티셔츠 707350-011</span> <br /><br />옵션 : <span>S</span>
-                     </td>
-                     <td>
-                        <span class="price1" style="padding-left: 10px;">25900</span>원
-                        <input type="hidden" class="realPrice" value="25900">
-                     </td>
-                     <td style="width: 100px;">
-                        <button class="button1 quanBtn" id="button" type ="button" value='-' >-</button>
-                          <div id="result"  class="result">1</div>
-                          <button class="button2 quanBtn" id="button" type="button" value='+'>+</button>
-                     </td>
-                     
-                     <td>
-                        <button class="btn default btndelete">삭제</button>
-                     </td>
-                     
-                  </tr>
+                  </c:forEach>
                </tbody>
                
                </table>
@@ -111,9 +87,9 @@
                </tr>
                
                <tr style="background-color: #fff;">
-                  <td style="padding: 22px 0;"><span class="totalPrice" id="price">25,900</span>원</td>
+                  <td style="padding: 22px 0;"><span class="totalPrice" id="price"></span>원</td>
                   <td><span class="price" id="price">0</span>원</td>
-                  <td><span class="totalPrice" id="price">25,900</span>원</td>
+                  <td><span class="totalPrice" id="price"></span>원</td>
                </tr>
             </table>
             <br /><br /><br />
@@ -181,12 +157,25 @@
    // 총합 계산
    function calcPrice(){
       var sum = 0;
-      $('.price1').each(function(){
-         sum += Number($(this).text());
-      });
-      
-      $('.totalPrice').text(thousandComma(sum));
+      if($('#cbtr1').is(':checked')){
+	      $('.price1').each(function(){
+	    	  
+	    	 var price = Number($(this).text());
+	         var quantity = Number($(this).parent().next().children('.result').text());
+	         
+	         console.log(quantity);
+	
+	         sum += price*quantity;
+	      
+	      });
+	      
+	      $('.totalPrice').text(thousandComma(sum));
+      }
    }
+   
+   $(function(){
+	   calcPrice();
+   })
    
    // 천단위 쉼표 함수
    function thousandComma(x){
@@ -204,10 +193,10 @@
 	         }
 	      $(this).siblings('.result').text(a);
 	      
-	      //var b = parseInt($(this).parent().siblings().children('.price1').text());
+/* 	      //var b = parseInt($(this).parent().siblings().children('.price1').text());
 	      var price = $('.realPrice').val();
 	      console.log(price);
-	      $(this).parent().siblings().children('.price1').text(a*price);
+	      $(this).parent().siblings().children('.price1').text(a*price); */
 	      
 	      calcPrice();
    });
@@ -222,7 +211,7 @@
       // var b = parseInt($(this).parent().siblings().children('.price1').text());
       var price = $('.realPrice').val(); // span의 id값을 가져와서 a*price
       console.log(price);
-      $(this).parent().siblings().children('.price1').text(a*price);
+      // $(this).parent().siblings().children('.price1').text(a*price);
       
       calcPrice();
       
@@ -239,7 +228,7 @@
    });
    
    $('#allProduct').click(function(){
-		location.href = "${pageContext.request.contextPath}/order/order.or";
+		location.href = "${pageContext.request.contextPath}/order/cart.or";
 		console.log("링크 선택");  
    })
    
