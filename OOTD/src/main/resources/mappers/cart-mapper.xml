@@ -10,6 +10,4 @@
     AND P.MEMBER_NO = M.MEMBER_NO
     AND C.MEMBER_NO = #{member_no}
     </select>
-   
-
 </mapper>
