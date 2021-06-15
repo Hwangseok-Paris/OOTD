@@ -13,7 +13,7 @@ import com.ootd.ootdApp.order.model.vo.Cart;
 
 
 @Controller
-public class orderController {
+public class OrderController {
 	
 	
 	@Autowired
