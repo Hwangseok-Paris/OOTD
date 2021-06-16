@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.brand.model.dao.BrandDAO;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
 import com.ootd.ootdApp.product.model.vo.Product;
@@ -16,15 +17,15 @@ public class BrandServiceImpl implements BrandService {
 	BrandDAO brandDAO;
 
 	@Override
-	public List<MypageOrderList> selectBrandOrderList() {
+	public List<MypageOrderList> selectBrandOrderList(String brand_name) {
 		System.out.println("order :: 서비스 왔나요");
-		return brandDAO.selectBrandOrderList();
+		return brandDAO.selectBrandOrderList(brand_name);
 	}
 
 	@Override
-	public List<Product> selectBrandProductList() {
+	public List<Product> selectBrandProductList(int member_no) {
 		System.out.println("product :: 서비스 왔나요");
-		return brandDAO.selectBrandProductList();
+		return brandDAO.selectBrandProductList(member_no);
 	}
 
 	@Override
@@ -39,5 +40,30 @@ public class BrandServiceImpl implements BrandService {
 		return brandDAO.selectBrandOrderDetail(orderNo);
 	}
 
+	@Override
+	public int updateBrandInfo(Member tempMember) {
+		System.out.println("brandMypage_UpdatePw :: 서비스 왔나요");
+		return brandDAO.updateBrandInfo(tempMember);
+	}
 
+	@Override
+	public int emUpdateBrandInfo(Member tempMember) {
+		System.out.println("brandMypage_UpdateEmail :: 서비스 왔나요");
+		return brandDAO.emUpdateBrandInfo(tempMember);
+	}
+
+	@Override
+	public int phUpdateBrandInfo(Member tempMember) {
+		System.out.println("brandMypage_UpdatePhone :: 서비스 왔나요");
+		return brandDAO.phUpdateBrandInfo(tempMember);
+	}
+
+	@Override
+	public int acUpdateBrandInfo(Member tempMember) {
+		System.out.println("brandMypage_UpdateAccount :: 서비스 왔나요");
+		return brandDAO.acUpdateBrandInfo(tempMember);
+	}
+	
 }
+
+

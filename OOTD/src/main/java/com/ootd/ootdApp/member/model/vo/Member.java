@@ -24,4 +24,5 @@ public class Member implements Serializable{
 	private String account_number;
 	private int login_type;
 	private String bank_code;
+	private int member_no; 
 }

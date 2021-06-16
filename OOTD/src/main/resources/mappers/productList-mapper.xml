@@ -8,6 +8,7 @@
 		FROM PRODUCT
 		WHERE PRODUCT_STATUS = 'Y'
 			AND PRODUCT_TYPE = 1
+			AND MEMBER_NO = #{ member_no }
 		ORDER BY PRODUCT_NO ASC
 	</select>
 	

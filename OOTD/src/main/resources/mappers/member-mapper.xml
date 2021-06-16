@@ -15,7 +15,6 @@
 		<result property="account_number" column="account_number"/>
 		<result property="login_type" column="login_type"/>
 		<result property="bank_code" column="bank_code"/>
-		
 	</resultMap>
 
 	<insert id="insertBrandMember" parameterType="Member">
@@ -38,6 +37,33 @@
 		SELECT * FROM MEMBER
 		WHERE MEMBER_ID = #{ member_id }
 	</select>
+	
+	<update id="updateBrandPwd" parameterType="Member">
+		UPDATE MEMBER SET MEMBER_PW = #{ member_pw }
+		WHERE MEMBER_NO = #{ member_no } 
+	</update>
+	
+	<update id="updateBrandEmail" parameterType="Member">
+		UPDATE MEMBER SET EMAIL = #{ email }
+		WHERE MEMBER_NO = #{ member_no } 
+	</update>
+	
+	<update id="updateBrandPhone" parameterType="Member">
+		UPDATE MEMBER SET PHONE = #{ phone }
+		WHERE MEMBER_NO = #{ member_no } 
+	</update>
+	
+	<update id="updateBrandAccount" parameterType="Member">
+		UPDATE MEMBER SET ACCOUNT_NUMBER = #{ account_number }
+		WHERE MEMBER_NO = #{ member_no } 
+	</update>
+	
+	
+	
+	
+	
+	
+	
 	
 	
 

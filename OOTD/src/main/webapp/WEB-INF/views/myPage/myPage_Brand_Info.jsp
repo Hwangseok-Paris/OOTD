@@ -30,13 +30,13 @@
                     <tbody>
                         <tr class="id">
                             <td>아이디</td>
-                            <td>Paris</td>
+                            <td>${member.member_id}</td>
                             <td></td>
                             <td></td>
                         </tr>
-                        <tr class="password" style>
+                        <tr class="password">
                             <td>비밀번호</td>
-                            <td colspan="2">*********</td>
+                            <td colspan="2"><input type="hidden" value="${member.member_pw}">*********</td>
                             <td>
                                 <button class="modify-btn" id="update-password">비밀번호 변경</button>
                             </td>
@@ -52,11 +52,11 @@
                                         </div>
                                         <div class="input">
                                             <label for="new-password">새 비밀번호</label>
-                                            <input type="password" name="" id="new-password">
+                                            <input type="password" name="new_password" id="new-password">
                                         </div>
                                         <div class="input">
                                             <label for="new-password-confirm">새 비밀번호 확인</label>
-                                            <input type="password" name="" id="new-password-confirm">
+                                            <input type="password" name="new_password_confirm" id="new-password-confirm">
                                         </div>
                                         <div class="btn-group">
                                             <input type="submit" value="확인">
@@ -68,13 +68,13 @@
                         </tr>
                         <tr>
                             <td>브랜드명</td>
-                            <td>OOTD</td>
+                            <td>${member.brand_name}</td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr class='email'>
                             <td>대표 이메일</td>
-                            <td colspan="2">paris@gmail.com</td>
+                            <td colspan="2">${member.email}</td>
                             <td>
                                 <button id="update-email">이메일 변경</button>
                             </td>
@@ -82,7 +82,7 @@
                         <tr class="update-email" style="display: none">
 
                             <td colspan="4">
-                                <form action="">
+                                <form action="${pageContext.request.contextPath}/myPage/myPage_Brand_Info_emUpdate.mp" method="post">
                                     <div class='email-update-area'>
                                         <div class="input">
                                             <label for="email">변경 이메일 주소</label>
@@ -100,14 +100,14 @@
                         </tr>
                         <tr class="phone">
                             <td>대표전화</td>
-                            <td colspan="2">010-8888-8888</td>
+                            <td colspan="2">${member.phone}</td>
                             <td>
                                 <button id="update-phone">전화번호 변경</button>
                             </td>
                         </tr>
                         <tr class="update-phone" style="display: none">
                             <td colspan="4">
-                                <form action="">
+                                <form action="${pageContext.request.contextPath}/myPage/myPage_Brand_Info_phUpdate.mp" method="post">
                                     <div class='phone-update-area'>
                                         <div class="input">
                                             <label for="phone">변경 번호</label>
@@ -124,8 +124,8 @@
                         </tr>
                         <tr class="account">
                             <td>계좌번호</td>
-                            <td>신한은행</td>
-                            <td>110-236-417886</td>
+                            <td>${member.bank_code}</td>
+                            <td>${member.account_number}</td>
                             <td>
                                 <button id="update-account">계좌번호 변경</button>
                             </td>
@@ -133,20 +133,22 @@
                         <tr class="update-account" style="display: none">
 
                             <td colspan="4">
-                                <form action="" method="POST">
+                                <form action="${pageContext.request.contextPath}/myPage/myPage_Brand_Info_accountUpdate.mp" method="post">
                                     <div class='account-update-area'>
                                         <div class="input">
                                             <label for="account">변경 계좌번호</label>
 
-                                            <select class="select-bank">
-                                                <option value="">국민은행</option>
-                                                <option value="">신한은행</option>
-                                                <option value="">농협</option>
-                                                <option value="">우리은행</option>
-                                            </select>
+                                            <select class="select-bank" name="bank_code">
+                                                 <option value="NH">농협</option>
+				                                 <option value="KB">KB</option>
+				                                 <option value="SH">신한</option>
+				                                 <option value="UR">우리</option>
+				                                 <option value="CH">축협</option>
+				                                 <option value="SH">수협</option>
+				                                 <option value="IBK">IBK</option>
+                                            </select>       
 
-
-                                            <input type="text" name="account" id="account"
+                                            <input type="text" name="account_number" id="account"
                                                 placeholder="계좌번호 입력( ' - ' 포함)">
 
                                             <div class="btn-group">

@@ -4,13 +4,15 @@
 <mapper namespace="orderList-mapper"> 
 
 
-   <select id="selectBrandOrderList" resultType="O_Order">
-	SELECT C.PRODUCT_NAME as product_name, B.ORDER_QUANTITY as ORDER_QUANTITY, A.ORDER_NO as ORDER_NO, A.ORDER_DATE as ORDER_DATE, A.TOTAL_PRICE as TOTAL_PRICE
-        FROM O_ORDER A, O_ORDER_LIST B, PRODUCT C
-        WHERE A.ORDER_NO = B.ORDER_NO
-        	AND B.PRODUCT_NO = C.PRODUCT_NO
-        	AND PRODUCT_TYPE = 1
-        ORDER BY A.ORDER_DATE DESC
+   <select id="selectBrandOrderList" resultType="O_Order" parameterType="string">
+	SELECT P.PRODUCT_NAME, OL.ORDER_QUANTITY, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE
+        FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P, MEMBER M
+        WHERE O.ORDER_NO = OL.ORDER_NO
+        	AND OL.PRODUCT_NO = P.PRODUCT_NO
+        	AND P.MEMBER_NO = M.MEMBER_NO
+        	AND P.PRODUCT_TYPE = 1
+        	AND M.BRAND_NAME= #{ brand_name }
+        ORDER BY O.ORDER_DATE DESC
    </select>
 
    <select id="selectBrandOrderDetail" resultType="O_Order" parameterType="_int">
