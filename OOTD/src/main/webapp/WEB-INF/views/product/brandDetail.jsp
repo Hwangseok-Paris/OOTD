@@ -49,7 +49,6 @@
             <div id="imgDetail" class="inputBox2">
                 <div class='inputBox2 zoom' id='ex1'>
                     <img src='${pageContext.request.contextPath }/resources/images/brand sample1.png' id='jack' width='540' height='620' alt='Daisy on the Ohoopee'/>
-                    
                 </div>
             </div>
         
@@ -246,18 +245,9 @@
 	<script>
 
 		$(function() {
-	        $(document).ready(function(){
-	            $('#ex1').zoom();
-	          
-	        });
+	         $('#ex1').zoom();
 		});
     
-
-
-
-    
-
-
 
     
         // function goCart() {
@@ -398,7 +388,7 @@
             // function slideUp() {
             //     $('.drop').removeClass('on').next().slideUp();
             // };
-        })
+        });
 
 
         $('#contentImgArea1').on('click', function() { 
@@ -416,12 +406,6 @@
 		$('#contentImgArea4').on('click', function() {
 			$('#imgDetail').children().children().attr('src', $('#contentImg4').attr('src'));
 		});
-
-
-
-
-
-
 
     </script>
 </body>

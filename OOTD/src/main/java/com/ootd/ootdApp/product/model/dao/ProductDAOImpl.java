@@ -47,7 +47,11 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectOne("product-mapper.secondHandSelectTotalContents");
 	}
 
-	
+	@Override
+	public List<String> brandNameSelectList() {
+		
+		return sqlSession.selectList("product-mapper.brandNameSelectList");
+	}
 	
 	// =========Product Input (insert)=========
 	
@@ -98,5 +102,7 @@ public class ProductDAOImpl implements ProductDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 }

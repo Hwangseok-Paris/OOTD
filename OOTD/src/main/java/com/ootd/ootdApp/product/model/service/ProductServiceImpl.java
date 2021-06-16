@@ -41,7 +41,11 @@ public class ProductServiceImpl implements ProductService {
 		}
 	}
 	
-	
+	@Override
+	public List<String> brandNameSelectList() {
+		
+		return productDAO.brandNameSelectList();
+	}
 
 	// =========Product Input (insert)=========
 	
@@ -68,6 +72,8 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 	
 	

@@ -44,7 +44,14 @@ public class ProductController {
 		
 		System.out.println("list : " + list);
 		
+		// brand_name List 불러오기 
+		List<String> brandName = productService.brandNameSelectList();
+		
+		System.out.println("brandName : " + brandName);
+		
+		
 		model.addAttribute("list", list);
+		model.addAttribute("brandName", brandName);
 		model.addAttribute("totalContents", totalContents);
 		model.addAttribute("numPerPage", numPerPage);
 		model.addAttribute("pageBar", pageBar);

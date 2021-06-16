@@ -41,8 +41,10 @@
 				top: 0,
 				left: 0,
 				opacity: 0,
-				width: img.width * magnify,
-				height: img.height * magnify,
+//				width: img.width * magnify,
+//				height: img.height * magnify,
+				width: '800px',
+				height: '800px',
 				border: 'none',
 				maxWidth: 'none',
 				maxHeight: 'none'
