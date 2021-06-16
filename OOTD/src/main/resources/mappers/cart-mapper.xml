@@ -4,10 +4,17 @@
 <mapper namespace="cart-mapper"> 
 
    <select id="selectCartList" parameterType="_int" resultType="Cart">
-   	SELECT C.*, P.PRODUCT_NAME, P.PRODUCT_PRICE, M.BRAND_NAME
-	FROM CART C, PRODUCT P, MEMBER M
+   	SELECT C.*, P.PRODUCT_NAME, P.PRODUCT_PRICE, M.BRAND_NAME, LOWER(ATT_NAME) ATT_NAME
+	FROM CART C, PRODUCT P, MEMBER M, ATTACHMENT A
 	WHERE C.PRODUCT_NO = P.PRODUCT_NO
     AND P.MEMBER_NO = M.MEMBER_NO
-    AND C.MEMBER_NO = #{member_no}
+    AND P.PRODUCT_NO = A.PRODUCT_NO
+    AND ATT_LEVEL = 1
+    AND C.MEMBER_NO = 1
     </select>
+    
+    <select id="deleteProduct" parameterType="_int">
+	DELETE FROM CART WHERE CART_NO = ${cart_no}
+    </select>
+    
 </mapper>

@@ -21,4 +21,16 @@ public class OrderServiceImpl implements OrderService {
 		return orderDAO.selectCartList(member_no);
 	}
 
+	@Override
+	public int deleteProduct(int cart_no) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateQuantity(int cart_no, int cart_quantity) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
