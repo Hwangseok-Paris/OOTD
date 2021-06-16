@@ -13,6 +13,7 @@ public class Cart implements Serializable{
 	
 	private static final long serialVersionUID = 400L;
 	
+	private int cart_no;
 	private int member_no;
 	private int cart_quantity;
 	private String cart_size;

@@ -8,8 +8,10 @@ public interface OrderDAO {
 	
 	List<Cart> selectCartList(int member_no);
 
-	int deleteProduct(int cart_no);
+	int deleteCartProduct(int cart_no);
 	
 	int updateQuantity(int cart_no, int cart_quantity);
+
+	int deleteCartProductAll(int member_no);
 	
 }

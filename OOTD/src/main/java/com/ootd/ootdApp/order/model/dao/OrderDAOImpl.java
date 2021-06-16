@@ -22,15 +22,22 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public int deleteProduct(int cart_no) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteCartProduct(int cart_no) {
+		
+		
+		return sqlSession.delete("cart-mapper.deleteCartProduct", cart_no);
 	}
 
 	@Override
 	public int updateQuantity(int cart_no, int cart_quantity) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int deleteCartProductAll(int member_no) {
+		
+		return sqlSession.delete("cart-mapper.deleteCartProductAll", member_no);
 	}
 
 
