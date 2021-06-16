@@ -22,11 +22,14 @@ public interface ProductService {
 
 	/**
 	 * 전체 상품 갯수 조회를 위한 메소드
-	 * 
 	 * @param pType = 1? brand : secondHand
-	 * 
 	 */
 	int productSelectTotalContents(int pType);
+	
+	/**
+	 * 전체 brand_name 조회를 위한 메소드
+	 */
+	List<String> brandNameSelectList();
 
 	// =========Product Input (insert)=========
 
@@ -67,5 +70,7 @@ public interface ProductService {
 	 * @return int
 	 */
 	int productDelete(int product_no);
+
+	
 
 }

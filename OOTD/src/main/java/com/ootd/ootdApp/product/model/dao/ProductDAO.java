@@ -38,6 +38,10 @@ public interface ProductDAO {
 	 */
 	int secondHandSelectTotalContents();
 	
+	/**
+	 * brand_name 전체조회를 위한 메소드
+	 */
+	List<String> brandNameSelectList();
 	
 	
 	
@@ -112,5 +116,7 @@ public interface ProductDAO {
 	 * @return int
 	 */
 	int secondHandDelete(int product_no);
+
+	
 
 }

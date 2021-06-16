@@ -7,20 +7,24 @@
 		SELECT P.*, (SELECT COUNT(*)
 					 FROM ATTACHMENT
 					 WHERE PRODUCT_NO = P.PRODUCT_NO) FILECOUNT,
-			  M.BRAND_NAME
-		FROM PRODUCT P, MEMBER M
+			  M.BRAND_NAME, A.ATT_NAME
+		FROM PRODUCT P, MEMBER M, ATTACHMENT A
 		WHERE P.MEMBER_NO = M.MEMBER_NO
-		  AND PRODUCT_TYPE = 1 
+           AND P.PRODUCT_NO = A.PRODUCT_NO
+		   AND PRODUCT_TYPE = 1
+           AND A.ATT_LEVEL = 1
 	</select>
 	
 	<select id="secondHandSelectList" resultType="Product_p">
 		SELECT P.*, (SELECT COUNT(*)
 					 FROM ATTACHMENT
 					 WHERE PRODUCT_NO = P.PRODUCT_NO) FILECOUNT,
-			  M.BRAND_NAME
-		FROM PRODUCT P, MEMBER M
+			  M.BRAND_NAME, A.ATT_NAME
+		FROM PRODUCT P, MEMBER M, ATTACHMENT A
 		WHERE P.MEMBER_NO = M.MEMBER_NO
-		  AND PRODUCT_TYPE = 2
+           AND P.PRODUCT_NO = A.PRODUCT_NO
+		   AND PRODUCT_TYPE = 1
+           AND A.ATT_LEVEL = 1
 	</select>
 	
 	<select id="brandSelectTotalContents" resultType="_int">
@@ -31,7 +35,9 @@
 		SELECT COUNT(*) FROM PRODUCT WHERE PRODUCT_TYPE = 2
 	</select>
 	
-	
+	<select id="brandNameSelectList" resultType="string">
+		SELECT BRAND_NAME FROM MEMBER WHERE BRAND_NAME != '중고'
+	</select>
 	
 	
 	
