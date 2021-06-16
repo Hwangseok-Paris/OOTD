@@ -18,7 +18,7 @@
 <body>
 <div class="container">
 	<div class="brandInput-title">
-		<span>상품 등록</span>
+		<span>브랜드 상품 등록</span>
 	</div>
 	<form name="brandFrm" action="${pageContext.request.contextPath}/product/productInput.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="product_type" value="1" />

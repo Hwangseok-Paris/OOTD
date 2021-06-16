@@ -20,7 +20,8 @@ public class ProductController {
 	ProductService productService;
 	
 	
-	// =========Product List (SelectList)조회=========
+	// =========Product List (SelectList)조회 =========
+	// 메인 화면에서 brand 또는 second hand 클릭 시 수행되는 로직.
 	@RequestMapping("/product/productList.do")
 	public String productList(
 			@RequestParam int pType,
@@ -56,45 +57,56 @@ public class ProductController {
 		model.addAttribute("numPerPage", numPerPage);
 		model.addAttribute("pageBar", pageBar);
 
+		// brand를 클릭 시, pType 값 1을 가져오게 되고, 해당 값을 가져올 경우
+		// 브랜드 상품 리스트로 이동
 		if (pType == 1) {
 
 			return "product/brandList";
 		} else {
-
+			// 아닐 경우, 중고 상품 리스트로 이동
 			return "product/secondHandList";
 		}
 
 	}
 	
 	
-	//=========Product Input jsp로 경로설정  ( insert )=========	
+	//========= 중고 or 브랜드 상품 리스트 화면 =========	
+	// 상품 등록 화면으로 이동하는 것은 현재 중고 리스트 화면에만 존재함.
 	@RequestMapping("product/productInputForm.do")
-	public String productInputForm(@RequestParam int pType) {
+	public String productInputForm(@RequestParam int pType, Product p) {
 		// pType = 1 ? 브랜드 : 상품  		
 		
 		
 		if( pType == 1 ) {
-			
-			return "product/brandInput";			// 상품 등록 jsp로 이동 
+			// 아직 브랜드 상품 리스트 화면에서 product/productInputForm.do를 수행하는 기능이 없음.
+			return "product/brandInput";			// 브랜드 상품 등록 jsp로 이동 (아직 기능 없음)
 		} else {
-			
-			return "product/secondHandInput";		// 상품 등록 jsp로 이동 
+			// 중고 상품 리스트 화면에서 상품 등록 버튼 클릭 시, 이동.
+			return "product/secondHandInput";		// 중고 상품 등록 jsp로 이동 
 		}
 
 	}
 	
-	//=========Product Input Form 으로 이동  ( insert )=========	
+	//=========Product Input Form에서 상품 등록 후, 각 상품의 리스트 화면으로 이동  ( insert )=========	
 		@RequestMapping("product/productInput.do")
 		public String productInput(Product p) {
 			// pType = 1 ? 브랜드 : 상품  		
 			int pType = p.getProduct_type();
 			
 			if( pType == 1 ) {
+			
 				
-				return "product/brandList"; 		// 상품 등록 완료 후 List 로 이동 
+				return "product/brandList"; 		// 상품 등록 완료 후 브랜드 상품 List 로 이동 
 			} else {
+				System.out.println("product_type : " + p.getProduct_type());
+				System.out.println("product_type : " + p.getMember_no());
+				System.out.println("product_type : " + p.getProduct_name());
+				System.out.println("product_type : " + p.getProduct_price());
+				System.out.println("product_type : " + p.getProduct_detail());
+				System.out.println("product_type : " + p.getProduct_sizeinfo());
+				System.out.println("product_type : " + p.getProduct_size());
 				
-				return "product/secondHandList";	// 상품 등록 완료 후 List 로 이동 
+				return "product/secondHandList";	// 상품 등록 완료 후 중고 상품 List 로 이동 
 			}
 
 		}

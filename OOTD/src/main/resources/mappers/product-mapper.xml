@@ -35,10 +35,16 @@
 		SELECT COUNT(*) FROM PRODUCT WHERE PRODUCT_TYPE = 2
 	</select>
 	
+
 	<select id="brandNameSelectList" resultType="string">
 		SELECT BRAND_NAME FROM MEMBER WHERE BRAND_NAME != '중고'
 	</select>
-	
+
+	<insert id="insertProduct" parameterType="Product_p">
+		INSERT INTO PRODUCT(PRODUCT_NO, PRODUCT_NAME, PRODUCT_DETAIL, PRODUCT_SIZEINFO, PRODUCT_SIZE, PRODUCT_PRICE, PRODUCT_STOCK_S, PRODUCT_STOCK_M, PRODUCT_STOCK_L, PRODUCT_TYPE, MEMBER_NO, PRODUCT_STATUS)
+		VALUES(16, '33423423', '123123', '234234234', 's', 123123123, null, null, null, 2, 15, 'Y')
+	</insert>
+
 	
 	
 

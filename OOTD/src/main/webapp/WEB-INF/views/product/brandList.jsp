@@ -184,13 +184,13 @@
         });
         
         // click 시 ProductDetail 이동
-		/* $(function(){
+		$(function(){
 			$('.thumbnail-area').on("click",function(){
 				var product_no = $(this).attr("id");
 				console.log("product_no="+product_no);
-				location.href = "${pageContext.request.contextPath}/product/productDetail.do?product_no="+product_no&pType=1;
+				location.href = "${pageContext.request.contextPath}/product/productDetail.do?product_no="+product_no+"&pType=1";
 			});
-		}); */
+		});
         
         
         

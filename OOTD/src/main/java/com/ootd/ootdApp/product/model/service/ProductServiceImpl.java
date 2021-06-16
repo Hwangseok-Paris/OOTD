@@ -51,8 +51,11 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public int productInsert(Product product) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int result1 = productDAO.secondHandInsert(product);
+		System.out.println("result1 : " + result1);
+		
+		return result1;
 	}
 
 	@Override
