@@ -16,11 +16,12 @@
 <body>
 <div class="container">
 	<div class="brandInput-title">
-		<span>상품 등록</span>
+		<span>중고 상품 등록</span>
 	</div>
-	<form name="brandFrm" action="${pageContext.request.contextPath}/product/productInput.do" method="post" enctype="multipart/form-data">
+	<!-- enctype="multipart/form-data"을 form 속성으로 작성하면 다른 데이터가 vo에 안넘어감... -->
+	<form name="secondHandFrm" action="${pageContext.request.contextPath}/product/productInput.do" method="post">
 			<input type="hidden" name="product_type" value="2" />
-			<input type="hidden" name="member_no"value="/*회원번호 받아서 넣기*/"/>
+			<input type="hidden" name="member_no" value="1" />
 		<div class="input-area">
 		    <div class="input-img-area">
         <div id="insertArea" class="inputBox1">

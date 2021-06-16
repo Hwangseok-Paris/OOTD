@@ -256,6 +256,7 @@
 	
     <script>
     
+    // 상품 등록 버튼 클릭 시 실행
     $(function() {		
 		$('#prod-regis').on('click', function() {
 			

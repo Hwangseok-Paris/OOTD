@@ -22,7 +22,7 @@ public class Product implements Serializable {
 	private int product_stock_l;
 	private int product_type;
 	private int member_no;
-	private int product_status;
+	private char product_status;
 	
 	
 	private int fileCount;			// 각 상품당 첨부파일 갯수

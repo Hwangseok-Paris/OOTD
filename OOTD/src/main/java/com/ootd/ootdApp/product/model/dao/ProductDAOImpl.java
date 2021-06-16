@@ -53,14 +53,14 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Override
 	public int brandInsert(Product product) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return sqlSession.insert("product-mapper.insertProduct", product);
 	}
 
 	@Override
 	public int secondHandInsert(Product product) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return sqlSession.insert("product-mapper.insertProduct", product);
 	}
 
 	@Override
