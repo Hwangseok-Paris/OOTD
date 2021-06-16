@@ -1,6 +1,7 @@
 package com.ootd.ootdApp.order.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,10 +34,17 @@ public class OrderServiceImpl implements OrderService {
 		return orderDAO.deleteCartProductAll(member_no);
 	}
 	
+
 	@Override
-	public int updateQuantity(int cart_no, int cart_quantity) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateQuantity(Map<String, String> map) {
+		
+		return orderDAO.updateQuantity(map);
+	}
+
+	@Override
+	public List<Cart> selectedCartList(int cart_no) {
+		
+		return orderDAO.selectedCartList(cart_no);
 	}
 
 }

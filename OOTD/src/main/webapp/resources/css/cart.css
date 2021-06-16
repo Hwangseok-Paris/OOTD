@@ -232,6 +232,9 @@ input.underline {
 	border-top: 1px solid black; 
 	border-bottom: 1px solid black; 
 	width: 30px;
+	border-right: none;
+    border-left: 1px solid;
+    font-weight:600;
 }
 
 .guideFrame{
