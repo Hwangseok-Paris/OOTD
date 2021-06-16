@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" initial-scale=1.0>
-    <title>회원가입</title>
+    <title>개인 회원가입</title>
     <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
@@ -19,7 +19,7 @@
 
 </head>
 <body>
-  <form name="memberJoinFrm" action="member/memberJoinEnd.do" method="post">
+  <form name="memberJoinFrm" action="memberJoinEnd.do" method="post">
     <!-- wrapper -->
     <div id="wrapper">
         <h1 style="text-align: center;">JOIN</h1>
@@ -32,8 +32,8 @@
 
         <!-- content-->
         <div id="content">
-            <input type="checkbox" id="brand" name="choose" value="brand" checked="checked">업체
-            <input type="checkbox" id="member" name="choose" value="member" onclick="return false;">개인
+            <input type="checkbox" id="brand" name="login_type" value="1" onclick="return false;">업체
+            <input type="checkbox" id="member" name="login_type" value="2" checked="checked">개인
             <span style="float:right;">Required</span><span style="color: red; float:right;">*</span>
 
             <!-- ID -->
@@ -42,9 +42,9 @@
                   <span style="color: red;">*</span><label for="id">아이디</label>
                 </h3>
                 <span class="box int_id">
-                    <input type="text" id="id" class="int" maxlength="20" placeholder="아이디 입력">
+                    <input type="text" id="id" name="member_id" class="int" maxlength="20" placeholder="아이디 입력">
                 </span>
-                <button type="button" class="btn btn-secondary btn-sm" onclick="addrSearch();">중복 확인</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="checkId;">중복 확인</button>
                 <span class="error_next_box"></span>
             </div>
 
@@ -54,7 +54,7 @@
                   <span style="color: red;">*</span><label for="nickname">닉네임</label>
                 </h3>
                 <span class="box int_nickName">
-                    <input type="text" id="id" class="int" maxlength="20" placeholder="닉네임 입력">
+                    <input type="text" id="id" name="member_nickname" class="int" maxlength="20" placeholder="닉네임 입력">
                 </span>
                 <span class="error_next_box"></span>
             </div>
@@ -65,7 +65,7 @@
                   <span style="color: red;">*</span><label for="pswd1">비밀번호</label>
                 </h3>
                 <span class="box int_pass">
-                    <input type="password" id="pswd1" class="int" maxlength="25" placeholder="비밀번호 8자 이상">
+                    <input type="password" id="pswd1" name="member_pw" class="int" maxlength="25" placeholder="비밀번호 8자 이상">
                     <span id="alertTxt">사용불가</span>
                     <img src="${pageContext.request.contextPath }/resources/images/m_icon_pass.png" id="pswd1_img1" class="pswdImg">
                 </span>
@@ -87,10 +87,10 @@
             <!-- NAME -->
             <div>
                 <h3 class="join_title">
-                  <span style="color: red;">*</span><label for="name">브랜드 명</label>
+                  <span style="color: red;">*</span><label for="name">이름</label>
                 </h3>
                 <span class="box int_name">
-                    <input type="text" id="name" class="int" maxlength="20" placeholder="브랜드 이름">
+                    <input type="text" id="name" name="member_name"class="int" maxlength="20" placeholder="이름">
                 </span>
                 <span class="error_next_box"></span>
             </div>
@@ -98,10 +98,10 @@
             <!-- EMAIL -->
             <div>
                 <h3 class="join_title">
-                  <span style="color: red;">*</span><label for="email">담당자 이메일</label>
+                  <span style="color: red;">*</span><label for="email">이메일</label>
                 </h3>
                 <span class="box int_email">
-                    <input type="text" id="email" class="int" maxlength="100" placeholder="user@example.com">
+                    <input type="text" id="email" name="email"class="int" maxlength="100" placeholder="user@example.com">
                 </span>
                 <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>    
             </div>
@@ -109,10 +109,10 @@
             <!-- PHONE -->
             <div>
                 <h3 class="join_title">
-                  <span style="color: red;">*</span><label for="phoneNo">대표 전화번호</label>
+                  <span style="color: red;">*</span><label for="phoneNo">전화번호</label>
                 </h3>
                 <span class="box int_mobile">
-                    <input type="tel" id="mobile" class="int" maxlength="16" placeholder="010-0000-0000">
+                    <input type="tel" id="mobile" name="phone"class="int" maxlength="16" placeholder="숫자만 입력">
                 </span>
 
                 <span class="error_next_box"></span>    
@@ -124,7 +124,7 @@
                   <span style="color: red;">*</span><label for="address">주소</label>
                 </h3>
                 <span class="box int_addr1">
-                    <input type="text" id="address1" class="int" placeholder="주소 검색 버튼을 이용해 주세요." readonly>
+                    <input type="text" id="address1" name="address" class="int" placeholder="주소 검색 버튼을 이용해 주세요." readonly>
                 </span>
 
                 <span class="error_next_box"></span>    
@@ -137,7 +137,7 @@
                   <span style="color: red;">*</span><label for="addressDetail">상세 주소</label>
                 </h3>
                 <span class="box int_addr2">
-                    <input type="text" id="address2" class="int" placeholder="상세 주소 입력">
+                    <input type="text" id="address2" name="address" class="int" placeholder="상세 주소 입력">
                 </span>
 
                 <span class="error_next_box"></span>    
@@ -146,15 +146,16 @@
             <!-- 계좌 번호 -->
             <div>
                 <h3 class="account">
-                  <span style="color: red;">*</span><label for="account">계좌번호</label>
+                  <label for="account">계좌번호</label>
                 </h3>
 
                 <div id="account_wrap">
                     <!-- 계좌 선택 -->
                     <div id="account_bank">
                         <span class="box">
-                            <select id="bank" class="sel">
-                                <option selected value="NH">농협</option>
+                            <select id="bank" class="sel" name="bank_code">
+                                <option selected value="">은행선택</option>
+                                <option value="NH">농협</option>
                                 <option value="KB">KB</option>
                                 <option value="SH">신한</option>
                                 <option value="UR">우리</option>
@@ -168,7 +169,7 @@
                     <!-- 계좌 번호 입력 -->
                     <div id="account_number">
                         <span class="box">
-                            <input type="text" id="acNumber" class="int" placeholder="000-000-000000">
+                            <input type="text" id="acNumber" name="account_number" class="int" placeholder="000-000-000000">
                         </span>
                     </div>
 
@@ -182,6 +183,8 @@
                 <button type="button" id="cancelBtn" class="btn btn-secondary btn-sm">작성 취소</button>
             </div>
             
+            <br />
+            
 
         </div> 
         <!-- content-->
@@ -189,6 +192,9 @@
     </div> 
     <!-- wrapper -->
   </form>
+  
+  <br /><br />
+  
     <script>
         /*변수 선언*/
         var id = document.querySelector('#id');

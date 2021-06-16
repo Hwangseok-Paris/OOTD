@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" initial-scale=1.0>
-    <title>회원가입</title>
+    <title>업체 회원가입</title>
     <script src="../resources/asset/js/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
@@ -22,7 +22,7 @@
 
 </head>
 <body>
-  <form name="memberJoinFrm" action="member/memberJoinEnd.do" method="post">
+  <form name="memberJoinFrm" action="memberJoinEnd.do" method="post">
     <!-- wrapper -->
     <div id="wrapper">
         <h1 style="text-align: center;">JOIN</h1>
@@ -47,7 +47,7 @@
                 <span class="box int_id">
                     <input type="text" id="id" name="member_id" class="int" maxlength="20" placeholder="아이디 입력">
                 </span>
-                <button type="button" class="btn btn-secondary btn-sm" onclick="addrSearch();">중복 확인</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="checkId();">중복 확인</button>
                 <span class="error_next_box"></span>
             </div>
 
@@ -157,7 +157,8 @@
                     <div id="account_bank">
                         <span class="box">
                             <select id="bank" class="sel" name="bank_code">
-                                <option selected value="NH">농협</option>
+                                <option selected value="">은행선택</option>
+                                <option value="NH">농협</option>
                                 <option value="KB">KB</option>
                                 <option value="SH">신한</option>
                                 <option value="UR">우리</option>
@@ -184,6 +185,7 @@
                 <button type="submit" id="joinBtn" class="btn btn-secondary btn-sm">가입하기</button>
                 <button type="button" id="cancelBtn" class="btn btn-secondary btn-sm">작성 취소</button>
             </div>
+            <br />
             
 
         </div> 
@@ -192,6 +194,9 @@
     </div> 
     <!-- wrapper -->
   </form>
+  
+  <br /><br />
+  
     <script>
         /*변수 선언*/
         var id = document.querySelector('#id');
