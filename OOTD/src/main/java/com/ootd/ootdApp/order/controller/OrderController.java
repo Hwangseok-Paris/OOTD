@@ -19,7 +19,9 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 	
-	// 카트 영역
+	// =========== 카트 영역 =============== //
+	
+	// 장바구니 리스트 불러오기
 	@RequestMapping("/order/cart.or")
 	public String cartList(Model model
 			) {
@@ -27,13 +29,25 @@ public class OrderController {
 		int member_no = 1;
 		
 		List<Cart> cart = orderService.selectCartList(member_no);
-		//System.out.println("받아옴");
-		System.out.println(cart);
+
+		//System.out.println(cart);
 		
 		model.addAttribute("cart", cart);
 				
 		return "/order/cart";
 	}
+	
+	@RequestMapping("/order/deleteProduct.or")
+	public String deleteProduct(@RequestParam int cart_no) {
+		
+
+		
+		return "/order/cart";
+		
+	}
+	
+	
+	// =========== 카트 영역 =============== //
 	
 	
 	

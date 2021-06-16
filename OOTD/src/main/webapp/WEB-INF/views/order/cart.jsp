@@ -17,66 +17,81 @@
 <c:import url="../common/header.jsp"/>
    <div id="backbody">
       <div id="frame1">
-         <form>
+         <div>
             <div id="frame2">
                <span style="font-size:15pt; font-weight: bold;">장바구니</span>
                <span class="home"><b>장바구니</b>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;주문서 작성&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;주문 완료</span>
             </div>
             
             <div>
+            	
                <table class="calculation1" style="margin-top:20px;">
-               <thead>
-                  <tr>
-                     <th colspan="10" style="text-align: left; padding-left: 10px; padding-top: 20px;">주문상품(1)</th>
-                  </tr>
-                  
-                  <tr>
-                     <th colspan="10" style="text-align: left; padding-left: 10px; color: gray; padding-top: 30px; border-bottom: solid 1px #e0e0eb;">상품정보</th>
-                  </tr>
-            
-                  <tr>
-                     <th style="width: 50px;"><input type="checkbox" name="checkbox" id="check" style="width: 50px;"/></th>
-                     <th style="width: 100px;"><span>이미지</span></th>
-                     <th style="width: 400px;">상품정보</th>
-                     <th style="width: 130px;">판매가</th>
-                     <th style="width: 130px;">수량</th>
-                     <th style="width: 130px;">주문관리</th>
-                  </tr>
-               </thead>
-      
-               <tbody id="calculation1tbody">
-               <c:forEach items="${cart}" var="a">
-                  <tr class="calculation1_tbody_tr1" style="height: 90px; background-color: #fff;">
-                     <td style="text-align: left; text-align: center; border-right: none;" class="chee">
-                        <input type="checkbox" class="chkbox"id="cbtr1" name="checkbox" checked/>
-                     </td>
-                     <td style="border-left: none; border-right: none; width: 100px; text-align: center;"><img src="${pageContext.request.contextPath }/resources/images/product/brand/${a.att_name}" width="100px"></td>
-
-                     <td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;">
-                     <span>[${a.brand_name}]</span> <br/><span>${a.product_name} </span> <br /><br />옵션 : <span>${a.cart_size}</span>
-                     </td>
-                     <td>
-                        <span class="price1" style="padding-left: 10px;">${a.product_price}</span>원
-                        <input type="hidden" class="realPrice" value="${a.product_price}"/>
-                     </td> 
-                     <td style="width: 100px;">
-                        <button class="button1 quanBtn" id="button" type ="button"  value='-' >-</button>
-                       <div id="result" class="result">${a.cart_quantity}</div>
-                       <button class="button2 quanBtn" id="button" type="button"  value='+'>+</button>
-                     </td>
-                     <td>
-                        <button class="btn default btndelete">삭제</button>
-                     </td>
-                  </tr>
-                  </c:forEach>
-               </tbody>
-               
+	               <thead>
+	                  <tr>
+	                     <th colspan="10" style="text-align: left; padding-left: 10px; padding-top: 20px;">주문상품(1)</th>
+	                  </tr>
+	                  
+	                  <tr>
+	                     <th colspan="10" style="text-align: left; padding-left: 10px; color: gray; padding-top: 30px; border-bottom: solid 1px #e0e0eb;">상품정보</th>
+	                  </tr>
+	            
+	                  <tr>
+	                     <th style="width: 50px;">
+	                     	<input type="checkbox" name="checkbox" id="check" style="width: 50px;" checked/>
+	                     </th>
+	                     <th style="width: 100px;"><span>이미지</span></th>
+	                     <th style="width: 400px;">상품정보</th>
+	                     <th style="width: 130px;">판매가</th>
+	                     <th style="width: 130px;">수량</th>
+	                     <th style="width: 130px;">주문관리</th>
+	                  </tr>
+	               </thead>
+	      
+	               <tbody id="calculation1tbody">
+	               <c:forEach items="${cart}" var="a">
+	                  <tr class="calculation1_tbody_tr1" style="height: 90px; background-color: #fff;">
+	                   
+	                     <!-- Check Btn. Area -->
+	                     <td style="text-align: left; text-align: center; border-right: none;">
+	                        <input type="checkbox" class="chkbox" id="cbtr1" name="checkbox" checked/>
+	                     </td>
+	                     
+	                     <!-- Product Image Area -->
+	                     <td style="border-left: none; border-right: none; width: 100px; text-align: center;">
+	                     	<img src="${pageContext.request.contextPath }/resources/images/product/brand/${a.att_name}" width="100px">
+	                     </td>
+	                     
+						 <!-- Product Info. Area -->
+	                     <td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;">
+	                     	<span>[${a.brand_name}]</span> <br/><span>${a.product_name} </span> <br /><br />옵션 : <span>${a.cart_size}</span>
+	                     </td>
+	                     
+	                     <!-- Price Area -->
+	                     <td>
+	                        <span class="price1" style="padding-left: 10px;">${a.product_price}</span>원
+	                        <input type="hidden" class="realPrice" value="${a.product_price}"/>
+	                     </td>
+	                     
+	                     <!-- Quantity Area --> 
+	                     <td style="width: 100px;">
+	                     	<button class="button1 quanBtn" id="button" type ="button"  value='-' >-</button>
+	                        <div id="result" class="result">${a.cart_quantity}</div>
+	                        <button class="button2 quanBtn" id="button" type="button"  value='+'>+</button>
+	                     </td>
+	                     
+	                     <!-- Delete Btn. Area -->
+	                     <td>
+	                        <button class="btn default btndelete">삭제</button>
+	                     </td>
+	                  </tr>
+	                  </c:forEach>
+	               </tbody>
                </table>
                
                <div style="margin: 10px 0;">
-                  <button class="btn default btnfloat" style="background-color: #B7B8B9; color: #fff;">선택삭제</button>&nbsp;&nbsp;
-                  <button class="btn default btnfloat" style="background-color: #B7B8B9; color: #fff;">전체삭제</button>
-                  <span class="clearboth"></span>
+                  <button  class="btn default btnfloat" id="deleteSel" style="background-color: #B7B8B9; color: #fff;">선택삭제</button>&nbsp;&nbsp;
+                  <button  class="btn default btnfloat" id="deleteAll" style="background-color: #B7B8B9; color: #fff;">전체삭제</button>
+
                </div>
                <br /><br />
                
@@ -100,7 +115,7 @@
             <div align="center">
                <button type="button" class="btn default orderbtn" id="allProduct">전체상품주문</button>
                <button type="button" class="btn default" id="productClear">선택상품주문</button>
-               <button type="button" class="btn default footerbtn" id="footerbtn continueShopping" type="button" onclick="location.href='${pageContext.request.contextPath}/order/order.do'" style="color: white;">쇼핑계속하기</button>
+               <button type="button" class="btn default footerbtn" id="footerbtn continueShopping" type="button" onclick="location.href='${pageContext.request.contextPath}'" style="color: white;">쇼핑계속하기</button>
                <span class="clearboth"></span>
             </div>
             <br /><br /><br /><br />
@@ -117,9 +132,10 @@
                   <li class="lifont">수량 제한 상품의 경우, 가상계좌를 통한 주문은 최대 2건까지만 가능합니다.(미입금 주문 기준, 기존 주문 합산)</li>
                </ul>
             </div>
-         </form>
+         </div>
       </div>
    </div>
+   
 
  <script>
  
@@ -128,36 +144,33 @@
    $(document).ready(function(){
       
      // 체크박스 전체 선택, 개별 선택, 선택 해제
-       $(".calculation1 thead input:checkbox[id=check]").click(function(){
+      $(".calculation1 thead input:checkbox[id=check]").click(function(){
          var bool = $(this).prop("checked");
          $(".calculation1 tbody input:checkbox[name=checkbox]").prop("checked", bool);
+         calcPrice_all()
       });
       
       $(".calculation1 tbody input:checkbox[name=checkbox]").click(function(){
          var flag = false;
          $(".calculation1 tbody input:checkbox[name=checkbox]").each(function(){
-            var bool = $(this).prop("checked");
-         
+            var bool = $(this).prop("checked");  // 각 체크박스의 값이 true 인지 false 인지 구분
+           
             if(!bool){
-               $(".calculation1 thead input:checbox'id=check]").prop("checked", false);
+               $(".calculation1 thead input:checkbox[id=check]").prop("checked", false);  // 품목 체크박스가 하나라도 false 라면 전체선택 체크박스를 false로 변경
                flag = true;
-               
-               calcPrice_all();
                return false;
-               
-               
             }
          });
          
          if(!flag){
-            $(".calculation1 thead input:checkbox[id=check]").prop("checked", true);
+            $(".calculation1 thead input:checkbox[id=check]").prop("checked", true);  // 전체가 다 체크되어있으면 전체선택 체크박스도 true로 변경
          }
       });
       
       // 이메일 선택시, 자동으로 값 들어오게 하기
-      $("#emailChoice").bind("change", function(){
+     /*  $("#emailChoice").bind("change", function(){
          $("#domainName").val($(this).val());
-      });
+      }); */
       
       calcPrice_all();
    });
@@ -189,7 +202,7 @@
 		_totalPrice += Number($(this).parent().parent().find('.price1').text()) * Number($(this).parent().parent().find('.result').text());
 	}); 
 	
-	$('.totalPrice').text(_totalPrice);
+	$('.totalPrice').text(thousandComma(_totalPrice));
   }
   
   /* function calcPrice(){
@@ -284,30 +297,58 @@
       
    });
       
-   // 선택 삭제
+   // 삭제 버튼
    $(".btndelete").click(function(){
       $(this).parent().parent().remove();
       
-      var tr = $('#calculation1tbody tr').val();
-      if(tr == null){
-        // console.log("장바구니가 비어있습니다.")
-      }
+      // var tr = $('#calculation1tbody tr').val();
+      // if(tr == null){
+      // console.log("장바구니가 비어있습니다.")
+      // }
+   
       calcPrice_all();
    });
    
-   $('#allProduct').click(function(){
+
+
+   
+   
+   
+   // 선택 품목 삭제
+   $("#deleteSel").click(function(){
+	   console.log('실행');
+	   $('.chkbox:checked').each(function(){
+		   $(this).parent().parent().remove();
+	   })
+	  
+	      calcPrice_all();
+   })
+    
+   
+   
+   
+   // 전체 품목 삭제
+      $("#deleteAll").click(function(){
+	   		$('.calculation1_tbody_tr1').remove();
+	   		calcPrice_all();
+  	  }) 
+   
+   
+   
+   // 모든 상품 주문
+/*    $('#allProduct').click(function(){
 		location.href = "${pageContext.request.contextPath}/order/cart.or";
 	// console.log("링크 선택");  
    })
+ 
    
-   
-      $('#productClear').click(function(){
-		location.href = "${pageContext.request.contextPath}/order/order.or";
-	  
-   })
-   
-   
+	//$('#productClear').click(function(){
+	//	location.href = "${pageContext.request.contextPath}/order/order.or";
+	// })
+ 	  
+      */
 </script>
+
 <c:import url="../common/footer.jsp"/>
 </body>
 </html>
