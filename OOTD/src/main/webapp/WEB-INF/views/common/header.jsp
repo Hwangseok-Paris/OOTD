@@ -58,7 +58,7 @@
 					<li><i class="fas fa-shopping-cart fa-lg" id="cartIcon"></i></li>
 
 					<li><i class="fas fa-user fa-lg" id="loginBtn"
-						data-target="#loginModal" data-toggle="modal"></i></li>
+						data-target="#loginModal" data-toggle="modal" href="${contextContext.request.contextPage }/views/myPage/myPage_Info.jsp"></i></li>
 					<li>
 						<span class="fa-stack fa-lg"> 
 							<i class="far fa-sun fa-stack-1x fa-lg"></i> 
@@ -139,7 +139,7 @@
 							})
 
 			$('.header_logo').on('click', function() {
-				location.href="${pageContext.request.contextPath}";
+				location.href="${pageContext.request.contextPath }/myPage/myPage_Info.mp";
 			})
 
 		})

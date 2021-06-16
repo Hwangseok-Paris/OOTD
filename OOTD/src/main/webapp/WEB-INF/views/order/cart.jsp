@@ -175,8 +175,6 @@
       calcPrice_all();
    });
   
-  
-  
   /*** total price calculator ***/
  /*   function calcPrice(){
 	  var sum = 0;
@@ -185,6 +183,7 @@
 		
 		  var price = Number($(this).text());
           var quantity = Number($(this).parent().next().children('.result').text());
+
 	         
 	       console.log(quantity);
 	

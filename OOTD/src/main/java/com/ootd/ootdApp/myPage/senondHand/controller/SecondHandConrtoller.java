@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ootd.ootdApp.member.model.vo.Member;
+import com.ootd.ootdApp.myPage.senondHand.model.service.SecondHandService;
 
 @SessionAttributes({"member"})
 @Controller
-public class secondHandConrtoller {
+public class SecondHandConrtoller {
 	
 	//Order_Detail 모달 (주문번호클릭시)
 	//Info 회원정보
@@ -21,15 +22,15 @@ public class secondHandConrtoller {
 	//Sale 판매한 상품
 	//Review Sale페이지에서 구매한 상품 리뷰 작성하기
 	
-	//@Autowired
-	//com.ootd.ootdApp.myPage.senondHand.model.service.secondHandService secondHandService;
+	@Autowired
+	SecondHandService secondHandService;
 	
-//	@Autowired
-//	BCryptPasswordEncoder bcryptPasswordEncoder;
+	@Autowired
+	BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@RequestMapping("/myPage/myPage_Info.mp")
-	public String myPageOrder() {
-		return "myPage/myPage_Info";
+	public void myPage_Info() {
+		
 	}
 	
 	@RequestMapping("/myPage/myPage_Purchased.mp")
@@ -47,36 +48,37 @@ public class secondHandConrtoller {
 		return "myPage/myPage_Sale";
 	}
 	
+	@RequestMapping("/myPage/update_Password.do")
+	public String update_Password(@RequestParam(value="password") String password,
+							@RequestParam(value="new_password") String new_password,
+							@RequestParam(value="confirm_password") String confirm_password,
+							Member member,
+							Model model) {
+		
+		String memberName = "홍길동";
+		Member search_Member = secondHandService.selectOneMember(memberName);
+		
+		System.out.println("기존 비밀번호 : " + password + ", 변경할 비밀번호 : " + new_password + "," + confirm_password);
+		System.out.println("비밀번호 변경 전 -> " + search_Member.getMember_pw());
+		
+		String member_pw = search_Member.getMember_pw();
+		
+		if(search_Member != null) {
+			if(bcryptPasswordEncoder.matches(member_pw, password) && new_password == confirm_password) {
+				model.addAttribute("member", search_Member);
+				System.out.println("변경완료!");
+			}
+		} else {
+			System.out.println("로그인부터 하세요");
+		}
+		
+		System.out.println("비밀번호 변경 후 -> " + search_Member.getMember_pw());
+		
+		return "myPage/myPage_Info";
+	}
+	
 	@RequestMapping("/myPage/update_Eamil.do")
 	public String search_User() {
 		return "";
 	}
-	
-	@RequestMapping("/myPage/update_Password.do")
-	public String update_Password(@RequestParam(value="password") String password,
-							@RequestParam(value="new_password") String new_password,
-							@RequestParam(value="confirm_p	assword") String confirm_password,
-							Member member,
-							Model model) {
-		
-		String name = "홍사장";
-		
-		System.out.println("기존 비밀번호 : " + password + ", 변경할 비밀번호 : " + new_password + "," + confirm_password);
-		
-		//Member search_Member = secondHandService.selectOneMember(name);
-		
-		String member_pw = member.getMember_pw();
-		
-//		if(search_Member != null) {
-//			if(bcryptPasswordEncoder.matches(member_pw, password) && new_password == confirm_password) {
-//				model.addAttribute("member", search_Member);
-//			}
-//		} else {
-//			System.out.println("로그인부터 하세요");
-//		}
-		
-		return "";
-	}
-	
-	
 }
