@@ -1,5 +1,8 @@
 package com.ootd.ootdApp.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,6 +25,16 @@ public class MemberController {
 	
 	@Autowired
 	BCryptPasswordEncoder bcrypt;
+	
+	@RequestMapping("/member/goMyPage.do")
+	public String goMyPage(HttpServletRequest req) {
+		
+		HttpSession session = req.getSession();
+		Member member = (Member) session.getAttribute("member");
+		
+		if ( member.getLogin_type() == 1) return "myPage/myPage_Brand_Info";
+		else return "myPage/myPage_Info";
+	}
 	
 	@RequestMapping("/member/memberJoin.do")
 	public String memberJoin() {
@@ -124,7 +137,23 @@ public class MemberController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("loc", loc);
 		
-		return "redirect:/";
+		return "common/msg";
+	}
+	
+	@RequestMapping("member/logout.do")
+	public String logout(SessionStatus status, Model model) {
+		
+		String msg = "";
+		
+		if ( ! status.isComplete() ) {
+			status.setComplete();
+			
+			msg = "로그아웃 완료";
+		}
+		
+		model.addAttribute("msg", msg);
+		
+		return "common/msg";
 	}
 	
 	

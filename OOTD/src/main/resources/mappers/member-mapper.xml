@@ -13,7 +13,7 @@
 		<result property="enroll_date" column="enroll_date"/>
 		<result property="brand_name" column="brand_name"/>
 		<result property="account_number" column="account_number"/>
-		<result property="logintype" column="login_type"/>
+		<result property="login_type" column="login_type"/>
 		<result property="bank_code" column="bank_code"/>
 		
 	</resultMap>
@@ -34,7 +34,7 @@
 		)
 	</insert>
 
-	<select id="selectOne" parameterType="string" resultMap="resultMember" >
+	<select id="selectOneMember" parameterType="string" resultMap="resultMember" >
 		SELECT * FROM MEMBER
 		WHERE MEMBER_ID = #{ member_id }
 	</select>

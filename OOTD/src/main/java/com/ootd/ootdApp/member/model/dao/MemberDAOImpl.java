@@ -13,9 +13,9 @@ public class MemberDAOImpl implements MemberDAO {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public Member selectOneMember(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Member selectOneMember(String member_id) {
+		
+		return sqlSession.selectOne("member-mapper.selectOneMember", member_id);
 	}
 
 	@Override
