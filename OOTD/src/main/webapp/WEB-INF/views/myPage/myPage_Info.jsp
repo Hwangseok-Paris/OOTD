@@ -32,7 +32,7 @@
                     <tbody>
                         <tr class="id">
                             <td>아이디</td>
-                            <td name="userID">${member.member_name }</td>
+                            <td name="userID">${member.member_id }</td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -47,7 +47,7 @@
                         
                         <tr class="update-password" style="display: none">
                             <td colspan="4">
-                                <form action="${pageContext.request.contextPath}/myPage/update_Pwd.do" method="post">
+                                <form action="${pageContext.request.contextPath}/myPage/update_Password.do" method="post">
                                     <div class='passowrd-update-area'>
                                         <div class="input">
                                             <label for="password">현재 비밀번호</label>

@@ -157,6 +157,7 @@
    // 총합 계산
    function calcPrice(){
       var sum = 0;
+      
       if($('#cbtr1').is(':checked')){
 	      $('.price1').each(function(){
 	    	  

@@ -2,8 +2,8 @@ package com.ootd.ootdApp.myPage.senondHand.model.DAO;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 
-public interface secondHandDAO {
+public interface SecondHandDAO {
 	
-	Member selectOneMember(String userId);
-	
+	Member selectOneMember(String memberName);
+
 }
