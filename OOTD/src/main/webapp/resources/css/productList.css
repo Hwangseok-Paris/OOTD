@@ -49,7 +49,7 @@ div[class$=cate]  {
     cursor: pointer;
 }
 
-.cate:hover {
+.showArea * .thumbnail-area * .cate:hover {
     cursor: pointer;
     color: black;
 }

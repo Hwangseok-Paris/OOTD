@@ -79,13 +79,21 @@
             <h5>Size, Color</h5>
             <textarea id="productInfo" cols="32" rows="8" class="ininput" placeholder="실측사이즈, 색상정보" name="product_sizeinfo"></textarea>
             <br><hr>
-            <h5>Size Option</h5>
-            <select name="product_size" id="selectSize" style="width: 160px;">
-                            <option value="">선택안함</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                        </select>
+            <span><b>Size Option</b>&nbsp;&nbsp;&nbsp;&nbsp; & &nbsp;&nbsp;&nbsp;&nbsp;<b>CategoryOption</b></span><br /><br />
+	            <select name="product_size" id="selectSize" style="width: 160px;" required>
+		            <option value="">선택안함</option>
+		            <option value="S">S</option>
+		            <option value="M">M</option>
+		            <option value="L">L</option>
+	            </select>
+	            <select name="product_category" id="selectCategory" style="width: 160px;" required>
+		            <option value="">선택안함</option>
+		            <option value="1">Top</option>
+		            <option value="2">Bottom</option>
+		            <option value="3">Shoes</option>
+		            <option value="4">Hat</option>
+		            <option value="5">Bag</option>
+	            </select>
             <br><hr/><br>
             <button id="btn" style="margin-left: 5px;">등록하기</button>
             <br><br>

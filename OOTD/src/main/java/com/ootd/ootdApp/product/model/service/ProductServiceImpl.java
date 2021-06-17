@@ -18,14 +18,14 @@ public class ProductServiceImpl implements ProductService {
 	// =========Product List (select) 조회=========
 	
 	@Override
-	public List<Map<String, String>> productSelectList(int cPage, int numPerPage, int pType) {
+	public List<Map<String, String>> productSelectList(int cPage, int numPerPage, int pType, Product product) {
 		
 		if (pType == 1) {
 
-			return productDAO.brandSelectList(cPage, numPerPage);
+			return productDAO.brandSelectList(cPage, numPerPage, product);
 		} else {
 			
-			return productDAO.secondHandSelectList(cPage, numPerPage);
+			return productDAO.secondHandSelectList(cPage, numPerPage, product);
 		}
 	}
 
