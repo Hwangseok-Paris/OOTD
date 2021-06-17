@@ -11,6 +11,11 @@
    <title>주문 페이지</title>
    <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+   
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+   
    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/order.css"/>
 </head>
  
@@ -45,35 +50,38 @@
             </thead>
    
             <tbody>
+            <c:forEach items="${cart}" var="a">
                <tr style="height: 90px; background-color: #fff;">
+               
+               <input type="hidden" class="cart_no" value="${a.cart_no}" />
                   
-                  <td style="border-left: none; border-right: none; width: 100px; text-align: center;"><img src="${pageContext.request.contextPath }/resources/images/sample.PNG" width="100px"></td>
-                  <td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;">
-                  <span>[나이키]</span> <br /><span>엠버로이드 라운드 반팔티셔츠 707350-011</span> <br /><br />옵션 : <span>S</span>
+               <!-- Product Image Area -->
+                  <td style="border-left: none; border-right: none; width: 100px; text-align: center;">
+                  	<img src="${pageContext.request.contextPath }/resources/images/${a.att_name}" width="100px">
                   </td>
-                  <td><span style="padding-left: 10px;">25,900</span>원</td>
-                  <td style="width: 100px;">                        
-                  	<div id="result" class="result">1</div> 
-                  </td>
-               </tr>
-               <!-- 임시-상품 추가했을 때 확인 -->
-               <tr style="height: 90px; background-color: #fff;">
                   
-                  <td style="border-left: none; border-right: none; width: 100px; text-align: center;"><img src="${pageContext.request.contextPath }/resources/images/sample.PNG" width="100px"></td>
-                  <td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;">
-                  <span>[나이키]</span> <br /><span>엠버로이드 라운드 반팔티셔츠 707350-011</span> <br /><br />옵션 : <span>S</span>
+               <!-- Product Info. Area -->
+                   <td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;">
+                   	<span>[${a.brand_name}]</span> <br/><span>${a.product_name} </span> <br /><br />옵션 : <span>${a.cart_size}</span>
+                   </td>
+                   
+               <!-- Price Area -->
+                  <td>
+                     <span class="price1" style="padding-left: 10px;">${a.product_price}</span>원
+                     <input type="hidden" class="realPrice" value="${a.product_price}"/>
                   </td>
-                  <td><span style="padding-left: 10px;">25,900</span>원</td>
-                  <td style="width: 100px;">
-                     <div id="result" class="result">1</div>
-                  </td>                  
+	            <!-- Quantity Area --> 
+	                <td style="width: 100px;">                        
+                  		 <input id="result" class="result" value="${a.cart_quantity}" readonly/>
+                 	</td>
                </tr>
+               </c:forEach>
             </tbody>
-   
-            
-            </table>
-            <br />
-            <table class="calculation2">
+         </table>    <br />
+         
+         
+         
+         <table class="calculation2">
             <tr style="background-color: #fafafa;">
                <th style="width: 300px;">총 상품금액</th>
                <th style="width: 300px;">총 배송비</th>
@@ -81,9 +89,9 @@
             </tr>
             
             <tr style="background-color: #fff;">
-               <td style="padding: 22px 0;"><span class="price">25,900</span>원</td>
-               <td><span class="price">0</span>원</td>
-               <td><span class="price">25,900</span>원</td>
+               <td style="padding: 22px 0;"><span class="totalPrice price" id="price" value=""></span>원</td>
+               <td><span class="price" id="price">0</span>원</td>
+               <td><span class="totalPrice price" id="price" value=""></span>원</td>
             </tr>
          </table>
          <br /><br /><br />
@@ -99,36 +107,38 @@
                <tr>
                   <td class="deliverytd">주문고객</td>
                   <td>
-                     홍길동
+                     ${m.member_name}
                   </td>
                </tr>
                
                <tr>
                   <td class="deliverytd">수령인&nbsp;<span style="color: red">*</span></td>
-                  <td><input class="underline" type="text" value="김길동" required="required" /></td>
+                  <td><input class="underline recipient" type="text" value="${m.member_name}" required="required" /></td>
                </tr>
                
                <tr>
                   <td class="deliverytd">주소&nbsp;<span style="color: red">*</span></td>
                   
                   <td>
-                     <input class="underline" type="text" id="postnum1" size="10" maxlength="5" required="required" />
+                     <input class="underline" type="text" id="postnum1" size="10" maxlength="5" />
                      &nbsp;
-                     <div class="btn default postSearch" id="postnum2" onclick="addrSearch();">우편번호 찾기</div>
+                     <div class="btn default postSearch" id="postnum2" onclick="addrSearch();">주소 찾기</div>
                      <br />
-                     <input class="underline" type="text" id="addr1" size="50" placeholder="주소" required="required" style="margin-bottom: 10px;" />
+                     <input class="underline" type="text" id="addr1" size="50" placeholder="주소" required="required" style="margin-bottom: 10px;" value="${m.address[0]}"/>
                      <br />
-                     <input class="underline" type="text" id="addr2" size="50" placeholder="상세주소" required="required"/>
+                     <input class="underline" type="text" id="addr2" size="50" placeholder="상세주소" value="${m.address[1]}"/>
                   </td>
                </tr>
                
                <tr>
                   <td class="deliverytd">휴대전화&nbsp;<span style="color: red">*</span></td>
-                  <td><input class="underline" type="text" placeholder="010-1234-5678"/></td>
+                  <td><input class="underline phoneNo" type="text" placeholder="010-1234-5678" value="${m.phone}"/></td>
                </tr>
                <tr>
                   <td class="deliverytd">이메일&nbsp;<span style="color: red">*</span></td>
-                  <td><input class="underline" type="text" required="required"/> @ <input class="underline" id="domainName" type="text" required="required"/>&nbsp;
+                  <td>
+                  <input type="hidden" class="fullEmail" value="${m.email}"/>
+                  <input class="underline" id="mailId" type="text" required="required"/> @ <input class="underline" id="domainName" type="text" required="required"/>&nbsp;
                      <select id="emailChoice" style="height: 30px; font-size: 13px;">
                         <option>이메일 선택</option>
                         <option>daum.net</option>
@@ -162,19 +172,18 @@
                   <img src="${pageContext.request.contextPath }/resources/images/orderImg/card.PNG" alt="" style="width: 50px; margin-left: 10px;"/>
                   <img src="${pageContext.request.contextPath }/resources/images/orderImg/account.PNG" alt="" style="width: 50px; margin-left: 70px;"/>
                   <img src="${pageContext.request.contextPath }/resources/images/orderImg/phone.PNG" alt="" style="width: 50px; margin-left: 75px;"/>
-                  <img src="${pageContext.request.contextPath }/resources/images/orderImg/passbook.PNG" alt="" style="width: 50px; margin-left: 60px;"/>
                   <br />
-                  <input type="radio" name="cardradio" checked />신용카드
-                  <input type="radio" name="cardradio" style="margin-left: 30px;"/>실시간 계좌이체
-                  <input type="radio" name="cardradio" style="margin-left: 30px;"/>휴대폰 결제
-                  <input type="radio" name="cardradio" style="margin-left: 30px;"/>무통장 입금
+                  <input type="radio" name="cardradio" value="card" checked />신용카드
+                  <input type="radio" name="cardradio" value="samsung" style="margin-left: 30px;"/>삼성페이
+                  <input type="radio" name="cardradio" value="phone" style="margin-left: 30px;"/>휴대폰 결제
                </div>
             </div>
             <div class="total">
                <span style="display:inline-block; padding: 30px 10px; color: gray; font-weight: bold;">결제정보</span><br />
                <span style="display:inline-block; padding: 20px 10px;">주문상품금액</span>
-               <span style="font-size: 20pt; font-weight: bold; float: right;">25,900원</span><br /><br />
-               <button type="button" class="btn default payBtn" onclick="location.href='${pageContext.request.contextPath}/order/paymentSuccess.or'">결제하기</button>
+               <span style="font-size: 20pt; font-weight: bold; float: right;" class="totalPrice "></span>
+               <input type="hidden" class="finalPrice" value=""/><br /><br />
+               <button type="button" class="btn default payBtn">결제하기</button>
             </div>
          </div>
          <br /><br />
@@ -194,8 +203,22 @@
       </form>
    </div>
 </div>
+
 <script>
+   $(function(){
+	// var mName = "${m.member_name}";
+	 //console.log(mName);
+	  calcPrice();
+	 var totalPrice = $(".finalPrice").val();
+	 console.log(totalPrice);
+	 
+	 // 라디오 값 받아보기 
+	 var pay_method = $("[name=cardradio]").val();
+	 console.log(pay_method);
+	 
+   })
    
+	// ============== 주소 API 시작 ============== // 
    function addrSearch() {
        new daum.Postcode({
            oncomplete: function(data) {
@@ -238,32 +261,12 @@
            }
        }).open();
    };
+   // ============== 주소 API 끝 ============== //
    
    $(document).ready(function(){
-      
-      // 체크박스 전체 선택, 개별 선택, 선택 해제
-      $(".calculation1 thead input:checkbox[id=check]").click(function(){
-         var bool = $(this).prop("checked");
-         $(".calculation1 tbody input:checkbox[name=checkbox]").prop("checked", bool);
-      });
-      
-      $(".calculation1 tbody input:checkbox[name=checkbox]").click(function(){
-         var flag = false;
-         $(".calculation1 tbody input:checkbox[name=checkbox]").each(function(){
-            var bool = $(this).prop("checked");
-         
-            if(!bool){
-               $(".calculation1 thead input:checbox'id=check]").prop("checked", false);
-               flag = true;
-               return false;
-            }
-         });
-         
-         if(!flag){
-            $(".calculation1 thead input:checkbox[id=check]").prop("checked", true);
-         }
-      });
-      
+	   emailSpliter();
+	  
+       
       // 이메일 선택시, 자동으로 값 들어오게 하기
       $("#emailChoice").bind("change", function(){
          $("#domainName").val($(this).val());
@@ -271,7 +274,7 @@
    });
    
 	// 배송메모 - 직접 입력 선택시에만 textarea 보여주기 
-	  $('#memoChoice').on('change', function(){
+	$('#memoChoice').on('change', function(){
 	     var a = $('#memoChoice option:selected').val();
 	     console.log(a);
 	     if( a == 'test4') {
@@ -280,9 +283,88 @@
 	        $('textarea').hide();
 	        console.log("test4 아님");
 	     }
-	  
-	  
-	  });
+	});
+	
+	// 결제 수단 버튼 클릭시 value 변경
+	$("[name=cardradio]").click(function(){
+		console.log($("[name=cardradio]:checked").val());
+	})
+	
+	
+	 /*** total price calculator ***/
+	 function calcPrice(){
+		  var sum = 0;
+		  
+		  $('.price1').each(function(){
+			
+			  var price = Number($(this).text());
+	          var quantity = Number($(this).parent().next().children('.result').val());
+		         
+		       console.log(quantity);
+		
+		       sum += price*quantity;
+		  })
+		  $('.finalPrice').attr('value', sum);
+		  $('.totalPrice').text(thousandComma(sum));
+	  }
+	
+   // 천단위 쉼표 함수 선언 
+   function thousandComma(x){
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+   
+   
+   // 이메일 스플릿(아이디, 도메인 나누기)
+   function emailSpliter(){
+   		var mailAdd = $('.fullEmail').val();
+   		var at = '@';
+   		var mAdd = mailAdd.split(at);
+   		
+   		$('#mailId').val(mAdd[0]);
+   		$('#domainName').val(mAdd[1]);
+   	 }
+   
+   // ========= 아임포트 API 구역 ========= //
+   $('.payBtn').click(function(){
+	 
+	 // 배송지 주소 설정
+	 var fullAddr = $("#addr1").val()+" "+$("#addr2").val();
+	 // 결제 수단 변수 설정 
+	 var pay_method = $("[name=cardradio]:checked").val();
+	 // 수령자 이메일 설정
+	 var email = $('#mailId').val();
+	 var domainName = $('#domainName').val();
+	 // 수령인 설정
+	 var recipient = $('.recipient').val();
+	 // 수령자번호 설정
+	 var phone = $('.phoneNo').val();
+
+	 var IMP = window.IMP; // 생략가능
+     IMP.init('imp02353224'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+
+     IMP.request_pay({
+  	    pg : 'inicis', // version 1.1.0부터 지원.
+  	    pay_method : pay_method,
+  	    merchant_uid : 'merchant_' + new Date().getTime(),
+  	    name : 'OOTD',
+  	    amount : 0/* $('.finalPrice').val() */,
+  	    buyer_email : email+"@"+domainName,
+  	    buyer_name : recipient,
+  	    buyer_tel : phone,
+  	    buyer_addr : fullAddr,
+  		}, function(rsp) { // callback
+	  	    if ( rsp.success ) {  // 결제 성공 
+	  	        var msg = '결제가 완료되었습니다. 감사합니다. /n OOTD'; 
+  	    } else {
+  	        var msg = 'payment failed';
+  	        msg += '에러내용 : ' + rsp.error_msg;
+  	    }
+  	    alert(msg);
+  		});
+     })
+        // ========= 아임포트 API 구역 끝 ========= //
+
+   
 </script>
 <c:import url="../common/footer.jsp"/>
 </body>

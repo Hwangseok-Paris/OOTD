@@ -156,23 +156,38 @@ public class OrderController {
 	
 	
 		
-	// 주문 페이지 영역
+	// =========== 주문 페이지 영역 =========== //
 	@RequestMapping("/order/order.or")
 	public String selectOrderList(
 			Model model, HttpServletRequest req,
-			@RequestParam(value="selProduct") List<Integer> selProduct_no) {
-		
+			@RequestParam(value="selProduct_no") List<Integer> selProduct_no) {
+		// ---------- 상품 리스트 가져오기 시작 ----------- //
 		int cart_no = 0;
-		ArrayList<Cart> list = new ArrayList<>();
+		ArrayList<Cart> cart = new ArrayList<>();
 		
-		// 반복문으로 selProduct 배열에 담긴 상품번호를 반복문을 통해 하나씩 삭제
+		// 반복문으로 selProduct 배열에 담긴 상품번호를 반복문을 통해 하나씩 search
 		for(int pNo : selProduct_no) {
-			List<Cart> cart = new ArrayList<>();
+//			List<Cart> cart = new ArrayList<>();
 			cart_no = pNo;
-			cart = orderService.selectCartList(cart_no);  // cart_no 1개 조회
-			list.add( (Cart) cart);
+			List<Cart> list = orderService.selectedCartList(cart_no);  // cart_no 1개 조회
+			cart.addAll(list);
 		}	
-		System.out.println(list);
+		System.out.println(cart);
+		// ---------- 상품 리스트 가져오기 끝 ----------- //
+		
+		// ---------- 멤버 정보 가져오기 시작 ----------- //
+		HttpSession session = req.getSession();
+		Member member = (Member) session.getAttribute("member");
+		
+		String email = member.getEmail();
+				
+		System.out.println(email);		
+		System.out.println(member);
+		
+		// ---------- 멤버 정보 가져오기 끝 ----------- //		
+		
+		model.addAttribute("cart", cart);
+		model.addAttribute("m", member);
 		
 		
 		// 장바구니에서 주문 선택한 품목 불러오기		

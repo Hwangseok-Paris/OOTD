@@ -189,7 +189,7 @@
    });
 	  
    
-   // 천단위 쉼표 함수
+   // 천단위 쉼표 함수 선언 
    function thousandComma(x){
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
@@ -308,7 +308,7 @@
 		 
 		console.log(selProduct_no);
 		
-		location.href = "${pageContext.request.contextPath}/order/order.or?selProduct="+selProduct_no;
+		location.href = "${pageContext.request.contextPath}/order/order.or?selProduct_no="+selProduct_no;
 		
 		
 	})

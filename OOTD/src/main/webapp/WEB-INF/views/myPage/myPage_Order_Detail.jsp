@@ -71,7 +71,7 @@
             </div>
         </div>
     </div>
-</body>
+
 
 <script>
     // 모달창 스크립트
@@ -88,12 +88,5 @@
     $('.close-icon').click(function () {
         $('.modal').fadeOut();
     })
-    
-    
-    
-    
-    
-    
-    
-
+ 
 </script>
