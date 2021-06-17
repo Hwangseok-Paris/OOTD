@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page import="com.ootd.ootdApp.product.model.vo.*" %>
+<% Product pr = (Product)request.getAttribute("product"); // product(카테고리, 브랜드네임) 받아오기 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,16 +44,17 @@
                                 </svg>
                             </span>
                         </div>
-                        
+       
                         
                         <!-- 클릭 시 보여줄 영역 (Dropdown) -->
                         <div class="dropArea">
-                            <ul class="hiddenArea">
-                                <li class="prod cate">Top</li>
-                                <li class="prod cate">bottom</li>
-                                <li class="prod cate">Shoes</li>
-                                <li class="prod cate">Hat</li>
-                                <li class="prod cate">Bag</li>
+                            <ul class="hiddenArea" id="categoryList">
+                                <li class="prod cate" id="0">All</li>
+                                <li class="prod cate" id="1">Top</li>
+                                <li class="prod cate" id="2">bottom</li>
+                                <li class="prod cate" id="3">Shoes</li>
+                                <li class="prod cate" id="4">Hat</li>
+                                <li class="prod cate" id="5">Bag</li>
                             </ul>
                         </div> 
                     </li>
@@ -73,7 +77,8 @@
                         
                         <!-- 클릭 시 보여줄 영역 (Dropdown) -->
                         <div class="dropArea">
-                            <ul class="hiddenArea">
+                            <ul class="hiddenArea" id="brandList">
+                            	<li class="brand cate">All</li>
                             	<c:forEach items="${ brandName }" var="b">
 	                                <li class="brand cate">${ b }</li>
                                 </c:forEach>
@@ -118,7 +123,7 @@
             </div>
 
             <!-- 페이지네이션 (임시) -->
-            <div class="pagination">
+            <!-- <div class="pagination">
                 <a href="#">&laquo;</a>
                 <a href="#">1</a>
                 <a href="#">2</a>
@@ -128,8 +133,8 @@
                 <a href="#">6</a>
                 <a href="#">&raquo;</a>
               </div>
-            </div>
-
+            </div> -->
+		<c:out value="${pageBar}" escapeXml="false"/>
             
 
             
@@ -147,8 +152,46 @@
    	<%@ include file="../common/footer.jsp" %>
    	
     <script>
-        
-
+    
+    
+	 	// 카테고리 클릭시 id 값을 가지고 selectList 로 이동 
+	 	$( document ).ready( function() {
+	 		$('#categoryList').children('.prod').on("click",function(){
+				var categoryNo = $(this).attr("id");
+				var pType = 1;
+				console.log("categoryNo="+categoryNo);
+				var bName = "<%= pr.getBrand_name() %>" ;	
+				console.log("bName="+bName);
+				/* if( bName != null) { */
+					location.href = "${pageContext.request.contextPath}/product/productList.do?categoryNo="+categoryNo+"&pType=1&bName="+bName;
+				/* } else {
+					location.href = "${pageContext.request.contextPath}/product/productList.do?categoryNo="+categoryNo+"&pType=1";	
+				}   */
+				
+			});
+	 	});
+	 	
+	 	
+		// 브랜드 클릭시 id 값을 가지고 selectList 로 이동 
+	 	$( document ).ready( function() {
+	 		$('#brandList').children('.brand').on("click",function(){
+				var bName = $(this).text();
+				var pType = 1;
+				console.log("bName="+bName);	
+				var categoryNo = <%= pr.getProduct_category() %> ;	
+				console.log("categoryNo="+categoryNo);
+				/* if( categoryNo != null) { */
+					location.href = "${pageContext.request.contextPath}/product/productList.do?bName="+bName+"&pType=1&categoryNo="+categoryNo;
+				/* } else {
+					location.href = "${pageContext.request.contextPath}/product/productList.do?bName="+bName+"&pType=1";	
+				} */
+				
+			});
+	 	});
+    
+		
+		
+		
         // Dropdown 
         $('.showArea').on('click', function() {
             // 숨긴 영역 slide down
@@ -175,12 +218,6 @@
                 'mouseleave' : function() {
                     $(this).children('span').css('display', 'none');
                 }
-                /* 'mouseclick' : function() {
-                	var product_no = $(this).attr("id");
-    				console.log("product_no="+product_no);
-    				location.href = "${pageContext.request.contextPath}/product/productDetail.do?product_no="+product_no+"&pType="1;
-                }  */
-                
         });
         
         // click 시 ProductDetail 이동

@@ -20,19 +20,19 @@ public class ProductDAOImpl implements ProductDAO {
 	RowBounds rows;
 
 	@Override
-	public List<Map<String, String>> brandSelectList(int cPage, int numPerPage) {
+	public List<Map<String, String>> brandSelectList(int cPage, int numPerPage, Product product) {
 		// DB SQL 에서 특정 개수의 행만 뽑아오는 객체
 		rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
 
-		return sqlSession.selectList("product-mapper.brandSelectList", null, rows);
+		return sqlSession.selectList("product-mapper.brandSelectList", product, rows);
 	}
 
 	@Override
-	public List<Map<String, String>> secondHandSelectList(int cPage, int numPerPage) {
+	public List<Map<String, String>> secondHandSelectList(int cPage, int numPerPage, Product product) {
 		// DB SQL 에서 특정 개수의 행만 뽑아오는 객체
 		rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
 
-		return sqlSession.selectList("product-mapper.secondHandSelectList", null, rows);
+		return sqlSession.selectList("product-mapper.secondHandSelectList", product, rows);
 	}
 
 	@Override

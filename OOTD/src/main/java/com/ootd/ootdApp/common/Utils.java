@@ -16,8 +16,8 @@ public class Utils {
 		int pageNo = ((cPage - 1)/pageBarSize) * pageBarSize +1;
 		//종료페이지 번호 세팅
 		int pageEnd = pageNo+pageBarSize-1;
-		System.out.println("totalPage : "+totalPage);
-		System.out.println("pageStart["+pageNo+"] ~ pageEnd["+pageEnd+"]");
+//		System.out.println("totalPage : "+totalPage);
+//		System.out.println("pageStart["+pageNo+"] ~ pageEnd["+pageEnd+"]");
 		
 		pageBar += "<ul class='pagination justify-content-center pagination-sm'>";
 		//[이전]section

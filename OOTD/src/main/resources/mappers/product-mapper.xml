@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product-mapper">
 
-	<select id="brandSelectList" resultType="Product_p">
+	<select id="brandSelectList" parameterType="Product_p" resultType="Product_p">
 		SELECT P.*, (SELECT COUNT(*)
 					 FROM ATTACHMENT
 					 WHERE PRODUCT_NO = P.PRODUCT_NO) FILECOUNT,
@@ -13,9 +13,15 @@
            AND P.PRODUCT_NO = A.PRODUCT_NO
 		   AND PRODUCT_TYPE = 1
            AND A.ATT_LEVEL = 1
+           <if test="product_category != 0">
+           		AND P.PRODUCT_CATEGORY = #{ product_category }
+           </if>
+           <if test="brand_name != 'All'">
+           		AND M.BRAND_NAME = #{ brand_name }
+           </if>
 	</select>
 	
-	<select id="secondHandSelectList" resultType="Product_p">
+	<select id="secondHandSelectList" parameterType="Product_p" resultType="Product_p">
 		SELECT P.*, (SELECT COUNT(*)
 					 FROM ATTACHMENT
 					 WHERE PRODUCT_NO = P.PRODUCT_NO) FILECOUNT,

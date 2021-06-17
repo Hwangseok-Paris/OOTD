@@ -25,17 +25,25 @@ public class ProductController {
 	@RequestMapping("/product/productList.do")
 	public String productList(
 			@RequestParam int pType,
+			@RequestParam( required = false, defaultValue = "0") int categoryNo,
+			@RequestParam( value = "bName", required = false, defaultValue = "All") String bName,
 			@RequestParam( value = "cPage", required = false, defaultValue = "1") int cPage,
 			Model model
 			) {
 		// pType = 1 ? 브랜드 : 상품  
+		
+		// product_category 와 brand_name 을 갖는 product VO 생성
+		Product product = new Product(categoryNo, bName);
+		System.out.println("controller에서 product.getProduct_category() :: " + product.getProduct_category());
+		System.out.println("controller에서 product.getBrand_Name() :: " + product.getBrand_name());
+		
 		
 		// 한 페이지당 상품 갯수 
 		int numPerPage = 12;
 		
 		// 현재 페이지의 상품 갯수
 		List<Map<String, String>> list
-			 = productService.productSelectList(cPage, numPerPage, pType);
+			 = productService.productSelectList(cPage, numPerPage, pType ,product);
 		
 		// 전체 상품 갯수 
 		int totalContents = productService.productSelectTotalContents(pType);
@@ -48,9 +56,10 @@ public class ProductController {
 		// brand_name List 불러오기 
 		List<String> brandName = productService.brandNameSelectList();
 		
-		System.out.println("brandName : " + brandName);
+//		System.out.println("brandName : " + brandName);
 		
 		
+		model.addAttribute("product", product); // category & brandName 별 검색 시 사용할 값
 		model.addAttribute("list", list);
 		model.addAttribute("brandName", brandName);
 		model.addAttribute("totalContents", totalContents);
@@ -70,8 +79,31 @@ public class ProductController {
 	}
 	
 	
+	
+//	@RequestMapping("product/productCategoryList")
+//	public String brandCategoryList() {
+//		
+//		return "";
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//========= 중고 or 브랜드 상품 리스트 화면 =========	
 	// 상품 등록 화면으로 이동하는 것은 현재 중고 리스트 화면에만 존재함.
+	// myPage_brand_??    마이페이지 쪽에서   상품등록으로 넘길버튼에 pType 담아서 보내야 함 - 기원 -  
 	@RequestMapping("product/productInputForm.do")
 	public String productInputForm(@RequestParam int pType, Product p) {
 		// pType = 1 ? 브랜드 : 상품  		

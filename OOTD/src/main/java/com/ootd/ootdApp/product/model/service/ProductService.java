@@ -15,10 +15,11 @@ public interface ProductService {
 	 * @param numPerPage
 	 * @param cPage
 	 * @param pType = 1? brand : secondHand
+	 * @param product 
 	 * 
 	 * @return List<Product>
 	 */
-	List<Map<String, String>> productSelectList(int cPage, int numPerPage, int pType);
+	List<Map<String, String>> productSelectList(int cPage, int numPerPage, int pType, Product product);
 
 	/**
 	 * 전체 상품 갯수 조회를 위한 메소드

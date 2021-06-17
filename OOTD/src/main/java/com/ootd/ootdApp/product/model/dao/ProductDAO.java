@@ -13,10 +13,11 @@ public interface ProductDAO {
 	 * brandList 조회를 위한 메소드
 	 * @param numPerPage 
 	 * @param cPage 
+	 * @param product 
 	 * 
 	 * @return List<Product>
 	 */
-	List<Map<String, String>> brandSelectList(int cPage, int numPerPage);
+	List<Map<String, String>> brandSelectList(int cPage, int numPerPage, Product product);
 
 	/**
 	 * secondHandList 조회를 위한 메소드
@@ -25,7 +26,7 @@ public interface ProductDAO {
 	 * 
 	 * @return List<Product>
 	 */
-	List<Map<String, String>> secondHandSelectList(int cPage, int numPerPage);
+	List<Map<String, String>> secondHandSelectList(int cPage, int numPerPage , Product product);
 	
 	
 	/**

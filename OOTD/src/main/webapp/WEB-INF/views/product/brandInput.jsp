@@ -89,7 +89,15 @@
 		            <span> L size : &nbsp;&nbsp; </span>
 		            <input type="text" id="quantity3" class="ininput2" placeholder="수량 입력" name="product_stock_l"><br>
 		            <hr>
-		
+		            <h5>Category</h5>
+					<select name="product_category" id="selectCategory" style="width: 160px;" required>
+			            <option value="">선택안함</option>
+			            <option value="1">Top</option>
+			            <option value="2">Bottom</option>
+			            <option value="3">Shoes</option>
+			            <option value="4">Hat</option>
+			            <option value="5">Bag</option>
+		            </select><hr /><br />
 		            
 		            <button id="btn" type="submit">등록하기</button>
 		        </div>
