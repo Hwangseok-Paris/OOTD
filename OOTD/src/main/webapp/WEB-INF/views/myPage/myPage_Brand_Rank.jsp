@@ -39,6 +39,7 @@
                             <th>누적 판매금액</th>
                         </tr>
                     </thead>
+                    <c:forEach items="${list}" var="p">    
                     <tbody>
                         <tr>
                             <td>
@@ -46,13 +47,13 @@
                             </td>
                             <td>
                                 <div class="product-info">
-                                    <span class="product-name">Round String Jacket Brown </span>
+                                    <span class="product-name">${p.product_name}</span>
                                 </div>
                             </td>
                             <td>
-                                <div class="product-no">0000001</div>
+                                <div class="product-no">${p.product_no}</div>
                             </td>
-                            <td class="product-price">30,000&nbsp;&#8361;</td>
+                            <td class="product-price">${p.product_price}&nbsp;&#8361;</td>
                             <td>
                                 <div class="sold">30</div>
                             </td>
@@ -60,189 +61,8 @@
                                 <div class="sold-price">900,000&nbsp;&#8361;</div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="rank">2</div>
-                            </td>
-                            <td>
-                                <div class="product-info">
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-no">0000001</div>
-                            </td>
-                            <td class="product-price">30,000&nbsp;&#8361;</td>
-                            <td>
-                                <div class="sold">30</div>
-                            </td>
-                            <td>
-                                <div class="sold-price">900,000&nbsp;&#8361;</div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="rank">3</div>
-                            </td>
-                            <td>
-                                <div class="product-info">
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-no">0000001</div>
-                            </td>
-                            <td class="product-price">30,000&nbsp;&#8361;</td>
-                            <td>
-                                <div class="sold">30</div>
-                            </td>
-                            <td>
-                                <div class="sold-price">900,000&nbsp;&#8361;</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="rank">4</div>
-                            </td>
-                            <td>
-                                <div class="product-info">
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-no">0000001</div>
-                            </td>
-                            <td class="product-price">30,000&nbsp;&#8361;</td>
-                            <td>
-                                <div class="sold">30</div>
-                            </td>
-                            <td>
-                                <div class="sold-price">900,000&nbsp;&#8361;</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="rank">5</div>
-                            </td>
-                            <td>
-                                <div class="product-info">
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-no">0000001</div>
-                            </td>
-                            <td class="product-price">30,000&nbsp;&#8361;</td>
-                            <td>
-                                <div class="sold">30</div>
-                            </td>
-                            <td>
-                                <div class="sold-price">900,000&nbsp;&#8361;</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="rank">6</div>
-                            </td>
-                            <td>
-                                <div class="product-info">
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-no">0000001</div>
-                            </td>
-                            <td class="product-price">30,000&nbsp;&#8361;</td>
-                            <td>
-                                <div class="sold">30</div>
-                            </td>
-                            <td>
-                                <div class="sold-price">900,000&nbsp;&#8361;</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="rank">7</div>
-                            </td>
-                            <td>
-                                <div class="product-info">
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-no">0000001</div>
-                            </td>
-                            <td class="product-price">30,000&nbsp;&#8361;</td>
-                            <td>
-                                <div class="sold">30</div>
-                            </td>
-                            <td>
-                                <div class="sold-price">900,000&nbsp;&#8361;</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="rank">8</div>
-                            </td>
-                            <td>
-                                <div class="product-info">
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-no">0000001</div>
-                            </td>
-                            <td class="product-price">30,000&nbsp;&#8361;</td>
-                            <td>
-                                <div class="sold">30</div>
-                            </td>
-                            <td>
-                                <div class="sold-price">900,000&nbsp;&#8361;</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="rank">9</div>
-                            </td>
-                            <td>
-                                <div class="product-info">
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-no">0000001</div>
-                            </td>
-                            <td class="product-price">30,000&nbsp;&#8361;</td>
-                            <td>
-                                <div class="sold">30</div>
-                            </td>
-                            <td>
-                                <div class="sold-price">900,000&nbsp;&#8361;</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="rank">10</div>
-                            </td>
-                            <td>
-                                <div class="product-info">
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-no">0000001</div>
-                            </td>
-                            <td class="product-price">30,000&nbsp;&#8361;</td>
-                            <td>
-                                <div class="sold">30</div>
-                            </td>
-                            <td>
-                                <div class="sold-price">900,000&nbsp;&#8361;</div>
-                            </td>
-                        </tr>
-
                     </tbody>
+                    </c:forEach>
                 </table>
             </div>
         </section>

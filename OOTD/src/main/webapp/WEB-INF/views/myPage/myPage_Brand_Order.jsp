@@ -59,7 +59,7 @@
                                 <span class="purchase-status">1</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
                             </td>
                             <td>
-                                <button class="complete-send">발송 완료</button>
+                                <button class="complete-send" id="${o.order_no}">발송 완료</button>
                             </td>
                         </tr>                                    
                     </tbody>
@@ -120,7 +120,26 @@
             }
         })
     })
+    
+    /* // send
+     function send() {
+        location.href='${pageContext.request.contextPath}/myPage/myPage_Brand_Send.mp?orderNo='+orderNo;
 
+     } */
+     $('.complete-send').click(function(){
+    	 var orderNo = $(this).attr('id');
+    	 console.log("orderNo="+orderNo); // 362
+    	 location.href = "${pageContext.request.contextPath}/myPage/myPage_Brand_Send.mp?orderNo="+orderNo;
+     });
+     
+    /*  $(function(){
+			$("button[id]").on("click",function(){
+				var productNo = $(this).attr("id");
+				console.log("productNo="+productNo);
+				location.href = "${pageContext.request.contextPath}/myPage/myPage_Brand_Prdouct_Delete.mp?productNo="+productNo;
+			});
+		});
+ */
     // 주문 번호를 클릭했을 때(span의 class가져옴)
 	 $('.order-no').click(function(){
 		 
@@ -154,6 +173,11 @@
 			
 		});
 	}); 
+ 
+ <c:if test="${name eq '홍길동'}">
+ 홍길동이 맞습니다.
+</c:if>
+
 
 </script>
 

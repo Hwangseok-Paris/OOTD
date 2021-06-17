@@ -17,5 +17,15 @@
 		SET STATUS = 'N'
 		WHERE PRODUCT_NO = #{ product_no }
 	</update>
+	
+	<select id="selectBrandProductRankList" resultType="Product_m">
+		SELECT *
+		FROM PRODUCT
+		WHERE PRODUCT_STATUS = 'Y'
+			AND PRODUCT_TYPE = 1
+			AND MEMBER_NO = #{ member_no }
+		ORDER BY PRODUCT_NO ASC
+	</select>
+	
 
 </mapper>

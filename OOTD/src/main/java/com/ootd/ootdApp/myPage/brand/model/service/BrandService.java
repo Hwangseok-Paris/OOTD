@@ -26,4 +26,8 @@ public interface BrandService {
 
 	int acUpdateBrandInfo(Member tempMember);
 
+	List<Product> selectBrandProductRankList(int member_no);
+
+	int updateBrandStatus(int orderNo);
+
 }
