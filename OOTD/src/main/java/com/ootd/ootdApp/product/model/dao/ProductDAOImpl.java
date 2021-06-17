@@ -1,5 +1,6 @@
 package com.ootd.ootdApp.product.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
 @Repository
@@ -56,15 +58,21 @@ public class ProductDAOImpl implements ProductDAO {
 	// =========Product Input (insert)=========
 	
 	@Override
-	public int brandInsert(Product product) {
-		System.out.println("DAO 접근");
+	public int brandInsert(Product product, List<Attachment> a) {
+		System.out.println("brandInsert DAO 접근");
 		return sqlSession.insert("product-mapper.insertBrandProduct", product);
 	}
 
 	@Override
-	public int secondHandInsert(Product product) {
-		System.out.println("DAO 접근");
+	public int secondHandInsert(Product product, List<Attachment> a) {
+		System.out.println("secondHandInsert DAO 접근");
 		return sqlSession.insert("product-mapper.insertSecondHandProduct", product);
+	}
+	
+	@Override
+	public int attachmentInsert(Attachment a) {
+		System.out.println("attachmentInsert DAO 접근");
+		return sqlSession.insert("product-mapper.insertAttachment", a);
 	}
 
 	@Override

@@ -1,8 +1,10 @@
 package com.ootd.ootdApp.product.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
 public interface ProductDAO {
@@ -53,7 +55,7 @@ public interface ProductDAO {
 	 * @param product
 	 * @return int
 	 */
-	int brandInsert(Product product);
+	int brandInsert(Product product, List<Attachment> a);
 
 	/**
 	 * secondHand 상품 등록을 위한 메소드
@@ -61,7 +63,15 @@ public interface ProductDAO {
 	 * @param product
 	 * @return int
 	 */
-	int secondHandInsert(Product product);
+	int secondHandInsert(Product product, List<Attachment> a);
+	
+	/**
+	 * 상품 이미지파일 등록을 위한 메소드
+	 * 
+	 * @param Attachment
+	 * @return int
+	 */
+	int attachmentInsert(Attachment a);
 
 	// =========Product Detail (selectOne)=========
 

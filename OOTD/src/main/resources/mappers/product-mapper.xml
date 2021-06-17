@@ -51,11 +51,16 @@
 		VALUES(17, #{product_name}, #{product_detail}, #{product_sizeinfo}, #{product_size}, #{product_price}, #{product_stock_s}, #{product_stock_m}, #{product_stock_l}, #{product_type}, #{member_no}, 'Y')
 	</insert>
 
-	<insert id="insertBrandProduct" parameterType="Product_p">
-		INSERT INTO PRODUCT(PRODUCT_NO, PRODUCT_NAME, PRODUCT_DETAIL, PRODUCT_SIZEINFO, PRODUCT_SIZE, PRODUCT_PRICE, PRODUCT_STOCK_S, PRODUCT_STOCK_M, PRODUCT_STOCK_L, PRODUCT_TYPE, MEMBER_NO, PRODUCT_STATUS)
-		VALUES(17, #{product_name}, #{product_detail}, #{product_sizeinfo}, #{product_size}, #{product_price}, #{product_stock_s}, #{product_stock_m}, #{product_stock_l}, #{product_type}, #{member_no}, 'Y')
+	<insert id="insertAttachment" parameterType="Attachment">
+		<!-- selectKey -->
+		<!-- 다른 테이블의 정보를 외래키로 사용할 경우 참조하는 기능 -->
+		<selectKey keyProperty="" resultType="_int" order="BEFORE">
+			SELECT PRODUCT_NO FROM DUAL
+		</selectKey>
+		<!-- att_no 부분도 시퀀스 넘버를 주자 -->
+		INSERT INTO ATTACHMENT(ATT_NO, ATT_NAME, ATT_DATE, ATT_LEVEL, ATT_STATUS, PRODUCT_NO)
+		VALUES(#{att_no}, #{att_name}, sysdate, #{att_level}, 'Y', #{product_no})
 	</insert>
-	
 
 
 </mapper>

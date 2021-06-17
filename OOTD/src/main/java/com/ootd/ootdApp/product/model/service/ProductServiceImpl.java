@@ -1,5 +1,6 @@
 package com.ootd.ootdApp.product.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -51,19 +52,33 @@ public class ProductServiceImpl implements ProductService {
 	// =========Product Input (insert)=========
 	
 	@Override
-	public int productInsert(Product product, int pType, Attachment a) {
+	public int productInsert(Product product, int pType, List<Attachment> attachList) {
 		
 		if (pType == 1) {
 			System.out.println("브랜드 상품 등록 serviceImpl 수행");
 			
-			int result1 = productDAO.brandInsert(product);
+			int result1 = productDAO.brandInsert(product, attachList);
+			
 			System.out.println("result1 : " + result1);
-			return result1;
+			return 0;
 		} else {
 			System.out.println("중고 상품 등록 serviceImpl 수행");
 			
-			int result1 = productDAO.secondHandInsert(product);
+			int result1 = productDAO.secondHandInsert(product, attachList);
 			System.out.println("result1 : " + result1);
+			
+			// 현재 추가된 boardNo를 가져오는 방법 2가지
+			// 1. DB에서 가장 최근에 추가된 게시글 번호를 DAO를 통해 직접 가져오는 방법
+			// 2. mapper에서 selectKey 태그를 사용하는 방법
+			
+			// 첨부파일이 있다면
+			if(attachList.size() > 0) {
+				for(Attachment a : attachList) {
+					int result2 = productDAO.attachmentInsert(a);
+					
+				}
+			}
+			
 			return result1;
 		}
 	}

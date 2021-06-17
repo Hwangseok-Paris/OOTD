@@ -1,5 +1,6 @@
 package com.ootd.ootdApp.product.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public interface ProductService {
 	 * @param product
 	 * @return int
 	 */
-	int productInsert(Product product, int pType, Attachment a);
+	int productInsert(Product product, int pType, List<Attachment> attachList);
 
 	// =========Product Detail (selectOne)=========
 
