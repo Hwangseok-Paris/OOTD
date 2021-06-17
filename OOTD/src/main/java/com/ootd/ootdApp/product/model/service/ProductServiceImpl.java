@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ootd.ootdApp.product.model.dao.ProductDAO;
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
 @Service
@@ -50,12 +51,21 @@ public class ProductServiceImpl implements ProductService {
 	// =========Product Input (insert)=========
 	
 	@Override
-	public int productInsert(Product product) {
+	public int productInsert(Product product, int pType, Attachment a) {
 		
-		int result1 = productDAO.secondHandInsert(product);
-		System.out.println("result1 : " + result1);
-		
-		return result1;
+		if (pType == 1) {
+			System.out.println("브랜드 상품 등록 serviceImpl 수행");
+			
+			int result1 = productDAO.brandInsert(product);
+			System.out.println("result1 : " + result1);
+			return result1;
+		} else {
+			System.out.println("중고 상품 등록 serviceImpl 수행");
+			
+			int result1 = productDAO.secondHandInsert(product);
+			System.out.println("result1 : " + result1);
+			return result1;
+		}
 	}
 
 	@Override

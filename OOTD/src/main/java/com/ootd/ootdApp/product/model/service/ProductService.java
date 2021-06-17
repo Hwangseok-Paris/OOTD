@@ -3,6 +3,7 @@ package com.ootd.ootdApp.product.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
 public interface ProductService {
@@ -39,7 +40,7 @@ public interface ProductService {
 	 * @param product
 	 * @return int
 	 */
-	int productInsert(Product product);
+	int productInsert(Product product, int pType, Attachment a);
 
 	// =========Product Detail (selectOne)=========
 

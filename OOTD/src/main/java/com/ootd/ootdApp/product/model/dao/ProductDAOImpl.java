@@ -57,14 +57,14 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Override
 	public int brandInsert(Product product) {
-		
-		return sqlSession.insert("product-mapper.insertProduct", product);
+		System.out.println("DAO 접근");
+		return sqlSession.insert("product-mapper.insertBrandProduct", product);
 	}
 
 	@Override
 	public int secondHandInsert(Product product) {
-		
-		return sqlSession.insert("product-mapper.insertProduct", product);
+		System.out.println("DAO 접근");
+		return sqlSession.insert("product-mapper.insertSecondHandProduct", product);
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ootd.ootdApp.common.Utils;
 import com.ootd.ootdApp.product.model.service.ProductService;
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
 @Controller
@@ -71,7 +72,7 @@ public class ProductController {
 	
 	
 	//========= 중고 or 브랜드 상품 리스트 화면 =========	
-	// 상품 등록 화면으로 이동하는 것은 현재 중고 리스트 화면에만 존재함.
+	// 상품 등록 화면으로 이동하는 버튼은 현재 중고 리스트 화면에만 존재함.
 	@RequestMapping("product/productInputForm.do")
 	public String productInputForm(@RequestParam int pType, Product p) {
 		// pType = 1 ? 브랜드 : 상품  		
@@ -89,7 +90,7 @@ public class ProductController {
 	
 	//=========Product Input Form에서 상품 등록 후, 각 상품의 리스트 화면으로 이동  ( insert )=========	
 		@RequestMapping("product/productInput.do")
-		public String productInput(Product p) {
+		public String productInput(Product p, Attachment a) {
 			// pType = 1 ? 브랜드 : 상품  		
 			int pType = p.getProduct_type();
 			
@@ -98,13 +99,19 @@ public class ProductController {
 				
 				return "product/brandList"; 		// 상품 등록 완료 후 브랜드 상품 List 로 이동 
 			} else {
-				System.out.println("product_type : " + p.getProduct_type());
-				System.out.println("product_type : " + p.getMember_no());
-				System.out.println("product_type : " + p.getProduct_name());
-				System.out.println("product_type : " + p.getProduct_price());
-				System.out.println("product_type : " + p.getProduct_detail());
-				System.out.println("product_type : " + p.getProduct_sizeinfo());
-				System.out.println("product_type : " + p.getProduct_size());
+//				System.out.println("product_type : " + p.getProduct_type());
+//				System.out.println("product_member_no : " + p.getMember_no());
+//				System.out.println("product_name : " + p.getProduct_name());
+//				System.out.println("product_price : " + p.getProduct_price());
+//				System.out.println("product_detail : " + p.getProduct_detail());
+//				System.out.println("product_sizeinfo : " + p.getProduct_sizeinfo());
+//				System.out.println("product_size : " + p.getProduct_size());
+//				System.out.println("product_status : " + p.getProduct_status());
+				
+				
+				
+				
+				int result = productService.productInsert(p, pType, a);
 				
 				return "product/secondHandList";	// 상품 등록 완료 후 중고 상품 List 로 이동 
 			}
