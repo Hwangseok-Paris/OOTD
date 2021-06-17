@@ -143,82 +143,38 @@
         <br><br><br><hr>
 
         <div style="margin-bottom: 15px;">
-        <span class="underMenu" style="margin-bottom: 50px;">REVIEW</span><span class="underMenu" style="margin-bottom: 50px;">FAQ</span>
+        	<span class="underMenu" style="margin-bottom: 50px;">REVIEW</span><span class="underMenu" style="margin-bottom: 50px;">FAQ</span>
         </div>
         <table class="table table-hover">
             <tr>
-                <th>
-                    번호
-                </th>
-                <th>
-                    제목
-                </th>
-                <th>
-                    작성자
-                </th>
-                <th>
-                    작성일
-                </th>
-                <th>
-                    조회수
-                </th>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
             </tr>
             <tr>
-                <td>
-                    1
-                </td>
-                <td>
-                    최고입니다~
-                </td>
-                <td>
-                    슈퍼캡숑코코
-                </td>
-                <td>
-                    2021/06/09
-                </td>
-                <td>
-                    149
-                </td>
+                <td>1</td>
+                <td>최고입니다~</td>
+                <td>슈퍼캡숑코코</td>
+                <td>2021/06/09</td>
             </tr>
             <tr>
-                <td>
-                    2
-                </td>
-                <td>
-                    최악입니다~
-                </td>
-                <td>
-                    슈퍼코코
-                </td>
-                <td>
-                    2021/06/09
-                </td>
-                <td>
-                    12
-                </td>
+                <td>2</td>
+                <td>최악입니다~</td>
+                <td>슈퍼코코</td>
+                <td>2021/06/09</td>
             </tr>
             <tr>
-                <td>
-                    3
-                </td>
-                <td>
-                    좋습니다~
-                </td>
-                <td>
-                    코코
-                </td>
-                <td>
-                    2021/06/09
-                </td>
-                <td>
-                    3
-                </td>
+                <td>3</td>
+                <td>좋습니다~</td>
+                <td>코코</td>
+                <td>2021/06/09</td>
             </tr>
             
 
 
         </table>
-        <hr>
+        <hr />
         <!-- 우선 틀만 잡아놓음 -->
             <!-- 페이지네이션 (임시) -->
             <div class="pagination">
