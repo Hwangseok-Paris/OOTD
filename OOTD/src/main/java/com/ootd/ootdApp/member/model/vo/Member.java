@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Member implements Serializable{
 	
+	private int member_no;
 	private String member_id;
 	private String member_nickname;
 	private String member_pw;

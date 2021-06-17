@@ -50,6 +50,8 @@
 	               <tbody id="calculation1tbody">
 	               <c:forEach items="${cart}" var="a">
 	                  <tr class="calculation1_tbody_tr1" style="height: 90px; background-color: #fff;">
+	                  
+	        			 <input type="hidden" class="cart_no" value="${a.cart_no}" />
 	                   
 	                     <!-- Check Btn. Area -->
 	                     <td style="text-align: left; text-align: center; border-right: none;">
@@ -58,7 +60,7 @@
 	                     
 	                     <!-- Product Image Area -->
 	                     <td style="border-left: none; border-right: none; width: 100px; text-align: center;">
-	                     	<img src="${pageContext.request.contextPath }/resources/images/product/brand/${a.att_name}" width="100px">
+	                     	<img src="${pageContext.request.contextPath }/resources/images/${a.att_name}" width="100px">
 	                     </td>
 	                     
 						 <!-- Product Info. Area -->
@@ -75,13 +77,15 @@
 	                     <!-- Quantity Area --> 
 	                     <td style="width: 100px;">
 	                     	<button class="button1 quanBtn" id="button" type ="button"  value='-' >-</button>
-	                        <div id="result" class="result">${a.cart_quantity}</div>
+	                        <input id="result" class="result" value="${a.cart_quantity}"></input>
 	                        <button class="button2 quanBtn" id="button" type="button"  value='+'>+</button>
 	                     </td>
 	                     
 	                     <!-- Delete Btn. Area -->
 	                     <td>
-	                        <button class="btn default btndelete">삭제</button>
+	                        <button class="btn default btndelete" 
+	                        onclick="location.href = '${pageContext.request.contextPath}/order/deleteCartProduct.or?cart_no=${a.cart_no}';">삭제</button>
+	                    
 	                     </td>
 	                  </tr>
 	                  </c:forEach>
@@ -113,8 +117,8 @@
             </div>
             
             <div align="center">
-               <button type="button" class="btn default orderbtn" id="allProduct">전체상품주문</button>
-               <button type="button" class="btn default" id="productClear">선택상품주문</button>
+               <button type="button" class="btn default orderbtn" id="orderAll">전체상품주문</button>
+               <button type="button" class="btn default" id="orderSelected">선택상품주문</button>
                <button type="button" class="btn default footerbtn" id="footerbtn continueShopping" type="button" onclick="location.href='${pageContext.request.contextPath}'" style="color: white;">쇼핑계속하기</button>
                <span class="clearboth"></span>
             </div>
@@ -138,12 +142,8 @@
    
 
  <script>
- 
- 	
- 
-   $(document).ready(function(){
-      
-     // 체크박스 전체 선택, 개별 선택, 선택 해제
+    $(document).ready(function(){
+	  // 체크박스 전체 선택, 개별 선택, 선택 해제
       $(".calculation1 thead input:checkbox[id=check]").click(function(){
          var bool = $(this).prop("checked");
          $(".calculation1 tbody input:checkbox[name=checkbox]").prop("checked", bool);
@@ -167,89 +167,22 @@
          }
       });
       
-      // 이메일 선택시, 자동으로 값 들어오게 하기
-     /*  $("#emailChoice").bind("change", function(){
-         $("#domainName").val($(this).val());
-      }); */
       
       calcPrice_all();
    });
   
-  /*** total price calculator ***/
- /*   function calcPrice(){
-	  var sum = 0;
-	  
-	  $('.price1').each(function(){
-		
-		  var price = Number($(this).text());
-          var quantity = Number($(this).parent().next().children('.result').text());
 
-	         
-	       console.log(quantity);
-	
-	       sum += price*quantity;
-	  })
-	  $('.totalPrice').text(thousandComma(sum));
-  } */
-  
-  
-  /*** total price calculator ***/
   function calcPrice_all(){
 	  var _totalPrice = 0;
 	  
 	$('.chkbox:checked').each(function(){
-		_totalPrice += Number($(this).parent().parent().find('.price1').text()) * Number($(this).parent().parent().find('.result').text());
+		_totalPrice += Number($(this).parent().parent().find('.price1').text()) * Number($(this).parent().parent().find('.result').val());
 	}); 
 	
 	$('.totalPrice').text(thousandComma(_totalPrice));
   }
   
-  /* function calcPrice(){
-	  var sumPlus = 0;
-	  var sumMinus = 0;
-	  // var totalPrice = 0;
-	  
-		  $('.price1').each(function(){
-			if($(this).parent().parent().children('.chee').children('.chkbox').prop('checked') == true){
-				
-				console.log('come');
-			  var priceP = parseInt($(this).text());
-	          var quantityP = parseInt($(this).parent().next().children('.result').text());
-		         
-		       console.log(quantityM);
-		       alert("react");
-		
-		       sumPlus += priceP * quantityP;
-		       
-		       console.log(sumPlus);
-		  
-		       
-			} else if($(this).parent().parent().children('.chee').children('.chkbox').prop('checked') == false) {
-				
-				 var priceM = parseInt($(this).text());
-		         var quantityM = parseInt($(this).parent().next().children('.result').text());
-			         
-			     console.log(quantityM);
-			
-			     sumMinus -= priceM*quantityM;
-			     
-			     console.log(sumMinus);
-				
-			}
-			  var totalPrice = sumPlus + sumMinus;
-			  console.log(totalPrice);
-		  })
-		  
-
-	  
-	  $('.totalPrice').text(thousandComma(totalPrice));
-	}
-  
-  $('.chkbox').on('change', function(){
-	  calcPrice();
-  }) */
-  
-   
+    
    // checkbox on change
    $('.chkbox').on('change', function(){
 	   calcPrice_all();	   
@@ -263,79 +196,126 @@
    
    // 수량 -
    $('.button1').click(function(){
-	   var a = parseInt($(this).siblings('.result').text());
+	   var a = parseInt($(this).siblings('.result').val());
+	   
 	    //  console.log("a2", a);
 	      a = a-1;
 	      if(a<1){
 	         alert("잘못된 수량입니다.") 
 	         return false;
 	         }
-	      $(this).siblings('.result').text(a);
-	      
-/* 	      //var b = parseInt($(this).parent().siblings().children('.price1').text());
-	      var price = $('.realPrice').val();
-	      console.log(price);
-	      $(this).parent().siblings().children('.price1').text(a*price); */
+	      $(this).siblings('.result').val(a);
 	      
 	      calcPrice_all();
    });
    
    // 수량 +
    $('.button2').click(function(){
-      var a = parseInt($(this).siblings('.result').text());
+      var a = parseInt($(this).siblings('.result').val());
      // console.log("a1", a);
       a= a+1;
-      $(this).siblings('.result').text(a);
+      $(this).siblings('.result').val(a);
    
-      // var b = parseInt($(this).parent().siblings().children('.price1').text());
       var price = $('.realPrice').val(); // span의 id값을 가져와서 a*price
       
-      // $(this).parent().siblings().children('.price1').text(a*price);
-      
       calcPrice_all();
       
    });
-      
-   // 삭제 버튼
-   $(".btndelete").click(function(){
-      $(this).parent().parent().remove();
-      
-      // var tr = $('#calculation1tbody tr').val();
-      // if(tr == null){
-      // console.log("장바구니가 비어있습니다.")
-      // }
    
-      calcPrice_all();
-   });
-   
+   // 수량 변경시 DB 업데이트(CART_QUANTITY) - ajax
+   $('.button1, .button2').on('click', function(){
+	   var quantity = $(this).siblings('.result').val();
+	   var cart_no = $(this).parent().parent().children('.cart_no').val();
+	   
+	   $.ajax({
+			type: "GET",
+			url: "${pageContext.request.contextPath}/order/updateQuantity.or",
+			data: { "cart_no" : cart_no,
+					"quantity" : quantity}, 
+					
+			success: function(data){
+					console.log("수량 업데이트 완료");
+				}, error : function(){
+					console.log("실패");
+				}
+			});
 
-
+	   
+   })
    
+   
+      
+   	/*
+	// 삭제 버튼 ajax 츄라이.........
+	
+		
+		var cart_no = $(this).parent().parent().children('.cart_no').val()
+		console.log(cart_no);
+		
+		$.ajax({
+			type: "GET",
+			url: "${pageContext.request.contextPath}/order/deleteCartProduct.or",
+			data: { "cart_no" : cart_no }, 
+			success: function(data){
+					console.log("성공");
+				}, error : function(){
+					console.log("실패");
+				}
+			});
+		
+	})
+   */
    
    
    // 선택 품목 삭제
    $("#deleteSel").click(function(){
-	   console.log('실행');
+	   // 선택된 항목 카트번호 담을 배열 선언
+	   var selchk = [];
+	   
 	   $('.chkbox:checked').each(function(){
-		   $(this).parent().parent().remove();
-	   })
-	  
-	      calcPrice_all();
+		   var cart_no = Number($(this).parent().parent().children('.cart_no').val());
+		   selchk.push(cart_no);
+		   })
+		   
+	// selchk 배열 확인
+	//	console.log(selchk);
+	//  console.log(selchk[1]);
+	//  console.log(selchk.length);
+		
+	// 배열 컨트롤러로 전송
+	    location.href="${pageContext.request.contextPath}/order/deleteCartProductList.or?selchk="+ selchk;
+	    
+	    calcPrice_all();
    })
     
-   
-   
-   
    // 전체 품목 삭제
       $("#deleteAll").click(function(){
-	   		$('.calculation1_tbody_tr1').remove();
-	   		calcPrice_all();
+	   	
+    	 // cart 테이블에서 회원번호에 해당하는 품목 전부 삭제
+    	 location.href ="${pageContext.request.contextPath}/order/deleteCartProductAll.or"
+    	 calcPrice_all();
   	  }) 
    
+  	  
+	// 선택 상품 주문
+	$('#orderSelected').click(function(){
+		var selProduct_no = [];
+		
+		 $('.chkbox:checked').each(function(){
+			 var cart_no = Number($(this).parent().parent().children('.cart_no').val());
+			   selProduct_no.push(cart_no);
+			   })
+		 
+		console.log(selProduct_no);
+		
+		location.href = "${pageContext.request.contextPath}/order/order.or?selProduct="+selProduct_no;
+		
+		
+	})
    
    
    // 모든 상품 주문
-/*    $('#allProduct').click(function(){
+/*    $('#orderAll').click(function(){
 		location.href = "${pageContext.request.contextPath}/order/cart.or";
 	// console.log("링크 선택");  
    })

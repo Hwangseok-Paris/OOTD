@@ -1,6 +1,7 @@
 package com.ootd.ootdApp.order.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,29 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public int deleteProduct(int cart_no) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteCartProduct(int cart_no) {
+		
+		
+		return sqlSession.delete("cart-mapper.deleteCartProduct", cart_no);
+	}
+
+
+	@Override
+	public int deleteCartProductAll(int member_no) {
+		
+		return sqlSession.delete("cart-mapper.deleteCartProductAll", member_no);
 	}
 
 	@Override
-	public int updateQuantity(int cart_no, int cart_quantity) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateQuantity(Map<String, String> map) {
+		
+		return sqlSession.delete("cart-mapper.updateQuantity", map);
+	}
+
+	@Override
+	public List<Cart> selectedCartList(int cart_no) {
+		
+		return sqlSession.selectList("cart-mapper.selectedCartList", cart_no);
 	}
 
 
