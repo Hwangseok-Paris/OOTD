@@ -70,7 +70,7 @@
 	                     
 	                     <!-- Price Area -->
 	                     <td>
-	                        <span class="price1" style="padding-left: 10px;">${a.product_price}</span>원
+	                        <span class="price1" style="padding-left: 10px;"><fmt:formatNumber value="${a.product_price}" pattern="#,###"/></span>&nbsp;<b>￦</b>
 	                        <input type="hidden" class="realPrice" value="${a.product_price}"/>
 	                     </td>
 	                     
@@ -176,7 +176,7 @@
 	  var _totalPrice = 0;
 	  
 	$('.chkbox:checked').each(function(){
-		_totalPrice += Number($(this).parent().parent().find('.price1').text()) * Number($(this).parent().parent().find('.result').val());
+		_totalPrice += Number($(this).parent().parent().find('.realPrice').val()) * Number($(this).parent().parent().find('.result').val());
 	}); 
 	
 	$('.totalPrice').text(thousandComma(_totalPrice));
@@ -216,7 +216,7 @@
       a= a+1;
       $(this).siblings('.result').val(a);
    
-      var price = $('.realPrice').val(); // span의 id값을 가져와서 a*price
+      var price = $('.realPrice').val(); // span의 id값을 가져와서 a x price
       
       calcPrice_all();
       
@@ -306,26 +306,31 @@
 			   selProduct_no.push(cart_no);
 			   })
 		 
-		console.log(selProduct_no);
-		
-		location.href = "${pageContext.request.contextPath}/order/order.or?selProduct_no="+selProduct_no;
-		
+		// console.log(selProduct_no);
+		 
+		 if(selProduct_no.length > 0){
+			 location.href = "${pageContext.request.contextPath}/order/order.or?selProduct_no="+selProduct_no;
+		 } else {
+			 alert("상품이 선택되지 않았습니다.");
+		 }
 		
 	})
    
    
    // 모든 상품 주문
-/*    $('#orderAll').click(function(){
-		location.href = "${pageContext.request.contextPath}/order/cart.or";
-	// console.log("링크 선택");  
-   })
- 
-   
-	//$('#productClear').click(function(){
-	//	location.href = "${pageContext.request.contextPath}/order/order.or";
-	// })
- 	  
-      */
+   $('#orderAll').click(function(){
+	   var selProduct_no = [];
+		
+		 $('.cart_no').each(function(){
+			 var cart_no = Number($(this).val());
+			   selProduct_no.push(cart_no);
+			   })
+		 
+		// console.log(selProduct_no);
+		
+		location.href = "${pageContext.request.contextPath}/order/order.or?selProduct_no="+selProduct_no;
+   });
+
 </script>
 
 <c:import url="../common/footer.jsp"/>

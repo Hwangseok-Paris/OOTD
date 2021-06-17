@@ -67,12 +67,12 @@
                    
                <!-- Price Area -->
                   <td>
-                     <span class="price1" style="padding-left: 10px;">${a.product_price}</span>원
+                     <span class="price1" style="padding-left: 10px;"><fmt:formatNumber value="${a.product_price}" pattern="#,###"/></span>&nbsp;￦
                      <input type="hidden" class="realPrice" value="${a.product_price}"/>
                   </td>
 	            <!-- Quantity Area --> 
 	                <td style="width: 100px;">                        
-                  		 <input id="result" class="result" value="${a.cart_quantity}" readonly/>
+                  		 <input id="result" class="result quantityInput" value="${a.cart_quantity}" disabled/>
                  	</td>
                </tr>
                </c:forEach>
@@ -295,9 +295,9 @@
 	 function calcPrice(){
 		  var sum = 0;
 		  
-		  $('.price1').each(function(){
+		  $('.realPrice').each(function(){
 			
-			  var price = Number($(this).text());
+			  var price = Number($(this).val());
 	          var quantity = Number($(this).parent().next().children('.result').val());
 		         
 		       console.log(quantity);
@@ -347,7 +347,7 @@
   	    pay_method : pay_method,
   	    merchant_uid : 'merchant_' + new Date().getTime(),
   	    name : 'OOTD',
-  	    amount : 0/* $('.finalPrice').val() */,
+  	    amount : 100/* $('.finalPrice').val() */,
   	    buyer_email : email+"@"+domainName,
   	    buyer_name : recipient,
   	    buyer_tel : phone,
@@ -356,8 +356,7 @@
 	  	    if ( rsp.success ) {  // 결제 성공 
 	  	        var msg = '결제가 완료되었습니다. 감사합니다. /n OOTD'; 
   	    } else {
-  	        var msg = 'payment failed';
-  	        msg += '에러내용 : ' + rsp.error_msg;
+  	        var msg = rsp.error_msg;
   	    }
   	    alert(msg);
   		});
