@@ -4,6 +4,10 @@ import com.ootd.ootdApp.member.model.vo.Member;
 
 public interface SecondHandService {
 	
-	Member selectOneMember(String memberName); // 가입 회원 이름으로 유효성테스트 메소드.
+	int updatePassword(Member member); //회원 비밀번호 변경
+
+	int updateEamil(Member member); // 회원 이메일 변경
+
+	int updatePhone(Member member); // 회원 전화번호 변경
 
 }
