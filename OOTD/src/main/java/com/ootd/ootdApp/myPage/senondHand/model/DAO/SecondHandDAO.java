@@ -4,6 +4,10 @@ import com.ootd.ootdApp.member.model.vo.Member;
 
 public interface SecondHandDAO {
 	
-	Member selectOneMember(String memberName);
+	int updatePassword(Member member);
+
+	int updateEmail(Member member);
+
+	int updatePhone(Member member);
 
 }

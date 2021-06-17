@@ -13,10 +13,19 @@ public class SecondHandServiceImpl implements SecondHandService {
 	SecondHandDAO secondHandDAO;
 
 	@Override
-	public Member selectOneMember(String memberName) {
-		return secondHandDAO.selectOneMember(memberName);
+	public int updatePassword(Member member) {
+		return secondHandDAO.updatePassword(member);
 	}
-	
+
+	@Override
+	public int updateEamil(Member member) {
+		return secondHandDAO.updateEmail(member);
+	}
+
+	@Override
+	public int updatePhone(Member member) {
+		return secondHandDAO.updatePhone(member);
+	}
 	
 
 }

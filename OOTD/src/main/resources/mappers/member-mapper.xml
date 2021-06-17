@@ -10,6 +10,8 @@
 		<result property="member_pw" column="member_pw"/>
 		<result property="member_name" column="member_name"/>
 		<result property="address" column="address" typeHandler="MyTypeHandler"/>
+		<result property="email" column="email"/>
+		<result property="phone" column="phone"/>
 		<result property="enroll_date" column="enroll_date"/>
 		<result property="brand_name" column="brand_name"/>
 		<result property="account_number" column="account_number"/>
@@ -39,8 +41,20 @@
 		WHERE MEMBER_ID = #{ member_id }
 	</select>
 	
+	<!-- 회원정보 수정 -->
+	<update id="updatePassword" parameterType="Member">
+		UPDATE MEMBER SET MEMBER_PW = #{member_pw}
+		WHERE MEMBER_ID = #{member_id}
+	</update>
 	
-
+	<update id="updateEmail" parameterType="Member">
+		UPDATE MEMBER SET EMAIL = #{email}
+		WHERE MEMBER_ID = #{member_id}
+	</update>
 	
+	<update id="updatePhone" parameterType="Member">
+		UPDATE MEMBER SET PHONE = #{phone}
+		WHERE MEMBER_ID = #{member_id}
+	</update>
 	
 </mapper>

@@ -11,10 +11,20 @@ public class SecondHandDAOImpl implements SecondHandDAO {
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
-	
+
 	@Override
-	public Member selectOneMember(String memberName) {
-		return sqlSession.selectOne("member-mapper.selectOne", memberName);
+	public int updatePassword(Member member) {
+		return sqlSession.update("member-mapper.updatePassword", member);
+	}
+
+	@Override
+	public int updateEmail(Member member) {
+		return sqlSession.update("member-mapper.updateEmail", member);
+	}
+
+	@Override
+	public int updatePhone(Member member) {
+		return sqlSession.update("member-mapper.updatePhone", member);
 	}
 
 }
