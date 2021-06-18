@@ -25,7 +25,7 @@
   <form name="memberJoinFrm" action="memberJoinEnd.do" method="post">
     <!-- wrapper -->
     <div id="wrapper">
-        <h1 style="text-align: center;">JOIN</h1>
+        <h1 style="text-align: center;">JOIN(업체)</h1>
         
         <!-- 브랜드 / 일반회원 가입 버튼 -->
         <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;">
@@ -35,8 +35,8 @@
 
         <!-- content-->
         <div id="content">
-            <input type="checkbox" id="brand" name="login_type" value="1" checked="checked">업체
-            <input type="checkbox" id="member" name="login_type" value="2" onclick="return false;">개인
+            <input type="checkbox" id="brand" style="display:none;" name="login_type" value="1" checked="checked">
+            <input type="checkbox" id="member" style="display:none;" name="login_type" value="2" onclick="return false;">
             <span style="float:right;">Required</span><span style="color: red; float:right;">*</span>
 
             <!-- ID -->

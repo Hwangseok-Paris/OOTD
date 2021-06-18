@@ -228,6 +228,7 @@ public class ProductController {
 	//=========Product Detail( selectOne )=========	
 	@RequestMapping("/product/productDetail.do")
 	public String productDetail(
+				@RequestParam( value="cPage", required=false, defaultValue="1" ) int cPage,
 				@RequestParam int pType, 
 				@RequestParam int product_no, 
 				Model model
@@ -236,9 +237,25 @@ public class ProductController {
 		
 		if ( pType == 1 ) {
 			
-			List<Review> review = productService.selectProductReview(product_no);
+			int numPerPage = 10;
 			
-			model.addAttribute("review", review);
+			// 현재 페이지의 게시글 수
+			List<Map<String, String>> list 
+				= productService.selectReviewList(cPage, numPerPage, product_no);
+			
+			// 전체 게시글 수 
+			int totalContents = productService.selectReviewTotalContents();
+			
+			// 페이지 처리 HTML 생성하기
+			String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "productList.do");
+			
+			System.out.println("list : " + list);
+			
+			model.addAttribute("review", list);
+			model.addAttribute("totalContents", totalContents);
+			model.addAttribute("numPerPage", numPerPage);
+			model.addAttribute("pageBar", pageBar);
+			
 			
 		}
 		

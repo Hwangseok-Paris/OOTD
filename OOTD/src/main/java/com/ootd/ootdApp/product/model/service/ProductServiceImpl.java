@@ -110,6 +110,22 @@ public class ProductServiceImpl implements ProductService {
 
 	
 
+	@Override
+	public List<Map<String, String>> selectReviewList(int cPage, int numPerPage, int product_no) {
+		
+		return productDAO.selectReviewList(cPage, numPerPage, product_no);
+	}
+
+	@Override
+	public int selectReviewTotalContents() {
+		
+		return productDAO.selectReviewTotalContents();
+	}
+
+	
+
+	
+
 	
 	
 

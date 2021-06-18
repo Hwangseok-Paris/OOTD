@@ -137,8 +137,14 @@
                 <h3>아이디 찾기</h3>
 
                 <div class="modal-body" style="padding:40px 50px;">
-                    <form role="form">
-                        <label for="username">이름</label>
+                    <form role="form" action="member/sendIdMail.do" method="post">
+                    	
+                    	<label for="brand" style="margin-top:5%">
+                    		<input type="checkbox" name="login_type" value="1" checked="true">업체 &nbsp;
+                    	</label>
+            			<input type="checkbox" name="login_type" value="2">개인
+                    	<br /><br />
+                        <label for="username">이름 / 브랜드 이름</label>
                         <div class="input-group">
                             <input type="text" name="member_name" class="form-control" id="usrname" placeholder="Enter name">
                         </div>
@@ -146,9 +152,8 @@
                         <label for="psw" style="margin-top:5%">이메일</label>
                         <div class="input-group">
                             <input type="text" name="email" class="form-control" id="psw" placeholder="Enter phone number">
-                            <span class="input-group-append"><button type="button" class="btn btn-dark id-confirm" onclick="sendMail_id()">메일발송</button></span>
                         </div>
-                        <button type="button" class="btn btn-secondary btn-lg btn-block" style="margin-top: 25%;">아이디 찾기</button>
+                        <button type="submit" class="btn btn-secondary btn-lg btn-block" style="margin-top: 25%;">아이디 찾기</button>
                     </form>
                 </div>
             </div>
@@ -168,23 +173,30 @@
                 <h3>비밀번호 찾기</h3>
 
                 <div class="modal-body" style="padding:40px 50px;">
-                    <form role="form">
+                    <form role="form" action="member/sendPwMail.do" method="post">
+                    	
+                    	
+                    	<label for="brand" style="margin-top:5%">
+                    		<input type="checkbox" name="login_type" value="1" checked="true">업체 &nbsp;
+                    	</label>
+            			<input type="checkbox" name="login_type" value="2">개인
+                    	<br /><br />
+                        
                         <label for="username">아이디</label>
                         <div class="input-group">
                             <input type="text" name="member_id" class="form-control" id="usrname" placeholder="Enter ID">
                         </div>
 
-                        <label for="username" style="margin-top:5%">이름</label>
+                        <label for="username" style="margin-top:5%">이름 / 브랜드 이름</label>
                         <div class="input-group">
                             <input type="text" name="member_name" class="form-control" id="usrname" placeholder="Enter name">
                         </div>
 
                         <label for="psw" style="margin-top:5%">이메일</label>
                         <div class="input-group">
-                            <input type="text" name="emaild" class="form-control" id="psw" placeholder="Enter phone number">
-                            <span class="input-group-append"><button type="button" class="btn btn-dark">본인 인증</button></span>
+                            <input type="text" name="email" class="form-control" id="psw" placeholder="Enter phone number">
                         </div>
-                        <button type="button" class="btn btn-secondary btn-lg btn-block" style="margin-top: 10%;">비밀번호 찾기</button>
+                        <button type="submit" class="btn btn-secondary btn-lg btn-block" style="margin-top: 10%;">비밀번호 찾기</button>
                     </form>
                 </div>
             </div>
@@ -195,10 +207,6 @@
         $("#loginBtn").click(function(){
                 $("#loginModal").modal();
           });
-      
-        function sendMail_id() {
-        	location.href="${pageContext.request.contextPath}/member/sendMail.do";
-        }
 
         /* 모달 밖의 영역 클릭 시, 모달이 닫히는 것을 방지 */
    		//   $('#loginModal').modal({backdrop: 'static', keyboard: false}) ;

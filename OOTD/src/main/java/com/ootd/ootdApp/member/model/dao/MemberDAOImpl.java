@@ -39,8 +39,20 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public Member selectMemberID(Member member) {
 		
-		return sqlSession.selectOne("member-mapper.selectMemberId", member);
+		if ( member.getLogin_type() == 1 ) {
+			return sqlSession.selectOne("member-mapper.selectBrandId", member);
+		} else {
+			return sqlSession.selectOne("member-mapper.selectMemberId", member);
+		}
 	}
+
+	@Override
+	public int updateNewPass(Member m) {
+		
+		return sqlSession.update("member-mapper.updatePasswordFind", m);
+	}
+
+	
 
 	
 
