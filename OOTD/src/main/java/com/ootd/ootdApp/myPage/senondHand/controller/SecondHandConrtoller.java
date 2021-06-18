@@ -1,5 +1,7 @@
 package com.ootd.ootdApp.myPage.senondHand.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.senondHand.model.service.SecondHandService;
+import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
+import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
 
 @SessionAttributes({"member"})
 @Controller
@@ -24,6 +28,8 @@ public class SecondHandConrtoller {
 	//Sale 판매한 상품
 	//Review Sale페이지에서 구매한 상품 리뷰 작성하기
 	
+	//O_ORDER , O_ORDER_LIST 는 무조건 결제가 된 상품들
+	
 	@Autowired
 	SecondHandService secondHandService;
 	
@@ -35,35 +41,12 @@ public class SecondHandConrtoller {
 		return "myPage/myPage_Info";
 	}
 	
-	@RequestMapping("/myPage/myPage_Purchased.mp")
-	public String myPagePurchased() {
-		return "myPage/myPage_Purchased";
-	}
-	
-	@RequestMapping("/myPage/myPage_Product.mp")
-	public String myPageProduct() {
-		return "myPage/myPage_Product";
-	}
-	
 	@RequestMapping("/myPage/myPage_Sale.mp")
 	public String myPageSale() {
 		return "myPage/myPage_Sale";
 	}
 	
-	@RequestMapping("/myPage/testMapping")
-	public String test(HttpSession session) {
-		
-		Member member = new Member();
-		member.setMember_id("user01");
-		member.setMember_pw(bcryptPasswordEncoder.encode("pwd01"));
-		member.setEmail("user01@naver.com");
-		member.setPhone("010-1111-1111");
-		
-		session.setAttribute("member", member);
-		
-		return "redirect:/";
-	}
-	
+	//비밀번호 변경
 	@RequestMapping("/myPage/update_Password.do")
 	public String update_Password(@RequestParam(value="password") String password,
 							@RequestParam(value="new_password") String new_password,
@@ -94,6 +77,7 @@ public class SecondHandConrtoller {
 		return "redirect:myPage_Info.mp";
 	}
 	
+	//이메일 변경
 	@RequestMapping("/myPage/update_Email.do")
 	public String update_Email(@RequestParam(value="update_email") String update_email, Member member, Model model) {
 		
@@ -121,6 +105,7 @@ public class SecondHandConrtoller {
 		return "redirect:myPage_Info.mp";
 	}
 	
+	//전화번호 변경
 	@RequestMapping("/myPage/update_Phone.do")
 	public String update_Phone(@RequestParam(value="update_phone") String update_phone, Member member, Model model) {
 		
@@ -149,19 +134,82 @@ public class SecondHandConrtoller {
 		return "redirect:myPage_Info.mp";
 	}
 	
+	//주소변경
 	@RequestMapping("/myPage/updateAddress.do")
-	public String updateAddress(@RequestParam(value="update_address") String address, @RequestParam(value="update_detail_address") String detailAddress) {
+	public String updateAddress(@RequestParam(value="update_address") String address, @RequestParam(value="update_detail_address") String detailAddress, Member member, Model model) {
 		
 		System.out.println(address + " / " + detailAddress);
+		
+		String[] newAddress = {address + " " + detailAddress};
+		
+		member.setAddress(newAddress);
+		
+		int result = secondHandService.updateAddress(member);
+		
+		if(result > 0) {
+			model.addAttribute(member);
+			
+			for( int i = 0; i < newAddress.length; i++) {
+				
+				System.out.println(newAddress[i]);
+				
+			}
+		}
 		
 		return "redirect:myPage_Info.mp";
 	}
 	
+	//계좌번호 변경
 	@RequestMapping("/myPage/updateBank.do")
-	public String updateBank() {
+	public String updateBank(@RequestParam(value="account") String accountNumber,@RequestParam(value="bank_name") String bank_code, Member member, Model model) {
 		
+		System.out.println(bank_code); // 변경할 은행 코드
+		System.out.println(accountNumber); // 변경할 계좌번호
 		
+		member.setAccount_number(accountNumber);
+		member.setBank_code(bank_code);
+		
+		int result = secondHandService.updateBank(member);
+		
+		if(result > 0) {
+			model.addAttribute(member);
+			System.out.println("change Bank_code / Bank_accout -> " + member.getBank_code() + " / " + member.getAccount_number() );
+		}
 		
 		return "redirect:myPage_Info.mp";
 	}
+	
+	//주문 상품 가져오기
+	@RequestMapping("/myPage/myPage_Purchased.mp")
+	public String selectOrderList(Member member, Model model) {
+		
+		String member_name = member.getMember_name();
+		
+		System.out.println(member_name);
+		
+		List<myPageOrderList> list = secondHandService.selectOrderList(member_name);
+		
+		model.addAttribute("list", list);
+		
+		System.out.println(list);
+		
+		return "myPage/myPage_Purchased";
+	}
+	
+	@RequestMapping("/myPage/myPage_Product.mp")
+	public String myPageProduct(Member member, Model model) {
+		
+		int member_no = member.getMember_no();
+		
+		System.out.println(member_no);
+		
+		List<Product> list = secondHandService.selectProductList(member_no);
+		
+		model.addAttribute("list", list);
+		
+		System.out.println(list);
+		
+		return "myPage/myPage_Product";
+	}
+ 	
 }

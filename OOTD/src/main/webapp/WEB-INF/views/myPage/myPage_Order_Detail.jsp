@@ -20,14 +20,14 @@
                 <div class="customer-info-title detail-subtitle">Customer Info</div>
                 <table class="customer-info">
                     <thead>
-                        <tr>
+                        <tr style="text-align: center;">
                             <th>주문자명</th>
                             <th>배송주소</th>
                             <th>연락처</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr style="text-align: center;">
                             <td>
                                 <div class="customer-name">옷삼이</div>
                             </td>
@@ -43,14 +43,14 @@
                 <div class="product-info-title detail-subtitle">Ordered Item</div>
                 <table class="order-list">
                     <thead>
-                        <tr>
+                        <tr style="text-align: center;">
                             <th>상품명</th>
                             <th>주문일자</th>
                             <th>수량</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr style="text-align: center;">
                             <td class="modal-product">
                                 <span class="product-name">Round String Jacket Brown </span>
                                 <span class="product-option">(small)</span>
@@ -88,5 +88,5 @@
     $('.close-icon').click(function () {
         $('.modal').fadeOut();
     })
- 
+
 </script>

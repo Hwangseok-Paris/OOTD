@@ -3,7 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orderList-mapper"> 
 
-
    <select id="selectBrandOrderList" resultType="O_Order" parameterType="string">
 	SELECT P.PRODUCT_NAME, OL.ORDER_QUANTITY, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE
         FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P, MEMBER M
@@ -34,8 +33,16 @@
    		SET PURCHASE_STATUS = 2
 		WHERE ORDER_NO = #{ order_no }
    </update>
- 
-  
-   
+
+	<select id="selectOrderList" parameterType="string" resultType="O_Order">
+		SELECT P.PRODUCT_NAME, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE, OL.ORDER_QUANTITY, M.BRAND_NAME
+		FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P, MEMBER M
+		WHERE M.MEMBER_NO = P.MEMBER_NO
+			AND O.ORDER_NO = OL.ORDER_NO
+			AND M.MEMBER_NAME = #{member_name}
+			AND P.PRODUCT_TYPE = 1
+			AND OL.PRODUCT_NO = P.PRODUCT_NO
+		ORDER BY O.ORDER_DATE DESC
+	</select>
 
 </mapper>

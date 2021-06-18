@@ -28,5 +28,14 @@
    			AND PRODUCT_STATUS = 'Y' 
 	</select>
 	
+	<select id="selectProductList" resultType="Product_s">
+		SELECT *
+		FROM PRODUCT
+		WHERE PRODUCT_STATUS = 'Y'
+			AND PRODUCT_TYPE = 2
+			AND MEMBER_NO = #{member_no}
+		ORDER BY PRODUCT_NO DESC
+	</select>
+
 
 </mapper>
