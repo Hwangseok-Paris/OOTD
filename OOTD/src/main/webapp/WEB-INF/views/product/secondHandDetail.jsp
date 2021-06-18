@@ -10,6 +10,7 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <title>second-handDetail</title>
    
+    <c:import url="../common/styler.jsp"/>
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 얘는 문제없  -->
      <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
@@ -18,7 +19,6 @@
     <script src='${pageContext.request.contextPath }/resources/js/jquery.zoom.js'></script>
     <script src='${pageContext.request.contextPath }/resources/js/jquery.Wheelzoom.js'></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productDetail.css" />
-    <c:import url="../common/styler.jsp"/>
 </head>
 <body>
     <c:import url="../common/header.jsp"/>
@@ -27,7 +27,7 @@
 <section>
     <div class="product_detail sh_detail">
         <div class="package" >
-            <div id="insertArea" class="inputBox1" style="margin-left: 20%;">
+            <div id="insertArea" class="inputBox1">
                 <div id="contentImgArea1" class="imgInput">
                     <img src="${pageContext.request.contextPath }/resources/images/second-hand sample1.jpg" 
                         id="contentImg1" style="height: 150px; width: 120px;"/>
@@ -136,7 +136,6 @@
             </div>
         </div>
     </div>
-
     
 
 </section>

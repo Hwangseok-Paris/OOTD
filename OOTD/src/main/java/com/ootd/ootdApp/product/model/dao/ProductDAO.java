@@ -92,6 +92,18 @@ public interface ProductDAO {
 	 * @return Product
 	 */
 	Product secondHandSelectOne(int product_no);
+	
+	
+	/**
+	 * 상품 번호로 상품 한 개 조회를 위한 메소드
+	 * 
+	 * @param pType, product_no
+	 * @return Product, List<Attachement>
+	 */
+	Product productSelectOne(int pType, int product_no);
+	
+	
+	
 
 	// =========Product Update (Update)=========
 

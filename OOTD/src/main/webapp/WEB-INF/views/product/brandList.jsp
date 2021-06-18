@@ -12,9 +12,9 @@
 <head>
 <meta charset="UTF-8">
 <title>브랜드리스트</title>
+<c:import url="../common/styler.jsp"/>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productList.css">
-<c:import url="../common/styler.jsp"/>
 </head>
 <body>
 
@@ -109,7 +109,7 @@
 	                    <li class="thumbnail-list">
 	                        <div class="thumbnail-area" id="${ p.product_no }">
 	                            <!-- thumbnail image -->
-	                            <img src="${pageContext.request.contextPath }/resources/images/${ p.att_name }" alt="">
+	                            <img src="${pageContext.request.contextPath }/resources/images/product/${ p.att_name }" alt="">
 	                            <!-- 상품 정보 (hover) -->
 	                            <span class="p_attr thumbnail-info">
 	                                <span>${ p.brand_name }</span> <br />
@@ -125,6 +125,7 @@
 		            	</c:if>
                     </c:forEach>
            	 	</div>
+			<c:out value="${pageBar}" escapeXml="false"/>
 			</div>
 
 
@@ -158,7 +159,6 @@
 
 
 
-			<c:out value="${pageBar}" escapeXml="false"/>
             
 
             
@@ -235,11 +235,7 @@
 		 	$('.pPrice').each(function() {
 		 		$(this).text(thousandComma($(this).text()));
 		 	});
-
-	 		
-		 	/* $('.thumbnail-info').each(function() {
-		 		$(this).css()
-		 	}); */
+	
 	 	
 	 	});
 	 	

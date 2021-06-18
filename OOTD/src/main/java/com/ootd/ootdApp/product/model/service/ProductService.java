@@ -53,7 +53,7 @@ public interface ProductService {
 	 * @param product_no
 	 * @return Product
 	 */
-	Product productSelectOne(int product_no);
+	Product productSelectOne(int pType, int product_no);
 
 	// =========Product Update (Update)=========
 
