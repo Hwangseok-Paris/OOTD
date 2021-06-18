@@ -34,18 +34,20 @@ public class ProductController {
 	// 메인 화면에서 brand 또는 second hand 클릭 시 수행되는 로직.
 	@RequestMapping("/product/productList.do")
 	public String productList(
-			@RequestParam int pType,
-			@RequestParam( required = false, defaultValue = "0") int categoryNo,
-			@RequestParam( value = "bName", required = false, defaultValue = "All") String bName,
+			@RequestParam int pType,	// 브랜드 or 중고 구분 
+			@RequestParam( required = false, defaultValue = "0") int categoryNo,	// 선택한 카테고리 값
+			@RequestParam( value = "bName", required = false, defaultValue = "All") String bName, // 선택한 브랜드 이름 
+			@RequestParam( required = false, defaultValue = "") String sortVal, // 선택한 필터 정렬 값 
 			@RequestParam( value = "cPage", required = false, defaultValue = "1") int cPage,
 			Model model
 			) {
 		// pType = 1 ? 브랜드 : 상품  
-		
+//		System.out.println(sortVal);
 		// product_category 와 brand_name 을 갖는 product VO 생성
-		Product product = new Product(categoryNo, bName);
-		System.out.println("controller에서 product.getProduct_category() :: " + product.getProduct_category());
-		System.out.println("controller에서 product.getBrand_Name() :: " + product.getBrand_name());
+		Product product = new Product(categoryNo, bName, sortVal);
+//		System.out.println("controller에서 product.getProduct_category() :: " + product.getProduct_category());
+//		System.out.println("controller에서 product.getBrand_Name() :: " + product.getBrand_name());
+//		System.out.println("controller에서 product.getSortVal() :: " + product.getSortVal());
 		
 		
 		// 한 페이지당 상품 갯수 
@@ -61,7 +63,7 @@ public class ProductController {
 		// 페이지 처리 HTML 생성하기
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "productList.do");
 		
-		System.out.println("list : " + list);
+//		System.out.println("list : " + list);
 		
 		// brand_name List 불러오기 
 		List<String> brandName = productService.brandNameSelectList();

@@ -99,7 +99,7 @@ div[class$=cate]  {
     margin-left: -30px;
 }
 .content-wrapper {
-    text-align: center;
+    /* text-align: center; */
 /*     padding: 10px; */
 
 }
@@ -107,6 +107,10 @@ div[class$=cate]  {
 .thumbnail-list {
     display: inline-block;
     margin: 10px;
+}
+
+.thumbnail-list:hover {
+	cursor: pointer;
 }
 
 .thumbnail-area {
@@ -125,28 +129,16 @@ div[class$=cate]  {
 
 .thumbnail-info {
     position: absolute;
-    top: 10px;
-    left: 10px;
+     top: 40px;
+/*    left: 10px; */
     display: none;
-}
-
-.pagination {
-    display: inline-block;
+   	padding : 0px 30px;
     text-align: center;
-    justify-content: center;
-    align-items: center;
+}
+.thumbnail-list .p_attr:hover{
+	display: inline-block;
 }
 
-.pagination a {
-color: black;
-float: left;
-padding: 8px 16px;
-text-decoration: none;
-background:none;
-
-
-
-}
 
 #topBtn {
 	width:50px;

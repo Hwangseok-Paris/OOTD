@@ -17,6 +17,7 @@
 
    
    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/order.css"/>
+   <c:import url="../common/styler.jsp"/>
 </head>
  
 <body>

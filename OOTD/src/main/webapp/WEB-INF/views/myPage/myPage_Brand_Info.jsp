@@ -11,6 +11,7 @@
 	    <title>OOTD - 마이페이지(브랜드)</title>
 	    <script src="${pageContext.request.contextPath }/resources/asset/js/jquery-3.6.0.min.js"></script>
 	    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/myPage_Info.css">
+	    <c:import url="../common/styler.jsp"/>
 	</head>
 <body>
 

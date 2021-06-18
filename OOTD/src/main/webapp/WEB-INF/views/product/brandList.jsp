@@ -1,3 +1,4 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -13,6 +14,7 @@
 <title>브랜드리스트</title>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productList.css">
+<c:import url="../common/styler.jsp"/>
 </head>
 <body>
 
@@ -89,9 +91,6 @@
             </div>
         </nav>
 
-
-        
-
         <section class="main-wrapper">
             <!-- 필터 정렬 영역 -->
             <div class="filter-div">
@@ -103,38 +102,63 @@
             <div class="content-wrapper">
                 <!-- 상품 list -->
                 <div class="product-list">
-                <ul>
-                	<c:forEach items="${ list }" var="p">
+		            <c:forEach items="${ list }" var="p" varStatus="vs">
+		            	<c:if test="${ vs.count%4 == 1 }">
+		            		<ul>
+		            	</c:if>
 	                    <li class="thumbnail-list">
 	                        <div class="thumbnail-area" id="${ p.product_no }">
 	                            <!-- thumbnail image -->
 	                            <img src="${pageContext.request.contextPath }/resources/images/${ p.att_name }" alt="">
 	                            <!-- 상품 정보 (hover) -->
-	                            <span class="thumbnail-info">
-	                                <b>${ p.brand_name }</b> <br />
+	                            <span class="p_attr thumbnail-info">
+	                                <span>${ p.brand_name }</span> <br />
 	                                <span>${ p.product_name }</span>
 	                                     <br><br>
-	                                <span>${ p.product_price }</span>
+	                                <span>￦</span>
+	                                <span class="pPrice">${ p.product_price }</span>
 	                            </span>
 	                        </div>
 	                    </li>
+	                    <c:if test="${ vs.count%4 == 0 || vs.count eq list.size() }">
+		            		</ul>
+		            	</c:if>
                     </c:forEach>
-                </ul>
-            </div>
+           	 	</div>
+			</div>
 
-            <!-- 페이지네이션 (임시) -->
-            <!-- <div class="pagination">
-                <a href="#">&laquo;</a>
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
-                <a href="#">&raquo;</a>
-              </div>
-            </div> -->
-		<c:out value="${pageBar}" escapeXml="false"/>
+
+			<!-- <ul class='pagination justify-content-center pagination-sm'>
+				<li class='page-item disabled'>
+					<a class='page-link' href='#' tabindex='-1'>이전</a>
+				</li>
+				<li class='page-item'>
+					<a class='page-link' href='javascript:fn_paging("+(pageNo-1)+")'>이전</a>
+				</li>
+				<li class='page-item active'>
+					<a class='page-link'>"+pageNo+"</a>
+				</li>
+				<li class='page-item'>
+					<a class='page-link' href='javascript:fn_paging("+pageNo+")'>"+pageNo+"</a>
+				</li>
+				<li class='page-item disabled'>
+					<a class='page-link' href='#'>다음</a>
+				</li>
+				<li class='page-item'>
+					<a class='page-link' href='javascript:fn_paging("+pageNo+")'>다음</a>
+				</li>
+			</ul>
+
+			<script>
+	            function fn_paging(cPage,numPerPage){
+	            	location.href='"+url+"?cPage='+cPage;
+	            }
+            </script> -->
+
+
+
+
+			<c:out value="${pageBar}" escapeXml="false"/>
             
 
             
@@ -153,43 +177,78 @@
    	
     <script>
     
-    
-	 	// 카테고리 클릭시 id 값을 가지고 selectList 로 이동 
+		var sortVal; // 정렬필터값 
+		var pType;
+		var categoryNo;
+		var bName;
+		
 	 	$( document ).ready( function() {
-	 		$('#categoryList').children('.prod').on("click",function(){
-				var categoryNo = $(this).attr("id");
-				var pType = 1;
+	 		sortVal = '<%= pr.getSortVal() %>';
+	 		
+	 		// 정렬할 필터의 값 가져오기 
+	 		$('.filter-div').children('.filter-text').on('click', function() {
+	 			pType = 1;
+				console.log(sortVal);
+				bName = "<%= pr.getBrand_name() %>" ;	
+				console.log("bName="+bName);
+				categoryNo = <%= pr.getProduct_category() %> ;	
 				console.log("categoryNo="+categoryNo);
-				var bName = "<%= pr.getBrand_name() %>" ;	
+				<%-- sortVal = '<%= pr.getSortVal() %>' ; --%>
+				sortVal = $(this).text();
+				console.log("sortVal="+sortVal);
+				location.href = "${pageContext.request.contextPath}/product/productList.do?categoryNo="+categoryNo+"&pType=1&bName="+bName+"&sortVal="+sortVal;
+			});
+
+	 		
+	 		// 카테고리 클릭시 id 값을 가지고 selectList 로 이동 
+	 		$('#categoryList').children('.prod').on("click",function(){
+				categoryNo = $(this).attr("id");
+				pType = 1;
+				console.log("categoryNo="+categoryNo);
+				bName = "<%= pr.getBrand_name() %>" ;	
 				console.log("bName="+bName);
 				/* if( bName != null) { */
-					location.href = "${pageContext.request.contextPath}/product/productList.do?categoryNo="+categoryNo+"&pType=1&bName="+bName;
+					location.href = "${pageContext.request.contextPath}/product/productList.do?categoryNo="+categoryNo+"&pType=1&bName="+bName+"&sortVal="+sortVal;
 				/* } else {
 					location.href = "${pageContext.request.contextPath}/product/productList.do?categoryNo="+categoryNo+"&pType=1";	
 				}   */
 				
 			});
-	 	});
-	 	
-	 	
-		// 브랜드 클릭시 id 값을 가지고 selectList 로 이동 
-	 	$( document ).ready( function() {
+	 		
+	 		
+	 		// 브랜드 클릭시 id 값을 가지고 selectList 로 이동 
 	 		$('#brandList').children('.brand').on("click",function(){
-				var bName = $(this).text();
-				var pType = 1;
+				bName = $(this).text();
+				pType = 1;
 				console.log("bName="+bName);	
-				var categoryNo = <%= pr.getProduct_category() %> ;	
+				categoryNo = <%= pr.getProduct_category() %> ;	
 				console.log("categoryNo="+categoryNo);
 				/* if( categoryNo != null) { */
-					location.href = "${pageContext.request.contextPath}/product/productList.do?bName="+bName+"&pType=1&categoryNo="+categoryNo;
+					location.href = "${pageContext.request.contextPath}/product/productList.do?bName="+bName+"&pType=1&categoryNo="+categoryNo+"&sortVal="+sortVal;
 				/* } else {
 					location.href = "${pageContext.request.contextPath}/product/productList.do?bName="+bName+"&pType=1";	
 				} */
 				
 			});
+	 	
+	 		// 상품 가격 천단위 구분 
+		 	$('.pPrice').each(function() {
+		 		$(this).text(thousandComma($(this).text()));
+		 	});
+
+	 		
+		 	/* $('.thumbnail-info').each(function() {
+		 		$(this).css()
+		 	}); */
+	 	
 	 	});
-    
+	 	
+	 	
+	 	function thousandComma(x){
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
 		
+	 	
 		
 		
         // Dropdown 

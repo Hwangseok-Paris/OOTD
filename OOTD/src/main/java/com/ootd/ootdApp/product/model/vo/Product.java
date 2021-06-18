@@ -33,10 +33,12 @@ public class Product implements Serializable {
 	private int fileCount;			// 각 상품당 첨부파일 갯수
 	private String brand_name;		// 상품의 브랜드 명 담을 추가변수
 	private String att_name;		// 상품의 각 대표(1)번 사진 담아오는 변수
+	private String sortVal;
 	
-	public Product(int product_category, String brand_name) {
+	public Product(int product_category, String brand_name, String sortVal) {
 		this.product_category = product_category;
 		this.brand_name = brand_name;
+		this.sortVal = sortVal;
 	}
 	
 }

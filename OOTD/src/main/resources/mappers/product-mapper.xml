@@ -19,6 +19,24 @@
            <if test="brand_name != 'All'">
            		AND M.BRAND_NAME = #{ brand_name }
            </if>
+           <if test="sortVal != null">
+           		<choose>
+           			<when test="sortVal == '최신순'">
+           				ORDER BY P.PRODUCT_NO DESC
+           			</when>
+           			<when test="sortVal == '낮은 가격순'">
+           				ORDER BY P.PRODUCT_PRICE
+           			</when>
+           			<otherwise>
+           				ORDER BY P.PRODUCT_PRICE DESC
+           			</otherwise>
+           		</choose>
+           </if>
+           
+           
+           
+           
+           
 	</select>
 	
 	<select id="secondHandSelectList" parameterType="Product_p" resultType="Product_p">

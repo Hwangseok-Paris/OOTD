@@ -9,13 +9,14 @@
 <head>
     <meta charset="UTF-8">
     <title>brand</title>
-    <c:import url="../common/header.jsp"/>
     <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productInput.css" />
+    <c:import url="../common/styler.jsp"/>
 </head>
 
 
 <body>
+    <c:import url="../common/header.jsp"/>
 <div class="container">
 	<div class="brandInput-title">
 		<span>브랜드 상품 등록</span>

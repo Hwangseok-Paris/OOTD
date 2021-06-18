@@ -9,7 +9,6 @@
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <title>second-handDetail</title>
-    <c:import url="../common/header.jsp"/>
    
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 얘는 문제없  -->
      <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> 
@@ -19,8 +18,10 @@
     <script src='${pageContext.request.contextPath }/resources/js/jquery.zoom.js'></script>
     <script src='${pageContext.request.contextPath }/resources/js/jquery.Wheelzoom.js'></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productDetail.css" />
+    <c:import url="../common/styler.jsp"/>
 </head>
 <body>
+    <c:import url="../common/header.jsp"/>
 
 
 <section>

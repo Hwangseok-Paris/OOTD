@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/myPage_Info.css">
     
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <c:import url="../common/styler.jsp"/>
 </head>
 
 <body>

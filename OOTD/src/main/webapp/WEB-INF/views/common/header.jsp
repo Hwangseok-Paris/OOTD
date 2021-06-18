@@ -3,25 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 
 <%@ include file="../member/loginModal.jsp"%>
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/header.css">
 
-
-<script
-	src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
-
-</head>
-<body>
 	<header class="header">
 		<div class="header_nav">
 			<!-- HEADER 로고 클릭 시 index화면으로 이동 -->
@@ -154,5 +139,4 @@
 	
 	
 	</script>
-</body>
-</html>
+

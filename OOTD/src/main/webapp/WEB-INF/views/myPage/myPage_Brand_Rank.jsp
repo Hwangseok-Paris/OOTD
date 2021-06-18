@@ -12,6 +12,7 @@
 	    <title>브랜드 - 상품 순위</title>
 	    <script src="${pageContext.request.contextPath }/resources/asset/js/jquery-3.6.0.min.js"></script>
 	    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/myPage.css">
+	    <c:import url="../common/styler.jsp"/>
 	</head>
 
 <body>

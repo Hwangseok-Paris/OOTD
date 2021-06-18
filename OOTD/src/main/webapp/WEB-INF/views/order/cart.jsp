@@ -11,6 +11,7 @@
    <title>장바구니</title>
    <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/cart.css"/>
+   <c:import url="../common/styler.jsp"/>
 </head>
 
 <body>
