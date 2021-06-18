@@ -66,7 +66,7 @@
                 </table>
                 <div class="price-area">
                     <span>주문금액 : </span>
-                    <span class="price-amount">200,000&nbsp;&#8361;</span>
+                    <span class="price-amount">200,000&nbsp;&#8361;</span><span>&nbsp;&#8361;</span>
                 </div>
             </div>
         </div>
