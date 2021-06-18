@@ -167,22 +167,47 @@ public class MemberController {
 		return "common/msg";
 	}
 	
-	@RequestMapping(value = "/sendMail.do") 
-	public String sendMail(final MailVO vo) { 
+	@RequestMapping("member/sendMail.do") 
+	public String sendMail(
+				final MailVO vo,
+				Member member,
+				Model model
+			) { 
+		
+		System.out.println("sendMail Controller 접근");
+		
+		Member m = memberService.selectMemberID(member);
+		
+		vo.setFrom("alfus78910@gmail.com");
+		vo.setTo(m.getEmail());
+		vo.setSubject("[내일의 옷] 아이디 확인 관련 메일");
+		vo.setContents(
+					"<html><body>"
+					+ "<h2>OOTD</h2><br>"
+					+ "<p>" + m.getMember_name() + "님의 아이디는" 
+					+ m.getMember_id() + "입니다."
+					+ "</p>"
+					+ "</body></html>"
+				);
+		
+		
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() { 
 			@Override public void prepare(MimeMessage mimeMessage) throws Exception { 
 				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8"); 
-				helper.setFrom(vo.getFrom()); 
+				helper.setFrom("OOTD <alfus78910@gmail.com>"); 
 				helper.setTo(vo.getTo()); 
 				helper.setSubject(vo.getSubject()); 
 				helper.setText(vo.getContents(), true); 
-				} 
-			}; 
+			} 
+		}; 
 				
-			mailSender.send(preparator); 
+		mailSender.send(preparator); 
+			
+		String msg = m.getMember_name() + "님의 메일로 아이디를 발송했습니다.";	
+		
+		model.addAttribute("msg", msg);
 				
-				
-			return "result"; 	
+		return "redirect:/"; 	
 	}
 
 

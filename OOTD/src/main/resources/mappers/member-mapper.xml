@@ -19,6 +19,7 @@
 		<result property="bank_code" column="bank_code"/>
 	</resultMap>
 
+	<!-- 현진 -->
 	<insert id="insertBrandMember" parameterType="Member">
 		INSERT INTO MEMBER VALUES (
 			SEQ_MEMBER_NO.NEXTVAL, #{ member_id }, #{ member_nickname }, #{ member_pw },
@@ -39,6 +40,15 @@
 		SELECT * FROM MEMBER
 		WHERE MEMBER_ID = #{ member_id }
 	</select>
+	
+	<select id="selectMemberId" parameterType="Member" resultMap="resultMember">
+		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_EMAIL FROM MEMBER
+		WHERE MEMBER_NAME = #{ member_name }
+		AND EMAIL = #{ email }
+	</select>
+	
+	<!-- 현진 -->
+	
 	
 	<!-- 다인 -->
 	<update id="updateBrandPwd" parameterType="Member">

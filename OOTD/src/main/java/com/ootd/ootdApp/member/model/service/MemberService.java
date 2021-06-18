@@ -11,6 +11,8 @@ public interface MemberService {
 	int insertBrandMember(Member member);
 	
 	int updateMember(Member member);
+
+	Member selectMemberID(Member member);
 	
 	
 }

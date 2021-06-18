@@ -36,6 +36,14 @@ public class MemberDAOImpl implements MemberDAO {
 		return 0;
 	}
 
+	@Override
+	public Member selectMemberID(Member member) {
+		
+		return sqlSession.selectOne("member-mapper.selectMemberId", member);
+	}
+
+	
+
 	
 
 }
