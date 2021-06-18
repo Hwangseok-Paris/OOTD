@@ -152,7 +152,7 @@
                         <label for="psw" style="margin-top:5%"></span>전화번호</label>
                         <div class="input-group">
                             <input type="text" class="form-control" id="psw" placeholder="Enter phone number">
-                            <span class="input-group-append"><button type="button" class="btn btn-dark">본인 인증</button></span>
+                            <span class="input-group-append"><button type="button" class="btn btn-dark id-confirm">본인 인증</button></span>
                         </div>
                         <button type="button" class="btn btn-secondary btn-lg btn-block" style="margin-top: 25%;">아이디 찾기</button>
                     </form>
@@ -160,6 +160,8 @@
             </div>
         </div>
     </div> 
+    
+    
 
       <!-- 비밀번호 찾기 Modal -->
       <div class="modal modal-center fade" id="findPwModal" role="dialog">

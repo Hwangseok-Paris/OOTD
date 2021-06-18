@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ootd.ootdApp.common.Utils;
 import com.ootd.ootdApp.product.model.service.ProductService;
 import com.ootd.ootdApp.product.model.vo.Product;
+import com.ootd.ootdApp.product.model.vo.Review;
 
 @Controller
 public class ProductController {
@@ -80,6 +81,7 @@ public class ProductController {
 	
 	
 	
+	
 //	@RequestMapping("product/productCategoryList")
 //	public String brandCategoryList() {
 //		
@@ -108,6 +110,8 @@ public class ProductController {
 	public String productInputForm(@RequestParam int pType, Product p) {
 		// pType = 1 ? 브랜드 : 상품  		
 		
+		System.out.println("productDetail controller 접근");
+		// List<Review> review = productService.
 		
 		if( pType == 1 ) {
 			// 아직 브랜드 상품 리스트 화면에서 product/productInputForm.do를 수행하는 기능이 없음.
@@ -148,8 +152,23 @@ public class ProductController {
 	
 	//=========Product Detail( selectOne )=========	
 	@RequestMapping("/product/productDetail.do")
-	public String productDetail(@RequestParam int pType, @RequestParam int product_no) {
+	public String productDetail(
+				@RequestParam int pType, 
+				@RequestParam int product_no, 
+				Model model
+			) {
 		// pType = 1 ? 브랜드 : 상품  	
+		
+		if ( pType == 1 ) {
+			
+			List<Review> review = productService.selectProductReview(product_no);
+			
+			model.addAttribute("review", review);
+			
+		}
+		
+		
+		
 	
 		if( pType == 1 ) {
 			

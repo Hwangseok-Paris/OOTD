@@ -14,14 +14,9 @@
 	<!-- Mybatis 연동 설정 -->
 	<bean id="sqlSessionFactoryBean"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
-		
 		<property name="dataSource" ref="dataSource" />
-		
-		<property name="mapperLocations"
-			value="classpath*:mappers/*.xml" />
-		
-		<property name="configLocation"
-			value="classpath:mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath*:mappers/*.xml" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
 	</bean>
 	
 	<!-- Mybatis 사용과 관련된 sqlSessionTemplate 등록하기 -->
@@ -35,5 +30,22 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<!-- Google Mail -->
+	<!-- org.springframework.mail.javamail.JavaMailSenderImpl -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+		<property name="host" value="smtp.gmail.com"/> 
+		<property name="port" value="587" /> 
+		<property name="username" value="alfus78910@gmail.com"/> 
+		<property name="password" value="rlaydnd^^8520"/> 
+		<property name="javaMailProperties"> 
+			<props> 
+				<prop key="mail.smtp.auth">true</prop> 
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props> 
+		</property> 
+	</bean>
+
+
 		
 </beans>

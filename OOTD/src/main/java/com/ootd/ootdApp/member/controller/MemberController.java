@@ -1,9 +1,13 @@
 package com.ootd.ootdApp.member.controller;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +18,19 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.ootd.ootdApp.member.exception.MemberException;
 import com.ootd.ootdApp.member.model.service.MemberService;
+import com.ootd.ootdApp.member.model.vo.MailVO;
 import com.ootd.ootdApp.member.model.vo.Member;
+
+
 
 @SessionAttributes({"member"})
 @Controller
 public class MemberController {
 
+	@Autowired 
+	private JavaMailSenderImpl mailSender;
+
+	
 	@Autowired
 	MemberService memberService;
 	
@@ -155,6 +166,26 @@ public class MemberController {
 		
 		return "common/msg";
 	}
+	
+	@RequestMapping(value = "/sendMail.do") 
+	public String sendMail(final MailVO vo) { 
+		final MimeMessagePreparator preparator = new MimeMessagePreparator() { 
+			@Override public void prepare(MimeMessage mimeMessage) throws Exception { 
+				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8"); 
+				helper.setFrom(vo.getFrom()); 
+				helper.setTo(vo.getTo()); 
+				helper.setSubject(vo.getSubject()); 
+				helper.setText(vo.getContents(), true); 
+				} 
+			}; 
+				
+			mailSender.send(preparator); 
+				
+				
+			return "result"; 	
+	}
+
+
 	
 	
 	

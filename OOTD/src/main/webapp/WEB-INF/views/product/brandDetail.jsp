@@ -143,38 +143,176 @@
         <br><br><br><hr>
 
         <div style="margin-bottom: 15px;">
-        	<span class="underMenu" style="margin-bottom: 50px;">REVIEW</span><span class="underMenu" style="margin-bottom: 50px;">FAQ</span>
-        </div>
-        <table class="table table-hover">
-            <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>최고입니다~</td>
-                <td>슈퍼캡숑코코</td>
-                <td>2021/06/09</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>최악입니다~</td>
-                <td>슈퍼코코</td>
-                <td>2021/06/09</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>좋습니다~</td>
-                <td>코코</td>
-                <td>2021/06/09</td>
-            </tr>
+        	<span class="underMenu review" style="margin-bottom: 50px;">REVIEW</span><span class="underMenu faq" style="margin-bottom: 50px;">FAQ</span>
+        </div><hr>
+        
+        <dl id="review-table">
+        	<dt class="showArea">
+				<span class="th">번호</span>
+				<span class="th">제목</span>
+				<span class="th">작성자</span>
+				<span class="th">작성일</span>
+	            <span class="accIcon" style="float: right; margin-right: 30px;">
+                </span>
+            </dt><hr>
             
-
-
-        </table>
+            <c:forEach items="${ review }" var="r">
+            	<dt class="showArea">
+					<span class="th">${ r.review_no }</span>
+					<span class="th">${ r.review_title }</span>
+					<span class="th">${ r.member_nickname }</span>
+					<span class="th">${ r.review_date }</span>
+		            <span class="accIcon" style="float: right; margin-right: 30px;">
+		                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+		                      <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+		                 </svg>
+	                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+	                          <path d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"/>
+	                     </svg>
+	                </span>
+	            </dt>
+	           	<dd class="dropArea">
+	            	<div>
+	                	<br />
+	                	<span class="review-content">
+		                	${ r.review_contents }
+	                	</span>
+	            	</div>
+	            </dd><hr>
+            </c:forEach>
+            
+            
+        </dl>
+        
+        
+        
+        
+        <dl id="FAQ-table">
+            
+	            <dt class="showArea-faq">
+	                주문내역을 확인하고 싶어요.
+	               
+	                <span class="accIcon" style="float: right; margin-right: 30px;">
+	                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+	                          <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+	                     </svg>
+	                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+	                          <path d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"/>
+	                     </svg>
+	                </span>
+	            </dt>
+            	<dd class="dropArea">
+	            	<div>
+	                	<br />
+	                	<span class="faq-text">
+	                		내일의 옷 회원일 경우 로그인 후 <br />
+	                		프로필 아이콘 클릭 > MYPAGE > 주문내역에서 <br /> 
+	                		주문내역 확인 가능합니다.
+	                	</span>
+	                	
+	            	</div>
+	            </dd><hr>
+	            
+	            <dt class="showArea-faq">
+	                주문현황을 확인하고 싶어요.
+	               
+	                <span class="accIcon" style="float: right; margin-right: 30px;">
+	                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+	                          <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+	                     </svg>
+	                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+	                          <path d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"/>
+	                     </svg>
+	                </span>
+	            </dt>
+            	<dd class="dropArea">
+	            	<div>
+	                	<br />
+	                	<span class="faq-text">
+	                		내일의 옷 회원일 경우 로그인 후 프로필 아이콘 클릭 > MYPAGE > 주문내역에서 <br /> 
+	                		주문 및 배송현황 확인 가능합니다. <br /><br /> 
+	                		
+	                		- 배송준비중 : 결제완료 후 해당 브랜드로부터 상품 발송을 대기중<br /> 
+	                		- 배송중 : 브랜드에서 상품 발송 완료<br />
+	                		- 구매완료 : 고객이 상품을 받고 구매완료 신청했을 경우 <br />
+	                	</span>
+	                	
+	            	</div>
+	            </dd><hr>
+	            
+	            <dt class="showArea-faq">
+	                중고상품 결제/결제후엔 어떻게 하나요?
+	               
+	                <span class="accIcon" style="float: right; margin-right: 30px;">
+	                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+	                          <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+	                     </svg>
+	                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+	                          <path d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"/>
+	                     </svg>
+	                </span>
+	            </dt>
+            	<dd class="dropArea">
+	            	<div>
+	                	<br />
+	                	<span class="faq-text">
+		                	내일의 옷에서 결제해주시면 판매자에게 전달해드립니다. <br /> 
+		                	판매자가 입금 확인 후 상품을 발송할 예정이오니,<br />
+		                	마이페이지 > 주문내역 에서 주문 현황을 확인해주시기 바랍니다.<br />
+	                	</span>
+	            	</div>
+	            </dd><hr>
+	            
+	            <dt class="showArea-faq">
+	                내 정보는 어떻게 수정하나요?
+	               
+	                <span class="accIcon" style="float: right; margin-right: 30px;">
+	                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+	                          <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+	                     </svg>
+	                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+	                          <path d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"/>
+	                     </svg>
+	                </span>
+	            </dt>
+            	<dd class="dropArea">
+	            	<div>
+	                	<br />
+	                	<span class="faq-text">
+		                	로그인 아이콘 클릭 > 마이페이지 > 회원 정보에서 <br />
+		                	원하시는 정보만 수정할 수 있습니다. <br />
+	                	</span>
+	            	</div>
+	            </dd><hr>
+	            
+	            <dt class="showArea-faq">
+	                리뷰는 어떻게 작성하나요?
+	               
+	                <span class="accIcon" style="float: right; margin-right: 30px;">
+	                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+	                          <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+	                     </svg>
+	                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+	                          <path d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"/>
+	                     </svg>
+	                </span>
+	            </dt>
+            	<dd class="dropArea" id="accordion2" class="collapse2">
+	            	<div>
+	                	<br />
+	                	<span class="faq-text">
+		                	로그인 아이콘 클릭 > 마이페이지에서 주문하신 상품의 리뷰만 작성하실 수 있습니다. <br /> 
+	                		리뷰 내용은 텍스트만 작성할 수 있으며 사용하시는 닉네임으로 등록됩니다. <br />
+	                	</span>
+	                	
+	            	</div>
+	            </dd>
+	            
+	         </dl>   
+	        
         <hr />
+        
+        
         <!-- 우선 틀만 잡아놓음 -->
             <!-- 페이지네이션 (임시) -->
             <div class="pagination">
@@ -320,9 +458,9 @@
 
         $('.drop').on('click', function () {
 
-            // 숨긴 영역 slide down
-            $(this).next('.ddd').slideToggle(300);
 
+        	$(this).next('.ddd').slideToggle(300);
+        	
             // +, - 아이콘 바꾸기
             var plus = $(this).children('span').children('.bi-plus-lg');
             var dash = $(this).children('span').children('.bi-dash-lg');
@@ -362,6 +500,64 @@
 		$('#contentImgArea4').on('click', function() {
 			$('#imgDetail').children().children().attr('src', $('#contentImg4').attr('src'));
 		});
+		
+		// icon, review-content toggle
+		$('.showArea, .showArea-faq').on('click', function() {
+
+			$(this).next('.dropArea').slideToggle(300);
+
+            // +, - 아이콘 바꾸기
+            var plus = $(this).children('.icon-td').children('span').children('.bi-plus-lg');
+            var dash = $(this).children('.icon-td').children('span').children('.bi-dash-lg');
+			
+            console.log(plus);
+            console.log(dash);
+            
+            if ( dash.css('display') == 'none' ) {
+                dash.css('display', 'block');
+                plus.css('display', 'none');
+            } else {
+                plus.css('display', 'block');
+                dash.css('display', 'none');
+            }
+        });
+		
+		// REVIEW 클릭 시 리뷰 테이블만 보이기
+		$('.review').on('click', function() {
+			$('#FAQ-table').css('display', 'none');
+			$('#review-table').css('display', 'block');
+			$(this).css('color', 'black');
+			$(this).css({
+				color: 'black',
+				'text-decoration': 'underline'
+			});
+			$(this).siblings('.faq').css({
+				color: 'grey',
+				'text-decoration': 'none'
+			});
+		});
+		
+		// FAQ 클릭 시 FAQ 테이블만 보이기
+		$('.faq').on('click', function() {
+			$('#review-table').css('display', 'none');
+			$('#FAQ-table').css('display', 'block');
+			$(this).css({
+				color: 'black',
+				'text-decoration': 'underline'
+			});
+			$(this).siblings('.review').css({
+				color: 'grey',
+				'text-decoration': 'none'
+			});
+		});
+		
+		$()
+		
+		 
+
+
+
+
 
     </script>
 </body>
