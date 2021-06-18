@@ -21,5 +21,7 @@ public class Attachment implements Serializable {
 	private char att_status;	// 첨부파일 삭제여부 (y는 파일 활성화, n은 비활성화) (디폴트로 y값을 줄건지 설명 필요)
 	private int product_no;		// 상품번호
 	
+	// 다인
+	private int rank;
 	
 }

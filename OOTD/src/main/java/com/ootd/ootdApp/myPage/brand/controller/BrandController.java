@@ -239,7 +239,7 @@ public class BrandController {
 
 	// 주문 내역 - 소비자가 주문한 주문 내역(업체가 판매한 판매 내역)
 	@RequestMapping("myPage/myPage_Brand_Order.mp")
-	public String selectBrandOrderList(Model model, HttpServletRequest req) {
+	public String selectBrandOrderList(@RequestParam( value = "cPage", required = false, defaultValue = "1") int cPage, Model model, HttpServletRequest req) {
 
 		HttpSession session = req.getSession();
 		Member member = (Member) session.getAttribute("member");

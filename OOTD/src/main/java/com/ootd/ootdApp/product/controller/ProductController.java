@@ -15,13 +15,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ootd.ootdApp.common.Utils;
 import com.ootd.ootdApp.product.model.service.ProductService;
 import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
-import com.ootd.ootdApp.product.model.vo.Review;
 
 @Controller
 public class ProductController {
@@ -320,6 +320,26 @@ public class ProductController {
 		}
 		
 	}
+	
+	
+	
+	// 210619 다인
+	@RequestMapping("/product/selectProductImages.do")
+	@ResponseBody
+	public List<Attachment> selectProductImages() {
+		
+		List<Attachment> list = productService.selectProductImages();
+		System.out.println("images :: 여기 왔나요");
+		System.out.println("selectProductImages [list] : " + list);
+		
+		return list;
+	}
+
+	
+	
+	
+	
+	
 	
 	
 	

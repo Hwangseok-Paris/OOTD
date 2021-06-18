@@ -37,18 +37,20 @@
     <div class="product_slide">
         <div class="slide_wrapper">
             
+           
             <ul class="bxslider">
-                <li>slide 01</li>
-                <li>slide 02</li>
-                <li>slide 03</li>
-                <li>slide 04</li>
-                <li>slide 05</li>
-                <li>slide 06</li>
-                <li>slide 07</li>
-                <li>slide 08</li>
-                <li>slide 09</li>
-                <li>slide 10</li>
+                <li><img class="img1" src="" alt="" /></li>
+                <li><img class="img2" src="" alt="" /></li>
+                <li><img class="img3" src="" alt="" /></li>
+                <li><img class="img4" src="" alt="" /></li>
+                <li><img class="img5" src="" alt="" /></li>
+                <li><img class="img6" src="" alt="" /></li>
+                <li><img class="img7" src="" alt="" /></li>
+                <li><img class="img8" src="" alt="" /></li>
+                <li><img class="img9" src="" alt="" /></li>
+                <li><img class="img10" src="" alt="" /></li>
             </ul>
+           
             
         </div>
     </div>
@@ -67,8 +69,44 @@
                 pause: 5000,
                 infiniteLoop: true,
                 auto: true
+                
+                
             });
         });
+        
+        $(function(){
+        	$.ajax({
+    			type: "POST",
+    			url: "${pageContext.request.contextPath}/product/selectProductImages.do",
+    			data: {}, 
+				
+    			success: function(data){
+    				console.log(data);
+    				console.log(data[0].att_name);
+    				console.log("TOP 10 이미지 불러오기 성공!")
+    				$('.bxslider>li>.img1').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[0].att_name);
+    				$('.bxslider>li>.img2').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[1].att_name);
+    				$('.bxslider>li>.img3').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[2].att_name);
+    				$('.bxslider>li>.img4').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[3].att_name);
+    				$('.bxslider>li>.img5').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[4].att_name);
+    				$('.bxslider>li>.img6').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[5].att_name);
+    				$('.bxslider>li>.img7').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[6].att_name);
+    				$('.bxslider>li>.img8').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[7].att_name);
+    				$('.bxslider>li>.img9').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[8].att_name);
+    				$('.bxslider>li>.img10').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[9].att_name);
+    			},
+    			
+    			error: function(){
+    				alert('TOP 10 이미지 불러오기 실패!');
+  					console.log("에러")
+    			}
+    			
+    		});
+    	}); 
+        
+        
+        
+        
         
         //브랜드 리스트로 화면이동
         $('.video_Brand').on('click', function() {
