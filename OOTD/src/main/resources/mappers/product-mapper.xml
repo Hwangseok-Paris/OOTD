@@ -52,6 +52,13 @@
 		INSERT INTO PRODUCT(PRODUCT_NO, PRODUCT_NAME, PRODUCT_DETAIL, PRODUCT_SIZEINFO, PRODUCT_SIZE, PRODUCT_PRICE, PRODUCT_STOCK_S, PRODUCT_STOCK_M, PRODUCT_STOCK_L, PRODUCT_TYPE, MEMBER_NO, PRODUCT_STATUS)
 		VALUES(17, #{product_name}, #{product_detail}, #{product_sizeinfo}, #{product_size}, #{product_price}, #{product_stock_s}, #{product_stock_m}, #{product_stock_l}, #{product_type}, #{member_no}, 'Y')
 	</insert>
+	
+	<select id="selectReviewList" parameterType="_int" resultType="review">
+		SELECT R.REVIEW_NO, R.REVIEW_TITLE, M.MEMBER_NICKNAME, R.REVIEW_DATE, R.REVIEW_CONTENTS
+		FROM REVIEW R, MEMBER M
+		WHERE R.MEMBER_NO = M.MEMBER_NO
+		AND PRODUCT_NO = ${ product_no }
+	</select>
 
 	<insert id="insertBrandProduct" parameterType="Product_p">
 		INSERT INTO PRODUCT(PRODUCT_NO, PRODUCT_NAME, PRODUCT_DETAIL, PRODUCT_SIZEINFO, PRODUCT_SIZE, PRODUCT_PRICE, PRODUCT_STOCK_S, PRODUCT_STOCK_M, PRODUCT_STOCK_L, PRODUCT_TYPE, MEMBER_NO, PRODUCT_STATUS)

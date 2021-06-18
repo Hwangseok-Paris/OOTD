@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
+import com.ootd.ootdApp.product.model.vo.Review;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -109,6 +110,12 @@ public class ProductDAOImpl implements ProductDAO {
 	public int secondHandDelete(int product_no) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<Review> selectProductReview(int product_no) {
+		System.out.println("DAO 접근 확인");
+		return sqlSession.selectList("product-mapper.selectReviewList", product_no);
 	}
 
 	

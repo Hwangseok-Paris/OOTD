@@ -17,6 +17,8 @@
 		<typeAlias type="com.ootd.ootdApp.myPage.brand.model.vo.Product" alias="Product_m" />
 		<typeAlias type="com.ootd.ootdApp.product.model.vo.Product" alias="Product_p" />
 		<typeAlias type="com.ootd.ootdApp.product.model.vo.Attachment" alias="Attachment" />
+		<typeAlias type="com.ootd.ootdApp.product.model.vo.Review" alias="review" />
+
 
 	</typeAliases>
 	

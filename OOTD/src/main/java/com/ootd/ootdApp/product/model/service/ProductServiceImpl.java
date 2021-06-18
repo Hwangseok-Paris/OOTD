@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ootd.ootdApp.product.model.dao.ProductDAO;
 import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
+import com.ootd.ootdApp.product.model.vo.Review;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -99,6 +100,12 @@ public class ProductServiceImpl implements ProductService {
 	public int productDelete(int product_no) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<Review> selectProductReview(int product_no) {
+		System.out.println("service 접근 확인");
+		return productDAO.selectProductReview(product_no);
 	}
 
 	

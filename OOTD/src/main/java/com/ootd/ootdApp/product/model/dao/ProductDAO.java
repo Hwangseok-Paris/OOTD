@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
+import com.ootd.ootdApp.product.model.vo.Review;
 
 public interface ProductDAO {
 
@@ -127,6 +128,8 @@ public interface ProductDAO {
 	 * @return int
 	 */
 	int secondHandDelete(int product_no);
+	
+	List<Review> selectProductReview(int product_no);
 
 	
 

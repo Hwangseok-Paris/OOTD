@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
+import com.ootd.ootdApp.product.model.vo.Review;
 
 public interface ProductService {
 
@@ -73,6 +74,8 @@ public interface ProductService {
 	 * @return int
 	 */
 	int productDelete(int product_no);
+	
+	List<Review> selectProductReview(int product_no);
 
 	
 
