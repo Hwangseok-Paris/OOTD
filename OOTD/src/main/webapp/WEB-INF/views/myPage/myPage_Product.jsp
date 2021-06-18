@@ -60,6 +60,9 @@
         </section>
     </div>
     
+    <script>
+    	$()
+    </script>
             
     <!-- FOOTER IMPORT -->
    	<%@ include file="../common/footer.jsp" %>
