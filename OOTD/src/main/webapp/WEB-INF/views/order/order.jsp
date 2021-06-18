@@ -12,6 +12,7 @@
    <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/order.css"/>
+   <c:import url="../common/styler.jsp"/>
 </head>
  
 <body>

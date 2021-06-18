@@ -3,11 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width" initial-scale=1.0>
-    <title>LOGIN</title>
+
     <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
@@ -17,8 +13,6 @@
     <!-- css 링크 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/loginModal.css" />
 
-</head>
-<body>
     <div class="container">
        
        <c:if test="${ !empty member }">
@@ -252,5 +246,3 @@
         
         
     </script>
-</body>
-</html>

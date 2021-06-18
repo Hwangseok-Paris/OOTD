@@ -3,11 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css">
 	<script src="${pageContext.request.contextPath }/resources/asset/js/jquery-3.6.0.min.js"></script>
@@ -23,8 +19,6 @@
         }
     </style>
     
-</head>
-<body>
 	<article>
 		<div id="main_video">
 	        <video  src="${pageContext.request.contextPath }/resources/images/main_video.mp4" muted="muted" autoplay="autoplay" loop=""></video>
@@ -89,5 +83,3 @@
         })
     </script>
     
-</body>
-</html>

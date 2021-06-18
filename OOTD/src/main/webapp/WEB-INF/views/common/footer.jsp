@@ -3,15 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footer.css">
 
-</head>
-<body>
+
 	<footer class="footer">
         <div class="wrapper">
             <img src="${pageContext.request.contextPath }/resources/images/footerlogo.png" alt="풋터이미지" id="logo_footer">
@@ -51,6 +46,4 @@
             </div>
         </div>
     </footer>
-</body>
-
-</html>
+    

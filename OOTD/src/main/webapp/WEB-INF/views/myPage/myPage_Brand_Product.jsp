@@ -20,6 +20,7 @@
 			});
 		});
 	</script>
+	<c:import url="../common/styler.jsp"/>
 	</head>
 <body>
 

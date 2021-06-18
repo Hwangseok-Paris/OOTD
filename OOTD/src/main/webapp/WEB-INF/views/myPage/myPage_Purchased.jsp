@@ -11,6 +11,7 @@
     <script src="${pageContext.request.contextPath }/resources/asset/js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/myPage.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/order_Detail.css">
+    <c:import url="../common/styler.jsp"/>
 </head>
 
 <body>
