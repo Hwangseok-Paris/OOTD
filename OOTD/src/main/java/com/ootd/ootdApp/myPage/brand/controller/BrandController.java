@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.ootd.ootdApp.member.model.service.MemberService;
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.brand.model.service.BrandService;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
@@ -25,9 +26,12 @@ public class BrandController {
 
 	@Autowired
 	BrandService brandService;
-
+	
 	@Autowired
-	BCryptPasswordEncoder bcryptPasswordEncoder;
+	MemberService memberService;
+	
+	@Autowired
+	BCryptPasswordEncoder bcrypt;
 
 	// 마이페이지 - 회원(업체) 정보 수정
 	@RequestMapping("myPage/myPage_Brand_Info.mp")
@@ -39,8 +43,7 @@ public class BrandController {
 	// 1. 비밀번호 변경
 	@RequestMapping("myPage/myPage_Brand_Info_pwUpdate.mp")
 	public String myPage_Brand_Info_Update(@RequestParam String password, // 현재 비밀번호 입력
-										   @RequestParam String new_password, // 새롭게 입력한 비밀번호
-										   @RequestParam String new_password_confirm, // 새롭게 입력한 비밀번호 확인
+										   @RequestParam String new_password, // 새롭게 입력한 비밀번호				   
 										   Member member, Model model) {
 
 		/*
@@ -50,40 +53,47 @@ public class BrandController {
 		 * System.out.println(password); // 123 System.out.println(new_password); // 123
 		 * System.out.println(new_password_confirm); // 123
 		 */
+		  
+		  // 우선 
+		  Member result1 = memberService.selectOneMember(member.getMember_id());
 
-//		  if(bcryptPasswordEncoder.matches(password, member.getMember_pw()) &&(new_password == new_password_confirm)) { // 210616 에러 해결하기
+		  // 현재 입력한 비밀번호와 db에서 꺼내온 비밀번호가 일치한다면
+		  if(bcrypt.matches(password, result1.getMember_pw())) { 
 		  
-		  // 현재 비밀번호, 새로 입력한 비밀번호와 다시 입력한 비밀번호 이 세개가 모두 일치한다면 // update? // 회원 번호를 같이넘겨줘야 하나? 
+			  String encryptPassword = bcrypt.encode(new_password);
 		
-		  String encryptPassword = bcryptPasswordEncoder.encode(new_password);
-		
-		  int member_no = member.getMember_no(); 
+			  int member_no = member.getMember_no(); 
 		  
-		  Member tempMember = new Member();
+			  Member tempMember = new Member();
 		  
-		  tempMember.setMember_no(member_no);
-		  tempMember.setMember_pw(encryptPassword);
+			  tempMember.setMember_no(member_no);
+			  tempMember.setMember_pw(encryptPassword);
 		  
-		  int result = brandService.updateBrandInfo(tempMember);
+			  int result2 = brandService.updateBrandInfo(tempMember);
 		  
-		  if( result > 0) {
-			  System.out.println("비밀번호 수정 완료!"); 
-			  model.addAttribute("member", member);
-			  return "myPage/myPage_Brand_Info";
-			  
-		  }else {
+				  if( result2 > 0) {
+					  System.out.println("비밀번호 수정 완료!"); 
+					  model.addAttribute("member", member);
+					  return "myPage/myPage_Brand_Info";
+					  
+				  } else {
+				  
+				  System.out.println("비밀번호 수정 실패!"); 
+				  return "myPage/myPage_Brand_Info"; 
+				  }
 		  
-		  System.out.println("비밀번호 수정 실패1!"); 
+		}
+		  else {
+		  System.out.println("현재 비밀번호가 일치하지 않습니다. / db의 비밀번호와 입력한 비밀번호가 불일치");
 		  return "myPage/myPage_Brand_Info"; 
 		  }
+		  
+	}
 
-//	} else {
-//		  System.out.println("비밀번호 수정 실패2!"); 
-//		  return "myPage/myPage_Brand_Info"; 
-//		
-//	}
+		  
+		 
 		
-}
+
 	// 2. 이메일 변경
 	@RequestMapping("myPage/myPage_Brand_Info_emUpdate.mp")
 	public String myPage_Brand_Info_emUpdate(@RequestParam String email, Member member, Model model) {
@@ -208,11 +218,23 @@ public class BrandController {
 		return "common/msg";
 	}
 
+	// 상품 순위
 	// 등록 상품 - 업체가 등록한 상품 리스트 - 수정
-
 	@RequestMapping("myPage/myPage_Brand_Rank.mp")
-	public void myPage_Brand_Rank() {
+	public String myPage_Brand_Rank(Model model, HttpServletRequest req) {
+		
+		HttpSession session = req.getSession();
+		Member member = (Member) session.getAttribute("member");
+		int member_no = member.getMember_no();
+		System.out.println(member_no);	
 
+		List<Product> list = brandService.selectBrandProductRankList(member_no);
+		System.out.println("product Rank :: 여기 왔나요");
+		System.out.println("selectBrandProductRankList [list] : " + list);
+
+		model.addAttribute("list", list);
+
+		return "myPage/myPage_Brand_Rank";
 	}
 
 	// 주문 내역 - 소비자가 주문한 주문 내역(업체가 판매한 판매 내역)
@@ -244,5 +266,30 @@ public class BrandController {
 
 		return list;
 	}
+	
+	// 주문 내역 - 발송 완료 버튼 눌렀을 때
+	@RequestMapping("myPage/myPage_Brand_Send.mp")
+	@ResponseBody
+	public int myPage_Brand_Send(@RequestParam int orderNo, Model model) {
+		
+		int a = brandService.updateBrandStatus(orderNo);
+		
+		int result = 0;
+		if(a>0) {
+			result = 2;
+		}
+		System.out.println("결과" + result);
+			return result;
+		
+		
+	}
+	
+
+		
+	
+	
+	
+	
+	
 
 }

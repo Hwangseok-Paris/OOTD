@@ -63,6 +63,18 @@ public class BrandServiceImpl implements BrandService {
 		System.out.println("brandMypage_UpdateAccount :: 서비스 왔나요");
 		return brandDAO.acUpdateBrandInfo(tempMember);
 	}
+
+	@Override
+	public List<Product> selectBrandProductRankList(int member_no) {
+		System.out.println("order :: 서비스 왔나요");
+		return brandDAO.selectBrandProductRankList(member_no);
+	}
+
+	@Override
+	public int updateBrandStatus(int orderNo) {
+		System.out.println("send :: 서비스 왔나요");
+		return brandDAO.updateBrandStatus(orderNo);
+	}
 	
 }
 

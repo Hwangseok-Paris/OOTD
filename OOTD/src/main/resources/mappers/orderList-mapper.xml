@@ -23,5 +23,19 @@
    		A.ORDER_NO = #{ order_no }
    </select>
    
+   <update id="updateBrandStatus" parameterType="_int">
+   		UPDATE O_ORDER 
+   		SET ORDER_STATUS = 2
+		WHERE ORDER_NO = #{ order_no }
+   </update>
+   
+   <update id="updateNoBrandStatus" parameterType="_int">
+   		UPDATE PURCHASE
+   		SET PURCHASE_STATUS = 2
+		WHERE ORDER_NO = #{ order_no }
+   </update>
+ 
+  
+   
 
 </mapper>

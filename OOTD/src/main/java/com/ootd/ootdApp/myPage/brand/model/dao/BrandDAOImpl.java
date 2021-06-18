@@ -66,6 +66,29 @@ public class BrandDAOImpl implements BrandDAO {
 		System.out.println("brandMypage_UpdateAccount :: DAO 왔나요");
 		return sqlSession.update("member-mapper.updateBrandAccount", tempMember);
 	}
+
+	@Override
+	public List<Product> selectBrandProductRankList(int member_no) {
+		System.out.println("product :: DAO 왔나요");
+		return sqlSession.selectList("productList-mapper.selectBrandProductRankList", member_no);
+	}
+
+	@Override
+	public int updateBrandStatus(int orderNo) {
+		System.out.println("send :: DAO 왔나요");
+		int result1 = sqlSession.update("orderList-mapper.updateBrandStatus", orderNo);
+		int result2 = sqlSession.update("orderList-mapper.updateNoBrandStatus", orderNo);
+		System.out.println("result1" + result1);
+		System.out.println("result2" + result2);
+
+		int result = 0;
+		if(result1*result2==1) {
+			result = 1;
+		}else {
+			result = 0;
+		}
+		return result;
+	}
 	
 
 

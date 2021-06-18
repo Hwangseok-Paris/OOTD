@@ -52,14 +52,16 @@
                                         </div>
                                         <div class="input">
                                             <label for="new-password">새 비밀번호</label>
-                                            <input type="password" name="new_password" id="new-password">
-                                        </div>
+                                            <input type="password" class="pw" name="new_password" id="new_password">
+                                        </div>          
                                         <div class="input">
                                             <label for="new-password-confirm">새 비밀번호 확인</label>
-                                            <input type="password" name="new_password_confirm" id="new-password-confirm">
+                                            <input type="password" class="pw" name="new_password_confirm" id="new_password_confirm">
+                                              <span id="alert-success" style="display: inline-block; color: #6e6e6e;">&nbsp;비밀번호가 일치합니다.</span>
+    										  <span id="alert-danger" style="display: inline-block;  color: #FF5A5A;">&nbsp;비밀번호가 일치하지 않습니다.</span>
                                         </div>
                                         <div class="btn-group">
-                                            <input type="submit" value="확인">
+                                            <input type="submit" class="submit1" value="확인">
                                             <input type="reset" id="reset-password" value="취소">
                                         </div>
                                     </div>
@@ -212,7 +214,32 @@
         $('.update-account').hide()
         $('.account').show()
     })
-
+   
+   	$(function(){
+   		$('#alert-success').hide();
+   		$('#alert-danger').hide();
+   		$('.pw').keyup(function(){
+   			var pwd1 = $('#new_password').val();
+   	   		var pwd2 = $('#new_password_confirm').val();
+   	   		console.log(pwd1);
+   	   		console.log(pwd2);
+   			if(pwd1 != "" || pwd2 != ""){
+   				if(pwd1 == pwd2){
+   					$('#alert-success').show();
+   					$('#alert-danger').hide();
+   					$('.submit1').removeAttr('disabled');
+   				} else {
+   					$('#alert-success').hide();
+   					$('#alert-danger').show();
+   					$('.submit1').attr('disabled', 'disabled');
+   				}
+   			}
+   		});   		
+   		
+   	});
+   	
+   		
+   	
 
 </script>
 

@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -56,10 +58,10 @@
                             <td class="order-date">${o.order_date}</td>
                             <td class="total-price">${o.total_price}&nbsp;&#8361;</td>
                             <td>
-                                <span class="purchase-status">1</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
+                                <span class="purchase-status" >1</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
                             </td>
                             <td>
-                                <button class="complete-send">발송 완료</button>
+                                <button class="complete-send" id="${o.order_no}">발송 완료</button>
                             </td>
                         </tr>                                    
                     </tbody>
@@ -80,6 +82,7 @@
 </body>
 
 <script>
+	var ps;
     // 모달창 스크립트
     $('.order-no').click(function () {
         $('.modal').fadeIn();
@@ -102,7 +105,9 @@
     $(function () {
         $('.purchase-status').each(function () {
 
-            var ps = $(this).text();
+        	
+        	
+            ps = $(this).text();
 
             compSend = $(this).parent().next().children('.complete-send');
 
@@ -120,7 +125,44 @@
             }
         })
     })
+    
+    /* // send
+     function send() {
+        location.href='${pageContext.request.contextPath}/myPage/myPage_Brand_Send.mp?orderNo='+orderNo;
 
+     } */
+     $('.complete-send').click(function(){
+    	 var orderNo = $(this).attr('id');
+    	 
+ 		$.ajax({
+ 			type: "POST",
+ 			url: "${pageContext.request.contextPath}/myPage/myPage_Brand_Send.mp",
+ 			data: { "orderNo" : orderNo }, 
+
+ 			success: function(data){
+ 				//alert('주문 상세보기 성공');
+ 				console.log("result", result);
+ 			
+ 			},
+ 			
+ 			error: function(){
+ 				alert('에러');
+ 			}
+ 			
+ 		});
+    	 
+    	 //console.log("orderNo="+orderNo); // 362
+    	 //location.href = "${pageContext.request.contextPath}/myPage/myPage_Brand_Send.mp?orderNo="+orderNo;
+     });
+     
+    /*  $(function(){
+			$("button[id]").on("click",function(){
+				var productNo = $(this).attr("id");
+				console.log("productNo="+productNo);
+				location.href = "${pageContext.request.contextPath}/myPage/myPage_Brand_Prdouct_Delete.mp?productNo="+productNo;
+			});
+		});
+ */
     // 주문 번호를 클릭했을 때(span의 class가져옴)
 	 $('.order-no').click(function(){
 		 
@@ -154,6 +196,10 @@
 			
 		});
 	}); 
+ 
+
+
+
 
 </script>
 
