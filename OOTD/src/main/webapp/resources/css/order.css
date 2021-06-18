@@ -122,34 +122,29 @@ table.delivery td{
 }
 
 .payArea{
-   height: 218px;
+   height: 100%;
    position: relative;
-   padding: 0 350px 0 0;
    border: 1px solid #e0e0eb;
    color: #353535;
-   line-height: 1.5;
-   border-right: white;
-   border-left: white;
+   border-right: none;
+   border-left: none;
+   margin-top: 50px;
+   display:block;
 }
 
-.payment {
-   border-right: solid 1px #e0e0eb;
-   float: left;
-   width: 100%;
-   height: 100%;
-   padding-left: 10px;
-   
+.paymentSelect{
+
+	
 }
 
 .total{
-   float: right;
-   width: 350px;
-   height: 215px;
-   margin: 0 -350px 0 0;
+  
+   width: 40%;
+   height: 200px;
    text-align: left;
    background: #fafafa;
    font-size: 11pt;
-   padding: 0px 0px 0px 0px;
+   display:inline-block;
    
 }
 
@@ -240,14 +235,159 @@ input.underline {
 }
 
 .guideDetail{
+	margin-top:50px;
+	height: 230px;
 	border: solid 1px #e0e0eb; 
-	height: 140px; 
 	font-size: 12pt; 
-	padding-left: 10px; 
-	padding-top:20px;
 }
+
+.detailTitle{
+	background:#fafafa;
+	line-height:50px;
+	padding-left : 20px;
+	border-bottom:solid 1px #e0e0eb;
+	font-size:13px;
+	font-weight: bold;
+
+}
+.detailTitle p{
+	margin:unset;
+}
+
+.detailContent{
+	height:120px;
+	padding-left: 20px;
+	padding-top:10px;
+
+}
+
+.detailContent li{
+	line-height:30px;
+		font-size:12px;
+}
+
 
 .price1.parent{
 	   font-weight: 700;
 }
 
+.delivery input{
+	height: 30px;
+	padding-inline-start: 2px;
+	outline: none;
+}
+
+.postSearch{
+	margin-left:10px;
+	line-height: 15px !important;
+	font-size: 13px !important;
+	font-weight: 600 !important;
+	background: black !important;
+	color:white !important;
+	border-radius: unset !important;
+}
+
+#emailChoice{
+	height: 28px;
+	outline: none;
+	}
+	
+.textarea{
+	margin-top: 10px;
+	outline : none;	
+	padding-inline-start: 5px;
+}
+.recipient{
+	width: 100px;
+}
+
+.paymentSelect{
+	height: 200px;
+	font-size: 11pt;  
+	font-weight: normal;
+	width:60%;
+	display:inline-block;
+	float:left;
+}
+
+.paymentSelect>p{
+	margin-bottom:unset !important;
+	padding-top:10px;
+	padding-left:10px;
+	padding-bottom: 10px;
+	font-size: 10pt;
+	font-weight: bold;
+	color: gray;
+	
+}
+
+.paymentIcon, .paymentRadio{
+	text-align:center;
+}
+
+.paymentIcon img{
+	width:80px;
+	height:80px;
+	margin:10px 25px;
+}
+
+.paymentRadio input{
+	margin-left:40px;
+	margin-right:5px;
+}
+
+#card{
+	margin-left:0px;
+}
+
+#samsung{
+	margin-left:40px;
+	
+}
+
+#phone{
+	margin-left:40px;
+}
+
+
+.total p{
+	margin-bottom:unset !important;
+	padding-top:10px;
+	padding-left:10px;
+	padding-bottom: 10px;
+	font-size: 10pt;
+	font-weight: bold;
+	color: gray;
+}
+
+.finalPriceArea{
+	position:relative;
+	padding:0 20px;
+	line-height:40px;
+	margin-top:45px;
+	margin-bottom:20px;
+	
+	
+}
+
+.finalPriceArea >span{
+
+	font-size: 15px;
+
+	
+	
+}
+
+.fpa-price,
+.won{
+	float:right;
+}
+
+.fpa-price{
+	font-size:30px !important;
+	font-weight: bolder;
+}
+
+.btnArea{
+	height:40px;
+}

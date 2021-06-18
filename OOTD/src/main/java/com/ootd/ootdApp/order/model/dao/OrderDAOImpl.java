@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ootd.ootdApp.order.model.vo.Cart;
+import com.ootd.ootdApp.order.model.vo.Order;
 
 @Repository
 public class OrderDAOImpl implements OrderDAO {
@@ -47,6 +48,13 @@ public class OrderDAOImpl implements OrderDAO {
 		
 		return sqlSession.selectList("cart-mapper.selectedCartList", cart_no);
 	}
+
+	@Override
+	public int insertOrder(Order order) {
+
+		return sqlSession.insert("cart-mapper.insertOrder", order);
+	}
+
 
 
 }

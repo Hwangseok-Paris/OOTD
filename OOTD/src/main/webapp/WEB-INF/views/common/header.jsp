@@ -133,8 +133,11 @@
 		
 	// 카트 아이콘 클릭시 장바구니 이동
 	$(".fa-shopping-cart").click(function(){
-		console.log("clicked");
-		location.href = "${pageContext.request.contextPath}/order/cart.or";
+		if(${empty member}){
+			alert("회원 전용 기능입니다.")
+		}else{
+			location.href = "${pageContext.request.contextPath}/order/cart.or";
+		}
 	});
 	
 	

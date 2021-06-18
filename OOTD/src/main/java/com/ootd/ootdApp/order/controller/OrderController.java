@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.order.model.service.OrderService;
 import com.ootd.ootdApp.order.model.vo.Cart;
+import com.ootd.ootdApp.order.model.vo.Order;
 
 
 @Controller
@@ -191,17 +192,46 @@ public class OrderController {
 		
 		
 		// 장바구니에서 주문 선택한 품목 불러오기		
-		
 		return "order/order";
 	}
 	
 	
-		
+	
 	// 결제 완료 페이지 영역
 	@RequestMapping("/order/paymentSuccess.or")
-	public String paymentSuccess() {
+	public String paymentSuccess(Model model, HttpServletRequest req,
+			@RequestParam String receiver_name,
+			@RequestParam String order_address,
+			@RequestParam String order_memo,
+			@RequestParam int total_price,
+			@RequestParam(value="order_size") List<String> order_size,
+			@RequestParam(value="order_quantity") List<Integer> order_quantity,
+			@RequestParam(value="product_no") List<Integer> product_no
+			) {
+		
+		HttpSession session = req.getSession();
+		Member member = (Member) session.getAttribute("member");
+		int member_no = member.getMember_no();
 	
+		// O_Order 에 값 넘기기
+		Order order = new Order();
+		order.setReceiver_name(receiver_name);
+		order.setOrder_address(order_address);
+		order.setOrder_memo(order_memo);
+		order.setTotal_price(total_price);
+		order.setMember_no(member_no);
+				
+		System.out.println(order);
+//		int Iresult = orderService.insertOrder(order); 
+		
+//		System.out.println(Iresult);
+	
+		
+		
+		
+		
 		return "order/paymentSuccess";
 	}
+	
 	
 }

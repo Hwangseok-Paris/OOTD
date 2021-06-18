@@ -13,6 +13,7 @@
 		<typeAlias type="com.ootd.ootdApp.member.model.vo.Member" alias="Member"></typeAlias>
 		<typeAlias type="com.ootd.ootdApp.common.MyTypeHandler" alias="MyTypeHandler"></typeAlias>
 		<typeAlias type="com.ootd.ootdApp.order.model.vo.Cart" alias="Cart" />
+		<typeAlias type="com.ootd.ootdApp.order.model.vo.Order" alias="Order" />
 		<typeAlias type="com.ootd.ootdApp.myPage.brand.model.vo.O_Order" alias="O_Order" />
 		<typeAlias type="com.ootd.ootdApp.myPage.brand.model.vo.Product" alias="Product_m" />
 		<typeAlias type="com.ootd.ootdApp.product.model.vo.Product" alias="Product_p" />

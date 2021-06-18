@@ -34,6 +34,8 @@ public class Order implements Serializable{
 	private Date order_date;
 	private String order_memo;
 	private int total_price;
+	private int member_no;
+	private int order_status;
 
 	
 	// cart 테이블통해서 -- 굳이 여기엔 없어도 될 것 같음

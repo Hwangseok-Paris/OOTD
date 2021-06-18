@@ -24,7 +24,7 @@
 <c:import url="../common/header.jsp"/>
 <div id="backbody order">
    <div id="frame1" style="align: center;">
-      <form>
+      <div>
          <div id="frame2">
             <span style="font-size:15pt; font-weight: bold;">주문서 작성</span>
             <span class="home">장바구니&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;<b>주문서 작성&nbsp;&nbsp;&nbsp;</b>>&nbsp;&nbsp;&nbsp;주문 완료</span>
@@ -55,6 +55,7 @@
                <tr style="height: 90px; background-color: #fff;">
                
                <input type="hidden" class="cart_no" value="${a.cart_no}" />
+               <input type="hidden" class="product_no" value="${a.product_no}" />
                   
                <!-- Product Image Area -->
                   <td style="border-left: none; border-right: none; width: 100px; text-align: center;">
@@ -64,6 +65,7 @@
                <!-- Product Info. Area -->
                    <td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;">
                    	<span>[${a.brand_name}]</span> <br/><span>${a.product_name} </span> <br /><br />옵션 : <span>${a.cart_size}</span>
+                 	<input type="hidden" class="order_size" value="${a.cart_size}" />
                    </td>
                    
                <!-- Price Area -->
@@ -73,7 +75,7 @@
                   </td>
 	            <!-- Quantity Area --> 
 	                <td style="width: 100px;">                        
-                  		 <input id="result" class="result quantityInput" value="${a.cart_quantity}" disabled/>
+                  		 <input id="result" class="result quantityInput order_quantity" value="${a.cart_quantity}" disabled/>
                  	</td>
                </tr>
                </c:forEach>
@@ -121,13 +123,14 @@
                   <td class="deliverytd">주소&nbsp;<span style="color: red">*</span></td>
                   
                   <td>
-                     <input class="underline" type="text" id="postnum1" size="10" maxlength="5" />
-                     &nbsp;
+                    <!--  <input class="underline" type="text" id="postnum1" size="10" maxlength="5" />
+                     &nbsp; -->
+                     
+                     
+                     <input class="underline" type="text" id="addr1" size="40" placeholder="주소" required="required" style="margin-bottom: 10px;" value="${m.address[0]}"/>
                      <div class="btn default postSearch" id="postnum2" onclick="addrSearch();">주소 찾기</div>
                      <br />
-                     <input class="underline" type="text" id="addr1" size="50" placeholder="주소" required="required" style="margin-bottom: 10px;" value="${m.address[0]}"/>
-                     <br />
-                     <input class="underline" type="text" id="addr2" size="50" placeholder="상세주소" value="${m.address[1]}"/>
+                     <input class="underline" type="text" id="addr2" size="56" placeholder="상세주소" value="${m.address[1]}"/>
                   </td>
                </tr>
                
@@ -140,7 +143,7 @@
                   <td>
                   <input type="hidden" class="fullEmail" value="${m.email}"/>
                   <input class="underline" id="mailId" type="text" required="required"/> @ <input class="underline" id="domainName" type="text" required="required"/>&nbsp;
-                     <select id="emailChoice" style="height: 30px; font-size: 13px;">
+                     <select id="emailChoice">
                         <option>이메일 선택</option>
                         <option>daum.net</option>
                         <option>naver.com</option>
@@ -160,50 +163,77 @@
                         <option value="test4">직접입력</option>
                      </select>
                      <br />
-                     <textarea class="textarea" cols="80" rows="5"></textarea>
+                     <textarea class="textarea order_memo" cols="80" rows="5"></textarea>
                   </td>
                </tr>
             </thead>
          </table>
-         <br /><br />
+    
             
          <div class="payArea">
-            <div class="payment"><p style="margin-top: 30px; font-size: 10pt; font-weight: bold; color: gray;">결제수단선택</p>
-               <div style="padding: 18px 10px; font-size: 10pt; color: black; font-weight: bold;">
-                  <img src="${pageContext.request.contextPath }/resources/images/orderImg/card.PNG" alt="" style="width: 50px; margin-left: 10px;"/>
-                  <img src="${pageContext.request.contextPath }/resources/images/orderImg/account.PNG" alt="" style="width: 50px; margin-left: 70px;"/>
-                  <img src="${pageContext.request.contextPath }/resources/images/orderImg/phone.PNG" alt="" style="width: 50px; margin-left: 75px;"/>
-                  <br />
-                  <input type="radio" name="cardradio" value="card" checked />신용카드
-                  <input type="radio" name="cardradio" value="samsung" style="margin-left: 30px;"/>삼성페이
-                  <input type="radio" name="cardradio" value="phone" style="margin-left: 30px;"/>휴대폰 결제
-               </div>
-            </div>
-            <div class="total">
-               <span style="display:inline-block; padding: 30px 10px; color: gray; font-weight: bold;">결제정보</span><br />
-               <span style="display:inline-block; padding: 20px 10px;">주문상품금액</span>
-               <span style="font-size: 20pt; font-weight: bold; float: right;" class="totalPrice "></span>
-               <input type="hidden" class="finalPrice" value=""/><br /><br />
-               <button type="button" class="btn default payBtn">결제하기</button>
-            </div>
-         </div>
-         <br /><br />
+     
+               <div class="paymentSelect">
+       			   <p>결제수단선택</p>
+	               <div class ="paymentIcon">
+	                  <label for="card">
+	                  	<img src="${pageContext.request.contextPath }/resources/images/orderImg/card.PNG"/>
+	                  </label>
+	                  <label for="samsung">
+	                 	 <img src="${pageContext.request.contextPath }/resources/images/orderImg/account.PNG"/>
+	                  </label>
+	                  <label for="phone">
+	                 	 <img src="${pageContext.request.contextPath }/resources/images/orderImg/phone.PNG"/>
+	                  </label>
+	                </div>
+	                <div class ="paymentRadio">
+	                  <input type="radio" name="cardradio" id="card" value="card" checked />신용카드
+	                  <input type="radio" name="cardradio" id="samsung" value="samsung"/>삼성페이
+	                  <input type="radio" name="cardradio" id="phone" value="phone"/>휴대폰 결제
+             	    </div>
+	              </div>
+            	
+	            <div class="total">
+	               <div>
+	               		<p>결제정보</p>
+	               </div>
+	               <div class="finalPriceArea">
+		               <span>주문상품금액</span>
+		               <span class="won">&nbsp;원</span> <span class="totalPrice fpa-price"/>
+		               <input type="hidden" class="finalPrice" value=""/>
+	               </div>
+	               <div class="btnArea">
+	               		<button type="button" class="btn default payBtn">결제하기</button>
+	               </div>
+	            </div>
+       	 	</div>
+        	 </div>
+       
+     
          
-         <div class="guideFrame">
-            주문 전 확인하세요!
-         </div>
          <div class="guideDetail">
-            <ul>
-               <li class="lifont">실제 결제 금액에 따라 적립포인트는 변경될 수 있습니다.</li>
-               <li class="lifont">내일의 옷은 기본적으로 전 상품 무료 배송입니다.</li>
-               <li class="lifont">2개 이상 브랜드를 주문하신 경우, 각각 개별 배송됩니다.</li>
-               <li class="lifont">오프라인 매장과 동시 판매되고 있어 결제완료/입고확정 이후에도 품절이나 발송지연이 있을 수 있습니다.</li>
-               <li class="lifont">품절 발생 시 문자로 결제취소 또는 재결제에 대해 추가 안내 드리고, 품절취소 고객보상 기준에 따라 보상해 드립니다.</li>
-            </ul><br />
+         	<div class="detailTitle">
+         		<p> 주문 전 확인하세요!</p>
+         	</div>
+         	<div class="detailContent">
+	            <ul>
+	               <li class="lifont">실제 결제 금액에 따라 적립포인트는 변경될 수 있습니다.</li>
+	               <li class="lifont">내일의 옷은 기본적으로 전 상품 무료 배송입니다.</li>
+	               <li class="lifont">2개 이상 브랜드를 주문하신 경우, 각각 개별 배송됩니다.</li>
+	               <li class="lifont">오프라인 매장과 동시 판매되고 있어 결제완료/입고확정 이후에도 품절이나 발송지연이 있을 수 있습니다.</li>
+	               <li class="lifont">품절 발생 시 문자로 결제취소 또는 재결제에 대해 추가 안내 드리고, 품절취소 고객보상 기준에 따라 보상해 드립니다.</li>
+	            </ul>
+            </div>
          </div>
-      </form>
+    
    </div>
 </div>
+
+
+
+
+
+
+
 
 <script>
    $(function(){
@@ -216,8 +246,46 @@
 	 // 라디오 값 받아보기 
 	 var pay_method = $("[name=cardradio]").val();
 	 console.log(pay_method);
-	 
+	 /*
+	 // 사이즈 값 배열로 받아보기
+   	 var order_size = [];
+	 $('.order_size').each(function(){
+		 order_size.push($(this).val());
+	 })
+   	 var order_quantity = [];
+	 $('.order_quantity').each(function(){
+		 order_quantity.push($(this).val());
+	 })
+   	 
+   	 console.log(order_size);
+     console.log(order_quantity);
+	 */
+	
+	 /*
+	 var product_no = [];
+	 $('.product_no').each(function(){
+		product_no.push($(this).val()); 
+	 	})
+	 console.log(product_no);
+	  */	
+	  
+	  /* 
+	 var receiver_name = $('.recipient').val();	
+	  console.log(receiver_name); */
    })
+   
+   
+   // 텍스트 에어리어 값 받아보기
+   $('#memoChoice').on('change', function(){
+	   var order_memo = '';
+	   if($('#memoChoice option:selected').val() == "test4"){
+		   order_memo = $('.textarea').val();
+		  } else {
+			 order_memo = $('#memoChoice option:selected').text();
+		  }
+	   });
+
+	 
    
 	// ============== 주소 API 시작 ============== // 
    function addrSearch() {
@@ -277,12 +345,10 @@
 	// 배송메모 - 직접 입력 선택시에만 textarea 보여주기 
 	$('#memoChoice').on('change', function(){
 	     var a = $('#memoChoice option:selected').val();
-	     console.log(a);
 	     if( a == 'test4') {
 	        $('textarea').show();
 	     } else {
 	        $('textarea').hide();
-	        console.log("test4 아님");
 	     }
 	});
 	
@@ -327,19 +393,44 @@
    
    // ========= 아임포트 API 구역 ========= //
    $('.payBtn').click(function(){
+	   
+	 // 주문 테이블(O_ORDER)에 담을 데이터 
+	 var receiver_name = $('.recipient').val();		// 수령자 이름
+	 var order_address = $("#addr1").val()+" "+$("#addr2").val(); // 배송지 주소 설정
+	 var order_memo = ''; // 배송 메모
+	 	// 메모 설정 조건문
+	   if($('#memoChoice option:selected').val() == "test4"){
+		   order_memo = $('.textarea').val();
+		  } else if($('#memoChoice option:selected').val() == "test1"){
+		  } else {
+			 order_memo = $('#memoChoice option:selected').text();
+		  }
+	
+   	 var total_price = $('.finalPrice').val();
+   	 var member_no = ${m.member_no};
+   	
+   	 // 주문 리스트 테이블(O_ORDER_LIST)에 담을 데이터
+	 // 사이즈 값 배열로 받아보기
+   	 var order_size = [];
+	 $('.order_size').each(function(){
+		 order_size.push($(this).val());
+	 })
+   	 var order_quantity = [];
+	 $('.order_quantity').each(function(){
+		 order_quantity.push($(this).val());
+	 })
+	 var product_no = [];
+	 $('.product_no').each(function(){
+		product_no.push($(this).val()); 
+	 	})
 	 
-	 // 배송지 주소 설정
-	 var fullAddr = $("#addr1").val()+" "+$("#addr2").val();
-	 // 결제 수단 변수 설정 
-	 var pay_method = $("[name=cardradio]:checked").val();
-	 // 수령자 이메일 설정
-	 var email = $('#mailId').val();
-	 var domainName = $('#domainName').val();
-	 // 수령인 설정
-	 var recipient = $('.recipient').val();
-	 // 수령자번호 설정
-	 var phone = $('.phoneNo').val();
+	 
+	 var pay_method = $("[name=cardradio]:checked").val();	 // 결제 수단 변수 설정 
+	 var email = $('#mailId').val();	 // 수령자 이메일 설정(아이디)
+	 var domainName = $('#domainName').val();	  // 수령자 이메일 설정(도메인)
 
+	 var phone = $('.phoneNo').val();	 // 수령자번호 설정
+	 
 	 var IMP = window.IMP; // 생략가능
      IMP.init('imp02353224'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 
@@ -350,12 +441,33 @@
   	    name : 'OOTD',
   	    amount : 100/* $('.finalPrice').val() */,
   	    buyer_email : email+"@"+domainName,
-  	    buyer_name : recipient,
+  	    buyer_name : receiver_name,
   	    buyer_tel : phone,
-  	    buyer_addr : fullAddr,
+  	    buyer_addr : order_address,
   		}, function(rsp) { // callback
 	  	    if ( rsp.success ) {  // 결제 성공 
-	  	        var msg = '결제가 완료되었습니다. 감사합니다. /n OOTD'; 
+	  	        var msg = '결제가 완료되었습니다.';
+	  		   $.ajax({
+	  				type: "POST",
+	  				url: "${pageContext.request.contextPath}/order/paymentSuccess.or",
+	  				data: { "receiver_name" : receiver_name,
+	  						"order_address" : order_address,
+	  						"order_memo" : order_memo,
+	  						"total_price" : total_price,
+	  						"order_size" : order_size,
+	  						"order_quantity" : order_quantity,
+	  						"product_no" : product_no
+	  						}, 
+	  						
+	  				success: function(data){
+	  						
+	  						// location.href="${pageContext.request.contextPath}/order/paymentSuccess.or"
+	  					}, error : function(){
+	  						console.log("실패");
+	  					}
+	  				}); 
+	  	    	
+	  	    	
   	    } else {
   	        var msg = rsp.error_msg;
   	    }
