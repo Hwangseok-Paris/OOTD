@@ -85,11 +85,36 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product productSelectOne(int product_no) {
-		// TODO Auto-generated method stub
-		return null;
+	public Product productSelectOne(int pType, int product_no) {
+
+
+//		// brand 
+//		if( pType == 1) {
+//			Product p = productDAO.brandSelectOne(product_no);
+//			
+//		// second
+//		} else {
+//			
+//			
+//		}
+		
+		Product p = productDAO.productSelectOne(pType, product_no); 
+		
+		
+		return p;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public int productUpdate(Product product) {
 		// TODO Auto-generated method stub

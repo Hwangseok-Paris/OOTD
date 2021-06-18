@@ -76,6 +76,7 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.insert("product-mapper.insertAttachment", a);
 	}
 
+	// =========Product Detail (SelectOne)=========
 	@Override
 	public Product brandSelectOne(int product_no) {
 		// TODO Auto-generated method stub
@@ -88,6 +89,35 @@ public class ProductDAOImpl implements ProductDAO {
 		return null;
 	}
 
+	
+	// service 통합형 
+	@Override
+	public Product productSelectOne(int pType, int product_no) {
+		
+		if( pType == 1) { // brand
+			Product brandP = sqlSession.selectOne(null);
+			List<Attachment> brandAtt = sqlSession.selectOne(null);
+			
+			brandP.setAttachment(brandAtt);
+			
+			return brandP;		// 한개 상품 정보와 해당 상품의 첨부파일 List 가 담긴  하나의 product VO 반환 
+			
+		} else { // second
+			Product secondP = sqlSession.selectOne(null);
+			List<Attachment> secondAtt = sqlSession.selectOne(null);
+			
+			secondP.setAttachment(secondAtt);
+			
+			return secondP;		// 한개 상품 정보와 해당 상품의 첨부파일 List 가 담긴  하나의 product VO 반환 
+		}
+		
+		
+		
+		
+	}
+	
+	
+	// =========Product Update (update)=========
 	@Override
 	public int brandUpdate(Product product) {
 		// TODO Auto-generated method stub
@@ -117,6 +147,8 @@ public class ProductDAOImpl implements ProductDAO {
 		System.out.println("DAO 접근 확인");
 		return sqlSession.selectList("product-mapper.selectReviewList", product_no);
 	}
+
+	
 
 	
 

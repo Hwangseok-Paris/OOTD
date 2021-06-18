@@ -106,4 +106,20 @@
 		AND PRODUCT_NO = ${ product_no }
 	</select>
 
+	<select id="brandSelectOne" parameterType="_int" resultType="Product_p">
+		
+	</select>
+
+	<select id="brandAttSelectOne" parameterType="_int" resultType="Attachment">
+		
+	</select>
+	
+	<select id="secondSelectOne" parameterType="_int" resultType="Product_p">
+		
+	</select>
+	
+	<select id="secondAttSelectOne" parameterType="_int" resultType="Attachment">
+		
+	</select>
+
 </mapper>

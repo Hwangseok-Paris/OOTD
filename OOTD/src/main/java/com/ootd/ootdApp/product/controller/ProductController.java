@@ -186,22 +186,19 @@ public class ProductController {
 		// 5. 상품을 DB에 저장. 결과
 		int result = productService.productInsert(p, pType, attachList);
 
-		if (result > 0) {
-
-			if (pType == 1) {
-
-				return "product/brandList"; // 상품 등록 완료 후 브랜드 상품 List 로 이동
-
-			} else {
-
-				return "product/secondHandList"; // 상품 등록 완료 후 중고 상품 List 로 이동
-			}
-
+		String msg = "";
+		String loc = "/";
+		
+		if ( result > 0 ) {
+			msg = "상품등록 완료!";
 		} else {
-
-			return "common/error";
-
+			msg = "상품등록 실패";
 		}
+		
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+		
+		return "common/msg";
 
 	}
 	
@@ -228,18 +225,19 @@ public class ProductController {
 			) {
 		// pType = 1 ? 브랜드 : 상품  	
 		
-		if ( pType == 1 ) {
-			
-			List<Review> review = productService.selectProductReview(product_no);
-			
-			model.addAttribute("review", review);
-			
-		}
+		Product p = productService.productSelectOne(pType, product_no);
+		
+		
+		
+		
 		
 		
 		
 	
 		if( pType == 1 ) {
+			
+			List<Review> review = productService.selectProductReview(product_no);
+			model.addAttribute("review", review);
 			
 			return "product/brandDetail";
 		} else {
