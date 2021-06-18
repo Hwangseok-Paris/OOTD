@@ -10,6 +10,8 @@
     <title>마이페이지 - 상품리스트</title>
     <script src="${pageContext.request.contextPath }/resources/asset/js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/myPage.css">
+    <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 </head>
 
 <body>
@@ -36,19 +38,23 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="product-name">Round String Jacket Brown</td>
-                            <td>
-                                <div class="product-no">0000001</div>
-                            </td>
-                            <td class="total-price">80,000 &#8361;</td>
-                            <td>
-                                <button class="modify-product modify">수정</button>
-                                <button class="delete-product delete">삭제</button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <c:forEach items="${list }" var="s">
+	                    <tbody>
+	                        <tr>
+	                            <td class="product-name">
+	                            	${s.product_name }
+	                            </td>
+	                            <td>
+	                                <div class="product-no">${s.product_no }</div>
+	                            </td>
+	                            <td class="total-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${s.product_price}" /> &#8361;</td>
+	                            <td>
+	                                <button class="modify-product modify">수정</button>
+	                                <button class="delete-product delete" id="deleteProduct">삭제</button>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+                    </c:forEach>
                 </table>
             </div>
         </section>

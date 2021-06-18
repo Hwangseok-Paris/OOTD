@@ -39,92 +39,31 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="product-info">
-                                    <div class="brand-name">OOTD</div>
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                    <span class="product-option">(small)</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="order-no">0000001</div>
-                            </td>
-                            <td class="order-date">2021.06.06</td>
-                            <td class="total-price">300,000&#8361;</td>
-                            <td>
-                                <span class="purchase-status">1</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
-                            </td>
-                            <td>
-                                <button class="confirm-purchase" style="display: none;">구매 확정</button>
-                                <button class="write-review" style="display: none;">리뷰 작성</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product-info">
-                                    <div class="brand-name">OOTD</div>
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                    <span class="product-option">(small)</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="order-no">0000001</div>
-                            </td>
-                            <td class="order-date">2021.06.06</td>
-                            <td class="total-price">300,000&#8361;</td>
-                            <td>
-                                <span class="purchase-status">2</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
-                            </td>
-                            <td>
-                                <button class="confirm-purchase" style="display: none;">구매 확정</button>
-                                <button class="write-review" style="display: none;">리뷰 작성</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product-info">
-                                    <div class="brand-name">OOTD</div>
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                    <span class="product-option">(small)</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="order-no">0000001</div>
-                            </td>
-                            <td class="order-date">2021.06.06</td>
-                            <td class="total-price">300,000&#8361;</td>
-                            <td>
-                                <span class="purchase-status">3</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
-                            </td>
-                            <td>
-                                <button class="confirm-purchase" style="display: none;">구매 확정</button>
-                                <button class="write-review" style="display: none;">리뷰 작성</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product-info">
-                                    <div class="brand-name">OOTD</div>
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                    <span class="product-option">(small)</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="order-no">0000001</div>
-                            </td>
-                            <td class="order-date">2021.06.06</td>
-                            <td class="total-price">300,000&#8361;</td>
-                            <td>
-                                <span class="purchase-status">4</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
-                            </td>
-                            <td>
-                                <button class="confirm-purchase" style="display: none;">구매 확정</button>
-                                <button class="write-review" style="display: none;">리뷰 작성</button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <c:forEach items="${list}">
+	                    <tbody>
+	                        <tr>
+	                            <td>
+	                                <div class="product-info">
+	                                    <div class="brand-name">${list.brand_name }</div>
+	                                    <span class="product-name">${list.product_name } </span>
+	                                    <span class="product-option">(small)</span>
+	                                </div>
+	                            </td>
+	                            <td>
+	                                <div class="order-no">${list.order_no }</div>
+	                            </td>
+	                            <td class="order-date">${list.order_date }</td>
+	                            <td class="total-price">${list.total_price }&#8361;</td>
+	                            <td>
+	                                <span class="purchase-status">1</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
+	                            </td>
+	                            <td>
+	                                <button class="confirm-purchase" style="display: none;">구매 확정</button>
+	                                <button class="write-review" style="display: none;">리뷰 작성</button>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+                    </c:forEach>
                 </table>
             </div>
         </section>
@@ -182,6 +121,40 @@
             }
         })
     })
+    
+    // 주문 번호를 클릭했을 때(span의 class가져옴)
+	 $('.order-no').click(function(){
+		 
+		 var orderNo = $(this).text();
+		 console.log(orderNo);
+		 
+		$.ajax({
+			type: "POST",
+			url: "${pageContext.request.contextPath}/myPage/myPage_Order_Detail.mp",
+			data: { "orderNo" : orderNo }, 
+
+			success: function(data){
+				//alert('주문 상세보기 성공');
+				console.log(data[0].order_no);
+				console.log(data[0].receiver_name);
+				console.log(data[0].order_date); // ? error
+				$('.order-no-area>span.order-no').text(data[0].order_no);
+				$('.customer-name').text(data[0].receiver_name);
+				$('.customer-address').text(data[0].order_address);
+				// $('.customer-phone').text(data[0].order_address);
+				$('.modal-product>span.product-name').text(data[0].product_name);
+				$('.customer-address').text(data[0].order_address);
+				$('.modal-date>div.order-date').text(data[0].order_date);
+				$('.modal-quantity>div.order-quantity').text(data[0].order_quantity);
+				$('.price-area>span.price-amount').text(data[0].total_price);
+			},
+			
+			error: function(){
+				alert('주문 상세보기 실패');
+			}
+			
+		});
+	}); 
 
 
     $('.write-review').click(function () {

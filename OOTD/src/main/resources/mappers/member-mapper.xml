@@ -83,5 +83,15 @@
 		UPDATE MEMBER SET PHONE = #{phone}
 		WHERE MEMBER_ID = #{member_id}
 	</update>
+	
+	<update id="updateBank" parameterType="Member">
+		UPDATE MEMBER SET BANK_CODE = #{bank_code}, ACCOUNT_NUMBER = #{account_number}
+		WHERE MEMBER_ID = #{member_id}
+	</update>
+	
+	<update id="updateAddress" parameterType="Member">
+		UPDATE MEMBER SET ADDRESS = #{address, typeHandler=MyTypeHandler} 
+		WHERE MEMBER_ID = #{member_id}
+	</update>
 	<!-- 건형 -->
 </mapper>
