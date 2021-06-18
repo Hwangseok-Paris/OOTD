@@ -118,6 +118,22 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList("product-mapper.selectReviewList", product_no);
 	}
 
+	@Override
+	public List<Map<String, String>> selectReviewList(int cPage, int numPerPage, int product_no) {
+		// 데이터베이스 SQL에서 특정 개수의 행만 뽑아오는 객체
+		RowBounds rows = new RowBounds((cPage-1)*numPerPage, numPerPage);
+				                           // (시작값, 뽑아올 갯수)
+				                              
+		return sqlSession.selectList("product-mapper.selectReviewList", product_no, rows);
+				                         // mapper, null(전달값 없음), rows (반드시 세번째에 넣기)
+	}
+
+	@Override
+	public int selectReviewTotalContents() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("product-mapper.selectReviewTotalContents");
+	}
+
 	
 
 }

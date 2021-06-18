@@ -104,6 +104,11 @@
 		FROM REVIEW R, MEMBER M
 		WHERE R.MEMBER_NO = M.MEMBER_NO
 		AND PRODUCT_NO = ${ product_no }
+		ORDER BY REVIEW_NO DESC
+	</select>
+	
+	<select id="selectReviewTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM REVIEW
 	</select>
 
 </mapper>

@@ -77,6 +77,10 @@ public interface ProductService {
 	
 	List<Review> selectProductReview(int product_no);
 
+	List<Map<String, String>> selectReviewList(int cPage, int numPerPage, int product_no);
+
+	int selectReviewTotalContents();
+
 	
 
 }

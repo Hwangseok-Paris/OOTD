@@ -13,4 +13,6 @@ public interface MemberDAO {
 	int updateMember(Member member);
 
 	Member selectMemberID(Member member);
+
+	int updateNewPass(Member member);
 }
