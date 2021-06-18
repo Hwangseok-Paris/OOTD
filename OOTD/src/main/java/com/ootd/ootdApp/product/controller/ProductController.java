@@ -1,16 +1,25 @@
 package com.ootd.ootdApp.product.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ootd.ootdApp.common.Utils;
 import com.ootd.ootdApp.product.model.service.ProductService;
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
 @Controller
@@ -102,8 +111,12 @@ public class ProductController {
 	
 	
 	//========= 중고 or 브랜드 상품 리스트 화면 =========	
+
 	// 상품 등록 화면으로 이동하는 것은 현재 중고 리스트 화면에만 존재함.
 	// myPage_brand_??    마이페이지 쪽에서   상품등록으로 넘길버튼에 pType 담아서 보내야 함 - 기원 -  
+
+	// 상품 등록 화면으로 이동하는 버튼은 현재 중고 리스트 화면에만 존재함.
+
 	@RequestMapping("product/productInputForm.do")
 	public String productInputForm(@RequestParam int pType, Product p) {
 		// pType = 1 ? 브랜드 : 상품  		
@@ -120,29 +133,89 @@ public class ProductController {
 	}
 	
 	//=========Product Input Form에서 상품 등록 후, 각 상품의 리스트 화면으로 이동  ( insert )=========	
-		@RequestMapping("product/productInput.do")
-		public String productInput(Product p) {
-			// pType = 1 ? 브랜드 : 상품  		
-			int pType = p.getProduct_type();
+	@RequestMapping("product/productInput.do")
+	public String productInput(Product p, HttpServletRequest req, Model model,
+			@RequestParam(value="secondHandProductImg", required=false) MultipartFile[] upFiles) {
+		// pType = 1 ? 브랜드 : 상품  		
+		int pType = p.getProduct_type();
 			
-			if( pType == 1 ) {
+		if( pType == 1 ) {
 			
-				
 				return "product/brandList"; 		// 상품 등록 완료 후 브랜드 상품 List 로 이동 
-			} else {
-				System.out.println("product_type : " + p.getProduct_type());
-				System.out.println("product_type : " + p.getMember_no());
-				System.out.println("product_type : " + p.getProduct_name());
-				System.out.println("product_type : " + p.getProduct_price());
-				System.out.println("product_type : " + p.getProduct_detail());
-				System.out.println("product_type : " + p.getProduct_sizeinfo());
-				System.out.println("product_type : " + p.getProduct_size());
+		
+		} else {
+//			System.out.println("product_type : " + p.getProduct_type());
+//			System.out.println("product_member_no : " + p.getMember_no());
+//			System.out.println("product_name : " + p.getProduct_name());
+//			System.out.println("product_price : " + p.getProduct_price());
+//			System.out.println("product_detail : " + p.getProduct_detail());
+//			System.out.println("product_sizeinfo : " + p.getProduct_sizeinfo());
+//			System.out.println("product_size : " + p.getProduct_size());
+//			System.out.println("product_status : " + p.getProduct_status());
 				
-				return "product/secondHandList";	// 상품 등록 완료 후 중고 상품 List 로 이동 
+			// 1. 파일 저장 경로 및 파일 정보를 담을 객체 생성
+			String savePath = req.getServletContext().getRealPath("/resources/secondHandProductUpload");
+			List<Attachment> attachList = new ArrayList<>();
+			char att_level = 0;		// 몇번째 사진인지에 대한 변수
+				
+			// 2. 파일 업로드
+			for(MultipartFile f : upFiles) {
+				System.out.println("파일 업로드 for문 진입");	
+				// 만약 파일을 등록한 경우
+				if(f.isEmpty() == false) {
+					// 3. 파일 이름 변경
+					String originName = f.getOriginalFilename();		// 파일의 원래 이름
+					String changeName = fileNameChanger(originName);	// 파일 이름 변경
+					
+					try {
+						
+						f.transferTo(new File(savePath + "/" + changeName));
+						
+					} catch (IllegalStateException | IOException e) {
+						
+						e.printStackTrace();
+					}
+					
+					// 4. attachList에 담기
+					System.out.println("attachList 담기 진입");
+					Attachment a = new Attachment();
+					a.setAtt_name(changeName);
+					
+					att_level++;
+					a.setAtt_level(att_level);	// 사진 순서 번호 세팅.
+					a.setProduct_no(p.getProduct_no());	// 현재 등록하는 상품의 번호를 셋팅
+					
+					attachList.add(a);
+					System.out.println("att_no : " + a.getAtt_no());
+					System.out.println("att_name : " + a.getAtt_name());
+					System.out.println("att_date : " + a.getAtt_date());
+					System.out.println("att_level : " + a.getAtt_level());
+					System.out.println("att_status : " + a.getAtt_status());
+					System.out.println("att_product_no : " + a.getProduct_no());
+					
+				}
 			}
-
+			
+			// 5. 상품을 DB에 저장.
+			int result = productService.productInsert(p, pType, attachList);
+			
+			
+				
+			return "product/secondHandList";	// 상품 등록 완료 후 중고 상품 List 로 이동 
 		}
+
+	}
 	
+	// 단순 파일 이름 변경용 메소드 
+	public String fileNameChanger(String oldFileName) {
+
+		String ext = oldFileName.substring(oldFileName.lastIndexOf(".") + 1);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+		int rnd = (int)(Math.random() * 1000);
+
+		return sdf.format(new Date(System.currentTimeMillis())) + "_" + rnd + "." + ext;
+			
+	}
 	
 	
 	

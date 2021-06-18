@@ -171,7 +171,29 @@
       calcPrice_all();
    });
   
+<<<<<<< HEAD
 
+=======
+  /*** total price calculator ***/
+ /*   function calcPrice(){
+	  var sum = 0;
+	  
+	  $('.price1').each(function(){
+		
+		  var price = Number($(this).text());
+          var quantity = Number($(this).parent().next().children('.result').text());
+
+	         
+	       console.log(quantity);
+	
+	       sum += price*quantity;
+	  })
+	  $('.totalPrice').text(thousandComma(sum));
+  } */
+  
+  
+  /*** total price calculator ***/
+>>>>>>> refs/remotes/origin/feature_Jung
   function calcPrice_all(){
 	  var _totalPrice = 0;
 	  

@@ -19,9 +19,10 @@
 		<span>중고 상품 등록</span>
 	</div>
 	<!-- enctype="multipart/form-data"을 form 속성으로 작성하면 다른 데이터가 vo에 안넘어감... -->
-	<form name="secondHandFrm" action="${pageContext.request.contextPath}/product/productInput.do" method="post">
+	<form name="secondHandFrm" action="${pageContext.request.contextPath}/product/productInput.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="product_type" value="2" />
-			<input type="hidden" name="member_no" value="1" />
+			<!-- 방법 1 : 상품 등록 페이지가 로드되면 ajax 또는 함수를 사용해서 현재 로그인된 회원의 번호를 가져오자. -->
+			<input type="hidden" name="member_no" value="6" />
 		<div class="input-area">
 		    <div class="input-img-area">
         <div id="insertArea" class="inputBox1">
@@ -53,10 +54,10 @@
         <div class="fileArea" id="fileArea">
             <!--  첨부 사진 추가 영역 -->
             <!-- (input:file#thumbImg$[name=thumbImg$ onchange=loadImg(this,$)])*4  -->
-            <input type="file" accept="image/*" name="thumbImg1" id="thumbImg1" onchange="loadImg(this, 1);" />
-            <input type="file" accept="image/*" name="thumbImg2" id="thumbImg2" onchange="loadImg(this, 2);" />
-            <input type="file" accept="image/*" name="thumbImg3" id="thumbImg3" onchange="loadImg(this, 3);" />
-            <input type="file" accept="image/*" name="thumbImg4" id="thumbImg4" onchange="loadImg(this, 4);" />
+            <input type="file" accept="image/*" name="secondHandProductImg" id="thumbImg1" onchange="loadImg(this, 1);" />
+            <input type="file" accept="image/*" name="secondHandProductImg" id="thumbImg2" onchange="loadImg(this, 2);" />
+            <input type="file" accept="image/*" name="secondHandProductImg" id="thumbImg3" onchange="loadImg(this, 3);" />
+            <input type="file" accept="image/*" name="secondHandProductImg" id="thumbImg4" onchange="loadImg(this, 4);" />
         </div>
 
         <div id="prTextInput" class="inputBox3">
@@ -64,6 +65,7 @@
             <br>
             <input type="number" id="productPrice" class="ininput" placeholder="가격(숫자만 입력)" name="product_price">
             <br><hr>
+            
             <h5>Product Detail</h5>
             <textarea id="productDetail" cols="32" rows="10" class="ininput" name="product_detail">
 브랜드 :
