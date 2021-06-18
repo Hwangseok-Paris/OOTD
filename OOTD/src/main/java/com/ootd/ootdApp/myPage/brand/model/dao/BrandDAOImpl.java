@@ -76,7 +76,18 @@ public class BrandDAOImpl implements BrandDAO {
 	@Override
 	public int updateBrandStatus(int orderNo) {
 		System.out.println("send :: DAO 왔나요");
-		return sqlSession.update("orderList-mapper.updateBrandStatus", orderNo);
+		int result1 = sqlSession.update("orderList-mapper.updateBrandStatus", orderNo);
+		int result2 = sqlSession.update("orderList-mapper.updateNoBrandStatus", orderNo);
+		System.out.println("result1" + result1);
+		System.out.println("result2" + result2);
+
+		int result = 0;
+		if(result1*result2==1) {
+			result = 1;
+		}else {
+			result = 0;
+		}
+		return result;
 	}
 	
 

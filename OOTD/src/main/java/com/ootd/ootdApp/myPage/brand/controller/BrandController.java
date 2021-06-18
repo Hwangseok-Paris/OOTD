@@ -269,19 +269,18 @@ public class BrandController {
 	
 	// 주문 내역 - 발송 완료 버튼 눌렀을 때
 	@RequestMapping("myPage/myPage_Brand_Send.mp")
-	public String myPage_Brand_Send(@RequestParam int orderNo, Model model) {
+	@ResponseBody
+	public int myPage_Brand_Send(@RequestParam int orderNo, Model model) {
 		
 		int a = brandService.updateBrandStatus(orderNo);
 		
-		if ( a > 0) {
-			int result = 2;
-			model.addAttribute("result", result);
-			return "myPage/myPage_Brand_Order";
-		} else {
-			System.out.println("status 변경 실패!");
-			return "myPage/myPage_Brand_Order";
-			
+		int result = 0;
+		if(a>0) {
+			result = 2;
 		}
+		System.out.println("결과" + result);
+			return result;
+		
 		
 	}
 	

@@ -29,6 +29,11 @@
 		WHERE ORDER_NO = #{ order_no }
    </update>
    
+   <update id="updateNoBrandStatus" parameterType="_int">
+   		UPDATE PURCHASE
+   		SET PURCHASE_STATUS = 2
+		WHERE ORDER_NO = #{ order_no }
+   </update>
  
   
    
