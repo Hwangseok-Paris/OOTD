@@ -36,6 +36,14 @@ public class MemberServiceImpl implements MemberService {
 		return 0;
 	}
 
+	@Override
+	public Member selectMemberID(Member member) {
+		
+		return memberDAO.selectMemberID(member);
+	}
+
+	
+
 	
 
 }

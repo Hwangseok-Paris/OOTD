@@ -19,6 +19,7 @@
 		<result property="bank_code" column="bank_code"/>
 	</resultMap>
 
+	<!-- 현진 시작 -->
 	<insert id="insertBrandMember" parameterType="Member">
 		INSERT INTO MEMBER VALUES (
 			SEQ_MEMBER_NO.NEXTVAL, #{ member_id }, #{ member_nickname }, #{ member_pw },
@@ -39,8 +40,18 @@
 		SELECT * FROM MEMBER
 		WHERE MEMBER_ID = #{ member_id }
 	</select>
+
+	<select id="selectMemberId" parameterType="Member" resultMap="resultMember">
+		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_EMAIL FROM MEMBER
+		WHERE MEMBER_NAME = #{ member_name }
+		AND EMAIL = #{ email }
+	</select>
 	
-	<!-- 다인 -->
+	<!-- 현진 끝 -->
+	
+	
+	<!-- 다인 시작 -->
+
 	<update id="updateBrandPwd" parameterType="Member">
 		UPDATE MEMBER SET MEMBER_PW = #{ member_pw }
 		WHERE MEMBER_NO = #{ member_no } 
@@ -61,12 +72,12 @@
 		WHERE MEMBER_NO = #{ member_no } 
 	</update>
 	
-	<!-- 다인 -->
+	<!-- 다인 끝 -->
 	
 	
 	
 	
-	<!-- 건형 -->
+	<!-- 건형 시작 -->
 	<!-- 회원정보 수정 -->
 	<update id="updatePassword" parameterType="Member">
 		UPDATE MEMBER SET MEMBER_PW = #{member_pw}
@@ -83,5 +94,5 @@
 		UPDATE MEMBER SET PHONE = #{phone}
 		WHERE MEMBER_ID = #{member_id}
 	</update>
-	<!-- 건형 -->
+	<!-- 건형 끝 -->
 </mapper>
