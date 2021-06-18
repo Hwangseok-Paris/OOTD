@@ -52,7 +52,7 @@ public class OrderDAOImpl implements OrderDAO {
 	@Override
 	public int insertOrder(Order order) {
 
-		return sqlSession.insert("cart-mapper.insertOrder", order);
+		return sqlSession.insert("order-mapper.insertOrder", order);
 	}
 
 

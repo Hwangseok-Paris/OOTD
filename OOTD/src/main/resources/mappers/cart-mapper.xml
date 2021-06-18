@@ -34,9 +34,5 @@
 	    AND ATT_LEVEL = 1
 	    AND C.CART_NO = ${cart_no}
     </select>
-    
-    <insert id="insertOrder" parameterType="Order">
-    	INSERT INTO O_ORDER VALUES(SEQ_ORDER_NO.NEXTVAL, ${receiver_name}, ${order_address}, DEFAULT, ${order_memo}, ${total_price}, ${member_no}, DEFAULT);
-    </insert>
-    
+
 </mapper>
