@@ -26,5 +26,9 @@ public class Product implements Serializable {
 	private int product_stock_l;
 	private int product_type;
 	private int member_no;
+	
+	private int total;
+	private int rank;
+	private int quantity;
 
 }

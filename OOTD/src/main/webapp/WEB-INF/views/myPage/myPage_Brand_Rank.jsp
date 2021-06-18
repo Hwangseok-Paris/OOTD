@@ -44,7 +44,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <div class="rank">1</div>
+                                <div class="rank">${p.rank}</div>
                             </td>
                             <td>
                                 <div class="product-info">
@@ -56,10 +56,10 @@
                             </td>
                             <td class="product-price">${p.product_price}&nbsp;&#8361;</td>
                             <td>
-                                <div class="sold">30</div>
+                                <div class="sold">${p.quantity}</div>
                             </td>
                             <td>
-                                <div class="sold-price">900,000&nbsp;&#8361;</div>
+                                <div class="sold-price">${p.total}&nbsp;&#8361;</div>
                             </td>
                         </tr>
                     </tbody>

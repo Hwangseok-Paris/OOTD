@@ -66,7 +66,7 @@ public class BrandServiceImpl implements BrandService {
 
 	@Override
 	public List<Product> selectBrandProductRankList(int member_no) {
-		System.out.println("order :: 서비스 왔나요");
+		System.out.println("rank :: 서비스 왔나요");
 		return brandDAO.selectBrandProductRankList(member_no);
 	}
 

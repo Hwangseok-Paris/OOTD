@@ -226,7 +226,7 @@ public class BrandController {
 		HttpSession session = req.getSession();
 		Member member = (Member) session.getAttribute("member");
 		int member_no = member.getMember_no();
-		System.out.println(member_no);	
+		System.out.println(member_no); // 16(nike 브랜드)
 
 		List<Product> list = brandService.selectBrandProductRankList(member_no);
 		System.out.println("product Rank :: 여기 왔나요");
@@ -254,6 +254,10 @@ public class BrandController {
 
 		return "myPage/myPage_Brand_Order";
 	}
+	
+	// 컨트롤러 하나 더 만들어야하나?
+	
+	
 
 	// 주문 내역 - 소비자가 주문한 주문 내역 - 자세히 보기
 	@RequestMapping("myPage/myPage_Order_Detail.mp")
@@ -274,12 +278,19 @@ public class BrandController {
 		
 		int a = brandService.updateBrandStatus(orderNo);
 		
+		// 업체가 발송 완료 버튼을 눌렀을때 order_status, purchases_status를 '2'로 바꿔줘야 함
+		// sql update를 통해 정상적으로 변경이 되었다면 result라는 새로운 변수에 '2' 값을 넣어줌(update에 실패한다면 result는 0)
+		// ajax로 화면에 result를 return
 		int result = 0;
+		
 		if(a>0) {
 			result = 2;
+		} else {
+			result = 0;
 		}
-		System.out.println("결과" + result);
-			return result;
+		System.out.println("결과 : " + result);
+			
+		return result;
 		
 		
 	}

@@ -69,7 +69,7 @@ public class BrandDAOImpl implements BrandDAO {
 
 	@Override
 	public List<Product> selectBrandProductRankList(int member_no) {
-		System.out.println("product :: DAO 왔나요");
+		System.out.println("rank :: DAO 왔나요");
 		return sqlSession.selectList("productList-mapper.selectBrandProductRankList", member_no);
 	}
 

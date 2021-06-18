@@ -105,8 +105,6 @@
     // .purchase-status의 값(value)에 따라 배송 상태 텍스트 변경
     $(function () {
         $('.purchase-status').each(function () {
-
-        	
         	
             ps = $(this).text();
 
@@ -126,12 +124,7 @@
             }
         })
     })
-    
-    /* // send
-     function send() {
-        location.href='${pageContext.request.contextPath}/myPage/myPage_Brand_Send.mp?orderNo='+orderNo;
-
-     } */
+      
      $('.complete-send').click(function(){
     	 var orderNo = $(this).attr('id');
     	 
@@ -141,29 +134,19 @@
  			data: { "orderNo" : orderNo }, 
 
  			success: function(data){
- 				//alert('주문 상세보기 성공');
- 				console.log("result", result);
- 			
- 			},
- 			
+ 				if(data == 2){
+ 					$('.purchase-status').text('구매확정대기');
+ 					$('.complete-send').hide();
+                } else {
+                    $('.purchase-status').text('결제완료');
+                }
+ 			}, 			
  			error: function(){
- 				alert('에러');
- 			}
- 			
- 		});
-    	 
-    	 //console.log("orderNo="+orderNo); // 362
-    	 //location.href = "${pageContext.request.contextPath}/myPage/myPage_Brand_Send.mp?orderNo="+orderNo;
+ 				alert('상태 변환 실패!');
+ 			}			
+ 		});    	 
      });
-     
-    /*  $(function(){
-			$("button[id]").on("click",function(){
-				var productNo = $(this).attr("id");
-				console.log("productNo="+productNo);
-				location.href = "${pageContext.request.contextPath}/myPage/myPage_Brand_Prdouct_Delete.mp?productNo="+productNo;
-			});
-		});
- */
+    
     // 주문 번호를 클릭했을 때(span의 class가져옴)
 	 $('.order-no').click(function(){
 		 

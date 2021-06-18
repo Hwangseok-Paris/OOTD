@@ -17,9 +17,17 @@
 				var productNo = $(this).attr("id");
 				console.log("productNo="+productNo);
 				location.href = "${pageContext.request.contextPath}/myPage/myPage_Brand_Prdouct_Delete.mp?productNo="+productNo;
+				});
+		});
+		
+		// 상품 등록 버튼 클릭 시 실행
+	    $(function() {		
+			$('.registration').on('click', function() {				
+				var pType = 1;
+				location.href="${pageContext.request.contextPath}/product/productInputForm.do?pType="+pType;
 			});
 		});
-	</script>
+	    </script>
 	<c:import url="../common/styler.jsp"/>
 	</head>
 <body>
@@ -35,7 +43,9 @@
      
         <section class="main">
             <div class="wrap-section">
-                <div class="table-title">Product List</div>
+                <div class="table-title">Product List 
+                	<button class="registration" style="font-size: 14px; left: 740px;">상품 등록하기</button>
+                </div>
                 <table class="product-list">
                     <thead>
                         <tr>
