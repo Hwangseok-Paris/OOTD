@@ -70,7 +70,7 @@
                    
                <!-- Price Area -->
                   <td>
-                     <span class="price1" style="padding-left: 10px;"><fmt:formatNumber value="${a.product_price}" pattern="#,###"/></span>&nbsp;￦
+                     <span class="price1" style="padding-left: 10px;"><fmt:formatNumber value="${a.product_price}" pattern="#,###"/> </span>&nbsp;￦
                      <input type="hidden" class="realPrice" value="${a.product_price}"/>
                   </td>
 	            <!-- Quantity Area --> 
@@ -92,9 +92,9 @@
             </tr>
             
             <tr style="background-color: #fff;">
-               <td style="padding: 22px 0;"><span class="totalPrice price" id="price" value=""></span>원</td>
+               <td style="padding: 22px 0;"><span class="totalPrice price" id="price" ></span>원</td>
                <td><span class="price" id="price">0</span>원</td>
-               <td><span class="totalPrice price" id="price" value=""></span>원</td>
+               <td><span class="totalPrice price" id="price "></span>원</td>
             </tr>
          </table>
          <br /><br /><br />
@@ -198,8 +198,8 @@
 	               </div>
 	               <div class="finalPriceArea">
 		               <span>주문상품금액</span>
-		               <span class="won">&nbsp;원</span> <span class="totalPrice fpa-price"/>
-		               <input type="hidden" class="finalPrice" value=""/>
+		               <span class="won">&nbsp;원</span> <span class="totalPrice fpa-price"></span>
+		               <input type="hidden" class="finalPrice" id="finalPrice" value=""/>
 	               </div>
 	               <div class="btnArea">
 	               		<button type="button" class="btn default payBtn">결제하기</button>
@@ -236,48 +236,41 @@
 
 
 <script>
+
+function calcPrice(){
+	  var sum = 0;
+	  $('.realPrice').each(function(){
+		 var price = Number($(this).val());
+       var quantity = Number($(this).parent().next().children('.result').val());
+	         
+	       sum += price*quantity;
+	  })		  
+	  $('#finalPrice').attr('value', sum);
+	  var check = $('#finalPrice').val();
+	  console.log("함수 내부 작동 확인 : " + check);
+	  
+	  $('.totalPrice').text(thousandComma(sum));
+}
+	
    $(function(){
-	// var mName = "${m.member_name}";
-	 //console.log(mName);
-	  calcPrice();
-	 var totalPrice = $(".finalPrice").val();
-	 console.log(totalPrice);
+
+	 calcPrice();
+	 console.log("===== cal function : " + $('#finalPrice').val());
 	 
+	  
+	 var totalPrice = $('#finalPrice').val();
+	 console.log("실행 확인 : " + totalPrice);
+		 
 	 // 라디오 값 받아보기 
 	 var pay_method = $("[name=cardradio]").val();
 	 console.log(pay_method);
-	 /*
-	 // 사이즈 값 배열로 받아보기
-   	 var order_size = [];
-	 $('.order_size').each(function(){
-		 order_size.push($(this).val());
-	 })
-   	 var order_quantity = [];
-	 $('.order_quantity').each(function(){
-		 order_quantity.push($(this).val());
-	 })
-   	 
-   	 console.log(order_size);
-     console.log(order_quantity);
-	 */
-	
-	 /*
-	 var product_no = [];
-	 $('.product_no').each(function(){
-		product_no.push($(this).val()); 
-	 	})
-	 console.log(product_no);
-	  */	
-	  
-	  /* 
-	 var receiver_name = $('.recipient').val();	
-	  console.log(receiver_name); */
+	 
    })
    
    
    // 텍스트 에어리어 값 받아보기
    $('#memoChoice').on('change', function(){
-	   var order_memo = '';
+	   var order_memo = '없음';
 	   if($('#memoChoice option:selected').val() == "test4"){
 		   order_memo = $('.textarea').val();
 		  } else {
@@ -331,9 +324,11 @@
        }).open();
    };
    // ============== 주소 API 끝 ============== //
-   
+ 
    $(document).ready(function(){
-	   emailSpliter();
+	  emailSpliter();
+	
+			 
 	  
        
       // 이메일 선택시, 자동으로 값 들어오게 하기
@@ -351,36 +346,40 @@
 	        $('textarea').hide();
 	     }
 	});
+    
+ 
 	
+	// total price calculator 
+	function calcPrice(){
+		  var sum = 0;
+		  $('.realPrice').each(function(){
+			 var price = Number($(this).val());
+	         var quantity = Number($(this).parent().next().children('.result').val());
+		         
+		       sum += price*quantity;
+		  })		  
+		  $('#finalPrice').attr('value', sum);
+		  var check = $('#finalPrice').val();
+		  console.log("함수 내부 작동 확인 : " + check);
+		  
+		  $('.totalPrice').text(thousandComma(sum));
+	 }
+
+
 	// 결제 수단 버튼 클릭시 value 변경
 	$("[name=cardradio]").click(function(){
 		console.log($("[name=cardradio]:checked").val());
 	})
 	
 	
-	 /*** total price calculator ***/
-	 function calcPrice(){
-		  var sum = 0;
-		  
-		  $('.realPrice').each(function(){
-			
-			  var price = Number($(this).val());
-	          var quantity = Number($(this).parent().next().children('.result').val());
-		         
-		       console.log(quantity);
-		
-		       sum += price*quantity;
-		  })
-		  $('.finalPrice').attr('value', sum);
-		  $('.totalPrice').text(thousandComma(sum));
-	  }
-	
+
+
    // 천단위 쉼표 함수 선언 
    function thousandComma(x){
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+   }
    
-   
+
    // 이메일 스플릿(아이디, 도메인 나누기)
    function emailSpliter(){
    		var mailAdd = $('.fullEmail').val();
@@ -390,10 +389,11 @@
    		$('#mailId').val(mAdd[0]);
    		$('#domainName').val(mAdd[1]);
    	 }
-   
+  
    // ========= 아임포트 API 구역 ========= //
+  
    $('.payBtn').click(function(){
-	   
+	 
 	 // 주문 테이블(O_ORDER)에 담을 데이터 
 	 var receiver_name = $('.recipient').val();		// 수령자 이름
 	 var order_address = $("#addr1").val()+" "+$("#addr2").val(); // 배송지 주소 설정
@@ -406,7 +406,7 @@
 			 order_memo = $('#memoChoice option:selected').text();
 		  }
 	
-   	 var total_price = $('.finalPrice').val();
+   	 var total_price = $('#finalPrice').val();
    	 var member_no = ${m.member_no};
    	
    	 // 주문 리스트 테이블(O_ORDER_LIST)에 담을 데이터
@@ -430,7 +430,7 @@
 	 var domainName = $('#domainName').val();	  // 수령자 이메일 설정(도메인)
 
 	 var phone = $('.phoneNo').val();	 // 수령자번호 설정
-	 
+
 	 var IMP = window.IMP; // 생략가능
      IMP.init('imp02353224'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 
@@ -439,7 +439,7 @@
   	    pay_method : pay_method,
   	    merchant_uid : 'merchant_' + new Date().getTime(),
   	    name : 'OOTD',
-  	    amount : 100/* $('.finalPrice').val() */,
+  	    amount : 100,
   	    buyer_email : email+"@"+domainName,
   	    buyer_name : receiver_name,
   	    buyer_tel : phone,
@@ -447,25 +447,26 @@
   		}, function(rsp) { // callback
 	  	    if ( rsp.success ) {  // 결제 성공 
 	  	        var msg = '결제가 완료되었습니다.';
+
 	  		   $.ajax({
-	  				type: "POST",
-	  				url: "${pageContext.request.contextPath}/order/paymentSuccess.or",
-	  				data: { "receiver_name" : receiver_name,
-	  						"order_address" : order_address,
-	  						"order_memo" : order_memo,
-	  						"total_price" : total_price,
-	  						"order_size" : order_size,
-	  						"order_quantity" : order_quantity,
-	  						"product_no" : product_no
-	  						}, 
-	  						
-	  				success: function(data){
-	  						
-	  						// location.href="${pageContext.request.contextPath}/order/paymentSuccess.or"
-	  					}, error : function(){
-	  						console.log("실패");
-	  					}
-	  				}); 
+	  					type: "POST",
+	  					url: "${pageContext.request.contextPath}/order/paymentSuccess.or",
+	  					data: { "receiver_name" : receiver_name,
+	  							"order_address" : order_address,
+	  							"order_memo" : order_memo,
+	  							"total_price" : total_price,
+	  							"order_size" : order_size,
+	  							"order_quantity" : order_quantity,
+	  							"product_no" : product_no
+	  							}, 
+	  							
+	  					success: function(data){
+	  							alert("데이터 전송 완료");
+	  							location.href="${pageContext.request.contextPath}/order/orderResult.or"
+	  						}, error : function(){
+	  							console.log("실패");
+	  						}
+	  					});  
 	  	    	
 	  	    	
   	    } else {
@@ -475,6 +476,8 @@
   		});
      })
         // ========= 아임포트 API 구역 끝 ========= //
+        
+    
 
    
 </script>

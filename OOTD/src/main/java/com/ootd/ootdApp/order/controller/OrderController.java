@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,7 @@ import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.order.model.service.OrderService;
 import com.ootd.ootdApp.order.model.vo.Cart;
 import com.ootd.ootdApp.order.model.vo.Order;
+import com.ootd.ootdApp.order.model.vo.OrderList;
 
 
 @Controller
@@ -172,6 +174,7 @@ public class OrderController {
 			cart_no = pNo;
 			List<Cart> list = orderService.selectedCartList(cart_no);  // cart_no 1개 조회
 			cart.addAll(list);
+			
 		}	
 		System.out.println(cart);
 		// ---------- 상품 리스트 가져오기 끝 ----------- //
@@ -195,24 +198,27 @@ public class OrderController {
 		return "order/order";
 	}
 	
-	
-	
-	// 결제 완료 페이지 영역
+	// 결제 완료 후 주문번호 생성 -> 각 테이블에 데이터 전송
 	@RequestMapping("/order/paymentSuccess.or")
-	public String paymentSuccess(Model model, HttpServletRequest req,
+	@ResponseBody
+	public void paymentSuccess(Model model, HttpServletRequest req,
 			@RequestParam String receiver_name,
 			@RequestParam String order_address,
 			@RequestParam String order_memo,
 			@RequestParam int total_price,
-			@RequestParam(value="order_size") List<String> order_size,
-			@RequestParam(value="order_quantity") List<Integer> order_quantity,
-			@RequestParam(value="product_no") List<Integer> product_no
+			@RequestParam (value="order_size[]") String order_size[],
+			@RequestParam (value="order_quantity[]")int order_quantity[],
+			@RequestParam (value="product_no[]")int product_no[]
 			) {
 		
 		HttpSession session = req.getSession();
 		Member member = (Member) session.getAttribute("member");
 		int member_no = member.getMember_no();
-	
+		
+		if(order_memo == "") {
+			order_memo = "없음";
+		}
+		
 		// O_Order 에 값 넘기기
 		Order order = new Order();
 		order.setReceiver_name(receiver_name);
@@ -221,17 +227,90 @@ public class OrderController {
 		order.setTotal_price(total_price);
 		order.setMember_no(member_no);
 				
-		System.out.println(order);
-//		int Iresult = orderService.insertOrder(order); 
+		System.out.println("order 객체 값 확인 : " + order);
+		int iResult = orderService.insertOrder(order); 
 		
-//		System.out.println(Iresult);
+		if(iResult >0) {
+			System.out.println("ORDER 테이블 데이터 입력 성공!");
+			} else {
+				System.out.println("실패");
+			}
+		
+		// 성 공 했 다 !!!!! //
+		
+
+		// Order_List에 데이터 넣기
+		// 반복문으로 상품번호, 수량, 사이즈 하나씩 insert
+		for(int i = 0 ; i < product_no.length; i++) {
+			
+			OrderList oList = new OrderList();
+			
+			oList.setProduct_no(product_no[i]);
+			oList.setOrder_quantity(order_quantity[i]);
+			oList.setOrder_size(order_size[i]);
+			
+			// System.out.println(oList);
 	
 		
+			int olResult = orderService.insertOrderList(oList);
+			
+			if(olResult >0) {
+			System.out.println(i +"번째 orderList 데이터 입력 성공!");
+			} else {
+				System.out.println("실패");
+			}
+		}
+		
+		// !!!!!!!!! 성 공 !!!!!!!!! //
 		
 		
+		// PURCHASE 테이블에 데이터 넣기
 		
-		return "order/paymentSuccess";
+		int pResult = orderService.insertPurchase(member_no);
+		
+		if(pResult >0) {
+		System.out.println("PURCHASE TABLE 데이터 입력 성공!");
+		} else {
+			System.out.println("실패");
+		}
+		// !!!!!!!!! 성 공 !!!!!!!!! //
+			
+		
+		
+		// SALE_LIST 테이블에 데이터 넣기
+		int sResult = orderService.insertSaleList(member_no);
+		
+		if(sResult >0) {
+			System.out.println("SALE_LIST TABLE 데이터 입력 성공!");
+		} else {
+			System.out.println("실패");
+		}
+		// !!!!!!!!! 성 공 !!!!!!!!! //
+		
 	}
+	
+	// 결제 완료 페이지 영역
+	
+	@RequestMapping("/order/orderResult.or")
+	public String orderResult(Model model, Order order) {
+		
+		Order oResult = orderService.selectOrderList();
+		
+		model.addAttribute("order", oResult);
+		System.out.println(model);
+		
+		
+		return "/order/orderResult";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ootd.ootdApp.order.model.vo.Cart;
 import com.ootd.ootdApp.order.model.vo.Order;
+import com.ootd.ootdApp.order.model.vo.OrderList;
 
 @Repository
 public class OrderDAOImpl implements OrderDAO {
@@ -53,6 +54,30 @@ public class OrderDAOImpl implements OrderDAO {
 	public int insertOrder(Order order) {
 
 		return sqlSession.insert("order-mapper.insertOrder", order);
+	}
+
+	@Override
+	public int insertOrderList(OrderList oList) {
+		
+		return sqlSession.insert("order-mapper.insertOrderList", oList);
+	}
+
+	@Override
+	public int insertPurchase(int member_no) {
+	
+		return sqlSession.insert("order-mapper.insertPurchase", member_no);
+	}
+
+	@Override
+	public int insertSaleList(int member_no) {
+		
+		return sqlSession.insert("order-mapper.insertSaleList", member_no);
+	}
+
+	@Override
+	public Order selectOrderList() {
+		
+		return sqlSession.selectOne("order-mapper.selectOrderList");
 	}
 
 

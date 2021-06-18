@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ootd.ootdApp.order.model.dao.OrderDAO;
 import com.ootd.ootdApp.order.model.vo.Cart;
 import com.ootd.ootdApp.order.model.vo.Order;
+import com.ootd.ootdApp.order.model.vo.OrderList;
 
 
 @Service
@@ -52,6 +53,30 @@ public class OrderServiceImpl implements OrderService {
 	public int insertOrder(Order order) {
 		
 		return orderDAO.insertOrder(order);
+	}
+
+	@Override
+	public int insertOrderList(OrderList oList) {
+		
+		return orderDAO.insertOrderList(oList);
+	}
+
+	@Override
+	public int insertPurchase(int member_no) {
+		
+		return orderDAO.insertPurchase(member_no);
+	}
+
+	@Override
+	public int insertSaleList(int member_no) {
+
+		return orderDAO.insertSaleList(member_no);
+	}
+
+	@Override
+	public Order selectOrderList() {
+		
+		return orderDAO.selectOrderList();
 	}
 
 

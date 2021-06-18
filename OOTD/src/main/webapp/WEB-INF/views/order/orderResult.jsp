@@ -30,8 +30,8 @@
 					<tr>
 						<th colspan="10" style="text-align: center; padding-left: 10px; padding-top: 20px;">
 							<span style="font-size: 30px;"><img src="${pageContext.request.contextPath }/resources/images/check.PNG" style="width: 80px;"/>주문이 완료되었습니다!</span><br />
-							<span style="font-size: 17px;">주문번호 : 561231546</span><br />
-							<span style="font-size: 17px;">주문일자 : 2021-06-07</span>
+							<span style="font-size: 17px;">주문번호 : ${order.order_no }</span><br />
+							<span style="font-size: 17px;">주문일자 : ${order.order_date }</span>
 						</th>
 					</tr>
 				</thead>
@@ -46,21 +46,21 @@
 						
 					<tr>
 						<td class="deliverytd" style="width: 100px;">수령인</td>
-						<td>김길동</td>
+						<td>${order.receiver_name }</td>
 					</tr>
 					
 					<tr>
 						<td class="deliverytd">주소</td>
 						
 						<td>
-							서울시 강남구 테헤란로14길 6, 1층
+							${order.order_address }
 						</td>
 					</tr>
 					
 					<tr>
 						<td class="deliverytd" style="border-bottom: solid 1px #e0e0eb; padding-bottom:30px;">배송메모</td>
 						<td style="border-bottom: solid 1px #e0e0eb; padding-bottom:30px;">						
-							부재시 문 앞에 놔주세요
+							${order.order_memo }
 						</td>
 					</tr>
 				</thead>
@@ -81,7 +81,7 @@
 					<tr>
 						<td class="deliverytd" style="border-bottom: solid 1px #e0e0eb; padding-bottom:30px;">결제금액</td>
 						<td style="border-bottom: solid 1px #e0e0eb; padding-bottom:30px;">						
-							25,000원
+							<fmt:formatNumber value="${order.total_price }" pattern="#,###"/>&nbsp;원
 						</td>
 					</tr>					
 				</thead>
