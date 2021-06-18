@@ -32,11 +32,6 @@
            			</otherwise>
            		</choose>
            </if>
-           
-           
-           
-           
-           
 	</select>
 	
 	<select id="secondHandSelectList" parameterType="Product_p" resultType="Product_p">
@@ -47,8 +42,24 @@
 		FROM PRODUCT P, MEMBER M, ATTACHMENT A
 		WHERE P.MEMBER_NO = M.MEMBER_NO
            AND P.PRODUCT_NO = A.PRODUCT_NO
-		   AND PRODUCT_TYPE = 1
+		   AND PRODUCT_TYPE = 2
            AND A.ATT_LEVEL = 1
+           <if test="product_category != 0">
+           		AND P.PRODUCT_CATEGORY = #{ product_category }
+           </if>
+           <if test="sortVal != null">
+           		<choose>
+           			<when test="sortVal == '최신순'">
+           				ORDER BY P.PRODUCT_NO DESC
+           			</when>
+           			<when test="sortVal == '낮은 가격순'">
+           				ORDER BY P.PRODUCT_PRICE
+           			</when>
+           			<otherwise>
+           				ORDER BY P.PRODUCT_PRICE DESC
+           			</otherwise>
+           		</choose>
+           </if>
 	</select>
 	
 	<select id="brandSelectTotalContents" resultType="_int">
@@ -59,7 +70,6 @@
 		SELECT COUNT(*) FROM PRODUCT WHERE PRODUCT_TYPE = 2
 	</select>
 	
-
 	<select id="brandNameSelectList" resultType="string">
 		SELECT BRAND_NAME FROM MEMBER WHERE BRAND_NAME != '중고'
 	</select>
@@ -67,32 +77,33 @@
 
 	<!-- 1번 째(Product_no는 시퀀스넘버를 주자)  -->
 	<insert id="insertSecondHandProduct" parameterType="Product_p">
-		INSERT INTO PRODUCT(PRODUCT_NO, PRODUCT_NAME, PRODUCT_DETAIL, PRODUCT_SIZEINFO, PRODUCT_SIZE, PRODUCT_PRICE, PRODUCT_STOCK_S, PRODUCT_STOCK_M, PRODUCT_STOCK_L, PRODUCT_TYPE, MEMBER_NO, PRODUCT_STATUS)
-		VALUES(17, #{product_name}, #{product_detail}, #{product_sizeinfo}, #{product_size}, #{product_price}, #{product_stock_s}, #{product_stock_m}, #{product_stock_l}, #{product_type}, #{member_no}, 'Y')
+		INSERT INTO PRODUCT(PRODUCT_NO, PRODUCT_NAME, PRODUCT_DETAIL, PRODUCT_SIZEINFO, PRODUCT_SIZE, PRODUCT_PRICE, PRODUCT_STOCK_S, PRODUCT_STOCK_M, PRODUCT_STOCK_L, PRODUCT_TYPE, MEMBER_NO, PRODUCT_STATUS, PRODUCT_CATEGORY)
+		VALUES(SEQ_PRODUCT_NO.NEXTVAL, #{product_name}, #{product_detail}, #{product_sizeinfo}, #{product_size}, #{product_price}, #{product_stock_s}, #{product_stock_m}, #{product_stock_l}, #{product_type}, 3, 'Y', #{ product_category })
 	</insert>
-	
+
+	<insert id="insertBrandProduct" parameterType="Product_p">
+		INSERT INTO PRODUCT(PRODUCT_NO, PRODUCT_NAME, PRODUCT_DETAIL, PRODUCT_SIZEINFO, PRODUCT_SIZE, PRODUCT_PRICE, PRODUCT_STOCK_S, PRODUCT_STOCK_M, PRODUCT_STOCK_L, PRODUCT_TYPE, MEMBER_NO, PRODUCT_STATUS, PRODUCT_CATEGORY)
+		VALUES(SEQ_PRODUCT_NO.NEXTVAL, #{product_name}, #{product_detail}, #{product_sizeinfo}, #{product_size}, #{product_price}, #{product_stock_s}, #{product_stock_m}, #{product_stock_l}, #{product_type}, 2, 'Y', #{ product_category })
+	</insert>
+
+	<insert id="insertAttachment" parameterType="Attachment">
+		<!-- selectKey -->
+		<!-- 다른 테이블의 정보를 외래키로 사용할 경우 참조하는 기능 -->
+		<selectKey keyProperty="product_no" resultType="_int" order="BEFORE">
+			SELECT SEQ_PRODUCT_NO.CURRVAL FROM DUAL
+		</selectKey>
+		<!-- att_no 부분도 시퀀스 넘버를 주자 -->
+		INSERT INTO ATTACHMENT(ATT_NO, ATT_NAME, ATT_DATE, ATT_LEVEL, ATT_STATUS, PRODUCT_NO)
+		VALUES(SEQ_ATT_NO.NEXTVAL, #{att_name}, default , #{att_level}, 'Y', #{product_no})
+	</insert>
+
+
+	<!-- 리뷰 -->
 	<select id="selectReviewList" parameterType="_int" resultType="review">
 		SELECT R.REVIEW_NO, R.REVIEW_TITLE, M.MEMBER_NICKNAME, R.REVIEW_DATE, R.REVIEW_CONTENTS
 		FROM REVIEW R, MEMBER M
 		WHERE R.MEMBER_NO = M.MEMBER_NO
 		AND PRODUCT_NO = ${ product_no }
 	</select>
-
-	<insert id="insertBrandProduct" parameterType="Product_p">
-		INSERT INTO PRODUCT(PRODUCT_NO, PRODUCT_NAME, PRODUCT_DETAIL, PRODUCT_SIZEINFO, PRODUCT_SIZE, PRODUCT_PRICE, PRODUCT_STOCK_S, PRODUCT_STOCK_M, PRODUCT_STOCK_L, PRODUCT_TYPE, MEMBER_NO, PRODUCT_STATUS)
-		VALUES(17, #{product_name}, #{product_detail}, #{product_sizeinfo}, #{product_size}, #{product_price}, #{product_stock_s}, #{product_stock_m}, #{product_stock_l}, #{product_type}, #{member_no}, 'Y')
-	</insert>
-
-	<insert id="insertAttachment" parameterType="Attachment">
-		<!-- selectKey -->
-		<!-- 다른 테이블의 정보를 외래키로 사용할 경우 참조하는 기능 -->
-		<selectKey keyProperty="" resultType="_int" order="BEFORE">
-			SELECT PRODUCT_NO FROM DUAL
-		</selectKey>
-		<!-- att_no 부분도 시퀀스 넘버를 주자 -->
-		INSERT INTO ATTACHMENT(ATT_NO, ATT_NAME, ATT_DATE, ATT_LEVEL, ATT_STATUS, PRODUCT_NO)
-		VALUES(#{att_no}, #{att_name}, sysdate, #{att_level}, 'Y', #{product_no})
-	</insert>
-
 
 </mapper>

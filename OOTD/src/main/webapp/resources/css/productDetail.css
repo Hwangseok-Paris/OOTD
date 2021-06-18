@@ -1,7 +1,16 @@
 @charset "UTF-8";
 
+section{
+	height: auto;	
+	margin-bottom: 250px;
+}
+
 .product_detail{
+	margin-right: auto;
+	margin-left: auto;
 	margin-top: 80px;
+	width: 1300px;
+	height: 700px;
 }
 
 .review_list{
@@ -122,10 +131,6 @@
             width: 800px;
             height: 800px;
         }
-
-.sh_detail{
-	height:700px;
-}
 
 
 .pagination {

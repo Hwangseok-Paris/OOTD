@@ -1,23 +1,25 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page import="com.ootd.ootdApp.product.model.vo.*" %>
+<% Product pr = (Product)request.getAttribute("product"); // product(카테고리, 브랜드네임) 받아오기 %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>중고리스트</title>
+<c:import url="../common/styler.jsp"/>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productList.css">
-<c:import url="../common/styler.jsp"/>
 </head>
 
 <body>
 
 	<c:import url="../common/header.jsp"/>
-	
 	
     <div class="container-List">
         <!-- 스토어 이름영역 -->
@@ -49,12 +51,13 @@
                         
                         <!-- 보여줄 영역 -->
                         <div class="dropArea">
-                            <ul class="hiddenArea">
-                                <li class="prod cate">Top</li>
-                                <li class="prod cate">bottom</li>
-                                <li class="prod cate">Shoes</li>
-                                <li class="prod cate">Hat</li>
-                                <li class="prod cate">Bag</li>
+                            <ul class="hiddenArea" id="categoryList">
+                                <li class="prod cate" id="0">All</li>
+                                <li class="prod cate" id="1">Top</li>
+                                <li class="prod cate" id="2">bottom</li>
+                                <li class="prod cate" id="3">Shoes</li>
+                                <li class="prod cate" id="4">Hat</li>
+                                <li class="prod cate" id="5">Bag</li>
                             </ul>
                         </div> 
                     </li>
@@ -71,176 +74,47 @@
                 <span class="filter-text">최신순</span>
                 <span class="filter-text">낮은 가격순</span>
                 <span class="filter-text">높은 가격순</span>
-                <span class="filter-text" id="prod-regis">상품등록</span>
+                <span class="filter-text" id="prod-regis">상품등록</span> 
             </div>
             <div class="content-wrapper">
                 <!-- 상품 list -->
                 <div class="product-list">
-                <ul>
-                    <li class="thumbnail-list">
-                        <div class="thumbnail-area">
-                            <!-- thumbnail image -->
-                            <img src="https://heights-store.com/web/product/big/202105/4d853a41a69f4fb834d22631fbcadaa0.jpg" alt="">
-                            <!-- hover 시 상품 정보 -->
-                            <span class="thumbnail-info">
-                                <b>Know Wave</b> 
-                                <p>
-                                    Multi Check Half N Half Jacket - Navy/Brown Big Check <br><br>
-                                    256,000 원
-                                </p>
-                            </span>
-                        </div>
-                    </li>
-                    <li class="thumbnail-list">
-                        <div class="thumbnail-area">
-                            <img src="https://heights-store.com/web/product/big/202105/aaf50b824edbf9671555d2c68654c0ab.jpg" alt="">
-                            <span class="thumbnail-info">
-                                <b>Know Wave</b>
-                                <p>
-                                    Leopard Hood Jacket - Brown <br><br>
-                                    215,000 원
-                                </p>
-                            </span>
-                        </div>
-                    </li>
-                    <li class="thumbnail-list">
-                        <div class="thumbnail-area">
-                            <img src="https://heights-store.com/web/product/big/202105/4d853a41a69f4fb834d22631fbcadaa0.jpg" alt="">
-                            <span class="thumbnail-info">
-                                <b>Know Wave</b>
-                                <p>
-                                    Multi Check Half N Half Jacket - Navy/Brown Big Check <br><br>
-                                    256,000 원
-                                </p>
-                            </span>
-                        </div>
-                    </li>
-                    <li class="thumbnail-list">
-                        <div class="thumbnail-area">
-                            <img src="https://heights-store.com/web/product/big/202105/aaf50b824edbf9671555d2c68654c0ab.jpg" alt="">
-                            <span class="thumbnail-info">
-                                <b>Know Wave</b>
-                                <p>
-                                    Leopard Hood Jacket - Brown <br><br>
-                                    215,000 원
-                                </p>
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="thumbnail-list">
-                        <div class="thumbnail-area">
-                            <img src="https://heights-store.com/web/product/big/202105/aaf50b824edbf9671555d2c68654c0ab.jpg" alt="">
-                            <span class="thumbnail-info">
-                                <b>Know Wave</b>
-                                <p>
-                                    Multi Check Half N Half Jacket - Navy/Brown Big Check<br><br>
-                                    256,000 원
-                                </p>
-                            </span>
-                        </div>
-                    </li>
-                    <li class="thumbnail-list">
-                        <div class="thumbnail-area">
-                            <img src="https://heights-store.com/web/product/big/202105/4d853a41a69f4fb834d22631fbcadaa0.jpg" alt="">
-                            <span class="thumbnail-info">
-                                <b>Know Wave</b>
-                                <p>
-                                    Leopard Hood Jacket - Brown<br><br>
-                                    215,000 원
-                                </p>
-                            </span>
-                        </div>
-                    </li>
-                    <li class="thumbnail-list">
-                        <div class="thumbnail-area">
-                            <img src="https://heights-store.com/web/product/big/202105/aaf50b824edbf9671555d2c68654c0ab.jpg" alt="">
-                            <span class="thumbnail-info">
-                                <b>Know Wave</b>
-                                <p>
-                                    Multi Check Half N Half Jacket - Navy/Brown Big Check<br><br>
-                                    256,000 원
-                                </p>
-                            </span>
-                        </div>
-                    </li>
-                    <li class="thumbnail-list">
-                        <div class="thumbnail-area">
-                            <img src="https://heights-store.com/web/product/big/202105/4d853a41a69f4fb834d22631fbcadaa0.jpg" alt="">
-                            <span class="thumbnail-info">
-                                <b>Know Wave</b>
-                                <p>
-                                    Leopard Hood Jacket - Brown<br><br>
-                                    215,000 원
-                                </p>
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="thumbnail-list">
-                        <div class="thumbnail-area">
-                            <img src="https://heights-store.com/web/product/big/202105/4d853a41a69f4fb834d22631fbcadaa0.jpg" alt="">
-                            <span class="thumbnail-info">
-                                <b>Know Wave</b>
-                                <p>
-                                    Multi Check Half N Half Jacket - Navy/Brown Big Check<br><br>
-                                    256,000 원
-                                </p>
-                            </span>
-                        </div>
-                    </li>
-                    <li class="thumbnail-list">
-                        <div class="thumbnail-area">
-                            <img src="https://heights-store.com/web/product/big/202105/aaf50b824edbf9671555d2c68654c0ab.jpg" alt="">
-                            <span class="thumbnail-info">
-                                <b>Know Wave</b>
-                                <p>
-                                    Leopard Hood Jacket - Brown<br><br>
-                                    215,000 원
-                                </p>
-                            </span>
-                        </div>
-                    </li>
-                    <li class="thumbnail-list">
-                        <div class="thumbnail-area">
-                            <img src="https://heights-store.com/web/product/big/202105/4d853a41a69f4fb834d22631fbcadaa0.jpg" alt="">
-                            <span class="thumbnail-info">
-                                <b>Know Wave</b>
-                                <p>
-                                    Multi Check Half N Half Jacket - Navy/Brown Big Check<br><br>
-                                    256,000 원
-                                </p>
-                            </span>
-                        </div>
-                    </li>
-                    <li class="thumbnail-list">
-                        <div class="thumbnail-area">
-                            <img src="https://heights-store.com/web/product/big/202105/aaf50b824edbf9671555d2c68654c0ab.jpg" alt="">
-                            <span class="thumbnail-info">
-                                <b>Know Wave</b>
-                                <p>
-                                    Leopard Hood Jacket - Brown<br><br>
-                                    215,000 원
-                                </p>
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                	<c:forEach items="${ list }" var="p" varStatus="vs">
+		            	<c:if test="${ vs.count%4 == 1 }">
+		            		<ul>
+		            	</c:if>
+	                    <li class="thumbnail-list">
+	                        <div class="thumbnail-area" id="${ p.product_no }">
+	                            <!-- thumbnail image -->
+	                            <img src="${pageContext.request.contextPath }/resources/images/product/${ p.att_name }" alt="">
+	                            <!-- 상품 정보 (hover) -->
+	                            <span class="p_attr thumbnail-info">
+	                                <span>${ p.brand_name }</span> <br />
+	                                <span>${ p.product_name }</span>
+	                                     <br><br>
+	                                <span>￦</span>
+	                                <span class="pPrice">${ p.product_price }</span>
+	                            </span>
+	                        </div>
+	                    </li>
+	                    <c:if test="${ vs.count%4 == 0 || vs.count eq list.size() }">
+		            		</ul>
+		            	</c:if>
+                    </c:forEach>
+           		</div>
 
-            <!-- 페이지네이션 (임시) -->
-            <div class="pagination">
-                <a href="#">&laquo;</a>
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
-                <a href="#">&raquo;</a>
-              </div>
+            	<!--
+            	<div class="pagination">
+	                <a href="#">&laquo;</a>
+	                <a href="#">1</a>
+	                <a href="#">2</a>
+	                <a href="#">3</a>
+	                <a href="#">4</a>
+	                <a href="#">5</a>
+	                <a href="#">6</a>
+	                <a href="#">&raquo;</a>
+              	</div> -->
+              	<c:out value="${pageBar}" escapeXml="false"/>
             </div>
             
         </section>
@@ -257,17 +131,82 @@
 	
     <script>
     
-    // 상품 등록 버튼 클릭 시 실행
-    $(function() {		
-		$('#prod-regis').on('click', function() {
-			
-			var pType = 2;
-			location.href="${pageContext.request.contextPath}/product/productInputForm.do?pType="+pType;
+    var sortVal; // 정렬필터값 
+	var pType;
+	var categoryNo;
+	
+ 	$( document ).ready( function() {
+ 		sortVal = '<%= pr.getSortVal() %>';
+ 		
+ 		// 정렬할 필터의 값 가져오기 
+ 		$('.filter-div').children('.filter-text').on('click', function() {
+ 			pType = 2;
+			console.log(sortVal);
+			categoryNo = <%= pr.getProduct_category() %> ;	
+			console.log("categoryNo="+categoryNo);
+			<%-- sortVal = '<%= pr.getSortVal() %>' ; --%>
+			sortVal = $(this).text();
+			console.log("sortVal="+sortVal);
+			location.href = "${pageContext.request.contextPath}/product/productList.do?categoryNo="+categoryNo+"&pType=2&sortVal="+sortVal;
 		});
-	});
+
+ 		
+ 		// 카테고리 클릭시 id 값을 가지고 selectList 로 이동 
+ 		$('#categoryList').children('.prod').on("click",function(){
+			categoryNo = $(this).attr("id");
+			pType = 2;
+			console.log("categoryNo="+categoryNo);
+			/* if( bName != null) { */
+				location.href = "${pageContext.request.contextPath}/product/productList.do?categoryNo="+categoryNo+"&pType=2&sortVal="+sortVal;
+			/* } else {
+				location.href = "${pageContext.request.contextPath}/product/productList.do?categoryNo="+categoryNo+"&pType=2";	
+			}   */
+			
+		});
+ 		
+ 		
+ 		
+ 	
+ 		// 상품 가격 천단위 구분 
+	 	$('.pPrice').each(function() {
+	 		$(this).text(thousandComma($(this).text()));
+	 	});
+
+
+ 	
+ 	});
+ 	
+ 	
+	 	function thousandComma(x){
+	        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	    }
+	    
     
     
     
+    
+    
+	    // 상품 등록 버튼 클릭 시 실행
+	    $(function() {		
+			$('#prod-regis').on('click', function() {
+				
+				var pType = 2;
+				location.href="${pageContext.request.contextPath}/product/productInputForm.do?pType="+pType;
+			});
+		});
+	    
+	    
+		 // click 시 ProductDetail 이동
+		$(function(){
+			$('.thumbnail-area').on("click",function(){
+				var product_no = $(this).attr("id");
+				console.log("product_no="+product_no);
+				location.href = "${pageContext.request.contextPath}/product/productDetail.do?product_no="+product_no+"&pType=2";
+			});
+		});
+    
+    
+		 
     
         // Dropdown 
         $('.showArea').on('click', function() {
@@ -297,6 +236,8 @@
                 }
         });
 
+
+    	
         // filter 클릭 시 밑줄 표기하기
         $('.filter-text').on('click', function() {
             $(this).css('border-bottom', 'solid 2px gray');

@@ -25,7 +25,7 @@
 <section>
     <div class="product_detail">
         <div class="package" >
-            <div id="insertArea" class="inputBox1" style="margin-left: 20%;">
+            <div id="insertArea" class="inputBox1">
                 <div id="contentImgArea1" class="imgInput">
                     <img src="${pageContext.request.contextPath }/resources/images/brand sample1.png" 
                         id="contentImg1" style="height: 150px; width: 120px;"/>

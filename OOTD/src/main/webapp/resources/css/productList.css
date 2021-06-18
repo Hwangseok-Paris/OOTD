@@ -129,8 +129,8 @@ div[class$=cate]  {
 
 .thumbnail-info {
     position: absolute;
-     top: 40px;
-/*    left: 10px; */
+    top: 40px;
+    /* left: 10px; */
     display: none;
    	padding : 0px 30px;
     text-align: center;
