@@ -24,7 +24,8 @@
                             FROM O_ORDER_LIST
                             GROUP BY PRODUCT_NO) OL
 		WHERE OL.PRODUCT_NO(+) = P.PRODUCT_NO
-   			AND P.MEMBER_NO = #{ member_no } 
+   			AND P.MEMBER_NO = #{ member_no }
+   			AND PRODUCT_STATUS = 'Y' 
 	</select>
 	
 
