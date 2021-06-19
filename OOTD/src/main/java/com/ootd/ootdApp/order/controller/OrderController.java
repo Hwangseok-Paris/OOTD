@@ -168,6 +168,7 @@ public class OrderController {
 			@RequestParam(value="selProduct_no") List<Integer> selProduct_no) {
 		// ---------- 상품 리스트 가져오기 시작 ----------- //
 		int cart_no = 0;
+
 		ArrayList<Cart> cart = new ArrayList<>();
 		
 		// 반복문으로 selProduct 배열에 담긴 상품번호를 반복문을 통해 하나씩 search
@@ -176,7 +177,7 @@ public class OrderController {
 			cart_no = pNo;
 			List<Cart> list = orderService.selectedCartList(cart_no);  // cart_no 1개 조회
 			cart.addAll(list);
-			
+
 		}	
 		System.out.println(cart);
 		// ---------- 상품 리스트 가져오기 끝 ----------- //
@@ -196,6 +197,7 @@ public class OrderController {
 		model.addAttribute("m", member);
 		
 		
+		
 		// 장바구니에서 주문 선택한 품목 불러오기		
 		return "order/order";
 	}
@@ -210,7 +212,8 @@ public class OrderController {
 			@RequestParam int total_price,
 			@RequestParam (value="order_size[]") String order_size[],
 			@RequestParam (value="order_quantity[]")int order_quantity[],
-			@RequestParam (value="product_no[]")int product_no[]
+			@RequestParam (value="product_no[]")int product_no[],
+			@RequestParam (value="cart_no[]") int cart_no[]
 			) {
 		
 		HttpSession session = req.getSession();
@@ -289,6 +292,16 @@ public class OrderController {
 		}
 		// !!!!!!!!! 성 공 !!!!!!!!! //
 		
+		
+		// 카트 번호 삭제하기
+		for(int i = 0 ; i< cart_no.length ; i++) {
+			
+			int cResult = orderService.deleteCartProduct(cart_no[i]);
+			if(cResult >0 ) {
+				System.out.println("구매 완료, 카트번호 "+cart_no[i]+"번 삭제");
+			} else System.out.println("삭제 실패");
+			
+		}
 	}
 	
 	// 결제 완료 페이지 영역

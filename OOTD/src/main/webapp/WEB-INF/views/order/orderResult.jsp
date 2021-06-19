@@ -18,7 +18,7 @@
 <c:import url="../common/header.jsp"/>
 <div id="backbody">
 	<div id="frame1" style="align: center;">
-		<form>
+		<div>
 			<div id="frame2">
 				<span style="font-size:15pt; font-weight: bold;">주문 완료</span>
 				<span class="home">장바구니&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;주문서 작성&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;<b>주문 완료</b></span>
@@ -29,7 +29,7 @@
 				<thead>
 					<tr>
 						<th colspan="10" style="text-align: center; padding-left: 10px; padding-top: 20px;">
-							<span style="font-size: 30px;"><img src="${pageContext.request.contextPath }/resources/images/check.PNG" style="width: 80px;"/>주문이 완료되었습니다!</span><br />
+							<span style="font-size: 30px;"><img src="${pageContext.request.contextPath }/resources/images/check.PNG" style="width: 60px;"/>주문이 완료되었습니다!</span><br />
 							<span style="font-size: 17px;">주문번호 : ${order.order_no }</span><br />
 							<span style="font-size: 17px;">주문일자 : ${order.order_date }</span>
 						</th>
@@ -86,12 +86,25 @@
 					</tr>					
 				</thead>
 			</table>
-			<div>
-				<button class="btn default footerbtn" id="footerbtn" type="button" style="color: white;">나의 구매내역</button>
+			<div class="buttonArea">
+				<button class="btn orBtn goToMain" id="" type="button">main</button>
+				<button class="btn orBtn orderList" id="" type="button">order list</button>
 			</div>
-		</form>
+		</div>
 	</div>
 </div>
 <c:import url="../common/footer.jsp"/>
 </body>
+<script>
+	$('.goToMain').click(function(){
+		location.href="${pageContext.request.contextPath }/"
+	})
+	
+	$('.orderList').click(function(){
+		location.href="${pageContext.request.contextPath }/myPage/myPage_Purchased.mp"
+	})
+
+</script>
+
+
 </html>
