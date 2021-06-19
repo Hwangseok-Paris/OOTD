@@ -55,33 +55,44 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int productInsert(Product product, int pType, List<Attachment> attachList) {
 		
-		if (pType == 1) {
+		// Product Insert
+		
+		int resultP = 0;	// Product Insert 실행 결과
+		int resultA = 0;	// Attachment Insert 실행 결과
+		
+		if (pType == 1) { // brand insert 
 			System.out.println("브랜드 상품 등록 serviceImpl 수행");
 			
-			int result1 = productDAO.brandInsert(product, attachList);
+			resultP = productDAO.brandInsert(product, attachList);
 			
-			System.out.println("result1 : " + result1);
-			return 0;
-		} else {
+			System.out.println("resultP : " + resultP);
+		} else {		// second insert
 			System.out.println("중고 상품 등록 serviceImpl 수행");
 			
-			int result1 = productDAO.secondHandInsert(product, attachList);
-			System.out.println("result1 : " + result1);
-			
-			// 현재 추가된 boardNo를 가져오는 방법 2가지
-			// 1. DB에서 가장 최근에 추가된 게시글 번호를 DAO를 통해 직접 가져오는 방법
-			// 2. mapper에서 selectKey 태그를 사용하는 방법
-			
-			// 첨부파일이 있다면
-			if(attachList.size() > 0) {
-				for(Attachment a : attachList) {
-					int result2 = productDAO.attachmentInsert(a);
-					
-				}
-			}
-			
-			return result1;
+			resultP = productDAO.secondHandInsert(product, attachList);
+			System.out.println("resultP : " + resultP);
 		}
+		
+		// Attachment Insert 
+		
+		if( resultP > 0 ) {	// Product Insert 성공 했다면 첨부파일 Insert 실행
+			System.out.println("Attachment Insert 실행 확인");
+			System.out.println("attachList : " + attachList);
+			if(attachList.size() > 0) { // 첨부파일이 있다면
+				System.out.println("attachList.size() : " + attachList.size());
+				for(Attachment a : attachList) {
+					resultA = productDAO.attachmentInsert(a);
+					System.out.println("resultA :: " + resultA);
+				}
+				System.out.println("resultA :: " + resultA);
+			}
+
+		} /*
+			 * else { // Product Insert 실패 했다면 Product Exception 실행 }
+			 */
+		System.out.println("DAO 리턴 resultA :: " + resultA);
+
+		return resultA;
 	}
 
 	@Override

@@ -23,7 +23,7 @@
 	<form name="secondHandFrm" action="${pageContext.request.contextPath}/product/productInput.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="product_type" value="2" />
 			<!-- 방법 1 : 상품 등록 페이지가 로드되면 ajax 또는 함수를 사용해서 현재 로그인된 회원의 번호를 가져오자. -->
-			<input type="hidden" name="member_no" value="6" />
+			<input type="hidden" name="member_no" value="${ member.member_no }" />
 		<div class="input-area">
 		    <div class="input-img-area">
         <div id="insertArea" class="inputBox1">

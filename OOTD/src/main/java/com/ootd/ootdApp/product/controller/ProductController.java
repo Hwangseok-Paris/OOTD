@@ -63,7 +63,7 @@ public class ProductController {
 		// 페이지 처리 HTML 생성하기
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "productList.do");
 		
-//		System.out.println("list : " + list);
+		System.out.println("list : " + list);
 		
 		// brand_name List 불러오기 
 		List<String> brandName = productService.brandNameSelectList();
@@ -136,6 +136,8 @@ public class ProductController {
 		List<Attachment> attachList = new ArrayList<>();
 		int att_level = 0; // 몇번째 사진인지에 대한 변수
 
+		String savePath = req.getServletContext().getRealPath("/resources/images/productImgUpload");
+		
 		// 2. 파일 업로드
 		for (MultipartFile f : upFiles) {
 			System.out.println("파일 업로드 for문 진입");
@@ -146,14 +148,8 @@ public class ProductController {
 				String changeName = fileNameChanger(originName); // 파일 이름 변경
 
 				try {
-
-					if( pType == 1) {
-						String savePathBrand = req.getServletContext().getRealPath("/resources/brandImgUpload");
-						f.transferTo(new File(savePathBrand + "/" + changeName));
-					}else {
-						String savePathSecond = req.getServletContext().getRealPath("/resources/secondImgUpload");
-						f.transferTo(new File(savePathSecond + "/" + changeName));
-					} 
+						
+					f.transferTo(new File(savePath + "/" + changeName));
 
 				} catch (IllegalStateException | IOException e) {
 
@@ -226,10 +222,14 @@ public class ProductController {
 		// pType = 1 ? 브랜드 : 상품  	
 		
 		Product p = productService.productSelectOne(pType, product_no);
+		List<Attachment> att = p.getAttachment();
 		
 		
+		model.addAttribute("product", p);
+		model.addAttribute("attachment", att);
 		
-		if ( pType == 1 ) {
+		
+		if ( pType == 1 ) {		// 브랜드 
 			
 			int numPerPage = 10;
 			
@@ -251,17 +251,12 @@ public class ProductController {
 			model.addAttribute("pageBar", pageBar);
 			
 			return "product/brandDetail";
-			} else {
+			
+		} else {	// 중고
 				
-				return "product/secondHandDetail";
-			}
+			return "product/secondHandDetail";
+		}
 	
-			
-		
-	
-			
-		
-		
 		
 	}
 	

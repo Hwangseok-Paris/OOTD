@@ -37,6 +37,11 @@ section{
         margin: 1%;
         float: left;
     }
+    
+    .inputBox3{
+    	width : 370px;
+    }
+    
     #imgDetail{
         /* width: 545px;
         height: 700px; */

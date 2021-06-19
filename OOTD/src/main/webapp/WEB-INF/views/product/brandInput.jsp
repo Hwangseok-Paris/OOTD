@@ -23,7 +23,7 @@
 	</div>
 	<form name="brandFrm" action="${pageContext.request.contextPath}/product/productInput.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="product_type" value="1" />
-			<input type="hidden" name="member_no"value="/*회원번호 받아서 넣기*/"/>
+			<input type="hidden" name="member_no"value="${ member.member_no }"/>
 		<div class="input-area">
 		    <div class="input-img-area">
 		        <div id="insertArea" class="inputBox1">
@@ -62,13 +62,7 @@
 		        </div>
 		
 		        <div id="prTextInput" class="inputBox3">
-		            <select name="brand" id="brandName" class="ininput">
-		                <option value="">브랜드 선택</option>
-		                <option value="atom">atom</option>
-		                <option value="bottom">bottom</option>
-		                <option value="coco">coco</option>
-		                <option value="dottom">dottom</option>
-		            </select>
+		            <h4>Brand Name : ${ member.brand_name }</h4>
 		            <br>
 		            <input type="text" id="productName" class="ininput" placeholder="상품명" name="product_name">
 		            <br>
@@ -84,11 +78,11 @@
 		            <!-- <input type="text" id="productOption" placeholder="옵션명" class="ininput"> -->
 		
 					<span> S size : &nbsp;&nbsp; </span>
-		            <input type="text" id="quantity1" class="ininput2" placeholder="수량 입력" name="product_stock_s"><br>
+		            <input type="text" id="quantity1" class="ininput2" placeholder="수량 입력" name="product_stock_s" value="0"><br>
 		            <span> M size : &nbsp;&nbsp; </span>
-		            <input type="text" id="quantity2" class="ininput2" placeholder="수량 입력" name="product_stock_m"><br>
+		            <input type="text" id="quantity2" class="ininput2" placeholder="수량 입력" name="product_stock_m" value="0"><br>
 		            <span> L size : &nbsp;&nbsp; </span>
-		            <input type="text" id="quantity3" class="ininput2" placeholder="수량 입력" name="product_stock_l"><br>
+		            <input type="text" id="quantity3" class="ininput2" placeholder="수량 입력" name="product_stock_l" value="0"><br>
 		            <hr>
 		            <h5>Category</h5>
 					<select name="product_category" id="selectCategory" style="width: 160px;" required>

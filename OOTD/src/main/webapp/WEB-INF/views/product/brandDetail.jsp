@@ -26,11 +26,16 @@
     <div class="product_detail">
         <div class="package" >
             <div id="insertArea" class="inputBox1">
-                <div id="contentImgArea1" class="imgInput">
-                    <img src="${pageContext.request.contextPath }/resources/images/brand sample1.png" 
-                        id="contentImg1" style="height: 150px; width: 120px;"/>
-                </div>
-                <div id="contentImgArea2" class="imgInput">
+            
+            	<c:forEach items="${attchment}" var="a" varStatus="vs">
+	                <div id="contentImgArea${vs.count}" class="imgInput">
+	                    <img src="${pageContext.request.contextPath}/resources/images/productImgUpload/${ a.att_name }" 
+	                        id="contentImg${vs.count}" style="height: 150px; width: 120px;"/>
+	                </div>
+                </c:forEach>
+                
+                
+                <%-- <div id="contentImgArea2" class="imgInput">
                     <img src="${pageContext.request.contextPath }/resources/images/brand sample2.png" 
                         id="contentImg2" style="height: 150px; width: 120px;"/>
                 </div>
@@ -41,14 +46,14 @@
                 <div id="contentImgArea4" class="imgInput">
                     <img src="${pageContext.request.contextPath }/resources/images/brand sample4.png" 
                         id="contentImg4" style="height: 150px; width: 120px;"/>
-                </div>
+                </div> --%>
             </div>
 
            
         
             <div id="imgDetail" class="inputBox2">
                 <div class='inputBox2 zoom' id='ex1'>
-                    <img src='${pageContext.request.contextPath }/resources/images/brand sample1.png' id='jack' width='540' height='620' alt='Daisy on the Ohoopee'/>
+                    <img src='<%-- ${pageContext.request.contextPath }/resources/images/brand sample1.png --%>' id='jack' width='540' height='620' alt='Daisy on the Ohoopee'/>
                 </div>
             </div>
         
@@ -60,10 +65,10 @@
         </div>
         <div class="package">
             <div id="prTextInput" class="inputBox3">
-                <span><b>COCO</b></span> <br>
+                <span id="brand_name"><b>${ product.brand_name }</b></span> <br>
                 
-                <h4 id="pName">Special Premium Jacket</h4>
-                <span style="margin-left: 240px;" >￦</span><span id="ppPrice">398000</span> <br><hr>
+                <h4 id="pName">${ product.product_name }</h4>
+                <span style="margin-left: 240px;" >￦</span><span id="ppPrice">${ product.product_price }</span> <br><hr>
                 
 
                 <dl>
@@ -78,15 +83,7 @@
                         </span>
                     </dt> 
                     <dd class="ddd"><span class="pInfoText">
-                        <br>- 겉감 코튼 100% / 안감 폴리에스터 100% <br>
-                        - 루즈 핏 <br>
-                        - 카멜 컬러 <br>
-                        - 라운드 잠금 디테일 <br>
-                        - 라운드 포켓 <br>
-                        - 밑단 히든 스트링 <br>
-                        - 밑단 밴딩 처리 <br>
-                        - 뒤판 절개 디테일 <br>
-                        - 로고 각인 소뿔 단추 <br>
+                        ${ product.product_detail }
                     </span> <br></dd>
                     <hr>
                     <dt class="drop"><b>Size, Color</b> 
@@ -100,8 +97,7 @@
                         </span>
                     </dt>
                     <dd class="ddd"><span class="pInfoText">
-                        <br>- S 어깨 52.5cm 가슴 62cm <br>
-                        - Color : Black, Brown <br>    
+                        ${ product.product_sizeinfo }
                     </span> <br></dd>
                     <hr>
                     <dt>
@@ -115,10 +111,10 @@
                     </dt><hr>
                     <dt class="pOrigin">
                         <div id="origin">
-                            <span>Special Premium Jacket <b class="selectedSize"></b> </span> 
+                            <span>${ product.product_name }<b class="selectedSize"></b> </span> 
                             <input type="number" id="pQuan" name="pQuan" value="1" min="1"> <!-- input value 값 ??  -->
                             <img src="${pageContext.request.contextPath }/resources/images/xx.png" alt="" style="width: 15px; height: 15px; margin-right: 5px;" id="pDelete">
-                            <span>￦</span><span class="pPrice">398000</span>
+                            <span>￦</span><span class="pPrice">${ product.product_price }</span>
                         </div>
                     </dt>
                     <dt class="pResult">
@@ -475,6 +471,9 @@
             // };
         });
 
+        $(function() {
+        	$('#imgDetail').children().children().attr('src', $('#contentImg1').attr('src'));
+        });
 
         $('#contentImgArea1').on('click', function() { 
 			$('#imgDetail').children().children().attr('src', $('#contentImg1').attr('src'));

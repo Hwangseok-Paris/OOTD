@@ -74,7 +74,9 @@
                 <span class="filter-text">최신순</span>
                 <span class="filter-text">낮은 가격순</span>
                 <span class="filter-text">높은 가격순</span>
-                <span class="filter-text" id="prod-regis">상품등록</span> 
+                <c:if test="${ member != null && member.login_type == 2 }">
+               	 	<span class="filter-text" id="prod-regis">상품등록</span> 
+                </c:if>
             </div>
             <div class="content-wrapper">
                 <!-- 상품 list -->
@@ -86,7 +88,7 @@
 	                    <li class="thumbnail-list">
 	                        <div class="thumbnail-area" id="${ p.product_no }">
 	                            <!-- thumbnail image -->
-	                            <img src="${pageContext.request.contextPath }/resources/images/product/${ p.att_name }" alt="">
+	                            <img src="${pageContext.request.contextPath}/resources/images/productImgUpload/${p.att_name}" alt="">
 	                            <!-- 상품 정보 (hover) -->
 	                            <span class="p_attr thumbnail-info">
 	                                <span>${ p.brand_name }</span> <br />

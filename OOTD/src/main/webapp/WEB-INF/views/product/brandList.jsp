@@ -109,7 +109,7 @@
 	                    <li class="thumbnail-list">
 	                        <div class="thumbnail-area" id="${ p.product_no }">
 	                            <!-- thumbnail image -->
-	                            <img src="${pageContext.request.contextPath }/resources/images/product/${ p.att_name }" alt="">
+	                            <img src="${pageContext.request.contextPath }/resources/images/productImgUpload/${ p.att_name }" alt="">
 	                            <!-- 상품 정보 (hover) -->
 	                            <span class="p_attr thumbnail-info">
 	                                <span>${ p.brand_name }</span> <br />
