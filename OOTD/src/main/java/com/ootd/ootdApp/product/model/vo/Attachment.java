@@ -23,5 +23,5 @@ public class Attachment implements Serializable {
 	
 	// 다인
 	private int rank;
-	
+	private int product_type;
 }
