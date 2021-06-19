@@ -164,6 +164,13 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectOne("product-mapper.selectReviewTotalContents");
 	}
 
+	// 다인
+	@Override
+	public List<Attachment> selectProductImages() {
+		
+		return sqlSession.selectList("product-mapper.selectProductImages");
+	}
+
 	
 
 	

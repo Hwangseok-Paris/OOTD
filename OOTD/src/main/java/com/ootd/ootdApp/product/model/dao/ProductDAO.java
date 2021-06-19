@@ -147,6 +147,9 @@ public interface ProductDAO {
 
 	int selectReviewTotalContents();
 
+	// 다인
+	List<Attachment> selectProductImages();
+
 	
 
 }

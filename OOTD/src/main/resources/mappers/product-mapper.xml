@@ -124,5 +124,22 @@
 	<select id="selectReviewTotalContents" resultType="_int">
 		SELECT COUNT(*) FROM REVIEW
 	</select>
-
+	
+	
+	<select id="selectProductImages" resultType="Attachment">
+	SELECT A.PRODUCT_NO, RANK, ATT_NAME
+	FROM (SELECT *
+          FROM 
+            ( SELECT PRODUCT_NO, SUM(ORDER_QUANTITY) as QUANTITY, DENSE_RANK() OVER (ORDER BY SUM(ORDER_QUANTITY) DESC) as RANK
+                FROM O_ORDER_LIST
+                GROUP BY PRODUCT_NO
+            )
+            <![CDATA[WHERE ROWNUM <= 10]]>) OL, ATTACHMENT A
+	WHERE OL.PRODUCT_NO = A.PRODUCT_NO
+    AND A.ATT_LEVEL = 1
+	</select>
+	
+	
+	
+	
 </mapper>

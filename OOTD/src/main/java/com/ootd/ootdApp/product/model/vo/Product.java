@@ -26,6 +26,7 @@ public class Product implements Serializable {
 	private char product_status;
 	private int product_category;
 	
+	
 
 	// Product Detail 에서 첨부파일 List<Attachment> 를  Product에 한번에 받아오기 위한 변수
 	private List<Attachment> attachment;

@@ -147,6 +147,13 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectReviewTotalContents();
 	}
 
+	// 다인
+	@Override
+	public List<Attachment> selectProductImages() {
+		
+		return productDAO.selectProductImages();
+	}
+
 	
 
 	

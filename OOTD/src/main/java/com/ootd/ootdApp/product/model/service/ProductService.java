@@ -80,6 +80,10 @@ public interface ProductService {
 	List<Map<String, String>> selectReviewList(int cPage, int numPerPage, int product_no);
 
 	int selectReviewTotalContents();
+	
+	// 다인
+	List<Attachment> selectProductImages(); 
+	
 
 	
 
