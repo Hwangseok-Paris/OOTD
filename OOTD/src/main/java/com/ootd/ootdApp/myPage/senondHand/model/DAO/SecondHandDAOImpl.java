@@ -51,4 +51,25 @@ public class SecondHandDAOImpl implements SecondHandDAO {
 		return sqlSession.selectList("productList-mapper.selectProductList", member_no);
 	}
 
+	@Override
+	public int deleteProduct(int productNo) {
+		return sqlSession.delete("productList-mapper.deleteProduct", productNo);
+	}
+
+	@Override
+	public List<myPageOrderList> selectSaleProductList(String member_name) {
+		return sqlSession.selectList("orderList-mapper.selectSaleProductList", member_name);
+	}
+
+	@Override
+	public int updateOrderSaleStatus(int orderNo) {
+		System.out.println("DAO Sale Status -> " + orderNo);
+		return sqlSession.update("orderList-mapper.updateOrderSaleStatus", orderNo);
+	}
+
+	@Override
+	public String selectOrderStatus(int orderNo) {
+		return sqlSession.selectOne("orderList-mapper.selectOrderStatus", orderNo);
+	}
+
 }

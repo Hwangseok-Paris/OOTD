@@ -41,11 +41,6 @@ public class SecondHandConrtoller {
 		return "myPage/myPage_Info";
 	}
 	
-	@RequestMapping("/myPage/myPage_Sale.mp")
-	public String myPageSale() {
-		return "myPage/myPage_Sale";
-	}
-	
 	//비밀번호 변경
 	@RequestMapping("/myPage/update_Password.do")
 	public String update_Password(@RequestParam(value="password") String password,
@@ -181,7 +176,7 @@ public class SecondHandConrtoller {
 	
 	//주문 상품 가져오기
 	@RequestMapping("/myPage/myPage_Purchased.mp")
-	public String selectOrderList(Member member, Model model) {
+	public List<myPageOrderList> selectOrderList(Member member, Model model) {
 		
 		String member_name = member.getMember_name();
 		
@@ -191,13 +186,14 @@ public class SecondHandConrtoller {
 		
 		model.addAttribute("list", list);
 		
-		System.out.println(list);
+		System.out.println("주문상품 리스트 -> " + list);
 		
-		return "myPage/myPage_Purchased";
+		return list;
 	}
 	
+	//판매상품 리스트 가져오기
 	@RequestMapping("/myPage/myPage_Product.mp")
-	public String myPageProduct(Member member, Model model) {
+	public List<Product> myPageProduct(Member member, Model model) {
 		
 		int member_no = member.getMember_no();
 		
@@ -207,9 +203,61 @@ public class SecondHandConrtoller {
 		
 		model.addAttribute("list", list);
 		
-		System.out.println(list);
+		System.out.println("판매상품 리스트 -> " + list);
+		
+		return list;
+	}
+ 	
+	//판매상품 삭제
+	@RequestMapping("/myPage/myPage_Product_Delete")
+	public String myPageProductDelete(@RequestParam int productNo, Model model) {
+		
+		System.out.println(productNo);
+		
+		int result = secondHandService.deleteProduct(productNo);
 		
 		return "myPage/myPage_Product";
 	}
- 	
+	
+	//판매내역 가져오기
+	@RequestMapping("/myPage/myPage_Sale.mp")
+	public String myPageSaleProductList(Member member, Model model) {
+		
+		String member_name = member.getMember_name();
+		
+		System.out.println("판매자 이름 -> " + member_name);
+		
+		List<myPageOrderList> list = secondHandService.selectSaleProductList(member_name);
+		
+		System.out.println("판매내역 리스트 -> " + list + "\n");
+		
+		model.addAttribute("list", list);
+		
+		return "myPage/myPage_Sale";
+	}
+	
+	@RequestMapping("/myPage/orderStatusChange.do")
+	public int OrderStatuschange(@RequestParam int orderNo) {
+		
+		System.out.println("주문 상태 바꿀 주문번호 -> " + orderNo);
+		
+		int result = secondHandService.updateOrderSaleStatus(orderNo);
+				
+		System.out.println("status change? -> " + result);
+		
+		String status = secondHandService.selectOrderStatus(orderNo);
+		
+		int order_status = 0;
+				
+		System.out.println("바뀐 status -> " + status);
+		
+		if(result > 0) {
+			System.out.println("배송 완료 -> " + result);
+			
+			order_status = 2;
+			
+		} 
+		
+		return order_status;
+	}
 }

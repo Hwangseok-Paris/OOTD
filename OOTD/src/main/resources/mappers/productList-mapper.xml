@@ -28,14 +28,20 @@
    			AND PRODUCT_STATUS = 'Y' 
 	</select>
 	
+	<!-- 건형 -->
 	<select id="selectProductList" resultType="Product_s">
 		SELECT *
 		FROM PRODUCT
 		WHERE PRODUCT_STATUS = 'Y'
 			AND PRODUCT_TYPE = 2
 			AND MEMBER_NO = #{member_no}
-		ORDER BY PRODUCT_NO DESC
+		ORDER BY PRODUCT_NO ASC
 	</select>
-
+	
+	<update id="deleteProduct" parameterType="_int">
+		UPDATE PRODUCT
+		SET PRODUCT_STATUS = 'N'
+		WHERE PRODUCT_NO = #{product_no}
+	</update>
 
 </mapper>

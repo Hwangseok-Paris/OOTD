@@ -22,4 +22,12 @@ public interface SecondHandService {
 
 	List<Product> selectProductList(int member_no);
 
+	int deleteProduct(int productNo);
+
+	List<myPageOrderList> selectSaleProductList(String member_name);
+
+	int updateOrderSaleStatus(int orderNo);
+
+	String selectOrderStatus(int orderNo);
+
 }

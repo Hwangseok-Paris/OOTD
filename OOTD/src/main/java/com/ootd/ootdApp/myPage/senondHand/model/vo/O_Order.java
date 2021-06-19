@@ -26,5 +26,5 @@ public class O_Order implements Serializable {
 	private String product_name;
 	private int order_quantity;
 	private String brand_name;
-		
+	private int order_status;
 }

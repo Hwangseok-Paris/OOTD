@@ -40,26 +40,26 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <c:forEach items="${list}">
+                    <c:forEach items="${list}" var="s">
 	                    <tbody>
 	                        <tr>
 	                            <td>
 	                                <div class="product-info">
-	                                    <div class="brand-name">${list.brand_name }</div>
-	                                    <span class="product-name">${list.product_name } </span>
-	                                    <span class="product-option">(small)</span>
+	                                    <div class="brand-name">${s.brand_name }</div>
+	                                    <span class="product-name">${s.product_name } </span>
+	                                    <span class="product-option">${s.product_size }</span>
 	                                </div>
 	                            </td>
 	                            <td>
-	                                <div class="order-no">${list.order_no }</div>
+	                                <div class="order-no">${s.order_no }</div>
 	                            </td>
-	                            <td class="order-date">${list.order_date }</td>
-	                            <td class="total-price">${list.total_price }&#8361;</td>
+	                            <td class="order-date">${s.order_date }</td>
+	                            <td class="total-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${s.total_price}" />&#8361;</td>
 	                            <td>
 	                                <span class="purchase-status">1</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
 	                            </td>
 	                            <td>
-	                                <button class="confirm-purchase" style="display: none;">구매 확정</button>
+	                                <button class="confirm-purchase" style="display: none;" id="${s.order_no }">구매 확정</button>
 	                                <button class="write-review" style="display: none;">리뷰 작성</button>
 	                            </td>
 	                        </tr>
@@ -122,6 +122,12 @@
             }
         })
     })
+    
+    $('.confirm-purchase').on('click', function() {
+    	var orderNo = $(this).text();
+    	
+    	
+    });
     
     // 주문 번호를 클릭했을 때(span의 class가져옴)
 	 $('.order-no').click(function(){

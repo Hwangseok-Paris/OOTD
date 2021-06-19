@@ -21,6 +21,8 @@ public class myPageOrderList {
 	private String order_memo;
 	private int total_price;
 	private int member_no;
+	private int order_status;
 	private String product_name;
 	private String brand_name;
+	
 }

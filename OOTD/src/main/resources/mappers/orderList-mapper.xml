@@ -35,14 +35,42 @@
    </update>
 
 	<select id="selectOrderList" parameterType="string" resultType="O_Order">
-		SELECT P.PRODUCT_NAME, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE, OL.ORDER_QUANTITY, M.BRAND_NAME
-		FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P, MEMBER M
-		WHERE M.MEMBER_NO = P.MEMBER_NO
-			AND O.ORDER_NO = OL.ORDER_NO
-			AND M.MEMBER_NAME = #{member_name}
-			AND P.PRODUCT_TYPE = 1
-			AND OL.PRODUCT_NO = P.PRODUCT_NO
+		SELECT M.BRAND_NAME, P.PRODUCT_NAME, P.PRODUCT_SIZE, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE, O.ORDER_STATUS 
+		FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P, MEMBER M 
+		WHERE O.ORDER_NO = OL.ORDER_NO AND OL.PRODUCT_NO = P.PRODUCT_NO AND O.MEMBER_NO = M.MEMBER_NO AND M.MEMBER_NAME= #{member_name}
 		ORDER BY O.ORDER_DATE DESC
+	</select>
+	
+	<select id="selectOrderDetail" parameterType="string" resultType="_int">
+		SELECT O.RECEIVER_NAME, O.ORDER_ADDRESS, M.MEMBER_PHONE
+		FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P, MEMBER M
+		WHERE O.ORDER_NO = OL.ORDER_NO
+			AND OL.PRODUCT_NO = P.PRODUCT_NO
+			AND O.ORDER_NO = M.MEMBER_NO
+			AND O.ORDER_NO = #{order_no}
+	</select>
+	
+	<select id="selectSaleProductList" parameterType="string" resultType="O_Order">
+		SELECT M.BRAND_NAME, P.PRODUCT_NAME, P.PRODUCT_SIZE, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE, O.ORDER_STATUS, O.ORDER_STATUS
+		FROM MEMBER M, PRODUCT P, O_ORDER O, O_ORDER_LIST OL
+		WHERE M.MEMBER_NO = P.MEMBER_NO 
+			AND O.ORDER_NO = OL.ORDER_NO
+			AND OL.PRODUCT_NO = P.PRODUCT_NO
+			AND O.ORDER_STATUS = '1'
+			AND M.MEMBER_NAME = #{member_name}
+		ORDER BY O.ORDER_DATE ASC
+	</select>
+	
+	<update id="updateOrderSaleStatus" parameterType="_int">
+		UPDATE O_ORDER
+		SET ORDER_STATUS = 2
+		WHERE ORDER_NO = #{order_no}
+	</update>
+	
+	<select id="selectOrderStatus" parameterType="string" resultType="O_Order">
+		SELECT ORDER_STATUS
+		FROM O_ORDER
+		WHERE ORDER_NO = #{order_no}
 	</select>
 
 </mapper>

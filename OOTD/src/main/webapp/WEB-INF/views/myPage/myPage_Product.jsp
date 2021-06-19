@@ -11,8 +11,10 @@
     <script src="${pageContext.request.contextPath }/resources/asset/js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/myPage.css">
 
-    <c:import url="../common/styler.jsp"/>
     <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
+
+    <c:import url="../common/styler.jsp"/>
 
 </head>
 
@@ -52,7 +54,7 @@
 	                            <td class="total-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${s.product_price}" /> &#8361;</td>
 	                            <td>
 	                                <button class="modify-product modify">수정</button>
-	                                <button class="delete-product delete" id="deleteProduct">삭제</button>
+	                                <button class="delete-product delete" id="${s.product_no }">삭제</button>
 	                            </td>
 	                        </tr>
 	                    </tbody>
@@ -63,7 +65,10 @@
     </div>
     
     <script>
-
+    	$('.delete-product').on('click', function() {
+    		var productNo = $(this).attr('id')
+    		location.href="${pageContext.request.contextPath }/myPage/myPage_Product_Delete.do?productNo=" + productNo;
+    	});
     </script>
             
     <!-- FOOTER IMPORT -->
