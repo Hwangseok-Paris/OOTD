@@ -28,11 +28,16 @@
     <div class="product_detail sh_detail">
         <div class="package" >
             <div id="insertArea" class="inputBox1">
-                <div id="contentImgArea1" class="imgInput">
-                    <img src="${pageContext.request.contextPath }/resources/images/second-hand sample1.jpg" 
-                        id="contentImg1" style="height: 150px; width: 120px;"/>
-                </div>
-                <div id="contentImgArea2" class="imgInput">
+            
+            	<c:forEach items="${ product.attachment }" var="a" varStatus="vs">
+	                <div id="contentImgArea1" class="imgInput">
+	                    <img src="${pageContext.request.contextPath }/resources/images/productImgUpload/${ a.get(vs.count).get(att_name) }"
+	                        id="contentImg1" style="height: 150px; width: 120px;"/>
+	                </div>
+                </c:forEach>
+                
+                
+                <%-- <div id="contentImgArea2" class="imgInput">
                     <img src="${pageContext.request.contextPath }/resources/images/second-hand sample2.jpg" 
                         id="contentImg2" style="height: 150px; width: 120px;"/>
                 </div>
@@ -43,14 +48,14 @@
                 <div id="contentImgArea4" class="imgInput">
                     <img src="${pageContext.request.contextPath }/resources/images/second-hand sample4.jpg" 
                         id="contentImg4" style="height: 150px; width: 120px;"/>
-                </div>
+                </div> --%>
             </div>
 
            
         
             <div id="imgDetail" class="inputBox2">
                 <div class='inputBox2 zoom' id='ex1'>
-                    <img src='${pageContext.request.contextPath }/resources/images/second-hand sample1.jpg' id='jack' width='540' height='620' alt='Daisy on the Ohoopee'/>
+                    <img src='<%-- ${pageContext.request.contextPath }/resources/images/second-hand sample1.jpg --%>' id='jack' width='540' height='620' alt='Daisy on the Ohoopee'/>
                     
                 </div>
             </div>
@@ -65,8 +70,8 @@
             <div id="prTextInput" class="inputBox3">
                 <span><b>second-hand</b></span> <br>
                 
-                <h4 id="pName">Special Premium Ultra Super Cap Jacket</h4>
-                <span style="margin-left: 240px;" >￦</span><span id="ppPrice">29800</span> <br><hr>
+                <h4 id="pName">${ product.product_name }</h4>
+                <span style="margin-left: 240px;" >￦</span><span id="ppPrice">${ product.product_price }</span> <br><hr>
                 
 
                 <dl>
@@ -81,11 +86,7 @@
                         </span>
                     </dt> 
                     <dd class="ddd"><span class="pInfoText">
-                        <br>브랜드 제품명 : SEMAZY 반팔 셔츠 <br>
-                    소재 : 코튼 블랜드 <br>
-                    세탁법 : 드라이클리닝 권장 <br>
-                    제품 상태 : 상품 사진 외 특별한 오염 및 데미지 <br>
-                               없는 우수한 상태
+                   	 	${ product.product_detail }
                     </span> <br></dd>
                     <hr>
                     <dt class="drop"><b>Size, Color</b> 
@@ -99,24 +100,22 @@
                         </span>
                     </dt>
                     <dd class="ddd"><span class="pInfoText">
-                        <br>어깨 50 / 가슴 60 / 암홀 24 <br>
-                         / 팔길이 25 / 총길이 73 <br>
-                    컬러 : Multi    
+                        ${ product.product_sizeinfo }
                     </span> <br></dd>
                     <hr>
                     <dt>
                         <b>Select Size</b>
                         <select name="" id="selectSize" style="width: 130px;">
                             <option value="">선택안함</option>
-                            <option value="L">L</option>
+                            <option value="${ product.product_size }">${ product.product_size }</option>
                         </select> <br>
                     </dt><hr>
                     <dt class="pOrigin">
                         <div id="origin">
-                            <span>Special Premium Ultra Super Cap Jacket<b class="selectedSize"></b> </span> 
+                            <span>${ product.product_name }<b class="selectedSize"></b> </span> 
                             <input type="number" id="pQuan" name="pQuan" value="1" min="1" max="1"> <!-- input value 값 ??  -->
                             <img src="${pageContext.request.contextPath }/resources/images/xx.png" alt="" style="width: 15px; height: 15px; margin-right: 5px;" id="pDelete">
-                            <span>￦</span><span class="pPrice">29800</span>
+                            <span>￦</span><span class="pPrice">${ product.product_price }</span>
                         </div>
                     </dt>
                     <dt class="pResult">
@@ -300,7 +299,10 @@
             //     $('.drop').removeClass('on').next().slideUp();
             // };
         })
-
+	
+        $(function() {
+        	$('#imgDetail').children().children().attr('src', $('#contentImg1').attr('src'));
+        });
 
         $('#contentImgArea1').on('click', function() { 
 			$('#imgDetail').children().children().attr('src', $('#contentImg1').attr('src'));

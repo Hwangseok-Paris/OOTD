@@ -76,8 +76,10 @@ public class ProductServiceImpl implements ProductService {
 		// Attachment Insert 
 		
 		if( resultP > 0 ) {	// Product Insert 성공 했다면 첨부파일 Insert 실행
-			
+			System.out.println("Attachment Insert 실행 확인");
+			System.out.println("attachList : " + attachList);
 			if(attachList.size() > 0) { // 첨부파일이 있다면
+				System.out.println("attachList.size() : " + attachList.size());
 				for(Attachment a : attachList) {
 					resultA = productDAO.attachmentInsert(a);
 					System.out.println("resultA :: " + resultA);

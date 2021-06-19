@@ -27,10 +27,10 @@
         <div class="package" >
             <div id="insertArea" class="inputBox1">
             
-            	<c:forEach items="${ product.attachment }" var="a" varStatus="vs">
-	                <div id="contentImgArea${ vs.count }" class="imgInput">
-	                    <img src="${ pageContext.request.contextPath }/resources/images/brand sample1.png"  <%-- ${ a.get(vs.count).get(att_name) } --%>
-	                        id="contentImg${ vs.count }" style="height: 150px; width: 120px;"/>
+            	<c:forEach items="${attchment}" var="a" varStatus="vs">
+	                <div id="contentImgArea${vs.count}" class="imgInput">
+	                    <img src="${pageContext.request.contextPath}/resources/images/productImgUpload/${ a.att_name }" 
+	                        id="contentImg${vs.count}" style="height: 150px; width: 120px;"/>
 	                </div>
                 </c:forEach>
                 
@@ -65,7 +65,7 @@
         </div>
         <div class="package">
             <div id="prTextInput" class="inputBox3">
-                <span><b>${ product.brand_name }</b></span> <br>
+                <span id="brand_name"><b>${ product.brand_name }</b></span> <br>
                 
                 <h4 id="pName">${ product.product_name }</h4>
                 <span style="margin-left: 240px;" >￦</span><span id="ppPrice">${ product.product_price }</span> <br><hr>

@@ -78,11 +78,11 @@
 		            <!-- <input type="text" id="productOption" placeholder="옵션명" class="ininput"> -->
 		
 					<span> S size : &nbsp;&nbsp; </span>
-		            <input type="text" id="quantity1" class="ininput2" placeholder="수량 입력" name="product_stock_s"><br>
+		            <input type="text" id="quantity1" class="ininput2" placeholder="수량 입력" name="product_stock_s" value="0"><br>
 		            <span> M size : &nbsp;&nbsp; </span>
-		            <input type="text" id="quantity2" class="ininput2" placeholder="수량 입력" name="product_stock_m"><br>
+		            <input type="text" id="quantity2" class="ininput2" placeholder="수량 입력" name="product_stock_m" value="0"><br>
 		            <span> L size : &nbsp;&nbsp; </span>
-		            <input type="text" id="quantity3" class="ininput2" placeholder="수량 입력" name="product_stock_l"><br>
+		            <input type="text" id="quantity3" class="ininput2" placeholder="수량 입력" name="product_stock_l" value="0"><br>
 		            <hr>
 		            <h5>Category</h5>
 					<select name="product_category" id="selectCategory" style="width: 160px;" required>

@@ -99,10 +99,13 @@
 
 	<!-- product Detail -->
 	<select id="brandSelectOne" parameterType="_int" resultType="Product_p">
-		SELECT * FROM PRODUCT WHERE PRODUCT_NO = #{ product_no }
+		SELECT P.* , M.BRAND_NAME
+		FROM PRODUCT P, MEMBER M 
+		WHERE P.MEMBER_NO = M.MEMBER_NO
+		  AND PRODUCT_NO = #{ product_no }
 	</select>
 
-	<select id="brandAttSelectOne" parameterType="_int" resultType="Attachment">
+	<select id="brandAttSelectList" parameterType="_int" resultType="Attachment">
 		SELECT * FROM ATTACHMENT WHERE PRODUCT_NO = #{ product_no }
 	</select>
 	
@@ -110,7 +113,7 @@
 		SELECT * FROM PRODUCT WHERE PRODUCT_NO = #{ product_no }
 	</select>
 	
-	<select id="secondAttSelectOne" parameterType="_int" resultType="Attachment">
+	<select id="secondAttSelectList" parameterType="_int" resultType="Attachment">
 		SELECT * FROM ATTACHMENT WHERE PRODUCT_NO = #{ product_no }
 	</select>
 

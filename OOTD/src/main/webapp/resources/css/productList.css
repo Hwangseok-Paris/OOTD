@@ -89,7 +89,7 @@ div[class$=cate]  {
 }
 
 
-.filter-div span:hover {
+.pagination, .filter-div span:hover {
     cursor: pointer;
     color: black;
 }
@@ -98,6 +98,11 @@ div[class$=cate]  {
 #prod-li, #brand-li {
     margin-left: -30px;
 }
+
+#prod-li, #brand-li:hover {
+	cursor: pointer;
+}
+
 .content-wrapper {
     /* text-align: center; */
 /*     padding: 10px; */

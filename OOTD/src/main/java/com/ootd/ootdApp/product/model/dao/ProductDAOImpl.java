@@ -95,18 +95,22 @@ public class ProductDAOImpl implements ProductDAO {
 	public Product productSelectOne(int pType, int product_no) {
 		
 		if( pType == 1) { // brand
-			Product brandP = sqlSession.selectOne("brandSelectOne", product_no);
-			List<Attachment> brandAtt = sqlSession.selectList("brandAttSelectOne", product_no);
+			Product brandP = sqlSession.selectOne("product-mapper.brandSelectOne", product_no);
+			List<Attachment> brandAtt = sqlSession.selectList("product-mapper.brandAttSelectList", product_no);
 			
 			brandP.setAttachment(brandAtt);
+			
+			System.out.println("DAO 에서 brandP :: " + brandP);
 			
 			return brandP;		// 한개 상품 정보와 해당 상품의 첨부파일 List 가 담긴  하나의 product VO 반환 
 			
 		} else { // second
-			Product secondP = sqlSession.selectOne("secondSelectOne", product_no);
-			List<Attachment> secondAtt = sqlSession.selectList("secondAttSelectOne", product_no);
+			Product secondP = sqlSession.selectOne("product-mapper.secondSelectOne", product_no);
+			List<Attachment> secondAtt = sqlSession.selectList("product-mapper.secondAttSelectList", product_no);
 			
 			secondP.setAttachment(secondAtt);
+			
+			System.out.println("DAO 에서 secondP :: " + secondP);
 			
 			return secondP;		// 한개 상품 정보와 해당 상품의 첨부파일 List 가 담긴  하나의 product VO 반환 
 		}

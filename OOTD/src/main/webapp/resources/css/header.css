@@ -56,6 +56,10 @@ a:active {
     width: 200px;
 }
 
+.nav_menu li, #second_Hand, #brand, #logo:hover {
+	cursor: pointer;
+}
+
 .header_menu {
     margin-left: 150px;
 }
