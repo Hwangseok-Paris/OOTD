@@ -78,15 +78,13 @@
 	<!-- 1번 째(Product_no는 시퀀스넘버를 주자)  -->
 	<insert id="insertSecondHandProduct" parameterType="Product_p">
 		INSERT INTO PRODUCT(PRODUCT_NO, PRODUCT_NAME, PRODUCT_DETAIL, PRODUCT_SIZEINFO, PRODUCT_SIZE, PRODUCT_PRICE, PRODUCT_STOCK_S, PRODUCT_STOCK_M, PRODUCT_STOCK_L, PRODUCT_TYPE, MEMBER_NO, PRODUCT_STATUS, PRODUCT_CATEGORY)
-		VALUES(SEQ_PRODUCT_NO.NEXTVAL, #{product_name}, #{product_detail}, #{product_sizeinfo}, #{product_size}, #{product_price}, #{product_stock_s}, #{product_stock_m}, #{product_stock_l}, #{product_type}, 3, 'Y', #{ product_category })
+		VALUES(SEQ_PRODUCT_NO.NEXTVAL, #{product_name}, #{product_detail}, #{product_sizeinfo}, #{product_size}, #{product_price}, #{product_stock_s}, #{product_stock_m}, #{product_stock_l}, #{product_type}, #{ member_no }, 'Y', #{ product_category })
 	</insert>
-
 
 	<insert id="insertBrandProduct" parameterType="Product_p">
 		INSERT INTO PRODUCT(PRODUCT_NO, PRODUCT_NAME, PRODUCT_DETAIL, PRODUCT_SIZEINFO, PRODUCT_SIZE, PRODUCT_PRICE, PRODUCT_STOCK_S, PRODUCT_STOCK_M, PRODUCT_STOCK_L, PRODUCT_TYPE, MEMBER_NO, PRODUCT_STATUS, PRODUCT_CATEGORY)
-		VALUES(SEQ_PRODUCT_NO.NEXTVAL, #{product_name}, #{product_detail}, #{product_sizeinfo}, #{product_size}, #{product_price}, #{product_stock_s}, #{product_stock_m}, #{product_stock_l}, #{product_type}, 2, 'Y', #{ product_category })
+		VALUES(SEQ_PRODUCT_NO.NEXTVAL, #{product_name}, #{product_detail}, #{product_sizeinfo}, #{product_size}, #{product_price}, #{product_stock_s}, #{product_stock_m}, #{product_stock_l}, #{product_type}, #{ member_no }, 'Y', #{ product_category })
 	</insert>
-
 
 	<insert id="insertAttachment" parameterType="Attachment">
 		<!-- selectKey -->
@@ -99,16 +97,21 @@
 		VALUES(SEQ_ATT_NO.NEXTVAL, #{att_name}, default , #{att_level}, 'Y', #{product_no})
 	</insert>
 
+	<!-- product Detail -->
+	<select id="brandSelectOne" parameterType="_int" resultType="Product_p">
+		SELECT * FROM PRODUCT WHERE PRODUCT_NO = #{ product_no }
+	</select>
+
 	<select id="brandAttSelectOne" parameterType="_int" resultType="Attachment">
-		
+		SELECT * FROM ATTACHMENT WHERE PRODUCT_NO = #{ product_no }
 	</select>
 	
 	<select id="secondSelectOne" parameterType="_int" resultType="Product_p">
-		
+		SELECT * FROM PRODUCT WHERE PRODUCT_NO = #{ product_no }
 	</select>
 	
 	<select id="secondAttSelectOne" parameterType="_int" resultType="Attachment">
-		
+		SELECT * FROM ATTACHMENT WHERE PRODUCT_NO = #{ product_no }
 	</select>
 
 

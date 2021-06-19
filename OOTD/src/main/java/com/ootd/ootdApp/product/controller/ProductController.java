@@ -63,7 +63,7 @@ public class ProductController {
 		// 페이지 처리 HTML 생성하기
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "productList.do");
 		
-//		System.out.println("list : " + list);
+		System.out.println("list : " + list);
 		
 		// brand_name List 불러오기 
 		List<String> brandName = productService.brandNameSelectList();
@@ -227,9 +227,9 @@ public class ProductController {
 		
 		Product p = productService.productSelectOne(pType, product_no);
 		
+		model.addAttribute("product", p);
 		
-		
-		if ( pType == 1 ) {
+		if ( pType == 1 ) {		// 브랜드 
 			
 			int numPerPage = 10;
 			
@@ -251,17 +251,12 @@ public class ProductController {
 			model.addAttribute("pageBar", pageBar);
 			
 			return "product/brandDetail";
-			} else {
+			
+		} else {	// 중고
 				
-				return "product/secondHandDetail";
-			}
+			return "product/secondHandDetail";
+		}
 	
-			
-		
-	
-			
-		
-		
 		
 	}
 	
