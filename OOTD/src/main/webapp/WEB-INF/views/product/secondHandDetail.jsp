@@ -23,47 +23,23 @@
 <body>
     <c:import url="../common/header.jsp"/>
 
-
 <section>
     <div class="product_detail sh_detail">
         <div class="package" >
             <div id="insertArea" class="inputBox1">
-            
-            	<c:forEach items="${ product.attachment }" var="a" varStatus="vs">
-	                <div id="contentImgArea1" class="imgInput">
-	                    <img src="${pageContext.request.contextPath }/resources/images/productImgUpload/${ a.get(vs.count).get(att_name) }"
-	                        id="contentImg1" style="height: 150px; width: 120px;"/>
+            	<c:forEach items="${ attachment }" var="a" varStatus="vs">
+	                <div id="contentImgArea${vs.count}" class="imgInput">
+	                    <img src="${pageContext.request.contextPath }/resources/images/productImgUpload/${a.att_name}"
+	                        id="contentImg${vs.count}" style="height: 150px; width: 120px;"/>
 	                </div>
                 </c:forEach>
-                
-                
-                <%-- <div id="contentImgArea2" class="imgInput">
-                    <img src="${pageContext.request.contextPath }/resources/images/second-hand sample2.jpg" 
-                        id="contentImg2" style="height: 150px; width: 120px;"/>
-                </div>
-                <div id="contentImgArea3" class="imgInput">
-                    <img src="${pageContext.request.contextPath }/resources/images/second-hand sample3.jpg" 
-                        id="contentImg3" style="height: 150px; width: 120px;"/>
-                </div>
-                <div id="contentImgArea4" class="imgInput">
-                    <img src="${pageContext.request.contextPath }/resources/images/second-hand sample4.jpg" 
-                        id="contentImg4" style="height: 150px; width: 120px;"/>
-                </div> --%>
             </div>
-
            
-        
             <div id="imgDetail" class="inputBox2">
                 <div class='inputBox2 zoom' id='ex1'>
-                    <img src='<%-- ${pageContext.request.contextPath }/resources/images/second-hand sample1.jpg --%>' id='jack' width='540' height='620' alt='Daisy on the Ohoopee'/>
-                    
+                    <img src='${pageContext.request.contextPath }/resources/images/productImgUpload/${a.att_name}' id='jack' width='540' height='620' alt='Daisy on the Ohoopee'/>
                 </div>
             </div>
-        
-        
-        
-        
-
             
         </div>
         <div class="package">
@@ -144,7 +120,6 @@
 
         
 	<script>
-
 		$(function() {
 		    $(document).ready(function(){
 		        $('#ex1').zoom();
@@ -152,20 +127,11 @@
 		    });
 		});
     
-
-
-
     
-
-
-
     
         // function goCart() {
-
         // }
-
         // function goBuy() {
-
         // }
         
          /* $(function() {
@@ -179,7 +145,6 @@
             $(this).parent().remove()
         });
             
-
         $('#pQuan').on('change', function() {
             var uuu = $(this).val()
             
@@ -191,37 +156,26 @@
             $(this).siblings('.pPrice').text(thousandComma(uuu*hhh));
             totalCalc();
         });
-
         var hhh;
-
         $(function() {
             hhh = $('#ppPrice').text();
             // console.log(hhh);
-
             $('#ppPrice').text(thousandComma($('#ppPrice').text()));
-
             if($("#pQuan").val() < 1) alert("최소 주문수량은 1개 입니다.");
         });
-
-
-
         $('.pOrigin').hide();
         // $('.pResult').hide();
         
         $('#selectSize').on('change', function() {
-
             $('.pResult').show();
-
             if($('.frmSize.'+$('#selectSize').val()).length == 0){
                 var result = $('#origin').clone(true);
-
                 result.removeClass('#origin');
                 result.addClass($('#selectSize').val());
                 result.addClass('frmSize');
                 result.find('.selectedSize').text("[" + $('#selectSize').val() + "]");
                 
                 $('.pResult').append(result);
-
                 $('.pPrice').each(function(){
                     $(this).text(thousandComma($(this).text()));
                 });
@@ -230,17 +184,11 @@
                 quan.val(parseInt(quan.val()) + 1);
                 var priceTag = quan.siblings('.pPrice');
                 priceTag.text(thousandComma(parseInt((priceTag.text()).replace(',','')) * quan.val()));
-
-
             }
             totalCalc();
-
             $('#won').text('￦')
-
             // $('.pResult').$('#selectedSize').text($('#selectSize').val())
-
         })
-
         
         
        function totalCalc(){
@@ -258,29 +206,19 @@
             //     totalQuan += Number($('#pQuan').val())
             //     $('#totalQ').text("(" + totalQuan + "개)")
             // })
-
-
-
             $('.totalPD').text(thousandComma(totalPrice));
             // console.log("totalPrice after :: " + totalPrice);
        }
         
-
         function thousandComma(x){
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-
-
-
         $('.drop').on('click', function () {
-
             // 숨긴 영역 slide down
             $(this).next('.ddd').slideToggle(300);
-
             // +, - 아이콘 바꾸기
             var plus = $(this).children('span').children('.bi-plus-lg');
             var dash = $(this).children('span').children('.bi-dash-lg');
-
             if ( dash.css('display') == 'none' ) {
                 dash.css('display', 'inline-block');
                 plus.css('display', 'none');
@@ -288,7 +226,6 @@
                 plus.css('display', 'inline-block');
                 dash.css('display', 'none');
             }
-
             // if ($(this).hasClass('on')) {
             //     slideUp();
             // } else {
@@ -303,7 +240,6 @@
         $(function() {
         	$('#imgDetail').children().children().attr('src', $('#contentImg1').attr('src'));
         });
-
         $('#contentImgArea1').on('click', function() { 
 			$('#imgDetail').children().children().attr('src', $('#contentImg1').attr('src'));
 		});
@@ -319,13 +255,6 @@
 		$('#contentImgArea4').on('click', function() {
 			$('#imgDetail').children().children().attr('src', $('#contentImg4').attr('src'));
 		});
-
-
-
-
-
-
-
     </script>
 
 </body>

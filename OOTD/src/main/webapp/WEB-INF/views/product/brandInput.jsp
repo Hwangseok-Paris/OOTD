@@ -55,10 +55,10 @@
 		        <div class="fileArea" id="fileArea">
 		            <!--  첨부 사진 추가 영역 -->
 		            <!-- (input:file#thumbImg$[name=thumbImg$ onchange=loadImg(this,$)])*4  -->
-		            <input type="file" accept="image/*" name="thumbImg1" id="thumbImg1" onchange="loadImg(this, 1);" />
-		            <input type="file" accept="image/*" name="thumbImg2" id="thumbImg2" onchange="loadImg(this, 2);" />
-		            <input type="file" accept="image/*" name="thumbImg3" id="thumbImg3" onchange="loadImg(this, 3);" />
-		            <input type="file" accept="image/*" name="thumbImg4" id="thumbImg4" onchange="loadImg(this, 4);" />
+		            <input type="file" accept="image/*" name="productImg" id="thumbImg1" onchange="loadImg(this, 1);" />
+		            <input type="file" accept="image/*" name="productImg" id="thumbImg2" onchange="loadImg(this, 2);" />
+		            <input type="file" accept="image/*" name="productImg" id="thumbImg3" onchange="loadImg(this, 3);" />
+		            <input type="file" accept="image/*" name="productImg" id="thumbImg4" onchange="loadImg(this, 4);" />
 		        </div>
 		
 		        <div id="prTextInput" class="inputBox3">

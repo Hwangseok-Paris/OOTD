@@ -141,7 +141,7 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping("member/memberLogin.do")
+	@RequestMapping(value={"member/memberLogin.do", "*/member/memberLogin.do"})
 	public String memberLogin(
 				@RequestParam String member_id,
 				@RequestParam String member_pw,
@@ -466,7 +466,6 @@ public class MemberController {
 			System.out.println("만료기간 : " + expiresTime);
 			System.out.println("리프레쉬 토큰 만료기간 : " + refreshExpiresTime);
 					 
-
 					 
 		} catch (HttpStatusCodeException e) {
 			

@@ -61,8 +61,14 @@ public class ProductController {
 		// 전체 상품 갯수 
 		int totalContents = productService.productSelectTotalContents(pType);
 		
-		// 페이지 처리 HTML 생성하기
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "productList.do");
+		
+		if ( pType == 1) {	// 페이지 처리 HTML 생성하기 ( brand )
+			String pageBar = Utils2.getPageBar(totalContents, cPage, numPerPage, "productList.do?&pType=1");
+			model.addAttribute("pageBar", pageBar);
+		} else {	// 페이지 처리 HTML 생성하기 ( second )
+			String pageBar = Utils2.getPageBar(totalContents, cPage, numPerPage, "productList.do?&pType=2");
+			model.addAttribute("pageBar", pageBar);
+		}
 		
 		System.out.println("list : " + list);
 		
@@ -77,7 +83,7 @@ public class ProductController {
 		model.addAttribute("brandName", brandName);
 		model.addAttribute("totalContents", totalContents);
 		model.addAttribute("numPerPage", numPerPage);
-		model.addAttribute("pageBar", pageBar);
+		
 
 		// brand를 클릭 시, pType 값 1을 가져오게 되고, 해당 값을 가져올 경우
 		// 브랜드 상품 리스트로 이동
@@ -119,7 +125,7 @@ public class ProductController {
 	//=========Product Input Form에서 상품 등록 후, 각 상품의 리스트 화면으로 이동  ( insert )=========	
 	@RequestMapping("product/productInput.do")
 	public String productInput(Product p, HttpServletRequest req, Model model,
-			@RequestParam(value = "secondHandProductImg", required = false) MultipartFile[] upFiles) {
+			@RequestParam(value = "productImg", required = false) MultipartFile[] upFiles) {
 		// pType = 1 ? 브랜드 : 상품
 		int pType = p.getProduct_type();
 
@@ -226,6 +232,7 @@ public class ProductController {
 		List<Attachment> att = p.getAttachment();
 	
 		model.addAttribute("product", p);
+		System.out.println("controller 에서 attachment ::: " + att);
 		model.addAttribute("attachment", att);
 	
 		if ( pType == 1 ) {		// 브랜드 
@@ -271,6 +278,11 @@ public class ProductController {
 		// pType = 1 ? 브랜드 : 상품  	
 		int pType = p.getProduct_type();
 		
+		
+//		detail 처럼 그대로 상품 정보 및 사진 불러오는 
+//		Product p = productService.productSelectOne(pType, product_no);
+//		List<Attachment> att = p.getAttachment();
+		
 		if( pType == 1 ) {
 			
 			System.out.println("productUpdateView 진입");
@@ -301,6 +313,7 @@ public class ProductController {
 			@RequestParam(value = "secondHandProductImg", required = false) MultipartFile[] upFiles) {
 		// pType = 1 ? 브랜드 : 상품  	
 		int pType = p.getProduct_type();
+		
 		
 		if( pType == 1 ) {
 			System.out.println("productUpdate 진입");
