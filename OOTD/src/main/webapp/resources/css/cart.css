@@ -233,7 +233,7 @@ input.underline {
 	border-bottom: 1px solid black; 
 	width: 30px;
 	border-right: none;
-    border-left: 1px solid;
+    border-left: none;
     font-weight:600;
 }
 

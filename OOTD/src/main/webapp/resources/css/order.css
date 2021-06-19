@@ -68,6 +68,29 @@ table.calculation2 td {
    border-bottom: solid 1px #fafafa;
 }
 
+table.calculation1 thead:nth-child(3){
+	width:60%;
+}
+
+#pInfo{
+		 text-align: left;
+		 padding-inline-start:13px;
+		 width: 400px;
+}
+
+#tdImg{
+	width: 120px;
+}
+
+tbody tr{
+	height : 90px;
+}
+
+tbody img{
+	width:100px;
+}
+
+
 .price{
    font-size: 20pt;
    font-weight: bold;

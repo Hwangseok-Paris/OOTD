@@ -41,25 +41,23 @@
                   <th colspan="10" style="text-align: left; padding-left: 10px; color: gray; padding-top: 30px; border-bottom: solid 1px #e0e0eb;">상품정보</th>
                </tr>
          
-               <tr>
-                 
-                  <th style="width: 100px;"><span>이미지</span></th>
-                  <th style="width: 400px;">상품정보</th>
-                  <th style="width: 130px;">판매가</th>
-                  <th style="width: 130px;">수량</th>
+               <tr class="tHead">
+                  <th colspan="2" id="pInfo">item</th>
+                  <th id="pPrice">price</th>
+                  <th id="pQuan">quantity</th>
                </tr>
             </thead>
    
             <tbody>
             <c:forEach items="${cart}" var="a">
-               <tr style="height: 90px; background-color: #fff;">
+               <tr>               
                
                <input type="hidden" class="cart_no" value="${a.cart_no}" />
                <input type="hidden" class="product_no" value="${a.product_no}" />
                   
                <!-- Product Image Area -->
-                  <td style="border-left: none; border-right: none; width: 100px; text-align: center;">
-                  	<img src="${pageContext.request.contextPath }/resources/images/${a.att_name}" width="100px">
+                  <td id="tdImg">
+                  	<img src="${pageContext.request.contextPath }/resources/images/${a.att_name}">
                   </td>
                   
                <!-- Product Info. Area -->

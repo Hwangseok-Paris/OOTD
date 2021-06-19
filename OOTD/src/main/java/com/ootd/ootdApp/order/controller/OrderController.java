@@ -57,24 +57,21 @@ public class OrderController {
 		int result = orderService.deleteCartProduct(cart_no);
 	
 		if(result>0) {
-			System.out.println("상품 삭제 성공");
-
+			System.out.println("카트 번호 "+ cart_no+" 삭제 성공");
 		} else {
 			System.out.println("상품 삭제 실패");
 		}
 		
-
-		// cartList(model, req);
-		
 		return "redirect:/order/cart.or";
+		
 	}
 	
 	// 선택 항목 삭제
 	@RequestMapping("/order/deleteCartProductList.or")
-	public String deleteCartProductList(@RequestParam(value="selchk") List<Integer> selchk) {
+	public String deleteCartProductList(@RequestParam(value="selchk[]") int selchk[]) {
 		
 		// jsp 에서 배열 넘어오는거 확인
-		// System.out.println(selchk);
+		// System.out.println(selchk[0]);
 		
 		int cart_no = 0;
 		
@@ -84,12 +81,11 @@ public class OrderController {
 			int result = orderService.deleteCartProduct(cart_no);
 			
 			if(result>0) {
-				System.out.println("카트번호 " + no +"번 상품 삭제 성공");
+				System.out.println("카트번호 " + no +"번 상품 선택 삭제 성공");
 			} else {
-				System.out.println("카트번호 " + no +"번 상품 삭제 성공");
+				System.out.println("카트번호 " + no +"번 상품 삭제 실패");
 			}
-		}		
-		
+		}	
 		return "redirect:/order/cart.or";
 	}
 	
@@ -103,6 +99,12 @@ public class OrderController {
 		int member_no = member.getMember_no();
 		
 		int result = orderService.deleteCartproductAll(member_no);
+		
+		if(result>0) {
+			System.out.println("카트 리스트 전체 삭제 성공");
+		} else {
+			System.out.println("카트 리스트 전체 삭제 실패");
+		}
 		
 		return "redirect:/order/cart.or";
 	}

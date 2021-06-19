@@ -84,8 +84,7 @@
 	                     
 	                     <!-- Delete Btn. Area -->
 	                     <td>
-	                        <button class="btn default btndelete" 
-	                        onclick="location.href = '${pageContext.request.contextPath}/order/deleteCartProduct.or?cart_no=${a.cart_no}';">삭제</button>
+	                        <button class="btn default btndelete">삭제</button>
 	                    
 	                     </td>
 	                  </tr>
@@ -246,11 +245,12 @@
    
    
       
-   	/*
-	// 삭제 버튼 ajax 츄라이.........
+   
+	// 삭제 버튼 ajax 츄라이 2 --- 성 공!! //
 	
-		
-		var cart_no = $(this).parent().parent().children('.cart_no').val()
+	$('.btndelete').click(function(){		
+
+		var cart_no = $(this).parent().parent().children('.cart_no').val();
 		console.log(cart_no);
 		
 		$.ajax({
@@ -259,16 +259,17 @@
 			data: { "cart_no" : cart_no }, 
 			success: function(data){
 					console.log("성공");
+					document.location.reload(true);
+					// location.href="${pageContext.request.contextPath}/order/cart.or"
 				}, error : function(){
 					console.log("실패");
 				}
 			});
-		
 	})
-   */
+
    
-   
-   // 선택 품목 삭제
+   /*
+   // 선택 품목 삭제  -- Original Ver.
    $("#deleteSel").click(function(){
 	   // 선택된 항목 카트번호 담을 배열 선언
 	   var selchk = [];
@@ -277,7 +278,6 @@
 		   var cart_no = Number($(this).parent().parent().children('.cart_no').val());
 		   selchk.push(cart_no);
 		   })
-		   
 	// selchk 배열 확인
 	//	console.log(selchk);
 	//  console.log(selchk[1]);
@@ -285,20 +285,62 @@
 		
 	// 배열 컨트롤러로 전송
 	    location.href="${pageContext.request.contextPath}/order/deleteCartProductList.or?selchk="+ selchk;
-	    
 	    calcPrice_all();
-   })
-    
-   // 전체 품목 삭제
+   })*/
+  
+   // 선택 품목 삭제  -- ajax Ver.
+   $("#deleteSel").click(function(){
+	   // 선택된 항목 카트번호 담을 배열 선언
+	   var selchk = [];
+	   
+	   $('.chkbox:checked').each(function(){
+		   var cart_no = Number($(this).parent().parent().children('.cart_no').val());
+		   selchk.push(cart_no);
+		   });
+		   
+		console.log(selchk);	   
+		
+	// ajax 시작
+		$.ajax({
+			type: "GET",
+			url: "${pageContext.request.contextPath}/order/deleteCartProductList.or",
+			data: { "selchk" : selchk }, 
+			success: function(data){
+					document.location.reload(true);
+				}, error : function(){
+					console.log("실패");
+				}
+			});		  
+   		})
+   
+   // 전체 품목 삭제 Original Ver.
       $("#deleteAll").click(function(){
 	   	
     	 // cart 테이블에서 회원번호에 해당하는 품목 전부 삭제
     	 location.href ="${pageContext.request.contextPath}/order/deleteCartProductAll.or"
     	 calcPrice_all();
-  	  }) 
+  	  })
+ 
+	 /*
+  // 전체 품목 삭제 ajax Ver.  --- 만들긴 했지만 굳이 ajax 쓸 필요가 없다?! 
+     $("#deleteAll").click(function(){
+   	
+   	 // cart 테이블에서 회원번호에 해당하는 품목 전부 삭제
+		$.ajax({
+			type: "GET",
+			url: "${pageContext.request.contextPath}/order/deleteCartProductAll.or",
+			data: { }, 
+			success: function(data){
+					document.location.reload(true);
+				}, error : function(){
+					console.log("실패");
+				}
+			});		  
+  		})
+  		*/
+ 
    
-  	  
-	// 선택 상품 주문
+   // 선택 상품 주문
 	$('#orderSelected').click(function(){
 		var selProduct_no = [];
 		
@@ -313,9 +355,9 @@
 			 location.href = "${pageContext.request.contextPath}/order/order.or?selProduct_no="+selProduct_no;
 		 } else {
 			 alert("상품이 선택되지 않았습니다.");
-		 }
+		 };
 		
-	})
+	});
    
    
    // 모든 상품 주문
