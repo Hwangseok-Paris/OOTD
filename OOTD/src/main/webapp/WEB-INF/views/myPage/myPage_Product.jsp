@@ -11,10 +11,8 @@
     <script src="${pageContext.request.contextPath }/resources/asset/js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/myPage.css">
 
-    <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-
-
     <c:import url="../common/styler.jsp"/>
+
 
 </head>
 
@@ -53,8 +51,13 @@
 	                            </td>
 	                            <td class="total-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${s.product_price}" /> &#8361;</td>
 	                            <td>
+<<<<<<< HEAD
 	                                <button class="modify-product modify">수정</button>
 	                                <button class="delete-product delete" id="${s.product_no }">삭제</button>
+=======
+	                                <button class="modify-product modify" id="updateProduct" onclick="moveToUpdate()">수정</button>
+	                                <button class="delete-product delete" id="deleteProduct" onclick="deleteProduct()">삭제</button>
+>>>>>>> refs/remotes/origin/feature_Jung
 	                            </td>
 	                        </tr>
 	                    </tbody>
@@ -65,10 +68,20 @@
     </div>
     
     <script>
+<<<<<<< HEAD
     	$('.delete-product').on('click', function() {
     		var productNo = $(this).attr('id')
     		location.href="${pageContext.request.contextPath }/myPage/myPage_Product_Delete.do?productNo=" + productNo;
     	});
+=======
+    	function moveToUpdate() {
+    		location.href="${pageContext.request.contextPath}/product/productUpdateView.do";
+    	}
+    
+    	function deleteProduct() {
+    		
+    	}
+>>>>>>> refs/remotes/origin/feature_Jung
     </script>
             
     <!-- FOOTER IMPORT -->

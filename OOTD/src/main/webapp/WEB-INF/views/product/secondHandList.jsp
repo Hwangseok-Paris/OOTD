@@ -6,7 +6,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="com.ootd.ootdApp.product.model.vo.*" %>
 <% Product pr = (Product)request.getAttribute("product"); // product(카테고리, 브랜드네임) 받아오기 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,9 +15,7 @@
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productList.css">
 </head>
-
 <body>
-
 	<c:import url="../common/header.jsp"/>
 	
     <div class="container-List">
@@ -26,7 +23,6 @@
         <header class="list-title">
             <h2 align="center">SECOND HAND STORE</h2>
         </header>
-
         <!-- 카테고리 사이드바 -->
         <nav class="side-bar">
             <!-- 카테고리 -->
@@ -64,10 +60,7 @@
                 </ul>
             </div>
         </nav>
-
-
         
-
         <section class="main-wrapper">
             <!-- 필터 정렬 영역 -->
             <div class="filter-div">
@@ -89,6 +82,7 @@
 	                        <div class="thumbnail-area" id="${ p.product_no }">
 	                            <!-- thumbnail image -->
 	                            <img src="${pageContext.request.contextPath}/resources/images/productImgUpload/${p.att_name}" alt="">
+
 	                            <!-- 상품 정보 (hover) -->
 	                            <span class="p_attr thumbnail-info">
 	                                <span>${ p.brand_name }</span> <br />
@@ -104,7 +98,6 @@
 		            	</c:if>
                     </c:forEach>
            		</div>
-
             	<!--
             	<div class="pagination">
 	                <a href="#">&laquo;</a>
@@ -151,7 +144,6 @@
 			console.log("sortVal="+sortVal);
 			location.href = "${pageContext.request.contextPath}/product/productList.do?categoryNo="+categoryNo+"&pType=2&sortVal="+sortVal;
 		});
-
  		
  		// 카테고리 클릭시 id 값을 가지고 selectList 로 이동 
  		$('#categoryList').children('.prod').on("click",function(){
@@ -173,8 +165,6 @@
 	 	$('.pPrice').each(function() {
 	 		$(this).text(thousandComma($(this).text()));
 	 	});
-
-
  	
  	});
  	
@@ -214,11 +204,9 @@
         $('.showArea').on('click', function() {
             // 숨긴 영역 slide down
             $(this).next('.dropArea').slideToggle(300);
-
             // +, - 아이콘 바꾸기
             var plus = $(this).children('span').children('.bi-plus-lg');
             var dash = $(this).children('span').children('.bi-dash-lg');
-
             if ( dash.css('display') == 'none' ) {
                 dash.css('display', 'inline-block');
                 plus.css('display', 'none');
@@ -227,7 +215,6 @@
                 dash.css('display', 'none');
             }
         });
-
         // hover 시 상품정보 보여주기
         $('.thumbnail-area').on({
                 'mouseenter' : function() {
@@ -237,15 +224,12 @@
                     $(this).children('span').css('display', 'none');
                 }
         });
-
-
     	
         // filter 클릭 시 밑줄 표기하기
         $('.filter-text').on('click', function() {
             $(this).css('border-bottom', 'solid 2px gray');
             $(this).siblings().css('border-bottom', '');
         });
-
         // top 버튼
         $(function() {
         $("#topBtn").click(function() {
@@ -259,13 +243,11 @@
     $('#toggleTheme').on('click', function() {
         $('html').toggleClass("dark");
     });
-
     $(function() {
         console.log(localStorage.getItem('darkMode'));
         $('html').attr('class', localStorage.getItem('darkMode'));
     });
         
-
     </script>
 </body>
 </html>

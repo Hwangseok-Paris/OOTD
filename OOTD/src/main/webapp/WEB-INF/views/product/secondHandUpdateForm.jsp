@@ -21,7 +21,7 @@
 	</div>
 	<form name="brandFrm" action="${pageContext.request.contextPath}/product/productUpdate.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="product_type" value="2" />
-			<input type="hidden" name="member_no"value="/*회원번호 받아서 넣기*/"/>
+			<input type="hidden" name="member_no"value="${ member.member_no }" />
 		<div class="input-area">
 		    <div class="input-img-area">
         <div id="insertArea" class="inputBox1">

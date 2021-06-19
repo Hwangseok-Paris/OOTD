@@ -142,14 +142,10 @@
 		});
 		
 		$('#fileArea').hide();
-
         function loadImg(img, num) {
 			if (img.files && img.files[0]) {
-
 				var reader = new FileReader();
-
 				reader.onload = function(e) {
-
 					switch (num) {
 					case 1: 
 						$('#contentImg1').attr('src', e.target.result); 
@@ -169,7 +165,6 @@
 						break;
 					}
 				}
-
 				reader.readAsDataURL(img.files[0]);
 			}
 			

@@ -95,6 +95,7 @@ public class ProductDAOImpl implements ProductDAO {
 	public Product productSelectOne(int pType, int product_no) {
 		
 		if( pType == 1) { // brand
+
 			Product brandP = sqlSession.selectOne("product-mapper.brandSelectOne", product_no);
 			List<Attachment> brandAtt = sqlSession.selectList("product-mapper.brandAttSelectList", product_no);
 			
@@ -105,6 +106,7 @@ public class ProductDAOImpl implements ProductDAO {
 			return brandP;		// 한개 상품 정보와 해당 상품의 첨부파일 List 가 담긴  하나의 product VO 반환 
 			
 		} else { // second
+
 			Product secondP = sqlSession.selectOne("product-mapper.secondSelectOne", product_no);
 			List<Attachment> secondAtt = sqlSession.selectList("product-mapper.secondAttSelectList", product_no);
 			
