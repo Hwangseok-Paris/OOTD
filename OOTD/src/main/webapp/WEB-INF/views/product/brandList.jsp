@@ -6,7 +6,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="com.ootd.ootdApp.product.model.vo.*" %>
 <% Product pr = (Product)request.getAttribute("product"); // product(카테고리, 브랜드네임) 받아오기 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,15 +16,12 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productList.css">
 </head>
 <body>
-
 	<c:import url="../common/header.jsp"/>
-
     <div class="container-List">
         <!-- 스토어 이름 -->
         <header class="list-title">
             <h2 align="center">BRAND STORE</h2>
         </header>
-
         <!-- 카테고리 사이드바 -->
         <nav class="side-bar">
             <!-- 카테고리 -->
@@ -90,7 +86,6 @@
                 </ul>
             </div>
         </nav>
-
         <section class="main-wrapper">
             <!-- 필터 정렬 영역 -->
             <div class="filter-div">
@@ -98,7 +93,6 @@
                 <span class="filter-text">낮은 가격순</span>
                 <span class="filter-text">높은 가격순</span>
             </div>
-
             <div class="content-wrapper">
                 <!-- 상품 list -->
                 <div class="product-list">
@@ -127,8 +121,6 @@
            	 	</div>
 			<c:out value="${pageBar}" escapeXml="false"/>
 			</div>
-
-
 			<!-- <ul class='pagination justify-content-center pagination-sm'>
 				<li class='page-item disabled'>
 					<a class='page-link' href='#' tabindex='-1'>이전</a>
@@ -149,18 +141,12 @@
 					<a class='page-link' href='javascript:fn_paging("+pageNo+")'>다음</a>
 				</li>
 			</ul>
-
 			<script>
 	            function fn_paging(cPage,numPerPage){
 	            	location.href='"+url+"?cPage='+cPage;
 	            }
             </script> -->
-
-
-
-
             
-
             
             
         </section>
@@ -168,10 +154,8 @@
 	    <aside>
 	        <div id="topBtn" href="#">TOP</div>
 	    </aside>        
-
         
     </div>
-
     <!-- FOOTER IMPORT -->
    	<%@ include file="../common/footer.jsp" %>
    	
@@ -198,7 +182,6 @@
 				console.log("sortVal="+sortVal);
 				location.href = "${pageContext.request.contextPath}/product/productList.do?categoryNo="+categoryNo+"&pType=1&bName="+bName+"&sortVal="+sortVal;
 			});
-
 	 		
 	 		// 카테고리 클릭시 id 값을 가지고 selectList 로 이동 
 	 		$('#categoryList').children('.prod').on("click",function(){
@@ -251,11 +234,9 @@
         $('.showArea').on('click', function() {
             // 숨긴 영역 slide down
             $(this).next('.dropArea').slideToggle(300);
-
             // +, - 아이콘 바꾸기
             var plus = $(this).children('span').children('.bi-plus-lg');
             var dash = $(this).children('span').children('.bi-dash-lg');
-
             if ( dash.css('display') == 'none' ) {
                 dash.css('display', 'inline-block');
                 plus.css('display', 'none');
@@ -264,7 +245,6 @@
                 dash.css('display', 'none');
             }
         });
-
         // hover 시 상품정보 보여주기
         $('.thumbnail-area').on({
                 'mouseenter' : function() {
@@ -291,7 +271,6 @@
             $(this).css('border-bottom', 'solid 2px gray');
             $(this).siblings().css('border-bottom', '');
         });
-
         // top 버튼
         $(function() {
         $("#topBtn").click(function() {
@@ -301,15 +280,12 @@
             return false;
         });
     });
-
     // if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         //document.documentElement.classList.add("dark");
         
     // }
-
     $('#toggleTheme').on('click', function() {
         $('html').toggleClass("dark");
-
         var mode = $('html').attr('class');
         localStorage.setItem('darkMode', mode)
         console.log(localStorage);
