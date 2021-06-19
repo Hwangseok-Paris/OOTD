@@ -63,7 +63,7 @@ public class ProductController {
 		// 페이지 처리 HTML 생성하기
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "productList.do");
 		
-//		System.out.println("list : " + list);
+		System.out.println("list : " + list);
 		
 		// brand_name List 불러오기 
 		List<String> brandName = productService.brandNameSelectList();
@@ -227,9 +227,9 @@ public class ProductController {
 		
 		Product p = productService.productSelectOne(pType, product_no);
 		
+		model.addAttribute("product", p);
 		
-		
-		if ( pType == 1 ) {
+		if ( pType == 1 ) {		// 브랜드 
 			
 			int numPerPage = 10;
 			
@@ -251,17 +251,12 @@ public class ProductController {
 			model.addAttribute("pageBar", pageBar);
 			
 			return "product/brandDetail";
-			} else {
+			
+		} else {	// 중고
 				
-				return "product/secondHandDetail";
-			}
+			return "product/secondHandDetail";
+		}
 	
-			
-		
-	
-			
-		
-		
 		
 	}
 	
@@ -271,16 +266,28 @@ public class ProductController {
 	
 	//=========Product Update( 브랜드 상품 수정화면으로 보내주는 경로 )======== ( selectOne 사용 )
 	@RequestMapping("/product/productUpdateView.do")
-	public String productUpdateView(@RequestParam int pType, @RequestParam int product_no) {
+	// @RequestParam int product_no, @RequestParam int pType 제거
+	public String productUpdateView(Product p) {
 		// pType = 1 ? 브랜드 : 상품  	
-		
+		int pType = p.getProduct_type();
 		
 		if( pType == 1 ) {
 			
+			System.out.println("productUpdateView 진입");
 			return "product/brandUpdateForm";			// 상품 select 후 updateForm jsp로 이동 
+			
 		} else {
 			
+			System.out.println("productUpdateView 진입");
+			
+			//Product product = productService.updateView(productNo);
+			//List<Attachment> attachmentList = productService.selectAttachmentList(boardNo);
+			
+			//model.addAttribute("product", product);
+			//model.addAttribute("attachmentList", attachmentList);
+			
 			return "product/secondHandUpdateForm";		// 상품 select 후 updateForm jsp로 이동 
+			
 		}
 		
 		
@@ -290,14 +297,19 @@ public class ProductController {
 	
 	//=========Product Update( Update )======== 
 	@RequestMapping("/product/productUpdate.do")
-	public String productUpdate(Product p) {
+	public String productUpdate(Product p, HttpServletRequest req, Model model,
+			@RequestParam(value = "secondHandProductImg", required = false) MultipartFile[] upFiles) {
 		// pType = 1 ? 브랜드 : 상품  	
 		int pType = p.getProduct_type();
 		
 		if( pType == 1 ) {
-			
+			System.out.println("productUpdate 진입");
 			return "product/brandDetail";			// 상품 수정완료 후 Detail로 이동 
 		} else {
+			System.out.println("productUpdate 진입");
+			
+			// 1. 원본 게시글 가져와 수정하기
+			
 			
 			return "product/secondHandDetail";		// 상품 수정완료 후 Detail로 이동 
 		}

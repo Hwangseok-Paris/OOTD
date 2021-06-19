@@ -51,8 +51,8 @@
 	                            </td>
 	                            <td class="total-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${s.product_price}" /> &#8361;</td>
 	                            <td>
-	                                <button class="modify-product modify">수정</button>
-	                                <button class="delete-product delete" id="deleteProduct">삭제</button>
+	                                <button class="modify-product modify" id="updateProduct" onclick="moveToUpdate()">수정</button>
+	                                <button class="delete-product delete" id="deleteProduct" onclick="deleteProduct()">삭제</button>
 	                            </td>
 	                        </tr>
 	                    </tbody>
@@ -63,7 +63,13 @@
     </div>
     
     <script>
-
+    	function moveToUpdate() {
+    		location.href="${pageContext.request.contextPath}/product/productUpdateView.do";
+    	}
+    
+    	function deleteProduct() {
+    		
+    	}
     </script>
             
     <!-- FOOTER IMPORT -->

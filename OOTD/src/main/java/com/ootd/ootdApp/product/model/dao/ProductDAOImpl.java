@@ -95,16 +95,16 @@ public class ProductDAOImpl implements ProductDAO {
 	public Product productSelectOne(int pType, int product_no) {
 		
 		if( pType == 1) { // brand
-			Product brandP = sqlSession.selectOne(null);
-			List<Attachment> brandAtt = sqlSession.selectOne(null);
+			Product brandP = sqlSession.selectOne("brandSelectOne", product_no);
+			List<Attachment> brandAtt = sqlSession.selectList("brandAttSelectOne", product_no);
 			
 			brandP.setAttachment(brandAtt);
 			
 			return brandP;		// 한개 상품 정보와 해당 상품의 첨부파일 List 가 담긴  하나의 product VO 반환 
 			
 		} else { // second
-			Product secondP = sqlSession.selectOne(null);
-			List<Attachment> secondAtt = sqlSession.selectOne(null);
+			Product secondP = sqlSession.selectOne("secondSelectOne", product_no);
+			List<Attachment> secondAtt = sqlSession.selectList("secondAttSelectOne", product_no);
 			
 			secondP.setAttachment(secondAtt);
 			

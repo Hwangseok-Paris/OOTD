@@ -63,7 +63,7 @@ public interface ProductService {
 	 * @param Product
 	 * @return int
 	 */
-	int productUpdate(Product product);
+	int productUpdate(int product_no);
 
 	// =========Product Delete( Delete )========
 
