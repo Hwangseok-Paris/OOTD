@@ -26,20 +26,43 @@
     <div class="product_detail">
         <div class="package" >
             <div id="insertArea" class="inputBox1">
-            	<c:forEach items="${attachment}" var="a" varStatus="vs">
-	                <div id="contentImgArea${vs.count}" class="imgInput">
+            
+            	<c:forEach items="${attchment}" var="a" varStatus="vs">
+	                <div id="contentImgArea1" class="imgInput">
 	                    <img src="${pageContext.request.contextPath}/resources/images/productImgUpload/${ a.att_name }" 
-	                        id="contentImg${vs.count}" style="height: 150px; width: 120px;"/>
+	                        id="contentImg1" style="height: 150px; width: 120px;"/>
 	                </div>
                 </c:forEach>
+                
+                
+                <%-- <div id="contentImgArea2" class="imgInput">
+                    <img src="${pageContext.request.contextPath }/resources/images/productImgUpload/brand sample2.png" 
+                        id="contentImg2" style="height: 150px; width: 120px;"/>
+                </div>
+                
+                
+                <div id="contentImgArea3" class="imgInput">
+                    <img src="${pageContext.request.contextPath }/resources/images/productImgUpload/brand sample3.png" 
+                        id="contentImg3" style="height: 150px; width: 120px;"/>
+                </div>
+                <div id="contentImgArea4" class="imgInput">
+                    <img src="${pageContext.request.contextPath }/resources/images/productImgUpload/brand sample4.png" 
+                        id="contentImg4" style="height: 150px; width: 120px;"/>
+                </div> --%>
             </div>
 
+           
+        
             <div id="imgDetail" class="inputBox2">
                 <div class='inputBox2 zoom' id='ex1'>
-                    <img src='${pageContext.request.contextPath}/resources/images/productImgUpload/${ a.att_name }' id='jack' width='540' height='620' alt='Daisy on the Ohoopee'/>
+                    <img src='<%-- ${pageContext.request.contextPath }/resources/images/brand sample1.png --%>' id='jack' width='540' height='620' alt='Daisy on the Ohoopee'/>
                 </div>
             </div>
         
+        
+        
+        
+
             
         </div>
         <div class="package">
@@ -62,7 +85,7 @@
                         </span>
                     </dt> 
                     <dd class="ddd"><span class="pInfoText">
-                        ${ product.product_detail }
+                        <textarea name="" id="" cols="30" rows="10"> ${ product.product_detail }</textarea>
                     </span> <br></dd>
                     <hr>
                     <dt class="drop"><b>Size, Color</b> 

@@ -141,7 +141,7 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping("member/memberLogin.do")
+	@RequestMapping(value={"member/memberLogin.do", "*/member/memberLogin.do"})
 	public String memberLogin(
 				@RequestParam String member_id,
 				@RequestParam String member_pw,

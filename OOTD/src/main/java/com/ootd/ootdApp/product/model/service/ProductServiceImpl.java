@@ -127,11 +127,11 @@ public class ProductServiceImpl implements ProductService {
 	
 	
 	
-	@Override
-	public int productUpdate(Product product) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	@Override
+//	public int productUpdate(Product product) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
 	@Override
 	public int productDelete(int product_no) {
@@ -164,6 +164,12 @@ public class ProductServiceImpl implements ProductService {
 	public List<Attachment> selectProductImages() {
 		
 		return productDAO.selectProductImages();
+	}
+
+	@Override
+	public int productUpdate(int product_no) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

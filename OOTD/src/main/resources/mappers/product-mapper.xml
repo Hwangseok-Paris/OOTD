@@ -107,7 +107,7 @@
 	</select>
 
 	<select id="brandAttSelectList" parameterType="_int" resultType="Attachment">
-		SELECT * FROM PRODUCT WHERE PRODUCT_NO = #{ product_no }
+		SELECT * FROM ATTACHMENT WHERE PRODUCT_NO = #{ product_no }
 	</select>
 
 	<select id="secondSelectOne" parameterType="_int" resultType="Product_p">
