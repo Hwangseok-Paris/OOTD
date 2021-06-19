@@ -541,7 +541,28 @@
 			});
 		});
 		
-		$()
+		
+		$(function() {
+			
+			var str = $('#currPage').text();
+			// var index = str.indexOf('currPage');
+			
+			// var result = str.substring(index+11, index+12);
+			console.log(str);
+			
+			if ( str > 1 ) {
+				var offset = $(".review_list").offset();
+	        	$('html, body').animate({scrollTop : offset.top}, 50);
+			}
+		});
+			
+	
+			
+		
+		
+		
+	
+
 		
 		 
 

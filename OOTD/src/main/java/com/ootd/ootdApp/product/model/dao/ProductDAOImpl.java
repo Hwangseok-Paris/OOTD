@@ -165,9 +165,9 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public int selectReviewTotalContents() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("product-mapper.selectReviewTotalContents");
+	public int selectReviewTotalContents(int product_no) {
+		
+		return sqlSession.selectOne("product-mapper.selectReviewTotalContents", product_no);
 	}
 
 	// 다인
@@ -177,8 +177,5 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList("product-mapper.selectProductImages");
 	}
 
-	
-
-	
 
 }

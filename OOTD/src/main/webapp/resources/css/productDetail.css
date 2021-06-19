@@ -138,13 +138,15 @@ section{
         }
 
 
-.pagination {
+.pagination_r {
     display: inline-block;
     text-align: center;
     padding-left : 35%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.pagination a {
+.pagination_r a {
 	color: black;
 	float: left;
 	padding: 8px 16px;
@@ -202,4 +204,9 @@ section{
 .review {
 	text-decoration: underline;
 	color: black;
+}
+
+a#currPage {
+	text-decoration: underline;
+	text-underline-offset: 2px;
 }

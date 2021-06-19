@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ootd.ootdApp.common.Utils;
+import com.ootd.ootdApp.common.Utils2;
 import com.ootd.ootdApp.product.model.service.ProductService;
 import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
@@ -223,30 +224,29 @@ public class ProductController {
 		
 		Product p = productService.productSelectOne(pType, product_no);
 		List<Attachment> att = p.getAttachment();
-		
 	
-		
 		model.addAttribute("product", p);
 		model.addAttribute("attachment", att);
-		
-
+	
 		if ( pType == 1 ) {		// 브랜드 
 			
-			int numPerPage = 10;
+			int numPerPage = 5;
 			
 			// 현재 페이지의 게시글 수
-			List<Map<String, String>> list 
+			List<Map<String, String>> review 
 				= productService.selectReviewList(cPage, numPerPage, product_no);
 			
 			// 전체 게시글 수 
-			int totalContents = productService.selectReviewTotalContents();
+			int totalContents = productService.selectReviewTotalContents(product_no);
 			
 			// 페이지 처리 HTML 생성하기
-			String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "productList.do");
+			// product_no=1&pType=1
+			String pageBar = Utils2.getPageBar(totalContents, cPage, numPerPage, 
+												"productDetail.do?product_no="+product_no+"&pType=1");
 			
-			System.out.println("list : " + list);
+			System.out.println("review : " + review);
 			
-			model.addAttribute("review", list);
+			model.addAttribute("review", review);
 			model.addAttribute("totalContents", totalContents);
 			model.addAttribute("numPerPage", numPerPage);
 			model.addAttribute("pageBar", pageBar);

@@ -145,7 +145,7 @@ public interface ProductDAO {
 
 	List<Map<String, String>> selectReviewList(int cPage, int numPerPage, int product_no);
 
-	int selectReviewTotalContents();
+	int selectReviewTotalContents(int product_no);
 
 	// 다인
 	List<Attachment> selectProductImages();

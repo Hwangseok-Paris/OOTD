@@ -218,7 +218,7 @@ public class SecondHandConrtoller {
 		
 		return "myPage/myPage_Product";
 	}
-	
+
 	//판매내역 가져오기
 	@RequestMapping("/myPage/myPage_Sale.mp")
 	public String myPageSaleProductList(Member member, Model model) {
@@ -260,4 +260,11 @@ public class SecondHandConrtoller {
 		
 		return order_status;
 	}
+
+	@RequestMapping("/myPage/myPage_Review.mp")
+	public String myPageReview() {
+		
+		return "";
+	}
+
 }
