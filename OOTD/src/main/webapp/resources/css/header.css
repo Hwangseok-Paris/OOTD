@@ -57,7 +57,7 @@ a:active {
 }
 
 .nav_menu li, #second_Hand, #brand, #logo:hover {
-	cursor: pointer;
+	cursor: pointer !important;
 }
 
 .header_menu {

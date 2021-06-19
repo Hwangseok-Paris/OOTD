@@ -90,7 +90,7 @@ div[class$=cate]  {
 
 
 .pagination, .filter-div span:hover {
-    cursor: pointer;
+    cursor: pointer !important;
     color: black;
 }
 
@@ -100,7 +100,8 @@ div[class$=cate]  {
 }
 
 #prod-li, #brand-li:hover {
-	cursor: pointer;
+	cursor: pointer !important;
+	color: black !important;
 }
 
 .content-wrapper {

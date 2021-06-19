@@ -84,16 +84,16 @@
     				console.log(data);
     				console.log(data[0].att_name);
     				console.log("TOP 10 이미지 불러오기 성공!")
-    				$('.bxslider>li>.img1').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[0].att_name);
-    				$('.bxslider>li>.img2').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[1].att_name);
-    				$('.bxslider>li>.img3').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[2].att_name);
-    				$('.bxslider>li>.img4').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[3].att_name);
-    				$('.bxslider>li>.img5').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[4].att_name);
-    				$('.bxslider>li>.img6').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[5].att_name);
-    				$('.bxslider>li>.img7').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[6].att_name);
-    				$('.bxslider>li>.img8').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[7].att_name);
-    				$('.bxslider>li>.img9').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[8].att_name);
-    				$('.bxslider>li>.img10').attr("src", "${pageContext.request.contextPath}/resources/images/product/"+data[9].att_name);
+    				$('.bxslider>li>.img1').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[0].att_name);
+    				$('.bxslider>li>.img2').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[1].att_name);
+    				$('.bxslider>li>.img3').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[2].att_name);
+    				$('.bxslider>li>.img4').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[3].att_name);
+    				$('.bxslider>li>.img5').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[4].att_name);
+    				$('.bxslider>li>.img6').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[5].att_name);
+    				$('.bxslider>li>.img7').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[6].att_name);
+    				$('.bxslider>li>.img8').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[7].att_name);
+    				$('.bxslider>li>.img9').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[8].att_name);
+    				$('.bxslider>li>.img10').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[9].att_name);
     			},
     			
     			error: function(){

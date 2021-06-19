@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.RestTemplate;
+// import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -53,8 +53,8 @@ public class MemberController {
 	@Autowired 
 	private JavaMailSenderImpl mailSender;
 	
-	@Autowired
-	private RestTemplate restTemplate;
+	// @Autowired
+	// private RestTemplate restTemplate;
 
 	
 	@Autowired
@@ -425,6 +425,7 @@ public class MemberController {
 
 	}
 	
+	/*
 	//카카오 나의 엑세스 토큰 요청하기.
 	@RequestMapping(value = "/selectMyAccessTockenWithKakao", method = RequestMethod.GET)
 	@ResponseBody
@@ -478,8 +479,10 @@ public class MemberController {
 		
 		return result;
 		
+		}
+		*/
 
-	}
+	
 	
 	
 	
