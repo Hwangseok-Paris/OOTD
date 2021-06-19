@@ -171,7 +171,7 @@
                         
                         <tr class="account">
                             <td>계좌번호</td>
-                            <td>${member.bank_code }</td>
+                            <td id="bank_code">${member.bank_code }</td>
                             <td>${member.account_number }</td>
                             <td>
                                 <button id="update-account">계좌번호 변경</button>

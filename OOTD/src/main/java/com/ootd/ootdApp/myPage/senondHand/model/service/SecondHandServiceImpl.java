@@ -50,6 +50,27 @@ public class SecondHandServiceImpl implements SecondHandService {
 	public List<Product> selectProductList(int member_no) {
 		return secondHandDAO.selectProductList(member_no);
 	}
+
+	@Override
+	public int deleteProduct(int productNo) {
+		return secondHandDAO.deleteProduct(productNo);
+	}
+
+	@Override
+	public List<myPageOrderList> selectSaleProductList(String member_name) {
+		return secondHandDAO.selectSaleProductList(member_name);
+	}
+
+	@Override
+	public int updateOrderSaleStatus(int orderNo) {
+		System.out.println("Service SaleStatus orderNo -> " + orderNo);
+		return secondHandDAO.updateOrderSaleStatus(orderNo);
+	}
+
+	@Override
+	public String selectOrderStatus(int orderNo) {
+		return secondHandDAO.selectOrderStatus(orderNo);
+	}
 	
 
 }

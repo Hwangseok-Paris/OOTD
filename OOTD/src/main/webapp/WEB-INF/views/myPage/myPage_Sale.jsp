@@ -40,74 +40,32 @@
                             <th></th>
                         </tr>
                     </thead>
+                    <c:forEach items="${list }" var="s">
                     <tbody>
                         <tr>
                             <td>
                                 <div class="product-info">
-                                    <div class="brand-name">OOTD</div>
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                    <span class="product-option">(small)</span>
+                                    <div class="brand-name">${s.brand_name }</div>
+                                    <span class="product-name">${s.product_name } </span>
+                                    <span class="product-option">${s.product_size }</span>
                                 </div>
                             </td>
                             <td>
-                                <div class="order-no">0000001</div>
+                                <div class="order-no">${s.order_no }</div>
                             </td>
-                            <td class="order-date">2021.06.06</td>
-                            <td class="total-price">300,000&#8361;</td>
+                            <td class="order-date">${s.order_date }</td>
+                            <td class="total-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${s.total_price}" />&#8361;</td>
                             <td>
-                                <span class="sale-status">1</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
+                                <span class="sale-status" id="${status }">1</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
                             </td>
                             <td>
                                 <button class="modify-product modify" style="display: none;">수정</button>
                                 <button class="delete-product delete" style="display: none;">삭제</button>
-                                <button class="complete-send" style="display: none;">발송완료</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product-info">
-                                    <div class="brand-name">OOTD</div>
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                    <span class="product-option">(small)</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="order-no">0000001</div>
-                            </td>
-                            <td class="order-date">2021.06.06</td>
-                            <td class="total-price">300,000&#8361;</td>
-                            <td>
-                                <span class="sale-status">2</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
-                            </td>
-                            <td>
-                                <button class="modify-product modify" style="display: none;">수정</button>
-                                <button class="delete-product delete" style="display: none;">삭제</button>
-                                <button class="complete-send" style="display: none;">발송완료</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product-info">
-                                    <div class="brand-name">OOTD</div>
-                                    <span class="product-name">Round String Jacket Brown </span>
-                                    <span class="product-option">(small)</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="order-no">0000001</div>
-                            </td>
-                            <td class="order-date">2021.06.06</td>
-                            <td class="total-price">300,000&#8361;</td>
-                            <td>
-                                <span class="sale-status">3</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
-                            </td>
-                            <td>
-                                <button class="modify-product modify" style="display: none;">수정</button>
-                                <button class="delete-product delete" style="display: none;">삭제</button>
-                                <button class="complete-send" style="display: none;">발송완료</button>
+                                <button class="complete-send" style="display: none;" id="${s.order_no }">발송완료</button>
                             </td>
                         </tr>
                     </tbody>
+                    </c:forEach>
                 </table>
             </div>
         </section>
@@ -122,9 +80,7 @@
    	
 
 <script>
-
-   
-
+	
     // .sale_status의 값(value)에 따라 배송 상태 텍스트 변경
     $(function () {
         $('.sale-status').each(function () {
@@ -147,7 +103,68 @@
             }
         })
     })
+	
+    // 판매상태 바꾸기
+  	$('.complete-send').click(function() {
+		
+		var orderNo = $(this).attr('id');
+		
+		$.ajax({
+			type: "POST",
+			url: "${pageContext.request.contextPath}/myPage/orderStatusChange.do",
+			data: {"orderNo": orderNo},
+			
+			success: function(data) {
+				if (data == 1) {
+					$('sale-status').text("결제완료");
+					$('.complete-send').show();
+				} else if(data == 2) {
+					$('.sale-status').text("구매확정대기");
+					$('.complete-send').hide();
+				} else if (data == 3) {
+					$('.sale-status').text("거래완료");
+					$('complete-send').hide();
+				}
+			}, error: function() {
+				alert("상태변환 실패");
+			}
+		});
+		
+	});
+    
+    // 주문 번호를 클릭했을 때(span의 class가져옴)
+	 $('.order-no').click(function(){
+		 
+		 var orderNo = $(this).text();
+		 console.log(orderNo);
+		 
+		$.ajax({
+			type: "POST",
+			url: "${pageContext.request.contextPath}/myPage/myPage_Order_Detail.mp",
+			data: { "orderNo" : orderNo }, 
 
+			success: function(data){
+				//alert('주문 상세보기 성공');
+				console.log(data[0].order_no);
+				console.log(data[0].receiver_name);
+				console.log(data[0].order_date); // ? error
+				$('.order-no-area>span.order-no').text(data[0].order_no);
+				$('.customer-name').text(data[0].receiver_name);
+				$('.customer-address').text(data[0].order_address);
+				// $('.customer-phone').text(data[0].order_address);
+				$('.modal-product>span.product-name').text(data[0].product_name);
+				$('.customer-address').text(data[0].order_address);
+				$('.modal-date>div.order-date').text(data[0].order_date);
+				$('.modal-quantity>div.order-quantity').text(data[0].order_quantity);
+				$('.price-area>span.price-amount').text(data[0].total_price);
+			},
+			
+			error: function(){
+				alert('주문 상세보기 실패');
+			}
+			
+		});
+	}); 
 
 
 
