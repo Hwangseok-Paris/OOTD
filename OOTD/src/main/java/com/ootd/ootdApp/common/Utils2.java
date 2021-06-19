@@ -21,11 +21,11 @@ public class Utils2 {
 		System.out.println("totalPage : "+totalPage);
 		System.out.println("pageStart["+pageNo+"] ~ pageEnd["+pageEnd+"]");
 		
-		pageBar += "<div class=\"pagination\">";
+		pageBar += "<div class=\"pagination_r\">";
 		//[이전]section
 		if(pageNo == 1 ){
 			// pageBar += "<a class='page-link' href='#' tabindex='-1'>이전</a>";
-			pageBar += "<a href=\"#\">&laquo;&laquo;</a>";
+			pageBar += "<a href='#'>&laquo;</a>";
 		}
 		else {
 			pageBar += "<a href='javascript:fn_paging("+(pageNo-1)+")'>&laquo;</a>";
@@ -34,7 +34,7 @@ public class Utils2 {
 		// pageNo section
 		while(!(pageNo > pageEnd || pageNo > totalPage)){
 			if(cPage == pageNo ){
-				pageBar += "<a>"+pageNo+"</a>";
+				pageBar += "<a id='currPage'>"+pageNo+"</a>";
 			} 
 			else {
 				pageBar += "<a href='javascript:fn_paging("+pageNo+")'>"+pageNo+"</a>";
@@ -47,7 +47,7 @@ public class Utils2 {
 			pageBar += "<a href='#'>&raquo;</a>";
 			
 		} else {
-			pageBar += "<a class='page-link' href='javascript:fn_paging("+pageNo+")'>&raquo;&raquo;</a> ";
+			pageBar += "<a href='javascript:fn_paging("+ (pageNo+1) +")'>&raquo;</a>";
 		}
 		
 		pageBar += "</div>";
@@ -56,7 +56,7 @@ public class Utils2 {
 		//fn_paging함수
 		pageBar += "<script>";
 		pageBar += "function fn_paging(cPage,numPerPage){";
-		pageBar += "location.href='"+url+"?cPage='+cPage;";
+		pageBar += "location.href='"+url+"&cPage='+cPage;";
 		pageBar += "}";
 		pageBar += "</script>";
 		

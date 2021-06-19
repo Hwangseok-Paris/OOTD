@@ -211,5 +211,11 @@ public class SecondHandConrtoller {
 		
 		return "myPage/myPage_Product";
 	}
+	
+	@RequestMapping("/myPage/myPage_Review.mp")
+	public String myPageReview() {
+		
+		return "";
+	}
  	
 }

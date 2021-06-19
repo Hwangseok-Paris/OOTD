@@ -231,6 +231,8 @@
         
         $(function() {
         	Kakao.init('1da952139d172c0ac2c48f4a3ba9ca34');
+        	// SDK 초기화 여부를 판단합니다.
+            console.log(Kakao.isInitialized());
         });
         
         $('#kakao-box').on('click', function() {
@@ -256,6 +258,71 @@
         		console.log(err)
         	}
         });
+        
+        //카카오 로그인
+        function loginWithKakao() {
+            Kakao.Auth.authorize({
+                redirectUri: 'http://localhost:8080/oauth'
+              });		
+          }
+        	
+         
+         
+        //나의 토큰 가져오기	
+        function selectMyAccessTockenWithKakao() {
+        	
+         	var param = {"code" : code}
+        	
+        	 	$.ajax({
+        			url  : '/selectMyAccessTockenWithKakao',
+        	        type : 'get',
+        	        data : param,
+        	        dataType : "JSON", 
+        	        contentType: "application/x-www-form-urlencoded;charset=utf-8", 
+        	        success : function(data){
+        	            
+        	        	
+        	        	console.log(data);
+        	        	
+        	        	console.log(data['access_token']);    //토큰얻기
+        	        	
+        	        	document.getElementById("tocken").value = data['access_token']; //토큰 할당
+        	        	
+        	        },
+        	        error: function(xhr, type){ 
+        		        console.log(xhr); 
+        		        console.log(type); 
+        			}
+        	    })
+        	
+          }
+        	
+        	
+        	
+        //나의 정보 가져오기	
+        function selectMyInfoWithKakao() {
+        	
+        	var myTocken = document.getElementById("tocken").value
+        	
+         	var param = {"tocken" : myTocken}
+        	
+        	 	$.ajax({
+        			url  : '/selectMyInfoWithKakao',
+        	        type : 'get',
+        	        data : param,
+        	        dataType : "JSON", 
+        	        contentType: "application/x-www-form-urlencoded;charset=utf-8", 
+        	        success : function(data){
+        	            
+        	        	console.log(data);
+        	        },
+        	        error: function(xhr, type){ 
+        		        console.log(xhr); 
+        		        console.log(type); 
+        			}
+        	    })
+        	
+          }
         
         
     </script>

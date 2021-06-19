@@ -142,10 +142,12 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int selectReviewTotalContents() {
+	public int selectReviewTotalContents(int product_no) {
 		
-		return productDAO.selectReviewTotalContents();
+		return productDAO.selectReviewTotalContents(product_no);
 	}
+
+	
 
 	
 

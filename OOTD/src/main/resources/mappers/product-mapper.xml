@@ -121,8 +121,9 @@
 		ORDER BY REVIEW_NO DESC
 	</select>
 	
-	<select id="selectReviewTotalContents" resultType="_int">
+	<select id="selectReviewTotalContents" parameterType="_int" resultType="_int">
 		SELECT COUNT(*) FROM REVIEW
+		WHERE PRODUCT_NO = ${ product_no }
 	</select>
 
 </mapper>
