@@ -35,9 +35,9 @@
    </update>
 
 	<select id="selectOrderList" parameterType="string" resultType="O_Order">
-		SELECT M.BRAND_NAME, P.PRODUCT_NAME, P.PRODUCT_SIZE, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE, O.ORDER_STATUS 
+		SELECT M.BRAND_NAME, P.PRODUCT_NO, P.PRODUCT_NAME, OL.ORDER_SIZE AS PRODUCT_SIZE, O.ORDER_NO, O.ORDER_DATE, (OL.ORDER_QUANTITY*P.PRODUCT_PRICE) AS TOTAL_PRICE, O.ORDER_STATUS 
 		FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P, MEMBER M 
-		WHERE O.ORDER_NO = OL.ORDER_NO AND OL.PRODUCT_NO = P.PRODUCT_NO AND O.MEMBER_NO = M.MEMBER_NO AND M.MEMBER_NAME= #{member_name}
+		WHERE O.ORDER_NO = OL.ORDER_NO AND OL.PRODUCT_NO = P.PRODUCT_NO AND O.MEMBER_NO = M.MEMBER_NO AND M.MEMBER_NAME= #{ member_name }
 		ORDER BY O.ORDER_DATE DESC
 	</select>
 	
@@ -72,5 +72,23 @@
 		FROM O_ORDER
 		WHERE ORDER_NO = #{order_no}
 	</select>
+
+	
+	<select id="selectReviewInfo" parameterType="hashmap" resultType="Product_rev">
+		SELECT  K.PRODUCT_NO, A.ATT_NAME, M.BRAND_NAME, K.PRODUCT_NAME, K.ORDER_SIZE, K.ORDER_DATE, K.TOTAL_PRICE
+		FROM ATTACHMENT A, MEMBER M, ( SELECT L.PRODUCT_NO, P.PRODUCT_NAME, L.ORDER_SIZE, (L.ORDER_QUANTITY * P.PRODUCT_PRICE) AS TOTAL_PRICE, O.ORDER_DATE, P.MEMBER_NO
+                                       FROM PRODUCT P, O_ORDER O, O_ORDER_LIST L
+                                       WHERE L.PRODUCT_NO = #{ product_no }
+                                       AND O.MEMBER_NO = #{ member_no }
+                                       AND O.ORDER_NO = L.ORDER_NO
+                                       AND P.PRODUCT_NO = L.PRODUCT_NO ) K
+		WHERE A.PRODUCT_NO = K.PRODUCT_NO
+		AND M.MEMBER_NO = K.MEMBER_NO 
+		AND ROWNUM = 1
+	</select>
+	
+	<insert id="insertReview" parameterType="review">
+		INSERT INTO REVIEW VALUES(SEQ_REVIEW_NO.NEXTVAL, #{ review_contents }, SYSDATE, #{ review_title }, #{ member_no }, #{ product_no })
+	</insert>
 
 </mapper>

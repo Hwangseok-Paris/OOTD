@@ -1,5 +1,6 @@
 package com.ootd.ootdApp.myPage.senondHand.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.stereotype.Service;
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.senondHand.model.DAO.SecondHandDAO;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
+import com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
+import com.ootd.ootdApp.product.model.vo.Review;
 
 @Service
 public class SecondHandServiceImpl implements SecondHandService {
@@ -70,6 +73,18 @@ public class SecondHandServiceImpl implements SecondHandService {
 	@Override
 	public String selectOrderStatus(int orderNo) {
 		return secondHandDAO.selectOrderStatus(orderNo);
+	}
+
+	@Override
+	public Review_ProductInfo selectReviewInfo(HashMap<String, Object> map) {
+		
+		return secondHandDAO.selectReviewInfo(map);
+	}
+
+	@Override
+	public int insertReview(Review review) {
+		
+		return secondHandDAO.insertReview(review);
 	}
 	
 

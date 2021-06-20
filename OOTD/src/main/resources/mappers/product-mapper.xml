@@ -120,7 +120,7 @@
 
 
 	<!-- 리뷰 -->
-	<select id="selectReviewList" parameterType="_int" resultType="review">
+	<select id="selectReviewList" parameterType="_int" resultType="review_v">
 		SELECT R.REVIEW_NO, R.REVIEW_TITLE, M.MEMBER_NICKNAME, R.REVIEW_DATE, R.REVIEW_CONTENTS
 		FROM REVIEW R, MEMBER M
 		WHERE R.MEMBER_NO = M.MEMBER_NO

@@ -1,8 +1,8 @@
 package com.ootd.ootdApp.myPage.senondHand.controller;
 
+import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.senondHand.model.service.SecondHandService;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
+import com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
+import com.ootd.ootdApp.product.model.vo.Review;
 
 @SessionAttributes({"member"})
 @Controller
@@ -262,9 +264,43 @@ public class SecondHandConrtoller {
 	}
 
 	@RequestMapping("/myPage/myPage_Review.mp")
-	public String myPageReview() {
+	public String myPageReview(@RequestParam int pno, @RequestParam int mno, Model model) {
 		
-		return "";
+		System.out.println("Review Controller access");
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("product_no", pno);
+		map.put("member_no", mno);
+		
+		System.out.println("service에 전달할 map : " + map);
+		
+		Review_ProductInfo info = secondHandService.selectReviewInfo(map);
+		
+		model.addAttribute("info", info);
+		
+		return "myPage/myPage_Review";
+	}
+	
+	@RequestMapping("/myPage/reviewEnroll.mp")
+	public String reviewEnroll(
+				Review review,
+				Model model
+			) {
+		
+		System.out.println("review 등록 controller 접근 : " + review);
+		
+		String msg = "";
+		
+		int result = secondHandService.insertReview(review);
+		
+		if ( result > 0 ) {
+			msg = "리뷰가 성공적으로 등록되었습니다.";
+		} else {
+			msg = "리뷰 등록에 실패하였습니다.";
+		}
+		
+		return "common/msg";
 	}
 
 }

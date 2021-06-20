@@ -37,19 +37,19 @@
                             <tr>
                                 <td>
                                     <div class="product-img">
-                                        <img src="${pageContext.request.contextPath}/resources/img/sample1.jpg" alt="">
+                                        <img src="${pageContext.request.contextPath}/resources/images/productImgUpload/${ info.att_name }" alt="">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="product-info">
-                                        <div class="brand-name">OOTD</div>
-                                        <span class="product-name">Round String Jacket Brown </span>
-                                        <span class="product-option">(small)</span>
+                                        <div class="brand-name">${ info.brand_name }</div>
+                                        <span class="product-name">${ info.product_name } </span>
+                                        <span class="product-option">${ info.order_size }</span>
                                     </div>
                                 </td>
 
-                                <td class="order-date">2021.06.06</td>
-                                <td class="total-price">300,000&#8361;</td>
+                                <td class="order-date">${ info.order_date }</td>
+                                <td class="total-price">${ info.total_price }&#8361;</td>
                             </tr>
                         </tbody>
                     </table>
@@ -57,22 +57,26 @@
                     <!-- 리뷰 작성 영역-->
                     <div class="reviewArea">
                         <div class="formArea">
-                            <form action="" method="POST" id="review">
+                            <form action="reviewEnroll.mp" method="POST" id="review">
                                 <div class="review-title">
                                     <span>제목</span>
-                                    <input type="text" name="review-title" class="input-review-title">
+                                    <input type="text" name="review_title" class="input-review-title">
+                                    <input type="hidden" name="member_no" value="${ member.member_no }" />
+                                    <input type="hidden" name="product_no" value="${ info.product_no }" />
                                 </div>
                                 <div class="review-content">
                                     <span>내용</span>
-                                    <textarea name="review-content" form="review" cols="113" rows="15" fixed></textarea>
+                                    <textarea name="review_contents" form="review" cols="113" rows="15" fixed></textarea>
                                 </div>
+                                <div class="btnArea">
+		                            <button type="submit"> 작성하기 </button>
+		                            <button onclick="history.back()"> 뒤로가기 </button>
+		                        </div>
+                                
                             </form>
                         </div>
                         <br>
-                        <div class="btnArea">
-                            <button type="submit"> 작성하기 </button>
-                            <button onclick="history.back()"> 뒤로가기 </button>
-                        </div>
+                        
                     </div>
 
                 </div>

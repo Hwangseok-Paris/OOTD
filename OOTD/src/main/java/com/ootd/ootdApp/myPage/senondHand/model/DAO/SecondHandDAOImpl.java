@@ -1,5 +1,6 @@
 package com.ootd.ootdApp.myPage.senondHand.model.DAO;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,7 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
+import com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
+import com.ootd.ootdApp.product.model.vo.Review;
 
 @Repository
 public class SecondHandDAOImpl implements SecondHandDAO {
@@ -70,6 +73,18 @@ public class SecondHandDAOImpl implements SecondHandDAO {
 	@Override
 	public String selectOrderStatus(int orderNo) {
 		return sqlSession.selectOne("orderList-mapper.selectOrderStatus", orderNo);
+	}
+
+	@Override
+	public Review_ProductInfo selectReviewInfo(HashMap<String, Object> map) {
+		
+		return sqlSession.selectOne("orderList-mapper.selectReviewInfo", map);
+	}
+
+	@Override
+	public int insertReview(Review review) {
+		
+		return sqlSession.insert("orderList-mapper.insertReview", review);
 	}
 
 }
