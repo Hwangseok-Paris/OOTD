@@ -12,6 +12,11 @@
 		ORDER BY PRODUCT_NO ASC
 	</select>
 	
+	<select id="brandProductSelectTotalContents" resultType="_int">
+		SELECT COUNT(*) 
+		FROM PRODUCT
+	</select>
+	
 	<update id="deleteBrandProductList" parameterType="_int">
 		UPDATE PRODUCT
 		SET PRODUCT_STATUS = 'N'

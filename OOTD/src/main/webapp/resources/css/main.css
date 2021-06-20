@@ -115,3 +115,6 @@ article > .video_content > .video_SHand:hover > p {
     height: 310px;
     background-color: gray;
 }
+.bxslider li img {
+	cursor: pointer !important;
+}

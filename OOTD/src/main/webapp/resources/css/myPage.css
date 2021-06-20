@@ -367,3 +367,20 @@ textarea{
     text-align: center;
     padding-inline-start: unset;
 }
+
+.pagination_r {
+    display: inline-block;
+    text-align: center;
+    padding-left : 35%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pagination_r a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	background:none;
+	text-align:center;
+}

@@ -1,7 +1,9 @@
 package com.ootd.ootdApp.myPage.brand.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,20 +17,26 @@ public class BrandDAOImpl implements BrandDAO {
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
+	
+	RowBounds rows;
 
 	@Override
-	public List<MypageOrderList> selectBrandOrderList(String brand_name) {
+	public List<Map<String, String>> selectBrandOrderList(int cPage, int numPerPage, String brand_name) {
 		System.out.println("order :: DAO 왔나요");
-		List<MypageOrderList> mypage = sqlSession.selectList("orderList-mapper.selectBrandOrderList", brand_name);
-		System.out.println("test" + mypage);
-		return mypage;
+		rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		
+		//List<MypageOrderList> mypage = sqlSession.selectList("orderList-mapper.selectBrandOrderList", brand_name);
+		//System.out.println("test" + mypage);
+		return sqlSession.selectList("orderList-mapper.selectBrandOrderList", brand_name, rows);
 
 	}
 
 	@Override
-	public List<Product> selectBrandProductList(int member_no) {
+	public List<Map<String, String>> selectBrandProductList(int cPage, int numPerPage, int member_no) {
 		System.out.println("product :: DAO 왔나요");
-		return sqlSession.selectList("productList-mapper.selectBrandProductList", member_no);
+		rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		
+		return sqlSession.selectList("productList-mapper.selectBrandProductList", member_no, rows);
 	}
 
 	@Override
@@ -88,6 +96,18 @@ public class BrandDAOImpl implements BrandDAO {
 			result = 0;
 		}
 		return result;
+	}
+
+	@Override
+	public int brandSelectTotalContents() {
+		
+		return sqlSession.selectOne("orderList-mapper.selectBrandTotalContents");
+	}
+
+	@Override
+	public int brandProductSelectTotalContents() {
+		
+		return sqlSession.selectOne("productList-mapper.brandProductSelectTotalContents");
 	}
 	
 

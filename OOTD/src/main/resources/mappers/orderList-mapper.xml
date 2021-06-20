@@ -13,6 +13,12 @@
         	AND M.BRAND_NAME= #{ brand_name }
         ORDER BY O.ORDER_DATE DESC
    </select>
+   
+   <select id="selectBrandTotalContents" resultType="_int">
+		SELECT COUNT(*) 
+		FROM O_ORDER O, O_ORDER_LIST OL
+		WHERE O.ORDER_NO = OL.ORDER_NO
+	</select>
 
    <select id="selectBrandOrderDetail" resultType="O_Order" parameterType="_int">
    		SELECT A.ORDER_NO, A.MEMBER_NO, C.PRODUCT_NAME, A.ORDER_ADDRESS, A.RECEIVER_NAME, A.ORDER_DATE, B.ORDER_QUANTITY, A.TOTAL_PRICE
