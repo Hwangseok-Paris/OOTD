@@ -34,5 +34,9 @@
 	    AND ATT_LEVEL = 1
 	    AND C.CART_NO = ${cart_no}
     </select>
+    
+    <insert id="addCartList" parameterType="Cart">
+    	INSERT INTO CART VALUES(SEQ_CART_NO.NEXTVAL, #{member_no}, #{cart_quantity}, #{cart_size}, #{product_no})
+    </insert>
 
 </mapper>

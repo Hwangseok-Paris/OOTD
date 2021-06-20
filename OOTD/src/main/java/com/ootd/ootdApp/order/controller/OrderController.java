@@ -132,6 +132,39 @@ public class OrderController {
 		return map;
 		
 	}
+	
+	
+	// add cartList from product Detail
+	@RequestMapping("/order/addCartList.or")
+	public String addCartList(HttpServletRequest req, Model model,
+							 @RequestParam int product_no,
+							 @RequestParam int quantity,
+							 @RequestParam String product_size
+							 ) {
+		
+		HttpSession session = req.getSession();
+		Member member = (Member) session.getAttribute("member");
+		
+		int member_no = member.getMember_no();
+		
+		Cart cart = new Cart();
+		cart.setMember_no(member_no);
+		cart.setProduct_no(product_no);
+		cart.setCart_quantity(quantity);
+		cart.setCart_size(product_size);
+		
+		int ciResult = orderService.addCartList(cart);
+		
+		if(ciResult > 0) {
+			System.out.println("Mission Success");
+		} else System.out.println("Mission Fail");
+		
+		
+		
+		
+		return "";
+		
+	}
 
 	
 	

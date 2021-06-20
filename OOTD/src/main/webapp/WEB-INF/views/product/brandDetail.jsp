@@ -65,7 +65,8 @@
         </div>
         <div class="package">
             <div id="prTextInput" class="inputBox3">
-                <span id="brand_name"><b>${ product.brand_name }</b></span> <br>
+                <span id="brand_name"><b>${ product.brand_name } </b></span>
+                <br>
                 
                 <h4 id="pName">${ product.product_name }</h4>
                 <span style="margin-left: 240px;" >￦</span><span id="ppPrice">${ product.product_price }</span> <br><hr>
@@ -110,11 +111,13 @@
                         </select> <br>
                     </dt><hr>
                     <dt class="pOrigin">
-                        <div id="origin">
-                            <span>${ product.product_name }<b class="selectedSize"></b> </span> 
-                            <input type="number" id="pQuan" name="pQuan" value="1" min="1"> <!-- input value 값 ??  -->
+                        <div id="origin" class="selectedPList">
+                       		<input type="hidden" class="product_no" value="${product.product_no }"/>
+                            <span>${ product.product_name }<b class="selectedSize"></b> </span>
+                            <input type="number" class="quantity" id="pQuan" name="pQuan" value="1" min="1"> <!-- input value 값 ??  -->
                             <img src="${pageContext.request.contextPath }/resources/images/xx.png" alt="" style="width: 15px; height: 15px; margin-right: 5px;" id="pDelete">
                             <span>￦</span><span class="pPrice">${ product.product_price }</span>
+                            <input type="hidden" class="selSize" />
                         </div>
                     </dt>
                     <dt class="pResult">
@@ -129,7 +132,7 @@
 
             
 
-                <button id="btn" onclick="goCart();">add to cart</button>
+                <button id="btn" onclick="addCart();">add to cart</button>
                 <button id="btn" onclick="goBuy();">buy now</button>
             </div>
         </div>
@@ -331,9 +334,35 @@
     
 
     
-        // function goCart() {
+        function addCart() {
+        	var addCart =[];
+        	$('.selectedPList').each(function(){
+        		
+        	 var product_no = $(this).children('.product_no').val();
+        	 var quantity = $(this).children('.quantity').val();
+        	 var product_size = $(this).children('.selSize').val();
+        	 
+        	 
+        	 
+        	 if(product_size != ""){
+/* 	     	 console.log(product_no);
+        	 console.log(quantity);
+        	 console.log(product_size); */
+        	 addCart.push(product_no);
+        	 addCart.push(quantity);
+        	 addCart.push(product_size);
+        	 
+        	 
+        	 location.href="${pageContext.request.contextPath}/order/addCartList.or?product_no="+product_no+"&quantity="+quantity+"&product_size="+product_size;
+        	 alert("success")
+        	 }
+        	
+        	
+        	})
+        	
+        	console.log("input success");
 
-        // }
+        }
 
         // function goBuy() {
 
@@ -390,6 +419,7 @@
                 result.addClass($('#selectSize').val());
                 result.addClass('frmSize');
                 result.find('.selectedSize').text("[" + $('#selectSize').val() + "]");
+                result.find('.selSize').val($('#selectSize').val());
                 
                 $('.pResult').append(result);
 
