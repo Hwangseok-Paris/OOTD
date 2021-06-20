@@ -31,7 +31,7 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 		
-	// =========== 카트 영역 =============== //
+	// =========== 카트 영역 ===============1 //
 	
 	// 장바구니 리스트 불러오기
 	@RequestMapping("/order/cart.or")
