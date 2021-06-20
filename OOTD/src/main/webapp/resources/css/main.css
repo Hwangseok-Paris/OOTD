@@ -75,11 +75,13 @@ article > .video_content > .video_SHand > p {
 article > .video_content > .video_Brand:hover {
     background-color: white;
     background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
 }
 
 article > .video_content > .video_SHand:hover {
     background-color: white;
     background-color: rgba(255, 255, 255, 0.1);
+      cursor: pointer;
 }
 
 
@@ -115,6 +117,14 @@ article > .video_content > .video_SHand:hover > p {
     height: 310px;
     background-color: gray;
 }
+
 .bxslider li img {
 	cursor: pointer !important;
 }
+
+
+.bxslider li:hover {
+	cursor: pointer;
+}
+
+

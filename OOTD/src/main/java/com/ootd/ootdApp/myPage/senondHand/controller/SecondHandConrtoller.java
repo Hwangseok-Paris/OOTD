@@ -1,8 +1,11 @@
 package com.ootd.ootdApp.myPage.senondHand.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,6 +24,7 @@ import com.ootd.ootdApp.myPage.brand.model.vo.O_Order;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Review;
 
 @SessionAttributes({ "member" })
@@ -238,9 +242,17 @@ public class SecondHandConrtoller {
 
 	// 판매상품 삭제
 	@RequestMapping("/myPage/myPage_Product_Delete.mp")
-	public String myPageProductDelete(@RequestParam int productNo, Model model) {
+
+	public String myPageProductDelete(@RequestParam int productNo, HttpServletRequest req, Model model) {
 
 		System.out.println(productNo);
+		
+		String savePath = req.getServletContext().getRealPath("/resources/images/productImgUpload");
+		
+		// 첨부파일 삭제 명단
+		List<Attachment> delList = secondHandService.selectAttachmentList(productNo);
+		
+		System.out.println("브랜드 상품 삭제 controller 확인 :: " + delList);
 
 		int result = secondHandService.deleteProduct(productNo);
 		String loc = "/myPage/myPage_Product.mp";
@@ -248,7 +260,11 @@ public class SecondHandConrtoller {
 
 		if (result > 0) {
 			msg = "삭제 완료!";
-
+			
+			for(Attachment a : delList) {
+				new File(savePath + "/" + a.getAtt_name()).delete();
+			}
+			
 		} else {
 			msg = "삭제 실패!";
 		}
@@ -347,17 +363,14 @@ public class SecondHandConrtoller {
 		return "common/msg";
 	}
 
-	@RequestMapping("/header/totalSearch.do")
-	public String totalSearch(@RequestParam(value = "totalSearch") String totalSearch) {
-
-		String result = secondHandService.selectSearchResult(totalSearch);
-
-		if (totalSearch.equals(result)) {
-			return "myPage/reviewEnroll";
-		} else if (result.equals(result)) {
-			return "myPage/myPage_Info";
-		} else
-			return "";
-	}
+	/*
+	 * @RequestMapping("/header/totalSearch.do") public String
+	 * totalSearch(@RequestParam(value = "totalSearch") String totalSearch) {
+	 * 
+	 * String result = secondHandService.selectSearchResult(totalSearch);
+	 * 
+	 * if (totalSearch.equals(result)) { return "myPage/reviewEnroll"; } else if
+	 * (result.equals(result)) { return "myPage/myPage_Info"; } else return ""; }
+	 */
 
 }

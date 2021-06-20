@@ -23,8 +23,10 @@
 	<c:import url="../common/header.jsp"/>
 
 <section>
+	<h1 style="margin-top: 100px; text-align: center;">브랜드 상품 수정</h1>
   <form name="brandFrm" action="${pageContext.request.contextPath}/product/productUpdate.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="product_type" value="1" />
+			<input type="hidden" name="product_no" value="${ product.product_no }" />
     <div class="product_detail">
         <div class="package" >
             <div id="insertArea" class="inputBox1">
@@ -57,7 +59,7 @@
                 <span id="brand_name"><b><input type="text" name="" id="" value="${ product.brand_name }"/></b></span> <br>
                 
                 <h4 id="pName">${ product.product_name }</h4>
-                <span style="margin-left: 240px;" >￦</span><span id="ppPrice"><input type="text" name="" id="" value="${ product.product_price }" /></span> <br><hr>
+                <span style="margin-left: 260px; margin-right: 5px;" >￦</span><input type="text" name="" id="ppPrice" value="${ product.product_price }" size="4" style="float: right; margin-right: 20px;"/>  <br><hr>
                 
 
                 <dl>
@@ -118,7 +120,7 @@
 		// 상품 취소 
 		$("#cancel").on("click",function(){
 			location.href = "${pageContext.request.contextPath}/myPage/myPage_Brand_Product.mp";
-			});
+		});
 	
 
 		$(function() {

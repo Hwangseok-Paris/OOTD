@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
 public interface BrandService {
@@ -33,6 +34,10 @@ public interface BrandService {
 
 	int updateBrandStatus(int orderNo);
 
+
 	int brandProductSelectTotalContents();
+
+	List<Attachment> selectAttachmentList(int productNo);
+
 
 }

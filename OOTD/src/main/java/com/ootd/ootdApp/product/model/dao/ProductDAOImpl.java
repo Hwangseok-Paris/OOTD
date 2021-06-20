@@ -125,15 +125,42 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	// =========Product Update (update)=========
 	@Override
-	public int brandUpdate(Product product) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int brandUpdate(Product originalProduct, List<Attachment> attachList) {
+
+		int resultP = 0;
+		int resultA = 0;
+		
+		// 상품 업데이트 실행
+		resultP = sqlSession.update("product-mapper.brandUpdate", originalProduct);
+
+		// 상품 업데이트 성공했다면 첨부파일 업데이트 
+		if ( resultP > 0) {
+			resultA = sqlSession.update("product-mapper.attachmentUpdate", attachList);
+		}
+		
+		return resultA;
 	}
 
 	@Override
-	public int secondHandUpdate(Product product) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int secondHandUpdate(Product originalProduct, List<Attachment> attachList) {
+
+		int resultP = 0;
+		int resultA = 0;
+		
+		System.out.println("업데이트 daao 접근 ");
+		System.out.println("DAO 에서 attachList " + attachList);
+		System.out.println("DAO 에서 originalProduct " + originalProduct);
+		
+		
+		// 상품 업데이트 실행
+		resultP = sqlSession.update("product-mapper.secondHandUpdate", originalProduct);
+
+		// 상품 업데이트 성공했다면 첨부파일 업데이트 
+		if ( resultP > 0) {
+			resultA = sqlSession.update("product-mapper.attachmentUpdate", attachList);
+		}
+		
+		return resultA;
 	}
 
 	@Override

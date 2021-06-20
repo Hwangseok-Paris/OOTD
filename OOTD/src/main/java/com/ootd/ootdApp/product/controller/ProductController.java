@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ootd.ootdApp.common.Utils;
 import com.ootd.ootdApp.common.Utils2;
 import com.ootd.ootdApp.product.model.service.ProductService;
 import com.ootd.ootdApp.product.model.vo.Attachment;
@@ -289,9 +288,6 @@ public class ProductController {
 		System.out.println("UpdateController 에서 attachment ::: " + att);
 		
 		
-//		detail 처럼 그대로 상품 정보 및 사진 불러오는 
-//		Product p = productService.productSelectOne(pType, product_no);
-//		List<Attachment> att = p.getAttachment();
 		
 		if( pType == 1 ) {
 			
@@ -311,13 +307,79 @@ public class ProductController {
 	//=========Product Update( Update )======== 
 	@RequestMapping("/product/productUpdate.do")
 	public String productUpdate(Product p, HttpServletRequest req, Model model,
-			@RequestParam(value = "secondHandProductImg", required = false) MultipartFile[] upFiles) {
+			@RequestParam(value = "secondHandProductImg", required = false) MultipartFile[] upFiles,
+			@RequestParam(value = "product_no", required = false) int productNo
+			) {
 		// pType = 1 ? 브랜드 : 상품  	
 		int pType = p.getProduct_type();
 		
-		// update 코드 작성 
-
+		// 기존 DB 에 있는 product 
+		Product originalProduct = productService.productSelectOne(pType, productNo);
 		
+		// 기존 Product 를 새로받아온  Product 로 변경하기 
+		originalProduct.setProduct_price(p.getProduct_price());
+		originalProduct.setProduct_detail(p.getProduct_detail());
+		originalProduct.setProduct_sizeinfo(p.getProduct_sizeinfo());
+		originalProduct.setProduct_size(p.getProduct_size());
+		originalProduct.setProduct_no(productNo);
+		
+		String savePath = req.getServletContext().getRealPath("/resources/images/productImgUpload");
+		
+		List<Attachment> attachList = originalProduct.getAttachment();
+		if ( attachList == null) attachList = new ArrayList<>();
+		
+		int idx = 0;
+		for( MultipartFile f : upFiles ) {
+			Attachment temp = null;
+			
+			if( f.isEmpty() == false ) {
+					
+					if(attachList.size() > idx) { // 변경 전의 파일이 있다면
+						
+						File oldFile = new File(savePath + "/"
+						                        + attachList.get(idx).getAtt_name());
+						
+						System.out.println("파일 삭제 확인 : " + oldFile.delete());
+						
+						temp = attachList.get(idx);
+						System.out.println("temp ::::: " + temp);
+					} else {	// 변경 전의 파일이 없다면 
+						temp = new Attachment();
+						temp.setProduct_no(productNo);
+						
+						attachList.add(temp);
+					}
+					
+					// 파일 저장용 이름 등록
+					String originName = f.getOriginalFilename();
+					String changeName = fileNameChanger(originName);
+					
+					// 파일 저장
+					try {
+						f.transferTo( new File(savePath + "/" + changeName) );
+					} catch (IllegalStateException | IOException e) {
+					
+						e.printStackTrace();
+					}
+					
+				temp.setAtt_name(originName);
+				temp.setProduct_no(productNo);
+				
+				attachList.set(idx, temp);
+			}
+			idx++;	
+		}
+		
+		System.out.println("업데이트 controller 에서 originalProduct 확인 :::" + originalProduct);
+		System.out.println("업데이트 controller 에서 attachList 확인 :::" + attachList);
+		
+		
+		int result = productService.productUpdate(originalProduct, attachList, pType);
+		
+//		if( result > 0) {
+//			
+//			
+//		}
 		if( pType == 1 ) {
 			System.out.println("productUpdate 진입");
 			return "myPage/myPage_Brand_Product";		// 상품 수정완료 후 brand 마이페이지로 이동  
@@ -327,6 +389,8 @@ public class ProductController {
 			// 1. 원본 게시글 가져와 수정하기
 			return "myPage/myPage_Product";		// 상품 수정완료 후 second 마이페이지로 이동 
 		}
+			
+		
 		
 		
 	}

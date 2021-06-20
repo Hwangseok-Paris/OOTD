@@ -7,6 +7,7 @@ import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Review;
 
 public interface SecondHandDAO {
@@ -38,5 +39,7 @@ public interface SecondHandDAO {
 	Review_ProductInfo selectReviewInfo(HashMap<String, Object> map);
 
 	int insertReview(Review review);
+
+	List<Attachment> selectAttachmentList(int productNo);
 
 }
