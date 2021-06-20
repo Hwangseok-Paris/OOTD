@@ -37,7 +37,7 @@
             <div id="imgDetail" class="inputBox2">
                 <div class='inputBox2 zoom' id='ex1'>
 
-                    <img src='${pageContext.request.contextPath }/resources/images/productImgUpload/${a.att_name}' id='jack' width='540' height='620' alt=''/>
+                    <img src="${pageContext.request.contextPath }/resources/images/productImgUpload/${a.att_name}" id='jack' width='540' height='620' alt=''/>
 
                 </div>
             </div>
@@ -46,7 +46,7 @@
         </div>
         <div class="package">
             <div id="prTextInput" class="inputBox3">
-                <span id="brand_name"><b>${ product.brand_name } </b></span>
+                <span id="brand_name"><b>${ product.brand_name }</b></span>
                 <br>
                 
                 <h4 id="pName">${ product.product_name }</h4>
@@ -93,6 +93,7 @@
                     <dt class="pOrigin">
                         <div id="origin" class="selectedPList">
                        		<input type="hidden" class="product_no" value="${product.product_no }"/>
+                       		<input type="hidden" class="product_type" value="${product.product_type }"/>
                             <span>${ product.product_name }<b class="selectedSize"></b> </span>
                             <input type="number" class="quantity" id="pQuan" name="pQuan" value="1" min="1"> <!-- input value 값 ??  -->
                             <img src="${pageContext.request.contextPath }/resources/images/xx.png" alt="" style="width: 15px; height: 15px; margin-right: 5px;" id="pDelete">
@@ -322,6 +323,7 @@
         	 var product_no = $(this).children('.product_no').val();
         	 var quantity = $(this).children('.quantity').val();
         	 var product_size = $(this).children('.selSize').val();
+        	 var pType = ${product.product_type};
         	 
         	 
         	 if(product_size != ""){
@@ -332,12 +334,11 @@
         	 addCart.push(quantity);
         	 addCart.push(product_size);
         	 
-        	 
-        	 location.href="${pageContext.request.contextPath}/order/addCartList.or?product_no="+product_no+"&quantity="+quantity+"&product_size="+product_size;
+        	 location.href="${pageContext.request.contextPath}/order/addCartList.or?product_no="+product_no+"&quantity="+quantity+"&product_size="+product_size+"&product_type="+pType;
         	 alert("success")
         	 }
         	
-        	
+
         	})
         	
         	console.log("input success");
@@ -345,8 +346,10 @@
         }
 
 
-        // function goBuy() {
-        // }
+         function goBuy() {
+        	 
+        	 
+         }
         
         // $(function() {
         //     if($('.totalPD').text()== "") {

@@ -28,9 +28,7 @@ public class OrderController {
 	
 	@Autowired
 	OrderService orderService;
-	
-	 
-	
+		
 	// =========== 카트 영역 =============== //
 	
 	// 장바구니 리스트 불러오기
@@ -139,12 +137,15 @@ public class OrderController {
 	public String addCartList(HttpServletRequest req, Model model,
 							 @RequestParam int product_no,
 							 @RequestParam int quantity,
-							 @RequestParam String product_size
+							 @RequestParam String product_size,
+							 @RequestParam int product_type
 							 ) {
 		
 		HttpSession session = req.getSession();
 		Member member = (Member) session.getAttribute("member");
 		
+		
+//		int pType = product_type;
 		int member_no = member.getMember_no();
 		
 		Cart cart = new Cart();
@@ -159,10 +160,7 @@ public class OrderController {
 			System.out.println("Mission Success");
 		} else System.out.println("Mission Fail");
 		
-		
-		
-		
-		return "";
+		return "redirect:/product/productDetail.do?product_no="+product_no+"&pType="+product_type;
 		
 	}
 
