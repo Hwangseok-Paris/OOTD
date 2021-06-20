@@ -2,6 +2,11 @@ package com.ootd.ootdApp.myPage.brand.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +16,6 @@ import lombok.Setter;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
 public class O_Order implements Serializable {
 	
 	private static final long serialVersionUID = 222L;
@@ -19,6 +23,7 @@ public class O_Order implements Serializable {
 	private int order_no;
 	private String receiver_name;
 	private String order_address;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date order_date;
 	private String order_memo;
 	private int total_price;

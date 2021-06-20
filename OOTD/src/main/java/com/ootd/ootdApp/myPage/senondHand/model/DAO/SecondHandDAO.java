@@ -31,7 +31,9 @@ public interface SecondHandDAO {
 
 	int updateOrderSaleStatus(int orderNo);
 
-	String selectOrderStatus(int orderNo);
+
+	int updatePurchaseStatus(int orderNo);
+
 
 	Review_ProductInfo selectReviewInfo(HashMap<String, Object> map);
 

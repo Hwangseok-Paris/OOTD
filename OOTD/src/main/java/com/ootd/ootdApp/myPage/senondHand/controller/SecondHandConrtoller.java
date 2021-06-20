@@ -9,11 +9,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.senondHand.model.service.SecondHandService;
+import com.ootd.ootdApp.myPage.brand.model.vo.O_Order;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
@@ -239,29 +242,39 @@ public class SecondHandConrtoller {
 	}
 	
 	@RequestMapping("/myPage/orderStatusChange.do")
+	@ResponseBody
 	public int OrderStatuschange(@RequestParam int orderNo) {
 		
 		System.out.println("주문 상태 바꿀 주문번호 -> " + orderNo);
 		
 		int result = secondHandService.updateOrderSaleStatus(orderNo);
-				
-		System.out.println("status change? -> " + result);
-		
-		String status = secondHandService.selectOrderStatus(orderNo);
 		
 		int order_status = 0;
-				
-		System.out.println("바뀐 status -> " + status);
 		
 		if(result > 0) {
-			System.out.println("배송 완료 -> " + result);
-			
 			order_status = 2;
-			
-		} 
+		}
 		
 		return order_status;
 	}
+	
+	@RequestMapping("/myPage/purchaseStatusChange.do")
+	@ResponseBody
+	public int purchaseStatusChange(@RequestParam int orderNo) {
+		
+		int result = secondHandService.updatePurchaseStatus(orderNo);
+		
+		System.out.println("현재 배송상태 -> " + orderNo);
+		
+		int order_status = 0;
+		
+		if(result > 0) {
+			order_status = 3;
+		}
+		
+		return order_status;
+	}
+	
 
 	@RequestMapping("/myPage/myPage_Review.mp")
 	public String myPageReview(@RequestParam int pno, @RequestParam int mno, Model model) {

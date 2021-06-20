@@ -56,7 +56,7 @@
                             <td class="order-date">${s.order_date }</td>
                             <td class="total-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${s.total_price}" />&#8361;</td>
                             <td>
-                                <span class="sale-status" id="${status }">1</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
+                                <span class="sale-status">${s.order_status }</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
                             </td>
                             <td>
                                 <button class="modify-product modify" style="display: none;">수정</button>
@@ -115,10 +115,7 @@
 			data: {"orderNo": orderNo},
 			
 			success: function(data) {
-				if (data == 1) {
-					$('sale-status').text("결제완료");
-					$('.complete-send').show();
-				} else if(data == 2) {
+				if(data == 2) {
 					$('.sale-status').text("구매확정대기");
 					$('.complete-send').hide();
 				} else if (data == 3) {

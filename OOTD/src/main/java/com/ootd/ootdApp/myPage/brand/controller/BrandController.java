@@ -292,7 +292,6 @@ public class BrandController {
 			
 		return result;
 		
-		
 	}
 	
 
