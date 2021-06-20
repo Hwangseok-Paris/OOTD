@@ -135,18 +135,21 @@
 	
 	
 	<select id="selectProductImages" resultType="Attachment">
-	SELECT A.PRODUCT_NO, RANK, ATT_NAME
-	FROM (SELECT *
-          FROM 
-            ( SELECT PRODUCT_NO, SUM(ORDER_QUANTITY) as QUANTITY, DENSE_RANK() OVER (ORDER BY SUM(ORDER_QUANTITY) DESC) as RANK
-                FROM O_ORDER_LIST
-                GROUP BY PRODUCT_NO
+		 SELECT A.PRODUCT_NO, RANK, ATT_NAME
+			FROM (SELECT *
+          		FROM 
+            ( SELECT O.PRODUCT_NO, SUM(ORDER_QUANTITY) as QUANTITY , DENSE_RANK() OVER (ORDER BY SUM(ORDER_QUANTITY) DESC) as RANK
+                FROM O_ORDER_LIST O, PRODUCT P
+                WHERE O.PRODUCT_NO = P.PRODUCT_NO
+                    AND P.PRODUCT_TYPE = 1
+                GROUP BY O.PRODUCT_NO
             )
-            <![CDATA[WHERE ROWNUM <= 10]]>) OL, ATTACHMENT A
-	WHERE OL.PRODUCT_NO = A.PRODUCT_NO
-    AND A.ATT_LEVEL = 1
+           <![CDATA[WHERE ROWNUM <= 10]]>) OL, ATTACHMENT A
+			WHERE OL.PRODUCT_NO = A.PRODUCT_NO
+    			AND A.ATT_LEVEL = 1
 	</select>
 	
+
 	
 	
 	
