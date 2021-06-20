@@ -61,7 +61,7 @@ section{
     .package{
         display: inline;
     }
-    #btn{
+    .btn{
         margin-left: 25px;
         border-radius: 15%;
         background-color: white;
@@ -69,7 +69,7 @@ section{
         height: 40px;
         font-weight: bolder;
     }
-    #btn:hover, .dropArea:hoer, .underMenu:hover {
+    .btn:hover, .dropArea:hoer, .underMenu:hover {
 		cursor : pointer;
     }
     #selectSize{

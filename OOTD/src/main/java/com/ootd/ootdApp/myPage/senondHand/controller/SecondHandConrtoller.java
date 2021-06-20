@@ -214,14 +214,26 @@ public class SecondHandConrtoller {
 	}
  	
 	//판매상품 삭제
-	@RequestMapping("/myPage/myPage_Product_Delete")
+	@RequestMapping("/myPage/myPage_Product_Delete.mp")
 	public String myPageProductDelete(@RequestParam int productNo, Model model) {
 		
 		System.out.println(productNo);
 		
 		int result = secondHandService.deleteProduct(productNo);
+		String loc = "/myPage/myPage_Product.mp";
+		String msg = "";
 		
-		return "myPage/myPage_Product";
+		if (result > 0) {
+			msg = "삭제 완료!";
+
+		} else {
+			msg = "삭제 실패!";
+		}
+
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+
+		return "common/msg";
 	}
 
 	//판매내역 가져오기

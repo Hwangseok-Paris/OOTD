@@ -13,10 +13,19 @@
 	    
 	    <script>
 		$(function(){
-			$("button[id]").on("click",function(){
-				var productNo = $(this).attr("id");
+			
+			// 상품 수정 
+			$(".modify").on("click",function(){
+				var productNo = $(this).attr("value");
 				console.log("productNo="+productNo);
-				location.href = "${pageContext.request.contextPath}/myPage/myPage_Brand_Prdouct_Delete.mp?productNo="+productNo;
+				location.href = "${pageContext.request.contextPath}/product/productUpdateView.do?productNo="+productNo+"&pType=1";
+				});
+			
+			// 상품 삭제
+			$(".delete").on("click",function(){
+				var productNo = $(this).attr("value");
+				console.log("productNo="+productNo);
+				location.href = "${pageContext.request.contextPath}/myPage/myPage_Brand_Prodouct_Delete.mp?productNo="+productNo;
 				});
 		});
 		
@@ -75,8 +84,8 @@
                             </td>
                             <td class="total-price">${p.product_price} &#8361;</td>
                             <td>
-                                <button class="modify-product modify">수정</button>
-                                <button class="delete-product delete" id="${p.product_no}">삭제</button>
+                                <button class="modify-product modify" value="${p.product_no}">수정</button>
+                                <button class="delete-product delete" value="${p.product_no}">삭제</button>
                             </td>
                         </tr>
                     </tbody>
