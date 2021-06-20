@@ -1,46 +1,42 @@
 package com.ootd.ootdApp.member.controller;
 
-//import java.io.BufferedReader;
-//import java.io.IOException;
-//import java.io.InputStreamReader;
-//import java.net.HttpURLConnection;
-//import java.net.URL;
-//import java.util.HashMap;
+
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-//import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpHeaders;
-//import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-//import org.springframework.util.LinkedMultiValueMap;
-//import org.springframework.util.MultiValueMap;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-//import org.springframework.web.client.HttpStatusCodeException;
-// import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-//import com.fasterxml.jackson.core.JsonProcessingException;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.google.gson.JsonElement;
-//import com.google.gson.JsonObject;
-//import com.google.gson.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ootd.ootdApp.member.exception.MemberException;
 import com.ootd.ootdApp.member.model.service.MemberService;
-//import com.ootd.ootdApp.member.model.vo.KakaoTokenVO;
+import com.ootd.ootdApp.member.model.vo.KakaoTokenVO;
 import com.ootd.ootdApp.member.model.vo.MailVO;
 import com.ootd.ootdApp.member.model.vo.Member;
 
@@ -53,8 +49,8 @@ public class MemberController {
 	@Autowired 
 	private JavaMailSenderImpl mailSender;
 	
-	// @Autowired
-	// private RestTemplate restTemplate;
+	@Autowired
+	private RestTemplate restTemplate;
 
 	
 	@Autowired
@@ -409,8 +405,9 @@ public class MemberController {
 
 
 	//카카오 로그인 리다이렉트
-	@RequestMapping(value = "/oauth", method = RequestMethod.GET)
-	public String oauth(@RequestParam String code , Model model , HttpServletRequest request) {
+	@RequestMapping(value = "/oauth", method = RequestMethod.GET, produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String kakao(@RequestParam String code , Model model , HttpServletRequest request) throws JsonProcessingException {
 			
 		//받은 코드
 		System.out.println("code :  " + code);
@@ -418,10 +415,86 @@ public class MemberController {
 		//코드를 세션에 넣어줌.
 		HttpSession session = request.getSession();
 		session.setAttribute("code", code);
+		
+		System.out.println("selectMyAccessTockenWithKakao 진입!--");
+				
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("grant_type", "authorization_code");
+		parameters.add("client_id", "89e4c9bda621e09d0753e1d8af4c0091");  	  //rest api key
+		parameters.add("redirect_uri", "http://localhost:8088/ootdApp");        //redirect 주소는 등록한 주소로....
+		parameters.add("code", code);
+				
+		String url = "https://kauth.kakao.com/oauth/token";
+		KakaoTokenVO body = null;
+		HttpEntity<String> response = null;
+		try {
+		
+			ResponseEntity<KakaoTokenVO> enti = restTemplate.postForEntity(url, parameters, KakaoTokenVO.class);
+					 
+			body = enti.getBody();
+					
+			String tokenType = body.getToken_type();
+			String refreshToken = body.getRefresh_token();
+			String accessTocken = body.getAccess_token();
+			String expiresTime = body.getExpires_in();
+			String refreshExpiresTime = body.getRefresh_token_expires_in();
+		
+			System.out.println("토큰 타입 : " + tokenType);
+			System.out.println("리프레쉬 토큰 : " + refreshToken);
+			System.out.println("엑세스 토큰 : " + accessTocken);
+			System.out.println("만료기간 : " + expiresTime);
+			System.out.println("리프레쉬 토큰 만료기간 : " + refreshExpiresTime);
+					 
+			// ObjectMapper mapper = new ObjectMapper();
+			// String result = mapper.writeValueAsString(body);
 			
-
+			System.out.println("selectMyInfoWithKakao controller 진입!");
 			
-		return "redirect:/";
+			String myTocken = "Bearer " + accessTocken;
+			
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+			headers.set("Authorization", myTocken);
+			
+			
+			UriComponentsBuilder builder = 
+					UriComponentsBuilder.fromHttpUrl("https://kapi.kakao.com/v2/user/me");
+		
+			
+			HttpEntity<?> entity = new HttpEntity<>(headers);
+		
+		
+			// HttpEntity<String> response = null;
+			
+			try {
+				
+				 response = restTemplate.exchange(
+				        builder.toUriString(), 
+				        HttpMethod.GET, 
+				        entity, 
+				        String.class);
+				 
+				 System.out.println("응답결과 :" + response.getBody());
+		
+			} catch (HttpStatusCodeException e) {
+				
+				System.out.println("error :" + e);
+		
+			}
+					 
+		} catch (HttpStatusCodeException e) {
+			
+			System.out.println("error :" + e);
+			
+		}
+		
+		// ObjectMapper mapper = new ObjectMapper();
+		// String result = mapper.writeValueAsString(body);
+		
+		
+			
+		return response.getBody();
 
 	}
 	
@@ -440,8 +513,8 @@ public class MemberController {
 				
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 		parameters.add("grant_type", "authorization_code");
-		parameters.add("client_id", "d345f48c50cbd61611c496d9708d72b2");  	  //rest api key
-		parameters.add("redirect_uri", "http://localhost:8080/oauth");        //redirect 주소는 등록한 주소로....
+		parameters.add("client_id", "89e4c9bda621e09d0753e1d8af4c0091");  	  //rest api key
+		parameters.add("redirect_uri", "http://localhost:8008/ootdApp");        //redirect 주소는 등록한 주소로....
 		parameters.add("code", code);
 				
 				
@@ -479,10 +552,53 @@ public class MemberController {
 		return result;
 		
 		}
-		*/
+	
 
+	//카카오 나의 정보 얻기
+	@RequestMapping(value = "/selectMyInfoWithKakao", method = RequestMethod.GET, produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String selectMyInfoWithKakao(@RequestParam String tocken) {
+		
+		System.out.println("selectMyInfoWithKakao controller 진입!");
+		
+		
+		String myTocken = "Bearer " + tocken;
+		
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		headers.set("Authorization", myTocken);
+		
+		
+		UriComponentsBuilder builder = 
+				UriComponentsBuilder.fromHttpUrl("https://kapi.kakao.com/v2/user/me");
+	
+		
+		HttpEntity<?> entity = new HttpEntity<>(headers);
 	
 	
+		HttpEntity<String> response = null;
+		
+		try {
+			
+			 response = restTemplate.exchange(
+			        builder.toUriString(), 
+			        HttpMethod.GET, 
+			        entity, 
+			        String.class);
+			 
+			 System.out.println("응답결과 :" + response.getBody());
+	
+		} catch (HttpStatusCodeException e) {
+			
+			System.out.println("error :" + e);
+	
+		}
+		
+		return response.getBody();
+		}
+	
+	*/
 	
 	
 }

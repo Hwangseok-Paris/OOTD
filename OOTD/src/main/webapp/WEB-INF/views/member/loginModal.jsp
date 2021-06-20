@@ -86,6 +86,8 @@
                 </div>
                 <!-- Modal 내 ID/PW 입력 및 로그인/ 가입 버튼 끝 -->
         
+        	<input type="hidden" id="kakaoCode" value="${ code }" />
+        	<input type="hidden" id="kakaoTocken" value="${ tocken }" />
 
               <!-- 모달 내 메신저 ID 로그인 디자인 시작 -->
               <div id = "login-service">
@@ -229,6 +231,10 @@
         	Kakao.init('1da952139d172c0ac2c48f4a3ba9ca34');
         } */
         
+        var code = $('#kakaoCode').val();
+        console.log(code);
+        var tocken;
+        
         $(function() {
         	Kakao.init('1da952139d172c0ac2c48f4a3ba9ca34');
         	// SDK 초기화 여부를 판단합니다.
@@ -236,33 +242,28 @@
         });
         
         $('#kakao-box').on('click', function() {
-        	try {
-        		return new Promise(function(resolve, reject) {
-        			if (!Kakao) {
-        				reject('Kakao 인스턴스가 존재하지 않습니다.')
-        			}
-        			
-        			Kakao.Auth.login({
-        				success: function(auth) {
-        					console.log('정상적으로 로그인', auth)
-        					this.setState({
-        						isLogin: true
-        					});
-        					
-        				}, fail: function(error) {
-        					console.log(error)
-        				}
-        			})
-        		})
-        	} catch (err) {
-        		console.log(err)
+        	loginWithKakao();
+        	
+        	console.log(code);
+            
+        	if ( code != null ) {
+        		
+        		Kakao.Auth.setAccessToken(code);
+        		
+        		selectMyAccessTockenWithKakao();
+        		
+        		selectMyInfoWithKakao();
+        		
+        		
         	}
-        });
+        }); 
+        
+        
         
         //카카오 로그인
         function loginWithKakao() {
             Kakao.Auth.authorize({
-                redirectUri: 'http://localhost:8080/oauth'
+                redirectUri: 'http://localhost:8088/ootdApp/oauth'
               });		
           }
         	
@@ -278,7 +279,8 @@
         	        type : 'get',
         	        data : param,
         	        dataType : "JSON", 
-        	        contentType: "application/x-www-form-urlencoded;charset=utf-8", 
+        	        contentType: "application/x-www-form-urlencoded;charset=utf-8",
+        	        async: false,
         	        success : function(data){
         	            
         	        	
@@ -286,7 +288,9 @@
         	        	
         	        	console.log(data['access_token']);    //토큰얻기
         	        	
-        	        	document.getElementById("tocken").value = data['access_token']; //토큰 할당
+        	        	tocken = data['access_token'];
+        	        	
+        	        	// document.getElementById("tocken").value = data['access_token']; //토큰 할당
         	        	
         	        },
         	        error: function(xhr, type){ 
@@ -302,7 +306,7 @@
         //나의 정보 가져오기	
         function selectMyInfoWithKakao() {
         	
-        	var myTocken = document.getElementById("tocken").value
+        	var myTocken = tocken;
         	
          	var param = {"tocken" : myTocken}
         	
