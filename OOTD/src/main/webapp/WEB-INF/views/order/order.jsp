@@ -34,7 +34,7 @@
             <table class="calculation1" style="margin-top:20px;">
             <thead>
                <tr>
-                  <th colspan="10" style="text-align: left; padding-left: 10px; padding-top: 20px;">주문상품(1)</th>
+                  <th colspan="10" style="text-align: left; padding-left: 10px; padding-top: 20px;">주문상품(${fn:length(cart)})</th>
                </tr>
                
                <tr>
@@ -50,14 +50,13 @@
    
             <tbody>
             <c:forEach items="${cart}" var="a">
-               <tr>               
-               
+               <tr>
                <input type="hidden" class="cart_no" value="${a.cart_no}" />
                <input type="hidden" class="product_no" value="${a.product_no}" />
                   
                <!-- Product Image Area -->
                   <td id="tdImg">
-                  	<img src="${pageContext.request.contextPath }/resources/images/${a.att_name}">
+                  	<img src="${pageContext.request.contextPath }/resources/images/productImgUpload/${a.att_name}">
                   </td>
                   
                <!-- Product Info. Area -->
@@ -174,13 +173,13 @@
        			   <p>결제수단선택</p>
 	               <div class ="paymentIcon">
 	                  <label for="card">
-	                  	<img src="${pageContext.request.contextPath }/resources/images/orderImg/card.PNG"/>
+	                  	<img src="${pageContext.request.contextPath }/resources/images/orderImg/card_icon.png"/>
 	                  </label>
 	                  <label for="samsung">
-	                 	 <img src="${pageContext.request.contextPath }/resources/images/orderImg/account.PNG"/>
+	                 	 <img src="${pageContext.request.contextPath }/resources/images/orderImg/apple_pay_icon.png"/>
 	                  </label>
 	                  <label for="phone">
-	                 	 <img src="${pageContext.request.contextPath }/resources/images/orderImg/phone.PNG"/>
+	                 	 <img src="${pageContext.request.contextPath }/resources/images/orderImg/phone_icon.png"/>
 	                  </label>
 	                </div>
 	                <div class ="paymentRadio">
@@ -421,6 +420,10 @@ function calcPrice(){
 	 $('.product_no').each(function(){
 		product_no.push($(this).val()); 
 	 	})
+ 	 var cart_no = [];
+	 $('.cart_no').each(function(){
+		cart_no.push($(this).val()); 
+	 	})
 	 
 	 
 	 var pay_method = $("[name=cardradio]:checked").val();	 // 결제 수단 변수 설정 
@@ -455,7 +458,8 @@ function calcPrice(){
 	  							"total_price" : total_price,
 	  							"order_size" : order_size,
 	  							"order_quantity" : order_quantity,
-	  							"product_no" : product_no
+	  							"product_no" : product_no,
+	  							"cart_no" : cart_no
 	  							}, 
 	  							
 	  					success: function(data){

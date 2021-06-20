@@ -29,7 +29,7 @@
                <table class="calculation1" style="margin-top:20px;">
 	               <thead>
 	                  <tr>
-	                     <th colspan="10" style="text-align: left; padding-left: 10px; padding-top: 20px;">주문상품(1)</th>
+	                     <th colspan="10" style="text-align: left; padding-left: 10px; padding-top: 20px;">Cart Product(${fn:length(cart)})</th>
 	                  </tr>
 	                  
 	                  <tr>
@@ -61,7 +61,7 @@
 	                     
 	                     <!-- Product Image Area -->
 	                     <td style="border-left: none; border-right: none; width: 100px; text-align: center;">
-	                     	<img src="${pageContext.request.contextPath }/resources/images/${a.att_name}" width="100px">
+	                     	<img src="${pageContext.request.contextPath }/resources/images/productImgUpload/${a.att_name}" width="100px">
 	                     </td>
 	                     
 						 <!-- Product Info. Area -->

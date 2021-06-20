@@ -29,6 +29,8 @@ public interface OrderDAO {
 
 	Order selectOrderList();
 
+	int addCartList(Cart cart);
+
 
 	
 }

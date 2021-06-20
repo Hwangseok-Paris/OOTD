@@ -30,6 +30,8 @@ public interface OrderService {
 
 	Order selectOrderList();
 
+	int addCartList(Cart cart);
+
 
 
 }
