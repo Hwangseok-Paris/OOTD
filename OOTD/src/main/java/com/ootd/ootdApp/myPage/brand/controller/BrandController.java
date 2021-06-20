@@ -1,6 +1,7 @@
 package com.ootd.ootdApp.myPage.brand.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.ootd.ootdApp.common.Utils;
+import com.ootd.ootdApp.common.Utils2;
 import com.ootd.ootdApp.member.model.service.MemberService;
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.brand.model.service.BrandService;
@@ -179,20 +182,40 @@ public class BrandController {
 	
 	// 등록 상품 - 업체가 등록한 상품 리스트
 	@RequestMapping("myPage/myPage_Brand_Product.mp")
-	public String myPage_Brand_Product(Model model, HttpServletRequest req) {
+	public String myPage_Brand_Product(@RequestParam( value = "cPage", required = false, defaultValue = "1") int cPage, Model model, HttpServletRequest req) {
 		
 		HttpSession session = req.getSession();
 		Member member = (Member) session.getAttribute("member");
 		int member_no = member.getMember_no();
-		System.out.println(member_no);	
-
-		List<Product> list = brandService.selectBrandProductList(member_no);
-		System.out.println("product :: 여기 왔나요");
-		System.out.println("selectBrandProductList [list] : " + list);
-
+		System.out.println(member_no);
+		
+		// 한 페이지당 상품 갯수 
+		int numPerPage = 12;
+		
+		// 현재 페이지의 상품 갯수
+		List<Map<String, String>> list
+			 = brandService.selectBrandProductList(cPage, numPerPage, member_no);
+		
+		// 전체 상품 갯수 
+		int totalContents = brandService.brandProductSelectTotalContents();
+		System.out.println(totalContents); // 22
+		
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myPage_Brand_Product.mp");
+		model.addAttribute("pageBar", pageBar);
+		
+		//List<MypageOrderList> list = brandService.selectBrandOrderList(brand_name);
+		System.out.println("order :: 여기 왔나요");
+		System.out.println("selectBrandOrderList [list] : " + list);
+		
+		model.addAttribute("member_mo", member_no);
 		model.addAttribute("list", list);
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("numPerPage", numPerPage);
 
 		return "myPage/myPage_Brand_Product";
+
+	
+	
 	}
 
 	// 등록 상품 - 업체가 등록한 상품 리스트 - 삭제
@@ -245,19 +268,31 @@ public class BrandController {
 		Member member = (Member) session.getAttribute("member");
 		String brand_name = member.getBrand_name();
 		System.out.println(brand_name);
-
-		List<MypageOrderList> list = brandService.selectBrandOrderList(brand_name);
+		
+		// 한 페이지당 상품 갯수 
+		int numPerPage = 12;
+		
+		// 현재 페이지의 상품 갯수
+		List<Map<String, String>> list
+			 = brandService.selectBrandOrderList(cPage, numPerPage, brand_name);
+		
+		// 전체 상품 갯수 
+		int totalContents = brandService.brandSelectTotalContents();
+		
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myPage_Brand_Order.mp");
+		model.addAttribute("pageBar", pageBar);
+		
+		//List<MypageOrderList> list = brandService.selectBrandOrderList(brand_name);
 		System.out.println("order :: 여기 왔나요");
 		System.out.println("selectBrandOrderList [list] : " + list);
-
+		
+		model.addAttribute("brand_name", brand_name);
 		model.addAttribute("list", list);
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("numPerPage", numPerPage);
 
 		return "myPage/myPage_Brand_Order";
 	}
-	
-	// 컨트롤러 하나 더 만들어야하나?
-	
-	
 
 	// 주문 내역 - 소비자가 주문한 주문 내역 - 자세히 보기
 	@RequestMapping("myPage/myPage_Order_Detail.mp")

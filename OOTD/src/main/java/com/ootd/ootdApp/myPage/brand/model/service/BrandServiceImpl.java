@@ -1,6 +1,7 @@
 package com.ootd.ootdApp.myPage.brand.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,15 +18,16 @@ public class BrandServiceImpl implements BrandService {
 	BrandDAO brandDAO;
 
 	@Override
-	public List<MypageOrderList> selectBrandOrderList(String brand_name) {
+	public List<Map<String, String>> selectBrandOrderList(int cPage, int numPerPage, String brand_name) {
 		System.out.println("order :: 서비스 왔나요");
-		return brandDAO.selectBrandOrderList(brand_name);
+		
+		return brandDAO.selectBrandOrderList(cPage, numPerPage, brand_name);
 	}
 
 	@Override
-	public List<Product> selectBrandProductList(int member_no) {
+	public List<Map<String, String>> selectBrandProductList(int cPage, int numPerPage, int member_no) {
 		System.out.println("product :: 서비스 왔나요");
-		return brandDAO.selectBrandProductList(member_no);
+		return brandDAO.selectBrandProductList(cPage, numPerPage, member_no);
 	}
 
 	@Override
@@ -74,6 +76,18 @@ public class BrandServiceImpl implements BrandService {
 	public int updateBrandStatus(int orderNo) {
 		System.out.println("send :: 서비스 왔나요");
 		return brandDAO.updateBrandStatus(orderNo);
+	}
+
+	@Override
+	public int brandSelectTotalContents() {
+		
+		return brandDAO.brandSelectTotalContents();
+	}
+
+	@Override
+	public int brandProductSelectTotalContents() {
+		
+		return brandDAO.brandProductSelectTotalContents();
 	}
 	
 }

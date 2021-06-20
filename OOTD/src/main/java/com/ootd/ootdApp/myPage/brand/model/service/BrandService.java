@@ -1,6 +1,7 @@
 package com.ootd.ootdApp.myPage.brand.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
@@ -8,9 +9,11 @@ import com.ootd.ootdApp.product.model.vo.Product;
 
 public interface BrandService {
 
-	List<MypageOrderList> selectBrandOrderList(String brand_name);
+	List<Map<String, String>> selectBrandOrderList(int cPage, int numPerPage, String brand_name);
+	
+	int brandSelectTotalContents();
 
-	List<Product> selectBrandProductList(int member_no);
+	List<Map<String, String>> selectBrandProductList(int cPage, int numPerPage, int member_no);
 
 	int deleteBrandProductList(int productNo);
 	
@@ -29,5 +32,7 @@ public interface BrandService {
 	List<Product> selectBrandProductRankList(int member_no);
 
 	int updateBrandStatus(int orderNo);
+
+	int brandProductSelectTotalContents();
 
 }

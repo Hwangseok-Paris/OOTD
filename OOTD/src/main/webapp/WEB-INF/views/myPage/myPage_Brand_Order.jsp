@@ -68,6 +68,7 @@
                     </tbody>
                     </c:forEach>
                 </table>
+                <c:out value="${pageBar}" escapeXml="false"/>
             </div>
         </section>
     </div>
