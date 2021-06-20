@@ -43,8 +43,9 @@
                     <c:forEach items="${list}" var="s">
 	                    <tbody>
 	                        <tr>
-	                            <td>
+	                            <td id="pno">
 	                                <div class="product-info">
+	                                	<span class="product-no" style="display:none;">${ s.product_no } </span>
 	                                    <div class="brand-name">${s.brand_name }</div>
 	                                    <span class="product-name">${s.product_name } </span>
 	                                    <span class="product-option">${s.product_size }</span>
@@ -56,7 +57,7 @@
 	                            <td class="order-date">${s.order_date }</td>
 	                            <td class="total-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${s.total_price}" />&#8361;</td>
 	                            <td>
-	                                <span class="purchase-status">1</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
+	                                <span class="purchase-status">${ s.order_status }</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
 	                            </td>
 	                            <td>
 	                                <button class="confirm-purchase" style="display: none;" id="${s.order_no }">구매 확정</button>
@@ -163,10 +164,15 @@
 		});
 	}); 
 
+    
 
-    $('.write-review').click(function () {
-        $(location).attr('href', '${pageContext.request.contextPath}/myPage/myPage_Review.mp')
-    })
+    $('.write-review').on('click', function () {
+    	
+    	var pno = $(this).parent().siblings('#pno').children().children('.product-no').text();
+    	console.log(pno);
+    	
+    	location.href = '${pageContext.request.contextPath}/myPage/myPage_Review.mp?pno='+pno+'&mno=${member.member_no}';
+    });
 </script>
 
 </html>

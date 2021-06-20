@@ -1,10 +1,13 @@
 package com.ootd.ootdApp.myPage.senondHand.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
+import com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
+import com.ootd.ootdApp.product.model.vo.Review;
 
 public interface SecondHandService {
 	
@@ -29,5 +32,9 @@ public interface SecondHandService {
 	int updateOrderSaleStatus(int orderNo);
 
 	String selectOrderStatus(int orderNo);
+
+	Review_ProductInfo selectReviewInfo(HashMap<String, Object> map);
+
+	int insertReview(Review review);
 
 }
