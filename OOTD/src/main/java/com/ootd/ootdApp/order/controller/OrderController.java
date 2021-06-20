@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.order.model.service.OrderService;
+import com.ootd.ootdApp.order.model.vo.BuyList;
 import com.ootd.ootdApp.order.model.vo.Cart;
 import com.ootd.ootdApp.order.model.vo.Order;
 import com.ootd.ootdApp.order.model.vo.OrderList;
@@ -135,14 +137,18 @@ public class OrderController {
 	// add cartList from product Detail
 	@RequestMapping("/order/addCartList.or")
 	public String addCartList(HttpServletRequest req, Model model,
+							 RedirectAttributes redirectAttributes,
 							 @RequestParam int product_no,
 							 @RequestParam int quantity,
-							 @RequestParam String product_size,
-							 @RequestParam int product_type
+							 @RequestParam String product_size
 							 ) {
 		
 		HttpSession session = req.getSession();
 		Member member = (Member) session.getAttribute("member");
+		
+		
+		
+		String referer = req.getHeader("Referer");
 		
 		
 //		int pType = product_type;
@@ -157,10 +163,15 @@ public class OrderController {
 		int ciResult = orderService.addCartList(cart);
 		
 		if(ciResult > 0) {
-			System.out.println("Mission Success");
-		} else System.out.println("Mission Fail");
+			System.out.println("카트에 상품담기 성공");
+		} else System.out.println("카트에 상품담기 실패");
 		
-		return "redirect:/product/productDetail.do?product_no="+product_no+"&pType="+product_type;
+		
+		
+		
+		//return "redirect:/product/productDetail.do?product_no="+product_no+"&pType="+product_type;
+		return "redirect:"+ referer;
+		
 		
 	}
 
@@ -196,14 +207,14 @@ public class OrderController {
 	@RequestMapping("/order/order.or")
 	public String selectOrderList(
 			Model model, HttpServletRequest req,
-			@RequestParam(value="selProduct_no") List<Integer> selProduct_no) {
+			@RequestParam(value="selectedCart_no") List<Integer> selectedCart_no) {
 		// ---------- 상품 리스트 가져오기 시작 ----------- //
 		int cart_no = 0;
 
 		ArrayList<Cart> cart = new ArrayList<>();
 		
 		// 반복문으로 selProduct 배열에 담긴 상품번호를 반복문을 통해 하나씩 search
-		for(int pNo : selProduct_no) {
+		for(int pNo : selectedCart_no) {
 //			List<Cart> cart = new ArrayList<>();
 			cart_no = pNo;
 			List<Cart> list = orderService.selectedCartList(cart_no);  // cart_no 1개 조회
@@ -213,15 +224,12 @@ public class OrderController {
 		System.out.println(cart);
 		// ---------- 상품 리스트 가져오기 끝 ----------- //
 		
+		
 		// ---------- 멤버 정보 가져오기 시작 ----------- //
 		HttpSession session = req.getSession();
 		Member member = (Member) session.getAttribute("member");
-		
-		String email = member.getEmail();
+
 				
-		System.out.println(email);		
-		System.out.println(member);
-		
 		// ---------- 멤버 정보 가져오기 끝 ----------- //		
 		
 		model.addAttribute("cart", cart);
@@ -350,7 +358,19 @@ public class OrderController {
 		
 	}
 	
+	// 테스트
 	
+	@RequestMapping("/order/buyList.or")
+	@ResponseBody
+	public String buyList(Model model, HttpServletRequest req,
+			@RequestBody List<BuyList> buyList) {
+		
+		System.out.println(buyList);
+		
+		
+		String referer = req.getHeader("Referer");
+		return "redirect:"+ referer;
+	}
 	
 	
 	
