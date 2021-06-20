@@ -36,9 +36,7 @@
 
             <div id="imgDetail" class="inputBox2">
                 <div class='inputBox2 zoom' id='ex1'>
-
                     <img src='${pageContext.request.contextPath }/resources/images/productImgUpload/${a.att_name}' id='jack' width='540' height='620' alt=''/>
-
                 </div>
             </div>
         
@@ -46,7 +44,7 @@
         </div>
         <div class="package">
             <div id="prTextInput" class="inputBox3">
-                <span id="brand_name"><b>${ product.brand_name } </b></span>
+                <span id="brand_name"><b>${ product.brand_name }</b></span>
                 <br>
                 
                 <h4 id="pName">${ product.product_name }</h4>
@@ -84,7 +82,7 @@
                     <dt>
                         <b>Select Size</b>
                         <select name="" id="selectSize" style="width: 140px; float: right; margin-right: 30px;" >
-                            <option value="">선택안함</option>
+                            <option>선택안함</option>
                             <option value="S">S</option>
                             <option value="M">M</option>
                             <option value="L">L</option>
@@ -93,6 +91,7 @@
                     <dt class="pOrigin">
                         <div id="origin" class="selectedPList">
                        		<input type="hidden" class="product_no" value="${product.product_no }"/>
+                       		<input type="hidden" class="product_type" value="${product.product_type }"/>
                             <span>${ product.product_name }<b class="selectedSize"></b> </span>
                             <input type="number" class="quantity" id="pQuan" name="pQuan" value="1" min="1"> <!-- input value 값 ??  -->
                             <img src="${pageContext.request.contextPath }/resources/images/xx.png" alt="" style="width: 15px; height: 15px; margin-right: 5px;" id="pDelete">
@@ -303,8 +302,6 @@
 
 <c:import url="../common/footer.jsp"/>
     
-
-        
 	<script>
 		$(function() {
 		    $(document).ready(function(){
@@ -314,39 +311,92 @@
 		});
     
     
-
         function addCart() {
-        	var addCart =[];
+     
         	$('.selectedPList').each(function(){
-        		
-        	 var product_no = $(this).children('.product_no').val();
-        	 var quantity = $(this).children('.quantity').val();
-        	 var product_size = $(this).children('.selSize').val();
-        	 
-        	 
-        	 if(product_size != ""){
-/* 	     	 console.log(product_no);
-        	 console.log(quantity);
-        	 console.log(product_size); */
-        	 addCart.push(product_no);
-        	 addCart.push(quantity);
-        	 addCart.push(product_size);
-        	 
-        	 
-        	 location.href="${pageContext.request.contextPath}/order/addCartList.or?product_no="+product_no+"&quantity="+quantity+"&product_size="+product_size;
-        	 alert("success")
-        	 }
         	
+	        	 var product_no = $(this).children('.product_no').val();
+	        	 var quantity = $(this).children('.quantity').val();
+	        	 var product_size = $(this).children('.selSize').val();
+	        	 
+	        	 if(product_size != ""){
+	/* 	     	 console.log(product_no);
+	        	 console.log(quantity);
+	        	 console.log(product_size); */
+	        		        	 
+	        	 location.href="${pageContext.request.contextPath}/order/addCartList.or?product_no="+product_no+"&quantity="+quantity+"&product_size="+product_size;
+	        	 }
+         	})
+        	 console.log("input success");
         	
-        	})
-        	
-        	console.log("input success");
+        	// 장바구니 이동 확인
+        	 if(confirm("장바구니에 상품이 담겼습니다. 장바구니로 이동하시겠습니까?") == true){
+        	        location.href="${pageContext.request.contextPath}/order/cart.or"
+        	    } else{
+        	        return ;
+        	    };
 
-        }
+	    }
 
 
-        // function goBuy() {
-        // }
+          function goBuy() {
+        	  var buyList = [];
+        	  $('.selectedPList').each(function(){
+	        	  var product_no = $(this).children('.product_no').val();
+	        	  var cart_quantity = $(this).children('.quantity').val();
+	        	  var cart_size = $(this).children('.selSize').val();
+	        	  var product_name = '<c:out value="${ product.product_name }"/>';
+	        	  var brand_name = '<c:out value="${ product.brand_name }"/>';
+	        	  var product_price = '<c:out value="${ product.product_price}"/>';
+	        	  var att_name = '<c:out value="${ attachment[1].att_name }"/>';
+	        	 
+	        	  if(cart_size != ""){
+		        	 var product = {
+		        			 'product_no' : product_no,
+		        			 'cart_quantity' : cart_quantity,
+		        			 'cart_size' : cart_size,
+		        			 'product_name' : product_name,
+		        			 'brand_name' : brand_name,
+		        			 'product_price' : product_price,
+		        			 'att_name' : att_name
+		        	 }
+		        	 buyList.push(product);
+	        	  }
+        	  })
+        	  
+        	  //JSON을 이용해 String 형식으로 만들어 SessionStorage에 저장
+        	  sessionStorage.setItem("buyList", JSON.stringify(buyList));
+        	  
+        	  
+	       	  alert("버튼 작동 확인");
+		  }
+          
+          
+          /*
+        	 $('.selectedPList').each(function(){
+        		 var product_no = $(this).children('.product_no').val();
+	        	 var cart_quantity = $(this).children('.quantity').val();
+	        	 var cart_size = $(this).children('.selSize').val();
+	        	 var brand_name = ${ product.brand_name };
+	        	 var product_name = ${ product.product_name };
+	        	 var product_price = ${ product.product_price};
+	        	// var att_name = ${ attachment[1].att_name };
+	        	  
+        	 })
+        	 
+        	 console.log('구매버튼 자료 확인');
+        	 console.log(product_no);
+        	 console.log(cart_quantity);
+        	 console.log(cart_size);
+        	 console.log(brand_name);
+        	 console.log(product_name);
+        	 console.log(product_price);
+        	 //console.log(att_name);
+
+        	 
+        	 
+         } */
+
         
         // $(function() {
         //     if($('.totalPD').text()== "") {

@@ -342,17 +342,17 @@
    
    // 선택 상품 주문
 	$('#orderSelected').click(function(){
-		var selProduct_no = [];
+		var selectedCart_no = [];
 		
 		 $('.chkbox:checked').each(function(){
 			 var cart_no = Number($(this).parent().parent().children('.cart_no').val());
-			   selProduct_no.push(cart_no);
+			 selectedCart_no.push(cart_no);
 			   })
 		 
 		// console.log(selProduct_no);
 		 
-		 if(selProduct_no.length > 0){
-			 location.href = "${pageContext.request.contextPath}/order/order.or?selProduct_no="+selProduct_no;
+		 if(selectedCart_no.length > 0){
+			 location.href = "${pageContext.request.contextPath}/order/order.or?selProduct_no="+selectedCart_no;
 		 } else {
 			 alert("상품이 선택되지 않았습니다.");
 		 };
@@ -362,16 +362,16 @@
    
    // 모든 상품 주문
    $('#orderAll').click(function(){
-	   var selProduct_no = [];
+	   var selectedCart_no = [];
 		
 		 $('.cart_no').each(function(){
 			 var cart_no = Number($(this).val());
-			   selProduct_no.push(cart_no);
+			 selectedCart_no.push(cart_no);
 			   })
 		 
 		// console.log(selProduct_no);
 		
-		location.href = "${pageContext.request.contextPath}/order/order.or?selProduct_no="+selProduct_no;
+		location.href = "${pageContext.request.contextPath}/order/order.or?selProduct_no="+selectedCart_no;
    });
 
 </script>
