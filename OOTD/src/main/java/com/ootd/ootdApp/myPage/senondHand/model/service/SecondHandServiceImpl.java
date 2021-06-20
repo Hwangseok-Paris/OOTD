@@ -68,8 +68,8 @@ public class SecondHandServiceImpl implements SecondHandService {
 	}
 
 	@Override
-	public String selectOrderStatus(int orderNo) {
-		return secondHandDAO.selectOrderStatus(orderNo);
+	public int updatePurchaseStatus(int orderNo) {
+		return secondHandDAO.updatePurchaseStatus(orderNo);
 	}
 	
 

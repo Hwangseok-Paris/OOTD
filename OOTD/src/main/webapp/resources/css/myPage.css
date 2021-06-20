@@ -13,6 +13,7 @@ ul {
     list-style: none;
     margin-bottom: 8px;
 }
+
 br{
     size: unset;
     height: 5px;
@@ -56,8 +57,9 @@ a {
     font-size: 13px;
 }
 
-.category-list ul a{
+.category-list ul a {
 	background:none;
+	text-decoration: none;
 }
 
 /* 테이블 전체 메뉴 설정 */

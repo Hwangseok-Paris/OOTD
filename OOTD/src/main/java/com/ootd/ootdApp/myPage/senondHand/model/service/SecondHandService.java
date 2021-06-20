@@ -28,6 +28,9 @@ public interface SecondHandService {
 
 	int updateOrderSaleStatus(int orderNo);
 
-	String selectOrderStatus(int orderNo);
+
+	int updatePurchaseStatus(int orderNo);
+
+
 
 }

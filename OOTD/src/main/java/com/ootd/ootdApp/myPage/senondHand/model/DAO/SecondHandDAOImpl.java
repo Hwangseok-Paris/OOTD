@@ -64,12 +64,39 @@ public class SecondHandDAOImpl implements SecondHandDAO {
 	@Override
 	public int updateOrderSaleStatus(int orderNo) {
 		System.out.println("DAO Sale Status -> " + orderNo);
-		return sqlSession.update("orderList-mapper.updateOrderSaleStatus", orderNo);
+		
+		int resultSale = sqlSession.update("orderList-mapper.updateOrderSaleStatus", orderNo);
+		int resultOrder = sqlSession.update("orderList-mapper.updateOrderStatus", orderNo);
+		
+		System.out.println(resultSale + "/" + resultOrder);
+		
+		int result = 0;
+		
+		if(resultSale * resultOrder == 1) {
+			result = 1;
+		} else result = 0;
+		
+		return result;
 	}
 
 	@Override
-	public String selectOrderStatus(int orderNo) {
-		return sqlSession.selectOne("orderList-mapper.selectOrderStatus", orderNo);
+	public int updatePurchaseStatus(int orderNo) {
+		
+		int result1 = sqlSession.update("orderList-mapper.updatePurchaseStatus", orderNo); 
+		int result2 = sqlSession.update("orderList-mapper.updatefianlstatus", orderNo);
+		
+		System.out.println(result1 + "/" + result2);
+		
+		int result = 0;
+		
+		if(result1 * result2 == 1) {
+			result = 1;
+		} else result = 0;
+		
+		return result;
 	}
+
+
+
 
 }

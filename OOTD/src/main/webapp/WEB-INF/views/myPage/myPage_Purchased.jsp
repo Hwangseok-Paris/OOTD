@@ -51,16 +51,16 @@
 	                                </div>
 	                            </td>
 	                            <td>
-	                                <div class="order-no">${s.order_no }</div>
+	                                <div class="order-no" name="order_no" >${s.order_no }</div>
 	                            </td>
 	                            <td class="order-date">${s.order_date }</td>
 	                            <td class="total-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${s.total_price}" />&#8361;</td>
 	                            <td>
-	                                <span class="purchase-status">1</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
+	                                <span class="purchase-status">${s.order_status }</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
 	                            </td>
 	                            <td>
 	                                <button class="confirm-purchase" style="display: none;" id="${s.order_no }">구매 확정</button>
-	                                <button class="write-review" style="display: none;">리뷰 작성</button>
+	                                <button class="write-review" style="display: none;" >리뷰 작성</button>
 	                            </td>
 	                        </tr>
 	                    </tbody>
@@ -80,6 +80,12 @@
 </body>
 
 <script>
+	
+	/* var orderNo = $('.order-no').text();
+	$(function() {
+		location.href="${pageContext.request.contextPath}/myPage/status.do?order_no="+orderNo;		
+	}); */
+
     // 모달창 스크립트
     $('.order-no').click(function () {
         $('.modal').fadeIn();
@@ -99,7 +105,7 @@
     // .purchase_status의 값(value)에 따라 배송 상태 텍스트 변경
     $(function () {
         $('.purchase-status').each(function () {
-            ps = $(this).text();
+            var ps = $(this).text();
 
             cfmBtn = $(this).parent().next().children('.confirm-purchase');
             wrvBtn = $(this).parent().next().children('.write-review');
@@ -107,6 +113,7 @@
             switch (ps) {
                 case "1":
                     $(this).text('배송준비');
+                   	cfmBtn.show();
                     break;
                 case "2":
                     $(this).text('배송중');
@@ -123,12 +130,29 @@
         })
     })
     
-    $('.confirm-purchase').on('click', function() {
-    	var orderNo = $(this).text();
-    	
-    	
-    });
-    
+	$('.confirm-purchase').click(function() {
+		
+		var orderNo = $(this).attr('id');
+		
+		$.ajax({
+			type: "POST",
+			url: "${pageContext.request.contextPath}/myPage/purchaseStatusChange.do",
+			data: {"orderNo": orderNo},
+			
+			success: function(data) {
+				if(data == 2) {
+					$('.purchase-status').text("배송중");
+					$('.complete-send').show();
+				} else if (data == 3) {
+					$('.purchase-status').text("구매완료");
+					$('complete-send').hide();
+				} 
+			}, error: function() {
+				alert("상태변환 실패");
+			}
+		});
+		
+	});
     // 주문 번호를 클릭했을 때(span의 class가져옴)
 	 $('.order-no').click(function(){
 		 

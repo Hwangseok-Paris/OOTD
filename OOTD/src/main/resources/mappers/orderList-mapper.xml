@@ -51,12 +51,11 @@
 	</select>
 	
 	<select id="selectSaleProductList" parameterType="string" resultType="O_Order">
-		SELECT M.BRAND_NAME, P.PRODUCT_NAME, P.PRODUCT_SIZE, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE, O.ORDER_STATUS, O.ORDER_STATUS
+		SELECT M.BRAND_NAME, P.PRODUCT_NAME, P.PRODUCT_SIZE, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE, O.ORDER_STATUS
 		FROM MEMBER M, PRODUCT P, O_ORDER O, O_ORDER_LIST OL
 		WHERE M.MEMBER_NO = P.MEMBER_NO 
 			AND O.ORDER_NO = OL.ORDER_NO
 			AND OL.PRODUCT_NO = P.PRODUCT_NO
-			AND O.ORDER_STATUS = '1'
 			AND M.MEMBER_NAME = #{member_name}
 		ORDER BY O.ORDER_DATE ASC
 	</select>
@@ -67,10 +66,28 @@
 		WHERE ORDER_NO = #{order_no}
 	</update>
 	
+	<update id="updateOrderStatus" parameterType="_int">
+		UPDATE PURCHASE
+		SET PURCHASE_STATUS = 2
+		WHERE ORDER_NO = #{order_no}
+	</update>
+	
 	<select id="selectOrderStatus" parameterType="string" resultType="O_Order">
 		SELECT ORDER_STATUS
 		FROM O_ORDER
 		WHERE ORDER_NO = #{order_no}
 	</select>
 
+	<update id="updatePurchaseStatus" parameterType="_int">
+		UPDATE O_ORDER
+		SET ORDER_STATUS = 3
+		WHERE ORDER_NO = #{order_no}
+	</update>
+	
+	<update id="updatefianlstatus" parameterType="_int">
+		UPDATE PURCHASE
+		SET PURCHASE_STATUS = 3
+		WHERE ORDER_NO = #{order_no}
+	</update>
+	
 </mapper>
