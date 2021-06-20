@@ -4,7 +4,7 @@
 <mapper namespace="orderList-mapper"> 
 
    <select id="selectBrandOrderList" resultType="O_Order" parameterType="string">
-	SELECT P.PRODUCT_NAME, OL.ORDER_QUANTITY, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE
+	SELECT P.PRODUCT_NAME, OL.ORDER_QUANTITY, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE, O.ORDER_STATUS
         FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P, MEMBER M
         WHERE O.ORDER_NO = OL.ORDER_NO
         	AND OL.PRODUCT_NO = P.PRODUCT_NO

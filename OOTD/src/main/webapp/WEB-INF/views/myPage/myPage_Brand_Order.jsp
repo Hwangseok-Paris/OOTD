@@ -59,7 +59,7 @@
                             <td class="order-date">${o.order_date}</td>
                             <td class="total-price">${o.total_price}&nbsp;&#8361;</td>
                             <td>
-                                <span class="purchase-status" >1</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
+                                <span class="purchase-status" >${o.order_status}</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
                             </td>
                             <td>
                                 <button class="complete-send" id="${o.order_no}">발송 완료</button>

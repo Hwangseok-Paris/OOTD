@@ -3,6 +3,8 @@ package com.ootd.ootdApp.myPage.brand.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,7 @@ public class O_Order implements Serializable {
 	private int order_no;
 	private String receiver_name;
 	private String order_address;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date order_date;
 	private String order_memo;
 	private int total_price;
