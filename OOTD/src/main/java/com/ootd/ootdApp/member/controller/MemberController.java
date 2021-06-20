@@ -421,7 +421,7 @@ public class MemberController {
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 		parameters.add("grant_type", "authorization_code");
 		parameters.add("client_id", "89e4c9bda621e09d0753e1d8af4c0091");  	  //rest api key
-		parameters.add("redirect_uri", "http://localhost:8088/ootdApp");        //redirect 주소는 등록한 주소로....
+		parameters.add("redirect_uri", "http://localhost:8088/ootdApp/oauth");        //redirect 주소는 등록한 주소로....
 		parameters.add("code", code);
 				
 		String url = "https://kauth.kakao.com/oauth/token";
