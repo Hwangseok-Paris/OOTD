@@ -13,6 +13,7 @@
            AND P.PRODUCT_NO = A.PRODUCT_NO
 		   AND PRODUCT_TYPE = 1
            AND A.ATT_LEVEL = 1
+           AND PRODUCT_STATUS = 'Y'
            <if test="product_category != 0">
            		AND P.PRODUCT_CATEGORY = #{ product_category }
            </if>
@@ -44,6 +45,7 @@
            AND P.PRODUCT_NO = A.PRODUCT_NO
 		   AND PRODUCT_TYPE = 2
            AND A.ATT_LEVEL = 1
+           AND PRODUCT_STATUS = 'Y'
            <if test="product_category != 0">
            		AND P.PRODUCT_CATEGORY = #{ product_category }
            </if>
@@ -149,8 +151,31 @@
     			AND A.ATT_LEVEL = 1
 	</select>
 	
+	<!-- update -->
+	<update id="brandUpdate" parameterType="Product_p">
+		UPDATE PRODUCT 
+		 SET PRODUCT_DETAIL = #{product_detail},
+			PRODUCT_SIZEINFO = #{product_sizeinfo},
+			PRODUCT_PRICE = #{product_price},
+			PRODUCT_STOCK_S = #{product_stock_s},
+			PRODUCT_STOCK_M = #{product_stock_m},
+			PRODUCT_STOCK_L = #{product_stock_l}
+		WHERE PRODUCT_NO = #{product_no}
+	</update>
 
+	<update id="secondHandUpdate" parameterType="Product_p">
+		UPDATE PRODUCT 
+		SET PRODUCT_DETAIL = #{product_detail},
+			PRODUCT_SIZEINFO = #{product_sizeinfo},
+			PRODUCT_SIZE = #{product_size},
+			PRODUCT_PRICE = #{product_price}
+		WHERE PRODUCT_NO = #{product_no}
+	</update>
 	
+	<insert id="attachmentUpdate" parameterType="Attachment">
+		INSERT INTO ATTACHMENT(ATT_NO, ATT_NAME, ATT_DATE, ATT_LEVEL, ATT_STATUS, PRODUCT_NO)
+		VALUES(SEQ_ATT_NO.NEXTVAL, #{att_name}, default , #{att_level}, 'Y', #{product_no})
+	</insert>
 	
 	
 </mapper>

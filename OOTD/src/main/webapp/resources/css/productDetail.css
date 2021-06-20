@@ -69,12 +69,22 @@ section{
         height: 40px;
         font-weight: bolder;
     }
-    .btn:hover, .dropArea:hoer, .underMenu:hover {
+    .btn:hover, .dropArea:hoer, .underMenu:hover, {
 		cursor : pointer;
+    }
+    .drop:hover {
+    	cursor: pointer;
     }
     #selectSize{
         margin-left: 90px;
     }
+    #selectSize:hover {
+    	cursor: pointer;
+    }
+    .quantity:hover {
+    	cursor: pointer;
+    }
+    
     .ddd{
         display: none;
     }

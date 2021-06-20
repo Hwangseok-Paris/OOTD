@@ -1,5 +1,6 @@
 package com.ootd.ootdApp.myPage.brand.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import com.ootd.ootdApp.member.model.service.MemberService;
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.brand.model.service.BrandService;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
 @SessionAttributes({ "member" })
@@ -197,8 +199,13 @@ public class BrandController {
 
 	// 등록 상품 - 업체가 등록한 상품 리스트 - 삭제
 	@RequestMapping("myPage/myPage_Brand_Prodouct_Delete.mp")
-	public String myPage_Brand_Prdouct_Delete(@RequestParam int productNo, Model model) {
+	public String myPage_Brand_Prdouct_Delete(@RequestParam int productNo, HttpServletRequest req, Model model) {
 
+		String savePath = req.getServletContext().getRealPath("/resources/images/productImgUpload");
+		
+		// 첨부파일 삭제 명단
+		List<Attachment> delList = brandService.selectAttachmentList(productNo);
+		System.out.println("브랜드 상품 삭제 controller 확인 :: " + delList);
 		int result = brandService.deleteBrandProductList(productNo);
 		System.out.println("result :: " + result);
 		System.out.println("product_delete :: 여기 왔나요"); // 여기 안옴
@@ -207,7 +214,11 @@ public class BrandController {
 
 		if (result > 0) {
 			msg = "삭제 완료!";
-
+			
+			for(Attachment a : delList) {
+				new File(savePath + "/" + a.getAtt_name()).delete();
+			}
+			
 		} else {
 			msg = "삭제 실패!";
 		}

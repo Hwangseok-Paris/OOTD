@@ -113,7 +113,7 @@ public interface ProductDAO {
 	 * @param Product
 	 * @return int
 	 */
-	int brandUpdate(Product product);
+	int brandUpdate(Product originalProduct, List<Attachment> attachList);
 
 	/**
 	 * secondHand상품 수정하는 메소드
@@ -121,7 +121,7 @@ public interface ProductDAO {
 	 * @param Product
 	 * @return int
 	 */
-	int secondHandUpdate(Product product);
+	int secondHandUpdate(Product originalProduct, List<Attachment> attachList);
 
 	// =========Product Delete( Delete )========
 

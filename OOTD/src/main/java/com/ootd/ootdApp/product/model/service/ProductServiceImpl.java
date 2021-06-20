@@ -166,10 +166,21 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectProductImages();
 	}
 
+
+
 	@Override
-	public int productUpdate(int product_no) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int productUpdate(Product originalProduct, List<Attachment> attachList , int pType) {
+
+		System.out.println("업데이트 서비스 접근 ");
+		if( pType == 1) {
+			
+			return productDAO.brandUpdate(originalProduct, attachList);
+		} else {
+			
+			return productDAO.secondHandUpdate(originalProduct, attachList);
+		}
+		
+		
 	}
 
 	

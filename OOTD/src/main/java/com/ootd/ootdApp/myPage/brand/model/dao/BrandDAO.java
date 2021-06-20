@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
 
@@ -28,5 +29,7 @@ public interface BrandDAO {
 	List<Product> selectBrandProductRankList(int member_no);
 
 	int updateBrandStatus(int orderNo);
+
+	List<Attachment> selectAttachmentList(int productNo);
 
 }

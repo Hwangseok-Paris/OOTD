@@ -61,9 +61,11 @@ public interface ProductService {
 	 * 상품 수정하는 메소드
 	 * 
 	 * @param Product
+	 * @param pType
+	 * @param List<Attachment>
 	 * @return int
 	 */
-	int productUpdate(int product_no);
+	int productUpdate(Product originalProduct, List<Attachment> attachList, int pType);
 
 	// =========Product Delete( Delete )========
 
@@ -83,6 +85,8 @@ public interface ProductService {
 	List<Attachment> selectProductImages(); 
 	
 	int selectReviewTotalContents(int product_no);
+
+	
 	
 
 }

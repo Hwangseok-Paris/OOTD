@@ -11,6 +11,7 @@ import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Review;
 
 @Repository
@@ -56,7 +57,17 @@ public class SecondHandDAOImpl implements SecondHandDAO {
 
 	@Override
 	public int deleteProduct(int productNo) {
-		return sqlSession.delete("productList-mapper.deleteProduct", productNo);
+		
+		int resultP = 0;	// 상품 삭제 결과
+		int resultA = 0; 	// 첨부파일 삭제 결과
+		
+		resultP = sqlSession.delete("productList-mapper.deleteProduct", productNo); 
+		
+		if( resultP > 0) {
+			resultA = sqlSession.delete("productList-mapper.deleteSecondProductAttachment", productNo);
+		}
+		
+		return resultA;
 	}
 
 	@Override
@@ -109,6 +120,12 @@ public class SecondHandDAOImpl implements SecondHandDAO {
 	public int insertReview(Review review) {
 		
 		return sqlSession.insert("orderList-mapper.insertReview", review);
+	}
+
+	@Override
+	public List<Attachment> selectAttachmentList(int productNo) {
+
+		return sqlSession.selectList("productList-mapper.selectAttachList", productNo);
 	}
 
 

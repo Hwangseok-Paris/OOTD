@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.brand.model.dao.BrandDAO;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
 @Service
@@ -74,6 +75,12 @@ public class BrandServiceImpl implements BrandService {
 	public int updateBrandStatus(int orderNo) {
 		System.out.println("send :: 서비스 왔나요");
 		return brandDAO.updateBrandStatus(orderNo);
+	}
+
+	@Override
+	public List<Attachment> selectAttachmentList(int productNo) {
+
+		return brandDAO.selectAttachmentList(productNo);
 	}
 	
 }

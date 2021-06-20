@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
 @Repository
@@ -34,7 +35,17 @@ public class BrandDAOImpl implements BrandDAO {
 	@Override
 	public int deleteBrandProductList(int productNo) {
 		System.out.println("product_delete :: DAO 왔나요");
-		return sqlSession.delete("productList-mapper.deleteBrandProductList", productNo);
+		
+		int resultP = 0;	// 상품 삭제 결과
+		int resultA = 0;	// 첨부파일 삭제 결과
+		
+		resultP = sqlSession.delete("productList-mapper.deleteBrandProductList", productNo);
+		
+		if( resultP > 0) { 
+			resultA = sqlSession.delete("productList-mapper.deleteBrandProductAttachment", productNo);
+		}
+		
+		return resultA;
 	}
 
 	@Override
@@ -88,6 +99,12 @@ public class BrandDAOImpl implements BrandDAO {
 			result = 0;
 		}
 		return result;
+	}
+
+	@Override
+	public List<Attachment> selectAttachmentList(int productNo) {
+
+		return sqlSession.selectList("productList-mapper.selectAttachList", productNo);
 	}
 	
 

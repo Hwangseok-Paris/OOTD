@@ -11,6 +11,7 @@ import com.ootd.ootdApp.myPage.senondHand.model.DAO.SecondHandDAO;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
+import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Review;
 
 @Service
@@ -85,6 +86,12 @@ public class SecondHandServiceImpl implements SecondHandService {
 	public int insertReview(Review review) {
 		
 		return secondHandDAO.insertReview(review);
+	}
+
+	@Override
+	public List<Attachment> selectAttachmentList(int productNo) {
+		
+		return secondHandDAO.selectAttachmentList(productNo);
 	}
 	
 
