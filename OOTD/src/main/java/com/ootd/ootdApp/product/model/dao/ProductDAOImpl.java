@@ -123,7 +123,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	
-	// =========Product Update (update)=========
+	// =========상품 수정 (update)=========
 	@Override
 	public int brandUpdate(Product originalProduct, List<Attachment> attachList) {
 
@@ -161,6 +161,7 @@ public class ProductDAOImpl implements ProductDAO {
 		}
 		
 		return resultA;
+
 	}
 
 	@Override
@@ -174,7 +175,26 @@ public class ProductDAOImpl implements ProductDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+	@Override
+	public int secondHandAttachmentDelete(int product_no) {
+		
+		return sqlSession.delete("product-mapper.updateSecondHandProduct");
+	}
+	
+	@Override
+	public int updateAttachment(Attachment a) {
+		
+		return sqlSession.insert("product-mapper.updateSecondHandProduct", a);
+	}
+	
+	@Override
+	public int deleteAttachment(int product_no) {
+		
+		return sqlSession.insert("product-mapper.deleteSecondHandProduct", product_no);
+	}
+	// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	
 	@Override
 	public List<Review> selectProductReview(int product_no) {
 		System.out.println("DAO 접근 확인");
@@ -196,6 +216,12 @@ public class ProductDAOImpl implements ProductDAO {
 		
 		return sqlSession.selectOne("product-mapper.selectReviewTotalContents", product_no);
 	}
+	
+//	@Override
+//	public int deleteAttachment(int product_no) {
+//		
+//		return sqlSession.selectOne("product-mapper.selectReviewTotalContents", product_no);
+//	}
 
 	// 다인
 	@Override

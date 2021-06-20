@@ -115,23 +115,8 @@ public class ProductServiceImpl implements ProductService {
 		
 		return p;
 	}
-
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	@Override
-//	public int productUpdate(Product product) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
+	// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
 	@Override
 	public int productDelete(int product_no) {
@@ -165,8 +150,6 @@ public class ProductServiceImpl implements ProductService {
 		
 		return productDAO.selectProductImages();
 	}
-
-
 
 	@Override
 	public int productUpdate(Product originalProduct, List<Attachment> attachList , int pType) {
