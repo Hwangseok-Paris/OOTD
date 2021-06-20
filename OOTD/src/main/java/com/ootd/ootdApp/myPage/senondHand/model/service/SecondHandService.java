@@ -10,8 +10,8 @@ import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
 import com.ootd.ootdApp.product.model.vo.Review;
 
 public interface SecondHandService {
-	
-	int updatePassword(Member member); //회원 비밀번호 변경
+
+	int updatePassword(Member member); // 회원 비밀번호 변경
 
 	int updateEamil(Member member); // 회원 이메일 변경
 
@@ -31,13 +31,12 @@ public interface SecondHandService {
 
 	int updateOrderSaleStatus(int orderNo);
 
-
 	int updatePurchaseStatus(int orderNo);
-
-
 
 	Review_ProductInfo selectReviewInfo(HashMap<String, Object> map);
 
 	int insertReview(Review review);
+
+	String selectSearchResult(String totalSearch);
 
 }

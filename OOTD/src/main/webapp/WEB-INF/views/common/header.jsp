@@ -32,9 +32,8 @@
 					<li class="search_li">
 						<div>
 
-							<form action="" method="GET" id="search_main">
-								<input type="text" class="search_input"> <i
-									class="fas fa-search fa-lg"></i>
+							<form action="/header/totalSearch.do" method="POST" id="search_main">
+								<input type="text" class="search_input" name="totalSearch"> <i class="fas fa-search fa-lg"></i>
 							</form>
 						</div>
 
