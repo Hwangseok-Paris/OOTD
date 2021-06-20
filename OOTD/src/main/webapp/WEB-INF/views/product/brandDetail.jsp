@@ -36,7 +36,7 @@
 
             <div id="imgDetail" class="inputBox2">
                 <div class='inputBox2 zoom' id='ex1'>
-                    <img src='${pageContext.request.contextPath}/resources/images/productImgUpload/${ a.att_name }' id='jack' width='540' height='620' alt='Daisy on the Ohoopee'/>
+                    <img src='${pageContext.request.contextPath }/resources/images/productImgUpload/${a.att_name}' id='jack' width='540' height='620' alt=''/>
                 </div>
             </div>
         
@@ -52,7 +52,7 @@
 
                 <dl>
                     <dt class="drop"><b>Product Detail</b> 
-                        <span class="accIcon" style="margin-left: 167px;"> 
+                        <span class="accIcon" style="float: right; margin-right: 30px;"> 
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
                             </svg>
@@ -66,7 +66,7 @@
                     </span> <br></dd>
                     <hr>
                     <dt class="drop"><b>Size, Color</b> 
-                        <span class="accIcon" style="margin-left: 190px;">
+                        <span class="accIcon" style="float: right; margin-right: 30px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
                             </svg>
@@ -81,7 +81,7 @@
                     <hr>
                     <dt>
                         <b>Select Size</b>
-                        <select name="" id="selectSize" style="width: 140px;">
+                        <select name="" id="selectSize" style="width: 140px; float: right; margin-right: 30px;" >
                             <option value="">선택안함</option>
                             <option value="S">S</option>
                             <option value="M">M</option>
@@ -99,7 +99,7 @@
                     <dt class="pResult">
                     </dt>
 
-                    <dt>
+                    <dt><br /><br />
                         <div>   
                             <b>Total :</b> <span id="won">0</span> <span class="totalPD"></span> <span id="totalQ"></span>
                         </div>
@@ -108,8 +108,8 @@
 
             
 
-                <button id="btn" onclick="goCart();">add to cart</button>
-                <button id="btn" onclick="goBuy();">buy now</button>
+                <button class="btn" onclick="goCart();">add to cart</button>
+                <button class="btn" onclick="goBuy();">buy now</button>
             </div>
         </div>
     </div>
@@ -305,7 +305,10 @@
 	<script>
 
 		$(function() {
-			$('#ex1').zoom();
+		    $(document).ready(function(){
+		        $('#ex1').zoom();
+		      
+		    });
 		});
     
 

@@ -51,13 +51,8 @@
 	                            </td>
 	                            <td class="total-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${s.product_price}" /> &#8361;</td>
 	                            <td>
-<<<<<<< HEAD
-	                                <button class="modify-product modify">수정</button>
-	                                <button class="delete-product delete" id="${s.product_no }">삭제</button>
-=======
-	                                <button class="modify-product modify" id="updateProduct" onclick="moveToUpdate()">수정</button>
-	                                <button class="delete-product delete" id="deleteProduct" onclick="deleteProduct()">삭제</button>
->>>>>>> refs/remotes/origin/feature_Jung
+	                                <button class="modify-product modify" value="${s.product_no }">수정</button>
+	                                <button class="delete-product delete" value="${s.product_no }">삭제</button>
 	                            </td>
 	                        </tr>
 	                    </tbody>
@@ -68,20 +63,23 @@
     </div>
     
     <script>
-<<<<<<< HEAD
-    	$('.delete-product').on('click', function() {
-    		var productNo = $(this).attr('id')
-    		location.href="${pageContext.request.contextPath }/myPage/myPage_Product_Delete.do?productNo=" + productNo;
-    	});
-=======
-    	function moveToUpdate() {
-    		location.href="${pageContext.request.contextPath}/product/productUpdateView.do";
-    	}
+	    $(function(){
+			
+			// 상품 수정 
+			$(".modify").on("click",function(){
+				var productNo = $(this).attr("value");
+				console.log("productNo="+productNo);
+				location.href = "${pageContext.request.contextPath}/product/productUpdateView.do?productNo="+productNo+"&pType=2";
+				});
+			
+			// 상품 삭제
+			$(".delete").on("click",function(){
+				var productNo = $(this).attr("value");
+				console.log("productNo="+productNo);
+				location.href = "${pageContext.request.contextPath}/myPage/myPage_Product_Delete.mp?productNo="+productNo;
+				});
+		});
     
-    	function deleteProduct() {
-    		
-    	}
->>>>>>> refs/remotes/origin/feature_Jung
     </script>
             
     <!-- FOOTER IMPORT -->

@@ -196,7 +196,7 @@ public class BrandController {
 	}
 
 	// 등록 상품 - 업체가 등록한 상품 리스트 - 삭제
-	@RequestMapping("myPage/myPage_Brand_Prdouct_Delete.mp")
+	@RequestMapping("myPage/myPage_Brand_Prodouct_Delete.mp")
 	public String myPage_Brand_Prdouct_Delete(@RequestParam int productNo, Model model) {
 
 		int result = brandService.deleteBrandProductList(productNo);
