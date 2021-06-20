@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -311,12 +312,12 @@ public class ProductController {
 	//=========Product Update( Update )======== 
 	@RequestMapping("/product/productUpdate.do")
 	public String productUpdate(Product p, HttpServletRequest req, Model model,
+			//@RequestParam(value = "product_no", required=false) productNo, 
 			@RequestParam(value = "secondHandProductImg", required = false) MultipartFile[] upFiles) {
 		// pType = 1 ? 브랜드 : 상품  	
-		int pType = p.getProduct_type();
+		int pType = p.getProduct_type();		// 네. 
 		
-		// update 코드 작성 
-
+		System.out.println("product_type : " + p);
 		
 		if( pType == 1 ) {
 			System.out.println("productUpdate 진입");
@@ -324,7 +325,57 @@ public class ProductController {
 		} else {
 			System.out.println("productUpdate 진입");
 			
-			// 1. 원본 게시글 가져와 수정하기
+			
+			
+//			// update 코드 작성 
+//			String savePath = req.getServletContext().getRealPath("/resources/images/productImgUplaod");	// 경로 지정 했습니다 (새로 파일 수정할 때 저장될 곳)
+//			//List<Attachment> attachList = productService.selectAttachmentList();	// 이거 왜 에러나
+//			
+//			if(attachList == null) 
+//				attachList = new ArrayList<>();
+//			
+//			int idx = 0;
+//			for(MultipartFile f : upFiles) {
+//				Attachment temp = null;
+//				
+//				if(f.isEmpty() == false) {
+//					// 변경 전의 파일이 존재할 경우
+//					if(attachList.size() > idx) {
+//						File oldFile = new File(savePath + "/" + attachList.get(idx).getRenamedFileName());
+//						System.out.println("파일 삭제 확인 : " + oldFile.delete());
+//						
+//						temp = attachList.get(idx);
+//					} else {
+//						temp = new Attachment();
+//						temp.setAtt_no(p.getProduct_no());
+//						
+//						attachList.add(temp);
+//					}
+//					
+//					// 파일 저장용 이름 등록
+//					String originName = f.getOriginalFilename();
+//					String changeName = fileNameChanger(originName);
+//					
+//					// 파일 저장
+//					try {
+//						
+//						f.transferTo(new File(savePath + "/" + changeName));
+//						
+//					} catch (IllegalStateException | IOException e) {
+//						
+//						e.printStackTrace();
+//					}
+//					
+//					temp.setOriginalFileName(originName);
+//					temp.setRenamedFileName(changeName);
+//					
+//					attachList.set(idx, temp);
+//				}
+//				
+//				idx++;
+//			}
+			
+			
 			return "myPage/myPage_Product";		// 상품 수정완료 후 second 마이페이지로 이동 
 		}
 		

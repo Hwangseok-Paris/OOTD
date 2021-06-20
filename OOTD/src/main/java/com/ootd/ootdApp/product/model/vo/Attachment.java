@@ -24,4 +24,12 @@ public class Attachment implements Serializable {
 	// 다인
 	private int rank;
 	private int product_type;
+	
+	private String originalFileName;
+	private String renamedFileName;
+	
+	public Attachment(String originalFileName, String renamedFileName) {
+		this.originalFileName = originalFileName;
+		this.renamedFileName = renamedFileName;
+	}
 }

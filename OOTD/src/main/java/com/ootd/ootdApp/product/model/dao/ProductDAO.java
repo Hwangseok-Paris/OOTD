@@ -122,6 +122,9 @@ public interface ProductDAO {
 	 * @return int
 	 */
 	int secondHandUpdate(Product product);
+	
+	// 상품 수정(정완)
+	List<Attachment> selectAttachmentList(int product_no);
 
 	// =========Product Delete( Delete )========
 
@@ -140,6 +143,12 @@ public interface ProductDAO {
 	 * @return int
 	 */
 	int secondHandDelete(int product_no);
+	
+	int secondHandAttachmentDelete(int product_no);
+	
+	int updateAttachment(Attachment a);
+	
+	int deleteAttachment(int product_no);
 	
 	List<Review> selectProductReview(int product_no);
 

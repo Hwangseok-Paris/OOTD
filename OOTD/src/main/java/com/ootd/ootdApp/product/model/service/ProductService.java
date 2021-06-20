@@ -60,10 +60,13 @@ public interface ProductService {
 	/**
 	 * 상품 수정하는 메소드
 	 * 
-	 * @param Product
-	 * @return int
+	 * @param int
+	 * @return Product
 	 */
-	int productUpdate(int product_no);
+	
+	int productUpdate(Product product, List<Attachment> attachList);
+	
+	List<Attachment> selectAttachmentList(int product_no);
 
 	// =========Product Delete( Delete )========
 

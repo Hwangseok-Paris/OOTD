@@ -22,6 +22,7 @@
 	<form name="brandFrm" action="${pageContext.request.contextPath}/product/productUpdate.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="product_type" value="2" />
 			<input type="hidden" name="member_no"value="${ member.member_no }" />
+			<input type="hidden" name="member_no"value="${ product.product_no }" />
 		<div class="input-area">
 		    <div class="input-img-area">
         <div id="insertArea" class="inputBox1">

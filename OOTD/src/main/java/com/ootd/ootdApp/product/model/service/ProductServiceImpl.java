@@ -118,20 +118,35 @@ public class ProductServiceImpl implements ProductService {
 
 	
 	
+	// 상품 수정
+	@Override
+	public List<Attachment> selectAttachmentList(int product_no) {
+
+		return productDAO.selectAttachmentList(product_no);
+	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-//	@Override
-//	public int productUpdate(Product product) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
+	@Override
+	public int productUpdate(Product product, List<Attachment> attachList) {
+		int totalResult = 0;
+		
+		List<Attachment> originList = productDAO.selectAttachmentList(product.getProduct_no());
+		
+		totalResult = productDAO.secondHandUpdate(product);
+		
+		if(originList.size() > 0) {
+			totalResult = productDAO.secondHandAttachmentDelete(product.getProduct_no());
+		}
+		
+		if(attachList.size() > 0) {
+			for(Attachment a : attachList) {
+				totalResult = productDAO.updateAttachment(a);
+			}
+		}
+		
+		return totalResult;
+	}
+	// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
 	@Override
 	public int productDelete(int product_no) {
@@ -166,11 +181,8 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectProductImages();
 	}
 
-	@Override
-	public int productUpdate(int product_no) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
+
 
 	
 

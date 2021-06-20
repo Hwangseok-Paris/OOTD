@@ -75,7 +75,7 @@
 	</select>
 
 
-	<!-- 1번 째(Product_no는 시퀀스넘버를 주자)  -->
+	<!-- 상품 등록 쿼리  -->
 	<insert id="insertSecondHandProduct" parameterType="Product_p">
 		INSERT INTO PRODUCT(PRODUCT_NO, PRODUCT_NAME, PRODUCT_DETAIL, PRODUCT_SIZEINFO, PRODUCT_SIZE, PRODUCT_PRICE, PRODUCT_STOCK_S, PRODUCT_STOCK_M, PRODUCT_STOCK_L, PRODUCT_TYPE, MEMBER_NO, PRODUCT_STATUS, PRODUCT_CATEGORY)
 		VALUES(SEQ_PRODUCT_NO.NEXTVAL, #{product_name}, #{product_detail}, #{product_sizeinfo}, #{product_size}, #{product_price}, #{product_stock_s}, #{product_stock_m}, #{product_stock_l}, #{product_type}, #{ member_no }, 'Y', #{ product_category })
@@ -96,6 +96,25 @@
 		INSERT INTO ATTACHMENT(ATT_NO, ATT_NAME, ATT_DATE, ATT_LEVEL, ATT_STATUS, PRODUCT_NO)
 		VALUES(SEQ_ATT_NO.NEXTVAL, #{att_name}, default , #{att_level}, 'Y', #{product_no})
 	</insert>
+
+	<!-- 상품 수정 -->
+	<insert id="updateSecondHandProduct" parameterType="Attachment">
+		INSERT INTO PRODUCT(PRODUCT_NO, PRODUCT_NAME, PRODUCT_DETAIL, PRODUCT_SIZEINFO, PRODUCT_SIZE, PRODUCT_PRICE, PRODUCT_STOCK_S, PRODUCT_STOCK_M, PRODUCT_STOCK_L, PRODUCT_TYPE, MEMBER_NO, PRODUCT_STATUS, PRODUCT_CATEGORY)
+		VALUES(SEQ_PRODUCT_NO.NEXTVAL, #{product_name}, #{product_detail}, #{product_sizeinfo}, #{product_size}, #{product_price}, #{product_stock_s}, #{product_stock_m}, #{product_stock_l}, #{product_type}, #{ member_no }, 'Y', #{ product_category })
+	</insert>
+	
+	<update id="updateSecondHand" parameterType="Product_p">
+		UPDATE PRODUCT
+		SET PRODUCT_DETAIL = #{product_detail},
+			PRODUCT_SIZEINFO = #{product_sizeinfo},
+			PRODUCT_PRICE = #{product_price}
+		WHERE PRODUCT_NO = #{product_no}
+	</update>
+	
+	<delete id="deleteSecondHandProduct" parameterType="_int">
+		DELETE FROM ATTACHMENT
+		WHERE PRODUCT_NO = #{product_no}
+	</delete>
 
 	<!-- product Detail -->
 	<select id="brandSelectOne" parameterType="_int" resultType="Product_p">
