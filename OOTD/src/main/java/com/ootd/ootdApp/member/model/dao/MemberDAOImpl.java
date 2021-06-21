@@ -52,6 +52,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.update("member-mapper.updatePasswordFind", m);
 	}
 
+	@Override
+	public int selectKakaoCount(String member_id) {
+		
+		return sqlSession.selectOne("member-mapper.selectKakaoCount", member_id);
+	}
+
 	
 
 	

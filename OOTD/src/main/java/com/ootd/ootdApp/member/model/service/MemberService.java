@@ -15,6 +15,8 @@ public interface MemberService {
 	Member selectMemberID(Member member);
 
 	int updateNewPass(Member member);
+
+	int selectKakaoCount(String id);
 	
 	
 }
