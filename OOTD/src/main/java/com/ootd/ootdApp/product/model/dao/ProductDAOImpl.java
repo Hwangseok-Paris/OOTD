@@ -130,20 +130,44 @@ public class ProductDAOImpl implements ProductDAO {
 
 		int resultP = 0;
 		int resultA = 0;
+		int product_no = originalProduct.getProduct_no();
+		int resultOldA = 0;
+
+		System.out.println("업데이트 daao 접근 ");
+		System.out.println("DAO 에서 attachList " + attachList);
+		System.out.println("DAO 에서 originalProduct " + originalProduct);
 		
 		// 상품 업데이트 실행
 		resultP = sqlSession.update("product-mapper.brandUpdate", originalProduct);
 
+		// 기존 attchmentList 불러오기 
+		List<Attachment> originAttList = sqlSession.selectList("product-mapper.brandAttSelectList", product_no);
+		
 		// 상품 업데이트 성공했다면 첨부파일 업데이트 
-		if ( resultP > 0) {
-			
-			for(Attachment a : attachList) {
-				resultA = sqlSession.update("product-mapper.attachmentUpdate", attachList);
-				System.out.println("resultA :: " + resultA);
+
+		if (resultP > 0) {
+
+			// 기존 첨부파일이 있다면
+			if (originAttList.size() > 0) {
+				// 기존 첨부파일 삭제
+				System.out.println("updateDAO 에서 기존 첨부파일 확인 :::: originAttList" + originAttList);
+				resultOldA = sqlSession.update("product-mapper.deleteAttachment", product_no);
+				System.out.println("기존 첨부파일 삭제 결과 : resultOldA :::: " + resultOldA);
 			}
-		}
+
+			// 새로운 첨부파일이 있다면
+			if (attachList.size() > 0) {
+				// 새로운 첨부파일 등록
+				for (Attachment a : attachList) {
+					resultA = sqlSession.update("product-mapper.attachmentUpdate", a);
+					System.out.println("resultA :: " + resultA);
+				}
+			}
+		} // 실패 시 처리할 exception 추가 
+
 		
 		return resultA;
+		
 	}
 
 	@Override
@@ -151,23 +175,40 @@ public class ProductDAOImpl implements ProductDAO {
 
 		int resultP = 0;
 		int resultA = 0;
+		int product_no = originalProduct.getProduct_no();
+		int resultOldA = 0;
 		
 		System.out.println("업데이트 daao 접근 ");
 		System.out.println("DAO 에서 attachList " + attachList);
 		System.out.println("DAO 에서 originalProduct " + originalProduct);
 		
-		
 		// 상품 업데이트 실행
 		resultP = sqlSession.update("product-mapper.secondHandUpdate", originalProduct);
 
+		// 기존 attchmentList 불러오기 
+		List<Attachment> originAttList = sqlSession.selectList("product-mapper.secondAttSelectList", product_no);
+		
 		// 상품 업데이트 성공했다면 첨부파일 업데이트 
 		if ( resultP > 0) {
 			
-			for(Attachment a : attachList) {
-				resultA = sqlSession.update("product-mapper.attachmentUpdate", attachList);
-				System.out.println("resultA :: " + resultA);
+			// 기존 첨부파일이 있다면
+			if (originAttList.size() > 0) {
+				// 기존 첨부파일 삭제
+				System.out.println("updateDAO 에서 기존 첨부파일 확인 :::: originAttList" + originAttList);
+				resultOldA = sqlSession.update("product-mapper.deleteAttachment", product_no);
+				System.out.println("기존 첨부파일 삭제 결과 : resultOldA :::: " + resultOldA);
 			}
-		}
+			
+			// 새로운 첨부파일이 있다면
+			if (attachList.size() > 0) {
+				// 새로운 첨부파일 등록
+				for(Attachment a : attachList) {
+					resultA = sqlSession.update("product-mapper.attachmentUpdate", a);
+					System.out.println("resultA :: " + resultA);
+				}
+			}
+			
+		} // 실패 시 처리할 exception 추가 
 		
 		return resultA;
 
@@ -193,6 +234,7 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Override
 	public int updateAttachment(Attachment a) {
+		
 		
 		return sqlSession.insert("product-mapper.updateSecondHandProduct", a);
 	}

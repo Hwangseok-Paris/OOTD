@@ -100,16 +100,6 @@ public class ProductServiceImpl implements ProductService {
 	public Product productSelectOne(int pType, int product_no) {
 
 
-//		// brand 
-//		if( pType == 1) {
-//			Product p = productDAO.brandSelectOne(product_no);
-//			
-//		// second
-//		} else {
-//			
-//			
-//		}
-		
 		Product p = productDAO.productSelectOne(pType, product_no); 
 		
 		
@@ -157,10 +147,16 @@ public class ProductServiceImpl implements ProductService {
 		System.out.println("업데이트 서비스 접근 ");
 		if( pType == 1) {
 			
+			// 변경된 상품, 사진 정보 들고 업데이트 하러 이동
 			return productDAO.brandUpdate(originalProduct, attachList);
-		} else {
 			
+			
+		} else {
+
+			// 변경된 상품, 사진 정보 들고 업데이트 하러 이동
 			return productDAO.secondHandUpdate(originalProduct, attachList);
+			
+			
 		}
 		
 		

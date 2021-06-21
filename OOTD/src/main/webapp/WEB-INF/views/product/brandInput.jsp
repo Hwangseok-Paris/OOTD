@@ -64,15 +64,15 @@
 		        <div id="prTextInput" class="inputBox3">
 		            <h4>Brand Name : ${ member.brand_name }</h4>
 		            <br>
-		            <input type="text" id="productName" class="ininput" placeholder="상품명" name="product_name">
+		            <input type="text" id="productName" class="ininput" placeholder="상품명" name="product_name" required>
 		            <br>
-		            <input type="number" id="productPrice" class="ininput" placeholder="가격(숫자만 입력)" name="product_price">
+		            <input type="number" id="productPrice" class="ininput" placeholder="가격(숫자만 입력)" name="product_price" required>
 		            <br><hr>
 		            <h5>Product Detail</h5>
-		            <textarea id="productDetail" cols="32" rows="8" class="ininput" placeholder="겉감 코튼100%/안감 폴리에스터100%" name="product_detail"></textarea>
+		            <textarea id="productDetail" cols="32" rows="8" class="ininput" placeholder="겉감 코튼100%/안감 폴리에스터100%" name="product_detail" required></textarea>
 		            <br><hr>
 		            <h5>Size, Color</h5>
-		            <textarea id="productInfo" cols="32" rows="8" class="ininput" placeholder="- S 어깨 52.5cm 가슴 62cm                      - Color : Black, Brown" name="product_sizeinfo"></textarea>
+		            <textarea id="productInfo" cols="32" rows="8" class="ininput" placeholder="- S 어깨 52.5cm 가슴 62cm                      - Color : Black, Brown" name="product_sizeinfo" required></textarea>
 		            <br><hr>
 		            <h5>Option & Stock</h5>
 		            <!-- <input type="text" id="productOption" placeholder="옵션명" class="ininput"> -->

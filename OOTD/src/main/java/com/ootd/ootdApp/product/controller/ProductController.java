@@ -321,8 +321,15 @@ public class ProductController {
 			originalProduct.setProduct_price(p.getProduct_price());
 			originalProduct.setProduct_detail(p.getProduct_detail());
 			originalProduct.setProduct_sizeinfo(p.getProduct_sizeinfo());
-			originalProduct.setProduct_size(p.getProduct_size());
 			originalProduct.setProduct_no(productNo);
+			
+			if(pType == 1) {
+				originalProduct.setProduct_stock_s(p.getProduct_stock_s());
+				originalProduct.setProduct_stock_m(p.getProduct_stock_m());
+				originalProduct.setProduct_stock_l(p.getProduct_stock_l());
+			} else {
+				originalProduct.setProduct_size(p.getProduct_size());
+			}
 			
 			String savePath = req.getServletContext().getRealPath("/resources/images/productImgUpload");
 			
@@ -330,6 +337,7 @@ public class ProductController {
 			if ( attachList == null) attachList = new ArrayList<>();
 			
 			int idx = 0;
+			int att_level = 1;
 			for( MultipartFile f : upFiles ) {
 				Attachment temp = null;
 				
@@ -340,7 +348,9 @@ public class ProductController {
 							File oldFile = new File(savePath + "/"
 							                        + attachList.get(idx).getAtt_name());
 							
+//							oldFile.delete();
 							System.out.println("파일 삭제 확인 : " + oldFile.delete());
+							
 							
 							temp = attachList.get(idx);
 							System.out.println("temp ::::: " + temp);
@@ -363,37 +373,32 @@ public class ProductController {
 							e.printStackTrace();
 						}
 						
-					temp.setAtt_name(originName);
+					temp.setAtt_name(changeName);	// 기존첨부파일에 새로운 파일의 바뀐 이름 적용 
 					temp.setProduct_no(productNo);
+					temp.setAtt_level(att_level);
 					
-					attachList.set(idx, temp);
+					attachList.set(idx, temp);		// 기존첨부파일에서  새로운 첨부파일로 이름, 상품번호 새로 셋팅 된 attachList
 				}
 				idx++;	
+				att_level++;
 			}
 			
-			System.out.println("업데이트 controller 에서 originalProduct 확인 :::" + originalProduct);
-			System.out.println("업데이트 controller 에서 attachList 확인 :::" + attachList);
+			System.out.println("업데이트 controller 에서 originalProduct 확인 :::" + originalProduct);	// 새로 받아온 정보로 셋팅 된 product
+			System.out.println("업데이트 controller 에서 attachList 확인 :::" + attachList);	// 새로 받아온 정보로 셋팅 된 attachList
 			
 			
 			int result = productService.productUpdate(originalProduct, attachList, pType);
 			
-//			if( result > 0) {
-//				
-//				
-//			}
+			
 			if( pType == 1 ) {
-				System.out.println("productUpdate 진입");
+				System.out.println("productUpdate 완료");
 				return "myPage/myPage_Brand_Product";		// 상품 수정완료 후 brand 마이페이지로 이동  
 			} else {
-				System.out.println("productUpdate 진입");
+				System.out.println("productUpdate 완료");
 				
-				// 1. 원본 게시글 가져와 수정하기
 				return "myPage/myPage_Product";		// 상품 수정완료 후 second 마이페이지로 이동 
 			}
-				
-			
-			
-			
+
 		}
 	
 	

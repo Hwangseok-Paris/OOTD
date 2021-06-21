@@ -62,9 +62,9 @@
         </div>
 
         <div id="prTextInput" class="inputBox3">
-            <input type="text" id="productName" class="ininput" placeholder="상품명" name="product_name">
+            <input type="text" id="productName" class="ininput" placeholder="상품명" name="product_name" required>
             <br>
-            <input type="number" id="productPrice" class="ininput" placeholder="가격(숫자만 입력)" name="product_price">
+            <input type="number" id="productPrice" class="ininput" placeholder="가격(숫자만 입력)" name="product_price" required>
             <br><hr>
             
             <h5>Product Detail</h5>

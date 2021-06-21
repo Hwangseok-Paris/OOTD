@@ -40,22 +40,17 @@
                 <!-- 만약 기존 사진이 4개 이하라면 추가 -->
                 <c:if test="${ attachment.size() < 4  }">
 	            	<c:forEach items="${ attachment }" end="${ 4 - attachment.size() }" var="a" varStatus="vs">
-	            		<div id="contentImgArea${vs.count + 2}" class="imgInput">
+	            		<div id="contentImgArea${attachment.size() + vs.count}" class="imgInput">
 			                <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" 
-			                    id="contentImg${vs.count + 2}" style="height: 150px; width: 120px;"/>
+			                    id="contentImg${attachment.size() + vs.count}" style="height: 150px; width: 120px;"/>
 			            </div>
 	            	</c:forEach>
 	            </c:if>
-	                
-	                
-	                
             </div>
            
             <div id="imgDetail" class="inputBox2">
                 <div class='inputBox2 zoom' id='ex1'>
-
                     <img src='${pageContext.request.contextPath }/resources/images/productImgUpload/${a.att_name}' id='jack' width='540' height='620' alt=''/>
-
                 </div>
             </div>
             
@@ -70,10 +65,9 @@
 				<!-- 만약 기존 사진이 4개 이하라면 추가 -->
 	            <c:if test="${ attachment.size() < 4  }">
 	            	<c:forEach items="${ attachment }" end="${ 4 - attachment.size() }" var="a" varStatus="vs">
-	            		<input type="file" accept="image/*" name="productImg" id="thumbImg${vs.count + 2}" onchange="loadImg(this, ${vs.count + 2});" />
+	            		<input type="file" accept="image/*" name="productImg" id="thumbImg${attachment.size() + vs.count}" onchange="loadImg(this, ${attachment.size() + vs.count});" />
 	            	</c:forEach>
 	            </c:if>
-		            
 	        </div>
         
             <div id="prTextInput" class="inputBox3">
