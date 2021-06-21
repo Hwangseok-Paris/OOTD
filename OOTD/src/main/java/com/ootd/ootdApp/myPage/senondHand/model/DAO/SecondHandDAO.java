@@ -2,6 +2,7 @@ package com.ootd.ootdApp.myPage.senondHand.model.DAO;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
@@ -22,13 +23,13 @@ public interface SecondHandDAO {
 
 	int updateAddress(Member member);
 
-	List<myPageOrderList> selectOrderList(String member_name);
+	List<Map<String, String>> selectOrderList(int cPage, int numPerPage, String member_name);
 
-	List<Product> selectProductList(int member_no);
+	List<Map<String, String>> selectProductList(int cPage, int numPerPage, int member_no);
 
 	int deleteProduct(int productNo);
 
-	List<myPageOrderList> selectSaleProductList(String member_name);
+	List<Map<String, String>> selectSaleProductList(int cPage, int numPerPage, String member_name);
 
 	int updateOrderSaleStatus(int orderNo);
 
@@ -41,5 +42,11 @@ public interface SecondHandDAO {
 	int insertReview(Review review);
 
 	List<Attachment> selectAttachmentList(int productNo);
+
+	int purchaseSelectTotalContents();
+
+	int selectProductTotalContents();
+
+	int selectSaleProductTotalContents();
 
 }

@@ -2,7 +2,9 @@ package com.ootd.ootdApp.myPage.senondHand.model.DAO;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,6 +21,8 @@ public class SecondHandDAOImpl implements SecondHandDAO {
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
+	
+	RowBounds rows;
 
 	@Override
 	public int updatePassword(Member member) {
@@ -46,13 +50,19 @@ public class SecondHandDAOImpl implements SecondHandDAO {
 	}
 
 	@Override
-	public List<myPageOrderList> selectOrderList(String member_name) {
-		return sqlSession.selectList("orderList-mapper.selectOrderList", member_name);
+	public List<Map<String, String>> selectOrderList(int cPage, int numPerPage, String member_name) {
+		
+		rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		
+		return sqlSession.selectList("orderList-mapper.selectOrderList", member_name, rows);
 	}
 
 	@Override
-	public List<Product> selectProductList(int member_no) {
-		return sqlSession.selectList("productList-mapper.selectProductList", member_no);
+	public List<Map<String, String>> selectProductList(int cPage, int numPerPage, int member_no) {
+		
+		rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		
+		return sqlSession.selectList("productList-mapper.selectProductList", member_no, rows);
 	}
 
 	@Override
@@ -71,8 +81,11 @@ public class SecondHandDAOImpl implements SecondHandDAO {
 	}
 
 	@Override
-	public List<myPageOrderList> selectSaleProductList(String member_name) {
-		return sqlSession.selectList("orderList-mapper.selectSaleProductList", member_name);
+	public List<Map<String, String>> selectSaleProductList(int cPage, int numPerPage, String member_name) {
+		
+		rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		
+		return sqlSession.selectList("orderList-mapper.selectSaleProductList", member_name, rows);
 	}
 
 	@Override
@@ -126,6 +139,21 @@ public class SecondHandDAOImpl implements SecondHandDAO {
 	public List<Attachment> selectAttachmentList(int productNo) {
 
 		return sqlSession.selectList("productList-mapper.selectAttachList", productNo);
+	}
+
+	@Override
+	public int purchaseSelectTotalContents() {
+		return sqlSession.selectOne("orderList-mapper.purchaseSelectTotalContents");
+	}
+
+	@Override
+	public int selectProductTotalContents() {
+		return sqlSession.selectOne("productList-mapper.selectProductTotalContents");
+	}
+
+	@Override
+	public int selectSaleProductTotalContents() {
+		return sqlSession.selectOne("orderList-mapper.selectSaleProductTotalContents");
 	}
 
 
