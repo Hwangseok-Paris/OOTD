@@ -86,6 +86,18 @@ public class OrderDAOImpl implements OrderDAO {
 		return sqlSession.insert("cart-mapper.addCartList", cart);
 	}
 
+	@Override
+	public int addTempCartList(Cart cart) {
+		
+		return sqlSession.insert("cart-mapper.addTempCartList", cart);
+	}
+
+	@Override
+	public int selectTempCartNo() {
+		
+		return sqlSession.selectOne("cart-mapper.selectTempCartNo");
+	}
+
 
 
 }

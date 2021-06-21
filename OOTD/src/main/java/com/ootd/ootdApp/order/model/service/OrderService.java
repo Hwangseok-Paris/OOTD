@@ -32,6 +32,10 @@ public interface OrderService {
 
 	int addCartList(Cart cart);
 
+	int addTempCartList(Cart cart);
+
+	int selectTempCartNo();
+
 
 
 }

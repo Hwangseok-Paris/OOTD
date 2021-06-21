@@ -53,6 +53,8 @@
 	                  <tr class="calculation1_tbody_tr1" style="height: 90px; background-color: #fff;">
 	                  
 	        			 <input type="hidden" class="cart_no" value="${a.cart_no}" />
+	        			 <input type="hidden" class="pType" value=""/>
+	        			 <input type="hidden" class="product_no" />
 	                   
 	                     <!-- Check Btn. Area -->
 	                     <td style="text-align: left; text-align: center; border-right: none;">
@@ -61,7 +63,7 @@
 	                     
 	                     <!-- Product Image Area -->
 	                     <td style="border-left: none; border-right: none; width: 100px; text-align: center;">
-	                     	<img src="${pageContext.request.contextPath }/resources/images/productImgUpload/${a.att_name}" width="100px">
+	                     	<img class="img "src="${pageContext.request.contextPath }/resources/images/productImgUpload/${a.att_name}" width="100px">
 	                     </td>
 	                     
 						 <!-- Product Info. Area -->
@@ -352,7 +354,7 @@
 		// console.log(selProduct_no);
 		 
 		 if(selectedCart_no.length > 0){
-			 location.href = "${pageContext.request.contextPath}/order/order.or?selProduct_no="+selectedCart_no;
+			 location.href = "${pageContext.request.contextPath}/order/order.or?selectedCart_no="+selectedCart_no;
 		 } else {
 			 alert("상품이 선택되지 않았습니다.");
 		 };
@@ -371,8 +373,13 @@
 		 
 		// console.log(selProduct_no);
 		
-		location.href = "${pageContext.request.contextPath}/order/order.or?selProduct_no="+selectedCart_no;
+		location.href = "${pageContext.request.contextPath}/order/order.or?selectedCart_no="+selectedCart_no;
    });
+   
+   
+   $('.img').on('click', function(){
+	   location.href = "${pageContext.request.contextPath}"
+   })
 
 </script>
 

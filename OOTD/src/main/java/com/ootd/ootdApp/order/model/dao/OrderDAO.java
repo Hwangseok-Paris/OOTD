@@ -31,6 +31,10 @@ public interface OrderDAO {
 
 	int addCartList(Cart cart);
 
+	int addTempCartList(Cart cart);
+
+	int selectTempCartNo();
+
 
 	
 }

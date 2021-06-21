@@ -89,11 +89,14 @@
                         </select> <br>
                     </dt><hr>
                     <dt class="pOrigin">
-                        <div id="origin">
-                            <span>${ product.product_name }<b class="selectedSize"></b> </span> 
-                            <input type="number" id="pQuan" name="pQuan" value="1" min="1" max="1"> <!-- input value 값 ??  -->
+                        <div id="origin" class="selectedPList">
+                       		<input type="hidden" class="product_no" value="${product.product_no }"/>
+                       		<input type="hidden" class="product_type" value="${product.product_type }"/>
+                            <span>${ product.product_name }<b class="selectedSize"></b> </span>
+                            <input type="number" class="quantity" id="pQuan" name="pQuan" value="1" min="1" max="1"> <!-- input value 값 ??  -->
                             <img src="${pageContext.request.contextPath }/resources/images/xx.png" alt="" style="width: 15px; height: 15px; margin-right: 5px;" id="pDelete">
                             <span>￦</span><span class="pPrice">${ product.product_price }</span>
+                            <input type="hidden" class="selSize" />
                         </div>
                     </dt>
                     <dt class="pResult">
@@ -108,7 +111,7 @@
 
             
 
-                <button class="btn" onclick="goCart();">add to cart</button>
+                <button class="btn" onclick="addCart();">add to cart</button>
                 <button class="btn" onclick="goBuy();">buy now</button>
             </div>
         </div>
@@ -131,10 +134,83 @@
     
     
     
-        // function goCart() {
-        // }
-        // function goBuy() {
-        // }
+    	// 장바구니에 선택상품 담기
+		function addCart() {
+		     
+        		 
+        	   	 var cart_size = '<c:out value="${ product.product_size }"/>';
+        		 var order_quantity =  $('.quantity').val();
+        		 var product_no = $('.product_no').val();
+        		
+       	   		$.ajax({
+	       		    method: 'POST',
+	       		    url: "${pageContext.request.contextPath}/order/addCartListSecondHand.or",
+	       		   	data: {
+						"product_size" :  product_size,
+						"order_quantity" : order_quantity,
+						"product_no" : product_no
+					}, 
+					success: function(){
+						// 장바구니 이동 확인
+			        	 if(confirm("장바구니에 상품이 담겼습니다. 장바구니로 이동하시겠습니까?") == true){
+			        	        location.href="${pageContext.request.contextPath}/order/cart.or"
+			        	    } else{
+			        	        return ;
+			        	    };
+						}, error : function(){
+							alert("실패");
+						}
+					});    
+	    }
+        
+        
+        
+		 // 상품 상세페이지에서 바로 구매
+        function goBuy() {
+      	  var buyList = [];
+      	  $('.selectedPList').each(function(){
+	        	  var product_no = $('.product_no').val();
+	        	  var cart_quantity = $('.quantity').val();
+	        	  var cart_size = '<c:out value="${ product.product_size }"/>';
+	        	  var product_name = '<c:out value="${ product.product_name }"/>';
+	        	  var brand_name = '<c:out value="${ product.brand_name }"/>';
+	        	  var product_price = '<c:out value="${ product.product_price}"/>';
+	        	  var att_name = '<c:out value="${ attachment[1].att_name }"/>';
+	        	 
+	        	
+		        	 var product = {
+		        			 'product_no' : product_no,
+		        			 'cart_quantity' : cart_quantity,
+		        			 'cart_size' : cart_size,
+		        			 'product_name' : product_name,
+		        			 'brand_name' : brand_name,
+		        			 'product_price' : product_price,
+		        			 'att_name' : att_name
+		     
+		        	 
+	        	  };
+		        	 buyList.push(product);
+      	  });
+      	  
+      	  var data = JSON.stringify(buyList);
+      	  
+      	   $.ajax({
+     		    method: 'POST',
+     		    url: '${pageContext.request.contextPath}/order/buyList.or',
+     		    traditional: true,
+				data: {data}, 
+				success: function(data){
+						console.log("전송 성공")
+						location.href="${pageContext.request.contextPath}/order/order.or?selectedCart_no="+data;
+					}, error : function(){
+						console.log("실패");
+					}
+				});        	  
+      	  
+      	  //JSON을 이용해 String 형식으로 만들어 SessionStorage에 저장
+      	  // sessionStorage.setItem("buyList", JSON.stringify(buyList));
+ 
+		  }
         
          /* $(function() {
              if($('.totalPD').text()== "") {
@@ -176,6 +252,7 @@
                 result.addClass($('#selectSize').val());
                 result.addClass('frmSize');
                 result.find('.selectedSize').text("[" + $('#selectSize').val() + "]");
+               // result.find('.selSize').val($('#selectSize').val());
                 
                 $('.pResult').append(result);
                 $('.pPrice').each(function(){

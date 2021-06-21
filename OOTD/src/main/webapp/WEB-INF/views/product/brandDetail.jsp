@@ -81,8 +81,8 @@
                     <hr>
                     <dt>
                         <b>Select Size</b>
-                        <select name="" id="selectSize" style="width: 140px; float: right; margin-right: 30px;" >
-                            <option>선택안함</option>
+                        <select name="" id="selectSize" class="selectSize" style="width: 140px; float: right; margin-right: 30px;" >
+                            <option value="">선택안함</option>
                             <option value="S">S</option>
                             <option value="M">M</option>
                             <option value="L">L</option>
@@ -310,35 +310,46 @@
 		    });
 		});
     
-    
-        function addCart() {
-     
-        	$('.selectedPList').each(function(){
-        	
-	        	 var product_no = $(this).children('.product_no').val();
-	        	 var quantity = $(this).children('.quantity').val();
-	        	 var product_size = $(this).children('.selSize').val();
-	        	 
-	        	 if(product_size != ""){
-	/* 	     	 console.log(product_no);
-	        	 console.log(quantity);
-	        	 console.log(product_size); */
-	        		        	 
-	        	 location.href="${pageContext.request.contextPath}/order/addCartList.or?product_no="+product_no+"&quantity="+quantity+"&product_size="+product_size;
-	        	 }
-         	})
-        	 console.log("input success");
-        	
-        	// 장바구니 이동 확인
-        	 if(confirm("장바구니에 상품이 담겼습니다. 장바구니로 이동하시겠습니까?") == true){
-        	        location.href="${pageContext.request.contextPath}/order/cart.or"
-        	    } else{
-        	        return ;
-        	    };
-
+    	// 장바구니에 선택상품 담기
+		function addCart() {
+		     
+        		 if(product_size != ""){
+        	   	 var product_size = [];
+        		 $('.selSize').each(function(){
+        			 product_size.push($(this).val());
+        		 })
+        		 
+        		  var order_quantity = [];
+				 $('.quantity').each(function(){
+					 order_quantity.push($(this).val());
+				 })
+        		 var product_no = [];
+				 $('.product_no').each(function(){
+					product_no.push($(this).val()); 
+				 	})
+        		 }	
+       	   		$.ajax({
+	       		    method: 'POST',
+	       		    url: "${pageContext.request.contextPath}/order/addCartList.or",
+	       		   	data: {
+						"product_size" :  product_size,
+						"order_quantity" : order_quantity,
+						"product_no" : product_no
+					}, 
+					success: function(){
+						// 장바구니 이동 확인
+			        	 if(confirm("장바구니에 상품이 담겼습니다. 장바구니로 이동하시겠습니까?") == true){
+			        	        location.href="${pageContext.request.contextPath}/order/cart.or"
+			        	    } else{
+			        	        return ;
+			        	    };
+						}, error : function(){
+							alert("실패");
+						}
+					});    
 	    }
 
-
+		  // 상품 상세페이지에서 바로 구매
           function goBuy() {
         	  var buyList = [];
         	  $('.selectedPList').each(function(){
@@ -364,11 +375,24 @@
 	        	  }
         	  })
         	  
+        	  var data = JSON.stringify(buyList);
+        	  
+        	   $.ajax({
+       		    method: 'POST',
+       		    url: '${pageContext.request.contextPath}/order/buyList.or',
+       		    traditional: true,
+				data: {data}, 
+				success: function(data){
+						console.log("전송 성공")
+						location.href="${pageContext.request.contextPath}/order/order.or?selectedCart_no="+data;
+					}, error : function(){
+						console.log("실패");
+					}
+				});        	  
+        	  
         	  //JSON을 이용해 String 형식으로 만들어 SessionStorage에 저장
-        	  sessionStorage.setItem("buyList", JSON.stringify(buyList));
-        	  
-        	  
-	       	  alert("버튼 작동 확인");
+        	  // sessionStorage.setItem("buyList", JSON.stringify(buyList));
+   
 		  }
           
           
@@ -397,7 +421,6 @@
         	 
          } */
 
-        
         // $(function() {
         //     if($('.totalPD').text()== "") {
         //         console.log("totalPD::" + $('.totalPD').text())

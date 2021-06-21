@@ -13,16 +13,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.reflect.TypeToken;
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.order.model.service.OrderService;
 import com.ootd.ootdApp.order.model.vo.BuyList;
 import com.ootd.ootdApp.order.model.vo.Cart;
 import com.ootd.ootdApp.order.model.vo.Order;
 import com.ootd.ootdApp.order.model.vo.OrderList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+
 
 
 @Controller
@@ -136,44 +145,76 @@ public class OrderController {
 	
 	// add cartList from product Detail
 	@RequestMapping("/order/addCartList.or")
-	public String addCartList(HttpServletRequest req, Model model,
-							 RedirectAttributes redirectAttributes,
-							 @RequestParam int product_no,
-							 @RequestParam int quantity,
-							 @RequestParam String product_size
-							 ) {
+	@ResponseBody
+	public void addCartList(HttpServletRequest req, 
+						     @RequestParam(value="product_no[]") int product_no[],
+							 @RequestParam(value="order_quantity[]")int order_quantity[],
+							 @RequestParam(value="product_size[]") String product_size[]
+								) {
 		
 		HttpSession session = req.getSession();
 		Member member = (Member) session.getAttribute("member");
-		
-		
-		
-		String referer = req.getHeader("Referer");
-		
-		
-//		int pType = product_type;
+
 		int member_no = member.getMember_no();
 		
-		Cart cart = new Cart();
+//		System.out.println(product_no);
+//		System.out.println(order_quantity);
+//		System.out.println(product_size);
+		
+		for(int i = 1 ; i < product_no.length ; i++) {
+			Cart cart = new Cart();
 		cart.setMember_no(member_no);
-		cart.setProduct_no(product_no);
-		cart.setCart_quantity(quantity);
-		cart.setCart_size(product_size);
+		cart.setProduct_no(product_no[i]);
+		cart.setCart_quantity(order_quantity[i]);
+		cart.setCart_size(product_size[i]);
+				
+		int Result = orderService.addCartList(cart);
 		
-		int ciResult = orderService.addCartList(cart);
-		
-		if(ciResult > 0) {
+		if(Result > 0) {
 			System.out.println("카트에 상품담기 성공");
-		} else System.out.println("카트에 상품담기 실패");
+		} else {
+			System.out.println("카트에 상품담기 실패");
+			};
+		};
 		
+	};
+	
+	
+	// add cartList from SecondHand Product Detail
+		@RequestMapping("/order/addCartListSecondHand.or")
+		@ResponseBody
+		public void addCartListSecondHand(HttpServletRequest req, 
+							     @RequestParam int product_no,
+								 @RequestParam int order_quantity,
+								 @RequestParam String product_size
+									) {
+			
+			HttpSession session = req.getSession();
+			Member member = (Member) session.getAttribute("member");
+
+			int member_no = member.getMember_no();
+			
+			System.out.println(product_no);
+			System.out.println(order_quantity);
+			System.out.println(product_size);
+			
+			
+			Cart cart = new Cart();
+			cart.setMember_no(member_no);
+			cart.setProduct_no(product_no);
+			cart.setCart_quantity(order_quantity);
+			cart.setCart_size(product_size);
+					
+			int Result = orderService.addCartList(cart);
+			
+			if(Result > 0) {
+				System.out.println("카트에 상품담기 성공");
+			} else {
+				System.out.println("카트에 상품담기 실패");
+				};
 		
-		
-		
-		//return "redirect:/product/productDetail.do?product_no="+product_no+"&pType="+product_type;
-		return "redirect:"+ referer;
-		
-		
-	}
+			
+		};
 
 	
 	
@@ -343,6 +384,26 @@ public class OrderController {
 		}
 	}
 	
+	// 결제하지 않고 페이지 이동시 카트번호 삭제
+	
+//	@RequestMapping("/order/deleteTempCartNo.or")
+//	public String deleteTempCartNo(@RequestParam (value="cart_no[]") int cart_no[]) {
+//		String result = "";
+//		for(int i = 0 ; i< cart_no.length ; i++) {
+//			
+//			int cResult = orderService.deleteCartProduct(cart_no[i]);
+//			if(cResult >0 ) {
+//				System.out.println("카트번호 "+cart_no[i]+"번 삭제");
+//				result = "true";
+//			} else System.out.println("삭제 실패");
+//			result = "false";
+//		}
+//		
+//		return result;
+//	}
+	
+	
+	
 	// 결제 완료 페이지 영역
 	
 	@RequestMapping("/order/orderResult.or")
@@ -358,25 +419,58 @@ public class OrderController {
 		
 	}
 	
-	// 테스트
+	// 상품 상세 페이지에서 즉시 구매
+		@RequestMapping("/order/buyList.or")
+		@ResponseBody
+		public List<Integer> buyDirect(@RequestParam String data, HttpServletRequest req, Model model){
+			  
+			  	List<Integer> cartNo = new ArrayList<Integer>();
+			 
+				HttpSession session = req.getSession();
+				Member member = (Member) session.getAttribute("member");
+				
+				int mNo = member.getMember_no();
 	
-	@RequestMapping("/order/buyList.or")
-	@ResponseBody
-	public String buyList(Model model, HttpServletRequest req,
-			@RequestBody List<BuyList> buyList) {
-		
-		System.out.println(buyList);
-		
-		
-		String referer = req.getHeader("Referer");
-		return "redirect:"+ referer;
-	}
-	
-	
-	
-	
-	
-	
-	
+			      List<Map<String, Object>> buyList = new Gson().fromJson(String.valueOf(data),
+			              new TypeToken<List<Map<String, Object>>>(){}.getType());
+
+			      for (Map<String, Object> b : buyList) {
+	    	  
+			  		Cart cart = new Cart();
+			  		
+			  		int pNo = Integer.parseInt( (String) b.get("product_no"));
+			  		int pQuan = Integer.parseInt( (String) b.get("cart_quantity"));
+			  		String pSize = (String) b.get("cart_size");
+			  		String pName = (String) b.get("product_name");
+			  		String bName = (String) b.get("brand_name");
+			  		int pPrice = Integer.parseInt( (String) b.get("product_price"));
+			  		String aName = (String) b.get("att_name");
+
+			  		cart.setProduct_no(pNo);
+			  		cart.setProduct_name(pName);
+			  		cart.setCart_quantity(pQuan);
+			  		cart.setCart_size(pSize);
+			  		cart.setProduct_name(pName);
+			  		cart.setBrand_name(bName);
+			  		cart.setProduct_price(pPrice);
+			  		cart.setAtt_name(aName);
+			  		cart.setMember_no(mNo);
+			  		
+					int dbResult = orderService.addTempCartList(cart);
+					
+					if(dbResult > 0) {
+						System.out.println("카트에 상품담기 성공");
+						int cNo = orderService.selectTempCartNo();
+						
+					cartNo.add(cNo);
+						
+					} else System.out.println("카트에 상품담기 실패");
+			  	  } 
+			      
+			      System.out.println(cartNo);
+			      
+									      
+			  return cartNo; 
+			}
 	
 }

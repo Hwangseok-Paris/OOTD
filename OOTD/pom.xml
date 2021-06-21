@@ -53,8 +53,13 @@
 		    <artifactId>cglib</artifactId>
 		    <version>3.2.12</version>
 		</dependency>
-			
 		
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20210307</version>
+		</dependency>
 		
 		<!-- Logging -->
 		<dependency>
@@ -212,6 +217,7 @@
 		    <version>2.11.4</version>
 		</dependency>
 		
+	
 		<!-- File upload library -->
 		<dependency>
 		    <groupId>commons-fileupload</groupId>
