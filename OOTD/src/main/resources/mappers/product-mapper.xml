@@ -128,7 +128,10 @@
 	</select>
 
 	<select id="brandAttSelectList" parameterType="_int" resultType="Attachment">
-		SELECT * FROM ATTACHMENT WHERE PRODUCT_NO = #{ product_no }
+		SELECT * FROM 
+		ATTACHMENT 
+		WHERE PRODUCT_NO = #{ product_no }
+		  AND ATT_STATUS = 'Y'
 	</select>
 
 	<select id="secondSelectOne" parameterType="_int" resultType="Product_p">
@@ -136,7 +139,10 @@
 	</select>
 	
 	<select id="secondAttSelectList" parameterType="_int" resultType="Attachment">
-		SELECT * FROM ATTACHMENT WHERE PRODUCT_NO = #{ product_no }
+		SELECT * FROM 
+		ATTACHMENT 
+		WHERE PRODUCT_NO = #{ product_no }
+		  AND ATT_STATUS = 'Y'
 	</select>
 
 
@@ -195,6 +201,12 @@
 		INSERT INTO ATTACHMENT(ATT_NO, ATT_NAME, ATT_DATE, ATT_LEVEL, ATT_STATUS, PRODUCT_NO)
 		VALUES(SEQ_ATT_NO.NEXTVAL, #{att_name}, default , #{att_level}, 'Y', #{product_no})
 	</insert>
+	
+	<delete id="deleteAttachment" parameterType="_int">
+		DELETE FROM ATTACHMENT
+		WHERE PRODUCT_NO = #{ product_no }
+	</delete>
+	
 	
 	
 </mapper>

@@ -36,6 +36,15 @@
 	                        id="contentImg${vs.count}" style="height: 150px; width: 120px;"/>
 	                </div>
                 </c:forEach>
+                <!-- 만약 기존 사진이 4개 이하라면 추가 -->
+                <c:if test="${ attachment.size() < 4  }">
+	            	<c:forEach items="${ attachment }" end="${ 4 - attachment.size() }" var="a" varStatus="vs">
+	            		<div id="contentImgArea${attachment.size() + vs.count}" class="imgInput">
+			                <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" 
+			                    id="contentImg${attachment.size() + vs.count}" style="height: 150px; width: 120px;"/>
+			            </div>
+	            	</c:forEach>
+	            </c:if>
             </div>
 
             <div id="imgDetail" class="inputBox2">
@@ -53,13 +62,19 @@
 				<c:forEach items="${attachment}" var="a" varStatus="vs">
 		            <input type="file" accept="image/*" name="productImg" id="thumbImg${vs.count}" onchange="loadImg(this, ${vs.count});" />
 				</c:forEach>
+				<!-- 만약 기존 사진이 4개 이하라면 추가 -->
+	            <c:if test="${ attachment.size() < 4  }">
+	            	<c:forEach items="${ attachment }" end="${ 4 - attachment.size() }" var="a" varStatus="vs">
+	            		<input type="file" accept="image/*" name="productImg" id="thumbImg${attachment.size() + vs.count}" onchange="loadImg(this, ${attachment.size() + vs.count});" />
+	            	</c:forEach>
+	            </c:if>
 	        </div>
         
             <div id="prTextInput" class="inputBox3">
                 <span id="brand_name"><b><input type="text" name="" id="" value="${ product.brand_name }"/></b></span> <br>
                 
                 <h4 id="pName">${ product.product_name }</h4>
-                <span style="margin-left: 260px; margin-right: 5px;" >￦</span><input type="text" name="" id="ppPrice" value="${ product.product_price }" size="4" style="float: right; margin-right: 20px;"/>  <br><hr>
+                <span style="margin-left: 260px; margin-right: 5px;" >￦</span><input type="text" name="product_price" id="ppPrice" value="${ product.product_price }" size="4" style="float: right; margin-right: 20px;"/>  <br><hr>
                 
 
                 <dl>
@@ -74,7 +89,7 @@
                         </span>
                     </dt> 
                     <dd class="ddd"><span class="pInfoText">
-                        <textarea name="" id="" cols="30" rows="4">${ product.product_detail }</textarea>
+                        <textarea name="product_detail" id="" cols="30" rows="4">${ product.product_detail }</textarea>
                     </span> <br></dd>
                     <hr>
                     <dt class="drop"><b>Size, Color</b> 
@@ -88,7 +103,7 @@
                         </span>
                     </dt>
                     <dd class="ddd"><span class="pInfoText">
-                        <textarea name="" id="" cols="30" rows="4">${ product.product_sizeinfo }</textarea>
+                        <textarea name="product_sizeinfo" id="" cols="30" rows="4">${ product.product_sizeinfo }</textarea>
                     </span> <br></dd>
                     <hr>
                     <dt>
@@ -326,13 +341,6 @@
 			
 
 		}
-      
-
-		
-
-
-
-
     </script>
 </body>
 </html>
