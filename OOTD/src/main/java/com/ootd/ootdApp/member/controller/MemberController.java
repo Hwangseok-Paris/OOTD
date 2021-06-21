@@ -2,10 +2,14 @@ package com.ootd.ootdApp.member.controller;
 
 
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -447,7 +451,17 @@ public class MemberController {
 		return count;
 	}
 	
-	
-	
+	// 아이디 중복 확인
+	@RequestMapping("/member/checkIdDuplicate.do")
+	public void checkIdDuplicate(@RequestParam String id, 
+								HttpServletResponse res) throws IOException {
+		
+		int check = memberService.checkIdDuplicate(id);
+		
+		boolean data = (check == 0 ? true : false);
+		
+		res.getWriter().print(data);
+	}
+
 	
 }

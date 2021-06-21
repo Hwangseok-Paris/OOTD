@@ -58,10 +58,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("member-mapper.selectKakaoCount", member_id);
 	}
 
-	
-
-	
-
-	
+	// 중고회원 아이디 중복 체크
+	@Override
+	public int checkIdDuplicate(String memberId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member-mapper.checkIdDuplicate", memberId);
+	}
 
 }

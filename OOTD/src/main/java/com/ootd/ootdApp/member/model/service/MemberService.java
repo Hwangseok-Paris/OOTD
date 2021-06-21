@@ -1,5 +1,7 @@
 package com.ootd.ootdApp.member.model.service;
 
+import java.util.HashMap;
+
 import com.ootd.ootdApp.member.model.vo.Member;
 
 public interface MemberService {
@@ -17,6 +19,8 @@ public interface MemberService {
 	int updateNewPass(Member member);
 
 	int selectKakaoCount(String id);
-	
-	
+
+	// 아이디 중복확인
+	int checkIdDuplicate(String memberId);
+
 }

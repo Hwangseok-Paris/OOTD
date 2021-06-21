@@ -1,5 +1,7 @@
 package com.ootd.ootdApp.member.model.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,11 +55,12 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDAO.selectKakaoCount(member_id);
 	}
-
 	
-
-	
-
-	
+	// 멤버회원 아이디 중복체크
+	@Override
+	public int checkIdDuplicate(String id) {
+		 // 일반 데이터 전달 시 (Stream 방식)
+		 return memberDAO.checkIdDuplicate(id);
+	}
 
 }

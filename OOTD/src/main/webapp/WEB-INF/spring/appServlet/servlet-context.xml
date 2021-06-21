@@ -69,6 +69,15 @@
 		<beans:property name="propertyNamingStrategy" value="CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES" /> 
 	</beans:bean>
 	
-	
+	<!-- @ResponseBody 사용을 위한 의존성 주입 -->
+	<beans:bean id = "jacksonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:ref bean="jacksonMessageConverter" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
 	
 </beans:beans>
