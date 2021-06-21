@@ -308,7 +308,7 @@ public class ProductController {
 	//=========Product Update( Update )======== 
 		@RequestMapping("/product/productUpdate.do")
 		public String productUpdate(Product p, HttpServletRequest req, Model model,
-				@RequestParam(value = "secondHandProductImg", required = false) MultipartFile[] upFiles,
+				@RequestParam(value = "productImg", required = false) MultipartFile[] upFiles,
 				@RequestParam(value = "product_no", required = false) int productNo
 				) {
 			// pType = 1 ? 브랜드 : 상품  	

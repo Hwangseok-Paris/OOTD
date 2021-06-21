@@ -73,6 +73,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public int attachmentInsert(Attachment a) {
 		System.out.println("attachmentInsert DAO 접근");
+		
 		return sqlSession.insert("product-mapper.insertAttachment", a);
 	}
 
@@ -135,7 +136,11 @@ public class ProductDAOImpl implements ProductDAO {
 
 		// 상품 업데이트 성공했다면 첨부파일 업데이트 
 		if ( resultP > 0) {
-			resultA = sqlSession.update("product-mapper.attachmentUpdate", attachList);
+			
+			for(Attachment a : attachList) {
+				resultA = sqlSession.update("product-mapper.attachmentUpdate", attachList);
+				System.out.println("resultA :: " + resultA);
+			}
 		}
 		
 		return resultA;
@@ -157,7 +162,11 @@ public class ProductDAOImpl implements ProductDAO {
 
 		// 상품 업데이트 성공했다면 첨부파일 업데이트 
 		if ( resultP > 0) {
-			resultA = sqlSession.update("product-mapper.attachmentUpdate", attachList);
+			
+			for(Attachment a : attachList) {
+				resultA = sqlSession.update("product-mapper.attachmentUpdate", attachList);
+				System.out.println("resultA :: " + resultA);
+			}
 		}
 		
 		return resultA;
