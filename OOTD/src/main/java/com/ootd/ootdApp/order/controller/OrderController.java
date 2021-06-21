@@ -419,7 +419,7 @@ public class OrderController {
 		
 	}
 	
-	// 상품 상세 페이지에서 즉시 구매
+	// 브랜드 상품 상세 페이지에서 즉시 구매
 		@RequestMapping("/order/buyList.or")
 		@ResponseBody
 		public List<Integer> buyDirect(@RequestParam String data, HttpServletRequest req, Model model){
@@ -472,5 +472,59 @@ public class OrderController {
 									      
 			  return cartNo; 
 			}
+		
+		// 중고 상품 상세 페이지에서 즉시 구매
+				@RequestMapping("/order/buyDirectSecondHand.or")
+				@ResponseBody
+				public List<Integer> buyDirectSecondHand(@RequestParam String data, HttpServletRequest req, Model model){
+					  
+					  	List<Integer> cartNo = new ArrayList<Integer>();
+					 
+						HttpSession session = req.getSession();
+						Member member = (Member) session.getAttribute("member");
+						
+						int mNo = member.getMember_no();
+			
+					      List<Map<String, Object>> buyList = new Gson().fromJson(String.valueOf(data),
+					              new TypeToken<List<Map<String, Object>>>(){}.getType());
+
+					      for (Map<String, Object> b : buyList) {
+			    	  
+					  		Cart cart = new Cart();
+					  		
+					  		int pNo = Integer.parseInt( (String) b.get("product_no"));
+					  		int pQuan = Integer.parseInt( (String) b.get("cart_quantity"));
+					  		String pSize = (String) b.get("cart_size");
+					  		String pName = (String) b.get("product_name");
+					  		String bName = (String) b.get("brand_name");
+					  		int pPrice = Integer.parseInt( (String) b.get("product_price"));
+					  		String aName = (String) b.get("att_name");
+
+					  		cart.setProduct_no(pNo);
+					  		cart.setProduct_name(pName);
+					  		cart.setCart_quantity(pQuan);
+					  		cart.setCart_size(pSize);
+					  		cart.setProduct_name(pName);
+					  		cart.setBrand_name(bName);
+					  		cart.setProduct_price(pPrice);
+					  		cart.setAtt_name(aName);
+					  		cart.setMember_no(mNo);
+					  		
+							int dbResult = orderService.addTempCartList(cart);
+							
+							if(dbResult > 0) {
+								System.out.println("카트에 상품담기 성공");
+								int cNo = orderService.selectTempCartNo();
+								
+							cartNo.add(cNo);
+								
+							} else System.out.println("카트에 상품담기 실패");
+					  	  } 
+					      
+					      System.out.println(cartNo);
+					      
+											      
+					  return cartNo; 
+					}
 	
 }

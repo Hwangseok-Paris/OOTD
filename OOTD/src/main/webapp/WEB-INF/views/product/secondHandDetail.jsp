@@ -146,7 +146,7 @@
 	       		    method: 'POST',
 	       		    url: "${pageContext.request.contextPath}/order/addCartListSecondHand.or",
 	       		   	data: {
-						"product_size" :  product_size,
+						"product_size" :  cart_size,
 						"order_quantity" : order_quantity,
 						"product_no" : product_no
 					}, 
@@ -168,35 +168,33 @@
 		 // 상품 상세페이지에서 바로 구매
         function goBuy() {
       	  var buyList = [];
-      	  $('.selectedPList').each(function(){
-	        	  var product_no = $('.product_no').val();
-	        	  var cart_quantity = $('.quantity').val();
-	        	  var cart_size = '<c:out value="${ product.product_size }"/>';
-	        	  var product_name = '<c:out value="${ product.product_name }"/>';
-	        	  var brand_name = '<c:out value="${ product.brand_name }"/>';
-	        	  var product_price = '<c:out value="${ product.product_price}"/>';
-	        	  var att_name = '<c:out value="${ attachment[1].att_name }"/>';
+      	  
+       	  var product_no = $('.product_no').val();
+       	  var cart_quantity = $('.quantity').val();
+       	  var cart_size = '<c:out value="${ product.product_size }"/>';
+       	  var product_name = '<c:out value="${ product.product_name }"/>';
+       	  var brand_name = '<c:out value="${ product.brand_name }"/>';
+       	  var product_price = '<c:out value="${ product.product_price}"/>';
+       	  var att_name = '<c:out value="${ attachment[1].att_name }"/>';
 	        	 
 	        	
-		        	 var product = {
-		        			 'product_no' : product_no,
-		        			 'cart_quantity' : cart_quantity,
-		        			 'cart_size' : cart_size,
-		        			 'product_name' : product_name,
-		        			 'brand_name' : brand_name,
-		        			 'product_price' : product_price,
-		        			 'att_name' : att_name
-		     
-		        	 
-	        	  };
-		        	 buyList.push(product);
-      	  });
+       	 var product = {
+       			 'product_no' : product_no,
+       			 'cart_quantity' : cart_quantity,
+       			 'cart_size' : cart_size,
+       			 'product_name' : product_name,
+       			 'brand_name' : brand_name,
+       			 'product_price' : product_price,
+       			 'att_name' : att_name
+    	      	  };
+		      buyList.push(product);
+      	 
       	  
       	  var data = JSON.stringify(buyList);
       	  
       	   $.ajax({
      		    method: 'POST',
-     		    url: '${pageContext.request.contextPath}/order/buyList.or',
+     		    url: '${pageContext.request.contextPath}/order/buyDirectSecondHand.or',
      		    traditional: true,
 				data: {data}, 
 				success: function(data){

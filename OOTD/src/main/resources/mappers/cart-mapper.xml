@@ -41,9 +41,7 @@
     </insert>
     
     <insert id="addTempCartList" parameterType="Cart">
-	    <set>
-	    	INSERT INTO CART VALUES(SEQ_CART_TEMP_NO.NEXTVAL, ${member_no}, ${cart_quantity}, ${cart_size}, ${product_no})
-	   	</set>
+	    	INSERT INTO CART VALUES(SEQ_CART_TEMP_NO.NEXTVAL, #{member_no}, #{cart_quantity}, #{cart_size}, #{product_no})
     </insert>
     
     <select id="selectTempCartNo" resultType="_int">
