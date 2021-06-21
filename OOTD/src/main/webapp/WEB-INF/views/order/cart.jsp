@@ -352,7 +352,7 @@
 		// console.log(selProduct_no);
 		 
 		 if(selectedCart_no.length > 0){
-			 location.href = "${pageContext.request.contextPath}/order/order.or?selProduct_no="+selectedCart_no;
+			 location.href = "${pageContext.request.contextPath}/order/order.or?selectedCart_no="+selectedCart_no;
 		 } else {
 			 alert("상품이 선택되지 않았습니다.");
 		 };
@@ -371,7 +371,7 @@
 		 
 		// console.log(selProduct_no);
 		
-		location.href = "${pageContext.request.contextPath}/order/order.or?selProduct_no="+selectedCart_no;
+		location.href = "${pageContext.request.contextPath}/order/order.or?selectedCart_no="+selectedCart_no;
    });
 
 </script>

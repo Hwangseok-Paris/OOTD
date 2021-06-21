@@ -85,5 +85,17 @@ public class OrderServiceImpl implements OrderService {
 		return orderDAO.addCartList(cart);
 	}
 
+	@Override
+	public int addTempCartList(Cart cart) {
+	
+		return orderDAO.addTempCartList(cart);
+	}
+
+	@Override
+	public int selectTempCartNo() {
+		
+		return orderDAO.selectTempCartNo();
+	}
+
 
 }

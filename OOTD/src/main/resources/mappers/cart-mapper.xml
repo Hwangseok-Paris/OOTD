@@ -38,5 +38,13 @@
     <insert id="addCartList" parameterType="Cart">
     	INSERT INTO CART VALUES(SEQ_CART_NO.NEXTVAL, #{member_no}, #{cart_quantity}, #{cart_size}, #{product_no})
     </insert>
+    
+    <insert id="addTempCartList" parameterType="Cart">
+    	INSERT INTO CART VALUES(SEQ_CART_TEMP_NO.NEXTVAL, ${member_no}, ${cart_quantity}, #{cart_size}, ${product_no})
+    </insert>
+    
+    <select id="selectTempCartNo" resultType="_int">
+    	SELECT CART_NO FROM CART WHERE CART_NO = (SELECT MAX(CART_NO) FROM CART)
+    </select>
 
 </mapper>
