@@ -1,6 +1,7 @@
 package com.ootd.ootdApp.member.controller;
 
 
+
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -8,35 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ootd.ootdApp.member.exception.MemberException;
 import com.ootd.ootdApp.member.model.service.MemberService;
-import com.ootd.ootdApp.member.model.vo.KakaoTokenVO;
 import com.ootd.ootdApp.member.model.vo.MailVO;
 import com.ootd.ootdApp.member.model.vo.Member;
 
@@ -48,9 +34,6 @@ public class MemberController {
 
 	@Autowired 
 	private JavaMailSenderImpl mailSender;
-	
-	@Autowired
-	private RestTemplate restTemplate;
 
 	
 	@Autowired
@@ -67,6 +50,55 @@ public class MemberController {
 		
 		if ( member.getLogin_type() == 1) return "myPage/myPage_Brand_Info";
 		else return "myPage/myPage_Info";
+	}
+	
+	@RequestMapping("/member/kakaoMemberJoin.do")
+	public String kakaoMemberJoin(
+				@RequestParam String member_id, 
+				@RequestParam String nickname,
+				Model model
+			) {
+		
+		System.out.println("kakao joinForm controller access : " + member_id + "/" + nickname);
+		
+		String pass = randomCode();
+		
+		
+		model.addAttribute("member_id", member_id);
+		model.addAttribute("nickname", nickname);
+		model.addAttribute("pass", pass);
+		
+		return "member/memberJoin";
+	}
+	
+	@RequestMapping(value={"member/kakaoLogin.do", "*/member/kakaoLogin.do"})
+	public String kakaoLogin(
+				@RequestParam String member_id,
+				Model model
+			) {
+		
+		System.out.println("login Access");
+		
+		Member result = memberService.selectOneMember(member_id);
+		
+		System.out.println("로그인 조회 결과 : " + result);
+		
+		String loc = "/";
+		String msg = "";
+		
+		if ( result != null ) {
+			
+			msg = "로그인 성공";
+			model.addAttribute("member", result);
+				
+		} else {
+			msg = "아이디를 다시 확인해주세요.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
 	}
 	
 	@RequestMapping("/member/memberJoin.do")
@@ -403,202 +435,19 @@ public class MemberController {
 		return generatedString;
 	}
 
-
-	//카카오 로그인 리다이렉트
-	@RequestMapping(value = "/oauth", method = RequestMethod.GET, produces="application/json;charset=utf-8")
+	@RequestMapping(value={"member/kakaoCheck.do", "*/member/kakaoCheck.do"})
 	@ResponseBody
-	public String kakao(@RequestParam String code , Model model , HttpServletRequest request) throws JsonProcessingException {
-			
-		//받은 코드
-		System.out.println("code :  " + code);
+	public int kakaoCheck(@RequestParam String id) {
 		
-		//코드를 세션에 넣어줌.
-		HttpSession session = request.getSession();
-		session.setAttribute("code", code);
+		System.out.println("kakaoCheck Controller Access");
 		
-		System.out.println("selectMyAccessTockenWithKakao 진입!--");
-				
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-		parameters.add("grant_type", "authorization_code");
-		parameters.add("client_id", "89e4c9bda621e09d0753e1d8af4c0091");  	  //rest api key
-		parameters.add("redirect_uri", "http://localhost:8088/ootdApp/oauth");        //redirect 주소는 등록한 주소로....
-		parameters.add("code", code);
-				
-		String url = "https://kauth.kakao.com/oauth/token";
-		KakaoTokenVO body = null;
-		HttpEntity<String> response = null;
-		try {
-		
-			ResponseEntity<KakaoTokenVO> enti = restTemplate.postForEntity(url, parameters, KakaoTokenVO.class);
-					 
-			body = enti.getBody();
-					
-			String tokenType = body.getToken_type();
-			String refreshToken = body.getRefresh_token();
-			String accessTocken = body.getAccess_token();
-			String expiresTime = body.getExpires_in();
-			String refreshExpiresTime = body.getRefresh_token_expires_in();
-		
-			System.out.println("토큰 타입 : " + tokenType);
-			System.out.println("리프레쉬 토큰 : " + refreshToken);
-			System.out.println("엑세스 토큰 : " + accessTocken);
-			System.out.println("만료기간 : " + expiresTime);
-			System.out.println("리프레쉬 토큰 만료기간 : " + refreshExpiresTime);
-					 
-			// ObjectMapper mapper = new ObjectMapper();
-			// String result = mapper.writeValueAsString(body);
-			
-			System.out.println("selectMyInfoWithKakao controller 진입!");
-			
-			String myTocken = "Bearer " + accessTocken;
-			
-			
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-			headers.set("Authorization", myTocken);
-			
-			
-			UriComponentsBuilder builder = 
-					UriComponentsBuilder.fromHttpUrl("https://kapi.kakao.com/v2/user/me");
-		
-			
-			HttpEntity<?> entity = new HttpEntity<>(headers);
+		int count = memberService.selectKakaoCount(id);
 		
 		
-			// HttpEntity<String> response = null;
-			
-			try {
-				
-				 response = restTemplate.exchange(
-				        builder.toUriString(), 
-				        HttpMethod.GET, 
-				        entity, 
-				        String.class);
-				 
-				 System.out.println("응답결과 :" + response.getBody());
-		
-			} catch (HttpStatusCodeException e) {
-				
-				System.out.println("error :" + e);
-		
-			}
-					 
-		} catch (HttpStatusCodeException e) {
-			
-			System.out.println("error :" + e);
-			
-		}
-		
-		// ObjectMapper mapper = new ObjectMapper();
-		// String result = mapper.writeValueAsString(body);
-		
-		
-			
-		return response.getBody();
-
+		return count;
 	}
 	
-	/*
-	//카카오 나의 엑세스 토큰 요청하기.
-	@RequestMapping(value = "/selectMyAccessTockenWithKakao", method = RequestMethod.GET)
-	@ResponseBody
-	public String selectMyAccessTockenWithKakao(@RequestParam String code , Model model , HttpServletRequest request) throws JsonProcessingException {
-				
-		System.out.println("selectMyAccessTockenWithKakao 진입!--");
-				
-		//클라이언트에서 받은 코드
-		System.out.println("code :  " + code);
-			
-				
-				
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-		parameters.add("grant_type", "authorization_code");
-		parameters.add("client_id", "89e4c9bda621e09d0753e1d8af4c0091");  	  //rest api key
-		parameters.add("redirect_uri", "http://localhost:8008/ootdApp");        //redirect 주소는 등록한 주소로....
-		parameters.add("code", code);
-				
-				
-				
-		String url = "https://kauth.kakao.com/oauth/token";
-		KakaoTokenVO body = null;
-		try {
-		
-			ResponseEntity<KakaoTokenVO> enti = restTemplate.postForEntity(url, parameters, KakaoTokenVO.class);
-					 
-			body = enti.getBody();
-					
-			String tokenType = body.getToken_type();
-			String refreshToken = body.getRefresh_token();
-			String accessTocken = body.getAccess_token();
-			String expiresTime = body.getExpires_in();
-			String refreshExpiresTime = body.getRefresh_token_expires_in();
-		
-			System.out.println("토큰 타입 : " + tokenType);
-			System.out.println("리프레쉬 토큰 : " + refreshToken);
-			System.out.println("엑세스 토큰 : " + accessTocken);
-			System.out.println("만료기간 : " + expiresTime);
-			System.out.println("리프레쉬 토큰 만료기간 : " + refreshExpiresTime);
-					 
-					 
-		} catch (HttpStatusCodeException e) {
-			
-			System.out.println("error :" + e);
-			
-		}
-		
-		ObjectMapper mapper = new ObjectMapper();
-		String result = mapper.writeValueAsString(body);
-		
-		return result;
-		
-		}
 	
-
-	//카카오 나의 정보 얻기
-	@RequestMapping(value = "/selectMyInfoWithKakao", method = RequestMethod.GET, produces="application/json;charset=utf-8")
-	@ResponseBody
-	public String selectMyInfoWithKakao(@RequestParam String tocken) {
-		
-		System.out.println("selectMyInfoWithKakao controller 진입!");
-		
-		
-		String myTocken = "Bearer " + tocken;
-		
-		
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-		headers.set("Authorization", myTocken);
-		
-		
-		UriComponentsBuilder builder = 
-				UriComponentsBuilder.fromHttpUrl("https://kapi.kakao.com/v2/user/me");
-	
-		
-		HttpEntity<?> entity = new HttpEntity<>(headers);
-	
-	
-		HttpEntity<String> response = null;
-		
-		try {
-			
-			 response = restTemplate.exchange(
-			        builder.toUriString(), 
-			        HttpMethod.GET, 
-			        entity, 
-			        String.class);
-			 
-			 System.out.println("응답결과 :" + response.getBody());
-	
-		} catch (HttpStatusCodeException e) {
-			
-			System.out.println("error :" + e);
-	
-		}
-		
-		return response.getBody();
-		}
-	
-	*/
 	
 	
 }

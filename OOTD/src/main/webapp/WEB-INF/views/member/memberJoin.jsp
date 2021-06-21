@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -19,23 +22,59 @@
 
 </head>
 <body>
+<c:if test="${ ! empty member_id }">
+	<script>
+		$(function() {
+			alert("해당 계정으로 내일의 옷에 가입해주세요. 가입 후엔 카카오 로그인으로 로그인하실 수 있습니다.");
+		});
+	</script>
+</c:if>
+
   <form name="memberJoinFrm" action="memberJoinEnd.do" method="post">
     <!-- wrapper -->
     <div id="wrapper">
         <h1 style="text-align: center;">JOIN(개인)</h1>
         
+        <c:if test="${ empty member_id }">
         <!-- 브랜드 / 일반회원 가입 버튼 -->
         <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;">
             <button type="button" id="moveBrand" class="btn btn-secondary" onclick="moveBrandJoinPage()">브랜드 가입</button>
             <button type="button" id="moveMember" class="btn btn-secondary" onclick="moveMemberJoinPage()">일반회원 가입</button>
         </div>
-
+		</c:if>
+		
         <!-- content-->
         <div id="content">
             <input type="checkbox" id="brand" style="display:none;" name="login_type" value="1" onclick="return false;">
             <input type="checkbox" id="member" style="display:none;" name="login_type" value="2" checked="checked">
             <span style="float:right;">Required</span><span style="color: red; float:right;">*</span>
-
+			
+			<c:if test="${ ! empty member_id }">
+			
+			<script>
+				$(function() {
+					alert("")
+				})
+			</script>
+			
+            <input type="hidden" name="member_id" value="${ member_id }">
+               
+            <div>
+                <h3 class="join_title">
+                  <span style="color: red;">*</span><label for="nickname">닉네임</label>
+                </h3>
+                <span class="box int_nickName">
+                    <input type="text" id="id" name="member_nickname" class="int" maxlength="20" value="${nickname }">
+                </span>
+                <span class="error_next_box"></span>
+            </div>
+            
+            <!-- PW1 -->
+            <input type="hidden" name="member_pw" value="${ pass }">
+                
+			</c:if>
+			
+			<c:if test="${ empty member_id }">
             <!-- ID -->
             <div>
                 <h3 class="join_title">
@@ -47,18 +86,19 @@
                 <button type="button" class="btn btn-secondary btn-sm" onclick="checkId;">중복 확인</button>
                 <span class="error_next_box"></span>
             </div>
-
-            <!-- Nickname -->
+            
+			<!-- Nickname -->
             <div>
                 <h3 class="join_title">
-                  <span style="color: red;">*</span><label for="nickname">닉네임</label>
+                  <span style="color: red;">*</span><label for="nickname">닉네임 ${ nickname }</label>
                 </h3>
                 <span class="box int_nickName">
                     <input type="text" id="id" name="member_nickname" class="int" maxlength="20" placeholder="닉네임 입력">
                 </span>
                 <span class="error_next_box"></span>
             </div>
-
+			
+			
             <!-- PW1 -->
             <div>
                 <h3 class="join_title">
@@ -83,7 +123,8 @@
                 </span>
                 <span class="error_next_box"></span>
             </div>
-
+			</c:if>
+			
             <!-- NAME -->
             <div>
                 <h3 class="join_title">

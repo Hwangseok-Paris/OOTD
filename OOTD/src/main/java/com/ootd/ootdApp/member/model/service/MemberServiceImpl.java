@@ -48,6 +48,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.updateNewPass(m);
 	}
 
+	@Override
+	public int selectKakaoCount(String member_id) {
+		
+		return memberDAO.selectKakaoCount(member_id);
+	}
+
 	
 
 	
