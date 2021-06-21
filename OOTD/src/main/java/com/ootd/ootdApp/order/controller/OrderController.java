@@ -157,6 +157,10 @@ public class OrderController {
 
 		int member_no = member.getMember_no();
 		
+//		System.out.println(product_no);
+//		System.out.println(order_quantity);
+//		System.out.println(product_size);
+		
 		for(int i = 1 ; i < product_no.length ; i++) {
 			Cart cart = new Cart();
 		cart.setMember_no(member_no);
@@ -174,6 +178,43 @@ public class OrderController {
 		};
 		
 	};
+	
+	
+	// add cartList from SecondHand Product Detail
+		@RequestMapping("/order/addCartListSecondHand.or")
+		@ResponseBody
+		public void addCartListSecondHand(HttpServletRequest req, 
+							     @RequestParam int product_no,
+								 @RequestParam int order_quantity,
+								 @RequestParam String product_size
+									) {
+			
+			HttpSession session = req.getSession();
+			Member member = (Member) session.getAttribute("member");
+
+			int member_no = member.getMember_no();
+			
+			System.out.println(product_no);
+			System.out.println(order_quantity);
+			System.out.println(product_size);
+			
+			
+			Cart cart = new Cart();
+			cart.setMember_no(member_no);
+			cart.setProduct_no(product_no);
+			cart.setCart_quantity(order_quantity);
+			cart.setCart_size(product_size);
+					
+			int Result = orderService.addCartList(cart);
+			
+			if(Result > 0) {
+				System.out.println("카트에 상품담기 성공");
+			} else {
+				System.out.println("카트에 상품담기 실패");
+				};
+		
+			
+		};
 
 	
 	
