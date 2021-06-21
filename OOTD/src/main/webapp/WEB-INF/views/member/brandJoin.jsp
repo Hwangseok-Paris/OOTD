@@ -57,7 +57,7 @@
                   <span style="color: red;">*</span><label for="nickname">닉네임</label>
                 </h3>
                 <span class="box int_nickName">
-                    <input type="text" id="id" name="member_nickname" class="int" maxlength="20" placeholder="닉네임 입력">
+                    <input type="text" id="nick" name="member_nickname" class="int" maxlength="20" placeholder="닉네임 입력">
                 </span>
                 <span class="error_next_box"></span>
             </div>
@@ -491,7 +491,7 @@
             }).open();
         };
         
-     // 아이디 중복 확인
+     	// 아이디 중복 확인
         $('#checkIdDuplicate').on('click', function() {
         	$.ajax({
             	url : "${pageContext.request.contextPath}/member/checkIdDuplicate.do",
@@ -522,6 +522,81 @@
             	}
             });
         })
+        
+        // form 데이터 유효성 검사 (form 데이터 모두 입력되었는지 확인)
+        function check_form() {
+        	var id = document.getElementById("id");
+        	var nick = document.getElementById("nick");
+        	var pwd1 = document.getElementById("pswd1");
+        	var pwd2 = document.getElementById("pswd2");
+        	var name = document.getElementById("name");
+        	var email = document.getElementById("email");
+        	var phone = document.getElementById("mobile");
+        	var address1 = document.getElementById("address1");
+        	var address2 = document.getElementById("address2");
+        	var acNumber = document.getElementById("acNumber");
+        	
+        	if(id.value=="") {
+        		alert("아이디가 입력되었는지 확인해주세요.");
+        		id.focus();
+            	return false;
+        	}		
+        	if(nick.value=="") {
+        			
+        		alert("닉네임이 입력되었는지 확인해주세요.");
+        		nick.focus();
+            	return false;
+        	}		
+        	if(pwd1.value=="") {
+        			
+        		alert("비밀번호란이 입력되었는지 확인해주세요.");
+        		pwd1.focus();
+            	return false;
+        	}		
+        	if(pwd2.value=="") {
+        			
+        		alert("비밀번호 확인란이 입력되었는지 확인해주세요.");
+        		pwd2.focus();
+            	return false;
+        	}		
+        	if(name.value=="") {
+        			
+        		alert("이름이 입력되었는지 확인해주세요.");
+        		name.focus();
+            	return false;
+        	}		
+        	if(email.value=="") {
+        			
+        		alert("이메일이 입력되었는지 확인해주세요.");
+        		email.focus();
+            	return false;
+        	}		
+        	if(phone.value=="") {
+        			
+        		alert("휴대폰 번호가 입력되었는지 확인해주세요.");
+        		phone.focus();
+            	return false;
+        	}		
+        	if(address1.value==""){
+        			
+        		alert("주소가 입력되었는지 확인해주세요.");
+        		address1.focus();
+            	return false;
+        			
+        	} 
+        	if(address2.value=="") {
+        		alert("상세주소가 입력되었는지 확인해주세요.");
+    			address2.focus();
+        		return false;
+        	}
+        	if(acNumber.value=="") {
+        		alert("계좌번호가 입력되었는지 확인해주세요.");
+    			acNumber.focus();
+        		return false;
+        	}
+        	
+        	document.getElementById("memberJoinFrm").submit();
+        }
     </script>
 </body>
 </html>

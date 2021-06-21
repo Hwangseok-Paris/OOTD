@@ -220,7 +220,7 @@
 
             <!-- JOIN BTN-->
             <div class="joinOrCancel">
-                <button type="submit" id="joinBtn" class="btn btn-secondary btn-sm" onclick="check_form();">가입하기</button>
+                <button type="button" id="joinBtn" class="btn btn-secondary btn-sm" onclick="check_form();">가입하기</button>
                 <button type="button" id="cancelBtn" class="btn btn-secondary btn-sm">작성 취소</button>
             </div>
             
@@ -561,68 +561,74 @@
             });
         });
         
-        // form 데이터 유효성 검사
-        
-        /*
+        // form 데이터 유효성 검사 (form 데이터 모두 입력되었는지 확인)
         function check_form() {
-        	frmName = document.memberJoinFrm;
+        	var id = document.getElementById("id");
+        	var nick = document.getElementById("nick");
+        	var pwd1 = document.getElementById("pswd1");
+        	var pwd2 = document.getElementById("pswd2");
+        	var name = document.getElementById("name");
+        	var email = document.getElementById("email");
+        	var phone = document.getElementById("mobile");
+        	var address1 = document.getElementById("address1");
+        	var address2 = document.getElementById("address2");
         	
-        	if(frmName.member_id.value=="" || frmName.member_nickname.value="" || frmName.member_pw.value=="" || frmName.member_pw_chk.value=="" || frmName.member_name.value=="" || frmName.email.value="" || frmName.phone.value="" || frmName.address.value="") {
-        		if(frmName.member_id.value=="") {
+        	if(id.value=="") {
+        		alert("아이디가 입력되었는지 확인해주세요.");
+        		id.focus();
+            	return false;
+        	}		
+        	if(nick.value=="") {
         			
-        			alert("아이디가 입력되었는지 확인해주세요.");
-        			frmName.member_id.focus();
-            		return false;
-            		
-        		} else if(frmName.member_nickname.value="") {
+        		alert("닉네임이 입력되었는지 확인해주세요.");
+        		nick.focus();
+            	return false;
+        	}		
+        	if(pwd1.value=="") {
         			
-        			alert("닉네임이 입력되었는지 확인해주세요.");
-        			frmName.member_nickname.focus();
-            		return false;
-            		
-        		} else if(frmName.member_pw.value="") {
+        		alert("비밀번호란이 입력되었는지 확인해주세요.");
+        		pwd1.focus();
+            	return false;
+        	}		
+        	if(pwd2.value=="") {
         			
-        			alert("비밀번호란이 입력되었는지 확인해주세요.");
-        			frmName.member_pw.focus();
-            		return false;
+        		alert("비밀번호 확인란이 입력되었는지 확인해주세요.");
+        		pwd2.focus();
+            	return false;
+        	}		
+        	if(name.value=="") {
         			
-        		} else if(frmName.member_pw_chk.value="") {
+        		alert("이름이 입력되었는지 확인해주세요.");
+        		name.focus();
+            	return false;
+        	}		
+        	if(email.value=="") {
         			
-        			alert("비밀번호 확인란이 입력되었는지 확인해주세요.");
-        			frmName.member_pw_chk.focus();
-            		return false;
+        		alert("이메일이 입력되었는지 확인해주세요.");
+        		email.focus();
+            	return false;
+        	}		
+        	if(phone.value=="") {
         			
-        		} else if(frmName.member_name.value=="") {
+        		alert("휴대폰 번호가 입력되었는지 확인해주세요.");
+        		phone.focus();
+            	return false;
+        	}		
+        	if(address1.value==""){
         			
-        			alert("이름이 입력되었는지 확인해주세요.");
-        			frmName.member_name.focus();
-            		return false;
+        		alert("주소가 입력되었는지 확인해주세요.");
+        		address1.focus();
+            	return false;
         			
-        		} else if(frmName.email.value="") {
-        			
-        			alert("이메일이 입력되었는지 확인해주세요.");
-        			frmName.email.focus();
-            		return false;
-        			
-        		} else if(frmName.phone.value="") {
-        			
-        			alert("휴대폰 번호가 입력되었는지 확인해주세요.");
-        			frmName.phone.focus();
-            		return false;
-        			
-        		} else {
-        			
-        			alert("주소가 입력되었는지 확인해주세요.");
-        			frmName.address.focus();
-            		return false;
-        			
-        		} 
         	} 
-        	else {
-        		document.getElementById("memberJoinFrm").submit();
+        	if(address2.value=="") {
+        		alert("상세주소가 입력되었는지 확인해주세요.");
+    			address2.focus();
+        		return false;
         	}
+        	document.getElementById("memberJoinFrm").submit();
         }
-        */
+        
         
     </script>
 </body>
