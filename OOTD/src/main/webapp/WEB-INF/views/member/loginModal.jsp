@@ -39,7 +39,7 @@
                     <div class="join-btn-group">
                         <button type="button" id="join-btn" class="btn btn-link" onclick="goMyPage()">MYPAGE</button>
                             | 
-                    	<button type="button" id="logout-btn" class="btn btn-link" onclick="logout()">LOGOUT</button>
+                    	<button type="button" id="logout-btn" class="btn btn-link" onclick="logout()" style="color: black; font-size: 20px;">LOGOUT</button>
                     	
                     </div>
                 </div> 
