@@ -186,58 +186,75 @@ public class SecondHandConrtoller {
 
 	// 주문 상품 가져오기
 	@RequestMapping("/myPage/myPage_Purchased.mp")
-	public List<myPageOrderList> selectOrderList(Member member, Model model) {
+	public String selectOrderList(Member member, Model model,
+			@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage) {
 
-//		// 한 페이지당 상품 갯수
-//		int numPerPage = 12;
-//		
+		// 한 페이지당 상품 갯수
+		int numPerPage = 12;
+
 		String member_name = member.getMember_name();
 		System.out.println(member_name);
-//		
-//		// 현재 페이지의 상품 갯수
-//		List<Map<String, String>> list2 = secondHandService.productSelectList(cPage, numPerPage, member_name);
-//
-//		// 전체 상품 갯수
-//		int totalContents = secondHandService.purchaseSelectTotalContents(member_name);
-//
-//		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "productList.do?&pType=1");
-//		model.addAttribute("pageBar", pageBar);
-//
-//		System.out.println("list : " + list2);
-//
-//		// brand_name List 불러오기
-//		//List<String> brandName = productService.brandNameSelectList();
-//
-////		System.out.println("brandName : " + brandName);
-//
-//		model.addAttribute("member", member);
-//		model.addAttribute("list", list2);
-//		model.addAttribute("numPerPage", numPerPage);
 
-		List<myPageOrderList> list = secondHandService.selectOrderList(member_name);
+		// 현재 페이지의 상품 갯수
+		List<Map<String, String>> list = secondHandService.selectOrderList(cPage, numPerPage, member_name);
 
+		// 전체 상품 갯수
+		int totalContents = secondHandService.purchaseSelectTotalContents();
+
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myPage_Purchased.mp");
+		model.addAttribute("pageBar", pageBar);
+
+		System.out.println("list : " + list);
+
+		model.addAttribute("member", member);
 		model.addAttribute("list", list);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("totalContents", totalContents);
 
-		System.out.println("주문상품 리스트 -> " + list);
+//		List<myPageOrderList> list = secondHandService.selectOrderList(member_name);
+//
+//		model.addAttribute("list", list);
+//
+//		System.out.println("주문상품 리스트 -> " + list);
 
-		return list;
+		return "myPage/myPage_Purchased";
 	}
 
 	// 판매상품 리스트 가져오기
 	@RequestMapping("/myPage/myPage_Product.mp")
-	public List<Product> myPageProduct(Member member, Model model) {
+	public String myPageProduct(Member member, Model model,
+			@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage) {
 
 		int member_no = member.getMember_no();
 
 		System.out.println(member_no);
 
-		List<Product> list = secondHandService.selectProductList(member_no);
+		// 한 페이지당 상품 갯수
+		int numPerPage = 12;
 
+		// 현재 페이지의 상품 갯수
+		List<Map<String, String>> list = secondHandService.selectProductList(cPage, numPerPage, member_no);
+
+		// 전체 상품 갯수
+		int totalContents = secondHandService.selectProductTotalContents();
+
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myPage_Product.mp");
+		model.addAttribute("pageBar", pageBar);
+
+		System.out.println("list : " + list);
+
+		model.addAttribute("member", member);
 		model.addAttribute("list", list);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("totalContents", totalContents);
 
-		System.out.println("판매상품 리스트 -> " + list);
+//		List<Product> list = secondHandService.selectProductList(member_no);
+//
+//		model.addAttribute("list", list);
+//
+//		System.out.println("판매상품 리스트 -> " + list);
 
-		return list;
+		return "myPage/myPage_Product";
 	}
 
 	// 판매상품 삭제
@@ -246,12 +263,12 @@ public class SecondHandConrtoller {
 	public String myPageProductDelete(@RequestParam int productNo, HttpServletRequest req, Model model) {
 
 		System.out.println(productNo);
-		
+
 		String savePath = req.getServletContext().getRealPath("/resources/images/productImgUpload");
-		
+
 		// 첨부파일 삭제 명단
 		List<Attachment> delList = secondHandService.selectAttachmentList(productNo);
-		
+
 		System.out.println("브랜드 상품 삭제 controller 확인 :: " + delList);
 
 		int result = secondHandService.deleteProduct(productNo);
@@ -260,11 +277,11 @@ public class SecondHandConrtoller {
 
 		if (result > 0) {
 			msg = "삭제 완료!";
-			
-			for(Attachment a : delList) {
+
+			for (Attachment a : delList) {
 				new File(savePath + "/" + a.getAtt_name()).delete();
 			}
-			
+
 		} else {
 			msg = "삭제 실패!";
 		}
@@ -277,17 +294,37 @@ public class SecondHandConrtoller {
 
 	// 판매내역 가져오기
 	@RequestMapping("/myPage/myPage_Sale.mp")
-	public String myPageSaleProductList(Member member, Model model) {
+	public String myPageSaleProductList(Member member, Model model,
+			@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage) {
 
 		String member_name = member.getMember_name();
 
 		System.out.println("판매자 이름 -> " + member_name);
 
-		List<myPageOrderList> list = secondHandService.selectSaleProductList(member_name);
+		// 한 페이지당 상품 갯수
+		int numPerPage = 12;
 
-		System.out.println("판매내역 리스트 -> " + list + "\n");
+		// 현재 페이지의 상품 갯수
+		List<Map<String, String>> list = secondHandService.selectSaleProductList(cPage, numPerPage, member_name);
 
+		// 전체 상품 갯수
+		int totalContents = secondHandService.selectSaleProductTotalContents();
+
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myPage_Sale.mp");
+		model.addAttribute("pageBar", pageBar);
+
+		System.out.println("list : " + list);
+
+		model.addAttribute("member", member);
 		model.addAttribute("list", list);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("totalContents", totalContents);
+
+//		List<myPageOrderList> list = secondHandService.selectSaleProductList(member_name);
+//
+//		System.out.println("판매내역 리스트 -> " + list + "\n");
+//
+//		model.addAttribute("list", list);
 
 		return "myPage/myPage_Sale";
 	}

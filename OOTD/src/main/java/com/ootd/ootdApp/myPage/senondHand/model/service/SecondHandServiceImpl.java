@@ -2,6 +2,7 @@ package com.ootd.ootdApp.myPage.senondHand.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,13 +47,13 @@ public class SecondHandServiceImpl implements SecondHandService {
 	}
 
 	@Override
-	public List<myPageOrderList> selectOrderList(String member_name) {
-		return secondHandDAO.selectOrderList(member_name);
+	public List<Map<String, String>> selectOrderList(int cPage, int numPerPage, String member_name) {
+		return secondHandDAO.selectOrderList(cPage, numPerPage, member_name);
 	}
 
 	@Override
-	public List<Product> selectProductList(int member_no) {
-		return secondHandDAO.selectProductList(member_no);
+	public List<Map<String, String>> selectProductList(int cPage, int numPerPage, int member_no) {
+		return secondHandDAO.selectProductList(cPage, numPerPage, member_no);
 	}
 
 	@Override
@@ -61,8 +62,8 @@ public class SecondHandServiceImpl implements SecondHandService {
 	}
 
 	@Override
-	public List<myPageOrderList> selectSaleProductList(String member_name) {
-		return secondHandDAO.selectSaleProductList(member_name);
+	public List<Map<String, String>> selectSaleProductList(int cPage, int numPerPage, String member_name) {
+		return secondHandDAO.selectSaleProductList(cPage, numPerPage, member_name);
 	}
 
 	@Override
@@ -92,6 +93,21 @@ public class SecondHandServiceImpl implements SecondHandService {
 	public List<Attachment> selectAttachmentList(int productNo) {
 		
 		return secondHandDAO.selectAttachmentList(productNo);
+	}
+
+	@Override
+	public int purchaseSelectTotalContents() {
+		return secondHandDAO.purchaseSelectTotalContents();
+	}
+
+	@Override
+	public int selectProductTotalContents() {
+		return secondHandDAO.selectProductTotalContents();
+	}
+
+	@Override
+	public int selectSaleProductTotalContents() {
+		return secondHandDAO.selectSaleProductTotalContents();
 	}
 	
 

@@ -68,5 +68,10 @@
 		SET PRODUCT_STATUS = 'N'
 		WHERE PRODUCT_NO = #{product_no}
 	</update>
+	 
+	<select id="selectProductTotalContents" resultType="_int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+	</select>
 
 </mapper>

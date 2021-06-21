@@ -114,5 +114,18 @@
 		SET PURCHASE_STATUS = 3
 		WHERE ORDER_NO = #{order_no}
 	</update>
-
+	
+	<select id="purchaseSelectTotalContents" resultType="_int">
+		SELECT COUNT(*)
+		FROM O_ORDER O, O_ORDER_LIST OL
+		WHERE O.ORDER_NO = OL.ORDER_NO
+	</select>
+	
+	<select id="selectSaleProductTotalContents" resultType="_int">
+		SELECT COUNT(*)
+		FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P
+		WHERE O.ORDER_NO = OL.ORDER_NO
+			AND OL.PRODUCT_NO = P.PRODUCT_NO
+	</select>
+	
 </mapper>

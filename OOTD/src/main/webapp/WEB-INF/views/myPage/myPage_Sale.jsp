@@ -27,7 +27,7 @@
         <%@ include file="myPage_Menu.jsp"%>        
 
         <section class="main">
-            <div class="wrap-section">
+            <div class="wrap-section" style="justify-content: center; align-items: center;">
                 <div class="table-title">판매 내역</div>
                 <table class="sale-table">
                     <thead>
@@ -67,6 +67,7 @@
                     </tbody>
                     </c:forEach>
                 </table>
+                <c:out value="${pageBar}" escapeXml="false"/>
             </div>
         </section>
     </div>
