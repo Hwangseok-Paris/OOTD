@@ -184,6 +184,18 @@ public class ProductController {
 
 		}
 
+		String inputSize = p.getProduct_size();
+		
+		if ( pType == 2) {
+			if (inputSize.equals("S")) {
+				p.setProduct_stock_s(1);
+			} else if (inputSize.equals("M")) {
+				p.setProduct_stock_m(1);
+			} else {
+				p.setProduct_stock_l(1);
+			}
+		}
+		
 
 		// 5. 상품을 DB에 저장. 결과
 		int result = productService.productInsert(p, pType, attachList);
