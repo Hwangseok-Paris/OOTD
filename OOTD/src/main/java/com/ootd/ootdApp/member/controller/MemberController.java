@@ -46,6 +46,7 @@ public class MemberController {
 	@Autowired
 	BCryptPasswordEncoder bcrypt;
 	
+	// 모달에서 마이페이지로 이동
 	@RequestMapping("/member/goMyPage.do")
 	public String goMyPage(HttpServletRequest req) {
 		
@@ -56,6 +57,8 @@ public class MemberController {
 		else return "myPage/myPage_Info";
 	}
 	
+	// sns로그인 시 해당 메일주소의 회원이 없다면, 
+	// sns로그인으로 얻은 정보와 함께 회원 가입페이지로 가기
 	@RequestMapping("/member/snsMemberJoin.do")
 	public String kakaoMemberJoin(
 				@RequestParam String member_id, 
@@ -66,6 +69,7 @@ public class MemberController {
 		
 		System.out.println("kakao joinForm controller access : " + member_id + "/" + name + "/" + email);
 		
+		// 임의로 비밀번호 생성
 		String pass = randomCode();
 		
 		
@@ -77,6 +81,7 @@ public class MemberController {
 		return "member/memberJoin";
 	}
 	
+	// sns 로그인 시 받아오는 정보로 로그인
 	@RequestMapping(value={"member/snsLogin.do", "*/member/snsLogin.do"})
 	public String kakaoLogin(
 				@RequestParam String member_id,
@@ -86,6 +91,7 @@ public class MemberController {
 		
 		System.out.println("login Access");
 		
+		// 이미 sns 로그인 계정이 확인되었기 때문에 비밀번호는 검사하지 않음
 		Member result = memberService.selectOneMember(member_id);
 		
 		System.out.println("로그인 조회 결과 : " + result);
@@ -176,7 +182,7 @@ public class MemberController {
 		return "common/msg";
 	}
 	
-	
+	// 아이디 찾기 실행 시 메일로 아이디 보내주기 
 	@RequestMapping(value={"member/memberLogin.do", "*/member/memberLogin.do"})
 	public String memberLogin(
 				@RequestParam String member_id,
@@ -260,24 +266,24 @@ public class MemberController {
 			if ( m.getLogin_type() == 2 ) {
 				
 				vo.setContents(
-						"<html><body>"
+						"<html><body><div style=\"width: 400px; height: 300px; padding: 50px; background: black; text-align: center; color: white;\">"
 						+ "<h2>내일의 옷에서 알려드립니다.</h2><br>"
 						+ "<p>개인 회원이신 " + m.getMember_name() + "님의 아이디는 <p style='font-weight:bolder;'>" 
 						+ m.getMember_id() + "</p> 입니다.<br>"
 						+ "확인 후 내일의 옷 홈페이지에서 로그인해주세요."
-						+ "</p>"
+						+ "</p></div>"
 						+ "</body></html>"
 					);
 				
 			} else {
 				
 				vo.setContents(
-						"<html><body>"
+						"<html><body><div style=\"width: 400px; height: 300px; padding: 50px; background: black; text-align: center; color: white;\">"
 						+ "<h2>내일의 옷에서 알려드립니다.</h2><br>"
 						+ "<p>브랜드 회원이신 " + m.getBrand_name() + "님의 아이디는 <p style='font-weight:bolder;'>" 
 						+ m.getMember_id() + "</p> 입니다.<br>"
 						+ "확인 후 내일의 옷 홈페이지에서 로그인해주세요."
-						+ "</p>"
+						+ "</p></div>"
 						+ "</body></html>"
 					);
 			}
@@ -357,28 +363,28 @@ public class MemberController {
 				if ( m.getLogin_type() == 2 ) {
 				
 					vo.setContents(
-							"<html><body>"
+							"<html><body><div style=\"width: 400px; height: 300px; padding: 50px; background: black; text-align: center; color: white;\">"
 							+ "<h2>내일의 옷에서 알려드립니다.</h2><br>"
 							+ "<p>개인 회원이신 " + m.getMember_name() 
-							+ "님의 임시 비밀번호는 <p style='font-weight:bolder;'>" 
+							+ "님의 임시 비밀번호는 <p style='font-weight:bolder; font-size:larger;'>" 
 							+ newPass + "</p> 입니다.<br>"
 							+ "확인 후 내일의 옷 홈페이지에서 로그인해주세요.<br>"
 							+ "로그인 후에는 마이페이지 > 회원정보 에서 반드시 비밀번호를 재설정하세요."
-							+ "</p>"
+							+ "</p></div>"
 							+ "</body></html>"
 						);
 				
 				} else {
 				
 					vo.setContents(
-						"<html><body>"
+						"<html><body><div style=\"width: 400px; height: 300px; padding: 50px; background: black; text-align: center; color: white;\">"
 						+ "<h2>내일의 옷에서 알려드립니다.</h2><br>"
 						+ "<p>브랜드 회원이신 " + m.getBrand_name() 
-						+ "님의 임시 비밀번호는 <p style='font-weight:bolder;'>" 
+						+ "님의 임시 비밀번호는 <p style='font-weight:bolder; font-size:larger;'>" 
 						+ newPass + "</p> 입니다.<br>"
 						+ "확인 후 내일의 옷 홈페이지에서 로그인해주세요."
 						+ "로그인 후에는 마이페이지 > 회원정보 에서 반드시 비밀번호를 재설정하세요."
-						+ "</p>"
+						+ "</p></div>"
 						+ "</body></html>"
 					);
 				}

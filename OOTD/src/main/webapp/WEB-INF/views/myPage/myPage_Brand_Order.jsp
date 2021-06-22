@@ -124,6 +124,8 @@
                     break;
             }
         })
+        
+        $('.pagination_r').css('padding-left', '33%');
     })
     
     

@@ -84,6 +84,8 @@
 	
     // .sale_status의 값(value)에 따라 배송 상태 텍스트 변경
     $(function () {
+    	$('.pagination_r').css('padding-left', '35%');
+    	
         $('.sale-status').each(function () {
 
             var ps = $(this).text();

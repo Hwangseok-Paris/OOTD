@@ -13,6 +13,7 @@
 	    
 	    <script>
 		$(function(){
+			$('.pagination_r').css('padding-left', '33%');
 			
 			// 상품 수정 
 			$(".modify").on("click",function(){

@@ -165,13 +165,13 @@ section{
             height: 800px;
         }
 
-
 .pagination_r {
-    display: inline-block;
+	display: inline-block;
     text-align: center;
-    padding-left : 35%;
+    padding-left: 45%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 25px;
 }
 
 .pagination_r a {
