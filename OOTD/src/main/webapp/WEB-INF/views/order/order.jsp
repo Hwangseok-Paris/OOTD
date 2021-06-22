@@ -436,7 +436,7 @@ function calcPrice(){
   	    pay_method : pay_method,
   	    merchant_uid : 'merchant_' + new Date().getTime(),
   	    name : 'OOTD',
-  	    amount : total_price,
+  	    amount : 352 /* total_price */,
   	    buyer_email : email+"@"+domainName,
   	    buyer_name : receiver_name,
   	    buyer_tel : phone,
