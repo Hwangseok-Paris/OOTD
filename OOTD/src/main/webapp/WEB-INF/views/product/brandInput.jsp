@@ -28,8 +28,7 @@
 		    <div class="input-img-area">
 		        <div id="insertArea" class="inputBox1">
 		            <div id="contentImgArea1" class="imgInput iip">
-		                <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" id="contentImg1" class="addImg"
-		                style="height: 50px; width: 50px;"/>
+		                <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" id="contentImg1" class="addImg"/>
 		            </div>
 		            <div id="contentImgArea2" class="imgInput iip">
 		                <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" id="contentImg2" class="addImg"/>
