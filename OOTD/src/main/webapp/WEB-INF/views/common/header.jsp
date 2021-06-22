@@ -100,9 +100,6 @@
 			//       alert("로그인 되있으면 마이페이지 안되있으면 로그인 페이지");
 			//  })
 			
-			
-    
-			
 			$('.fa-moon').on('click', function() {
 				
 				$('html').toggleClass("dark");
@@ -111,11 +108,14 @@
 		        
 		        $('.search_input').css('background-color','black');
 				$('.search_input').css('color', 'white');
-			icon.src = "${pageContext.request.contextPath }/resources/images/headerdarklogo.png";
+				$('.myPageInfo').css('text-decoration', 'none');
+				$('.myPageInfo').css('color', '#bbb');
+				$('.bx-wrapper').css('background-color', 'black');
+				
+				icon.src = "${pageContext.request.contextPath }/resources/images/headerdarklogo.png";
 				icon_footer.src = "${pageContext.request.contextPath }/resources/images/footerdarklogo.jpeg";
 				
 				$('.fa-moon').hide();
-				$('.bx-wrapper').css('background-color', 'black');
 				$('.fa-sun').css('visibility', 'visible');
 		        
 			});
@@ -129,9 +129,13 @@
 		        
 		        $('.search_input').css('background-color','white');
 				$('.search_input').css('color', '#bbb');
+				$('.myPageInfo').css('text-decoration', 'none');
+				$('.myPageInfo').css('color', 'black');
+				$('.bx-wrapper').css('background-color', 'white');
 
 				icon.src = "${pageContext.request.contextPath }/resources/images/headerlogo.png";
 				icon_footer.src = "${pageContext.request.contextPath }/resources/images/footerlogo.png";
+				
 				$('.fa-sun').css('visibility', 'hidden');
 				$('.fa-moon').show();
 		        

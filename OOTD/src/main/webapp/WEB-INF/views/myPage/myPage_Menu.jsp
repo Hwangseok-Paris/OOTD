@@ -6,16 +6,16 @@
             <div class="menu-title">MY PAGE</div>
             <ul class="category">
                 <li>
-                    <a href="${pageContext.request.contextPath}/myPage/myPage_Info.mp" style="text-decoration: none; color: black;">회원 정보</a>
+                    <a href="${pageContext.request.contextPath}/myPage/myPage_Info.mp" class="myPageInfo">회원 정보</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/myPage/myPage_Purchased.mp" style="text-decoration: none; color: black;">구매 내역</a>
+                    <a href="${pageContext.request.contextPath}/myPage/myPage_Purchased.mp" class="myPageInfo">구매 내역</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/myPage/myPage_Product.mp" style="text-decoration: none; color: black;">판매 상품</a>
+                    <a href="${pageContext.request.contextPath}/myPage/myPage_Product.mp" class="myPageInfo">판매 상품</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/myPage/myPage_Sale.mp" style="text-decoration: none; color: black;">판매 내역</a>
+                    <a href="${pageContext.request.contextPath}/myPage/myPage_Sale.mp" class="myPageInfo">판매 내역</a>
                 </li>
             </ul>
         </aside>

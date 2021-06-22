@@ -352,6 +352,8 @@ public class SecondHandConrtoller {
 	public int purchaseStatusChange(@RequestParam int orderNo) {
 
 		int result = secondHandService.updatePurchaseStatus(orderNo);
+		
+		//int status = secondHandService.selectSecondHandStatus(orderNo);
 
 		System.out.println("현재 배송상태 -> " + orderNo);
 
@@ -370,7 +372,7 @@ public class SecondHandConrtoller {
 		System.out.println("Review Controller access");
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("product_no", pno);
 		map.put("member_no", mno);
 
@@ -422,13 +424,13 @@ public class SecondHandConrtoller {
 
 		// 전체 상품 갯수
 		int totalContents = secondHandService.selectSearchTotalContents(totalSearch);
-		
+
 		System.out.println(totalContents);
 
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myPage_Product.mp");
 		model.addAttribute("pageBar", pageBar);
 
-		//List<Product> result = secondHandService.selectSearchResult(totalSearch);
+		// List<Product> result = secondHandService.selectSearchResult(totalSearch);
 
 		System.out.println("중고 검색 결과 -> " + result);
 

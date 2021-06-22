@@ -115,7 +115,7 @@
             switch (ps) {
                 case "1":
                     $(this).text('배송준비');
-                   	cfmBtn.show();
+                   	//cfmBtn.show();
                     break;
                 case "2":
                     $(this).text('배송중');
@@ -142,12 +142,16 @@
 			data: {"orderNo": orderNo},
 			
 			success: function(data) {
+				
 				if(data == 2) {
 					$('.purchase-status').text("배송중");
 					$('.complete-send').show();
+					location.reload();
 				} else if (data == 3) {
 					$('.purchase-status').text("구매완료");
-					$('complete-send').hide();
+ 					$('.complete-send').hide();
+					$('.write-review').show();
+					location.reload();
 				} 
 			}, error: function() {
 				alert("상태변환 실패");
@@ -164,7 +168,7 @@
 		$.ajax({
 			type: "POST",
 			url: "${pageContext.request.contextPath}/myPage/myPage_Order_Detail.mp",
-			data: { "orderNo" : orderNo }, 
+			data: { "orderNo" : orderNo, "productNo": productNo }, 
 
 			success: function(data){
 				//alert('주문 상세보기 성공');
