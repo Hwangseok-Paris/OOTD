@@ -24,6 +24,7 @@
 		<typeAlias type="com.ootd.ootdApp.product.model.vo.Review" alias="review" />
 		<typeAlias type="com.ootd.ootdApp.myPage.senondHand.model.vo.Product" alias="Product_s"></typeAlias>
 		<typeAlias type="com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo" alias="Product_rev"></typeAlias>
+		<typeAlias type="com.ootd.ootdApp.myPage.brand.model.vo.O_Order_List" alias="O_Order_List" />
 	</typeAliases>
 	
 	<typeHandlers>

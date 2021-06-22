@@ -25,7 +25,7 @@
 <c:if test="${ ! empty member_id }">
 	<script>
 		$(function() {
-			alert("해당 계정으로 내일의 옷에 가입해주세요. 가입 후엔 카카오 로그인으로 로그인하실 수 있습니다.");
+			alert("해당 계정으로 내일의 옷에 가입해주세요. 가입 후엔 카카오 or 구글 계정으로 생성한 아이디를 로그인하실 수 있습니다.");
 		});
 	</script>
 </c:if>
@@ -254,33 +254,21 @@
         var pw1 = document.querySelector('#pswd1');
         var pwMsg = document.querySelector('#alertTxt');
         var pwImg1 = document.querySelector('#pswd1_img1');
-
         var pw2 = document.querySelector('#pswd2');
         var pwImg2 = document.querySelector('#pswd2_img1');
         var pwMsgArea = document.querySelector('.int_pass');
-
         var userName = document.querySelector('#name');
-
         //var yy = document.querySelector('#yy');
         //var mm = document.querySelector('#mm');
         //var dd = document.querySelector('#dd');
-
         //var gender = document.querySelector('#gender');
-
         var email = document.querySelector('#email');
-
         var mobile = document.querySelector('#mobile');
-
         var addr1 = document.querySelector('#address1');
         var addr2 = document.querySelector('#address2');
-
         var account = document.querySelector('#account_number');
-
         var error = document.querySelectorAll('.error_next_box');
-
         
-
-
         /*이벤트 핸들러 연결*/
         id.addEventListener("focusout", checkId);
         nick.addEventListener("focusout", checkNickname);
@@ -304,7 +292,6 @@
         addr1.addEventListener("focusout", checkAddr1);
         addr2.addEventListener("focusout", checkAddr2);
         account.addEventListener("focusout", checkAccount);
-
         function checkId() {
             var idPattern = /[a-zA-Z0-9_-]{5,20}/;
             if(id.value === "") {
@@ -321,7 +308,6 @@
                 error[0].style.display = "block";
             }
         }
-
         function checkName() {
             var namePattern = /[a-zA-Z가-힣]/;
             if(userName.value === "") {
@@ -377,7 +363,6 @@
                 pwImg1.src = "${pageContext.request.contextPath }/resources/images/m_icon_safe.png";
             }
         }
-
         function comparePw() {
             if(pw2.value === pw1.value && pw2.value != "") {
                 pwImg2.src = "${pageContext.request.contextPath }/resources/images/m_icon_check_enable.png";
@@ -388,7 +373,6 @@
                 error[3].style.color = "#ff0000";
                 error[3].style.display = "block";
             } 
-
             if(pw2.value === "") {
                 error[3].innerHTML = "필수 정보입니다.";
                 error[3].style.color = "#ff0000";
@@ -399,15 +383,12 @@
         /*
         function isBirthCompleted() {
             var yearPattern = /[0-9]{4}/;
-
             if(!yearPattern.test(yy.value)) {
                 error[4].innerHTML = "태어난 년도 4자리를 정확하게 입력하세요.";
                 error[4].style.display = "block";
             } else {
                 isMonthSelected();
             }
-
-
             function isMonthSelected() {
                 if(mm.value === "월") {
                     error[4].innerHTML = "태어난 월을 선택하세요.";
@@ -415,7 +396,6 @@
                     isDateCompleted();
                 }
             }
-
             function isDateCompleted() {
                 if(dd.value === "") {
                     error[4].innerHTML = "태어난 일(날짜) 2자리를 정확하게 입력하세요.";
@@ -425,10 +405,8 @@
             }
         }
         */
-
         function isEmailCorrect() {
             var emailPattern = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/;
-
             if(email.value === ""){ 
                 error[5].style.display = "none"; 
             } else if(!emailPattern.test(email.value)) {
@@ -436,12 +414,9 @@
             } else {
                 error[5].style.display = "none"; 
             }
-
         }
-
         function checkPhoneNum() {
             var isPhoneNum = /([01]{2})([01679]{1})([0-9]{3,4})([0-9]{4})/;
-
             if(mobile.value === "") {
                 error[6].innerHTML = "필수 정보입니다.";
                 error[6].style.color = "#ff0000";
@@ -454,7 +429,6 @@
                 error[6].style.display = "none";
             }
         }
-
         function checkAddr1() {
             if(address1.value === "") {
                 error[7].innerHTML = "필수 정보입니다.";
@@ -464,7 +438,6 @@
                 error[7].style.display = "none";
             }
         }
-
         function checkAddr2() {
             var namePattern = /[a-zA-Z가-힣]/;
             if(address2.value === "") {
@@ -475,7 +448,6 @@
                 error[8].style.display = "none";
             }
         }
-
         function checkAccount() {
             if(account.value === "") {
                 error[9].innerHTML = "필수 정보입니다.";
@@ -485,7 +457,6 @@
                 error[9].style.display = "none";
             }
         }
-
           
         function moveBrandJoinPage() {
         	location.href='${pageContext.request.contextPath}/member/brandJoin.do';
@@ -494,27 +465,22 @@
         function moveMemberJoinPage() {
         	location.href='${pageContext.request.contextPath}/member/memberJoin.do';
         }
-
         /* 주소 입력 */
         // 참조 API : http://postcode.map.daum.net/guide
         function addrSearch() {
             new daum.Postcode({
                 oncomplete: function(data) {
                     // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                     // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                     // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                     var fullAddr = ''; // 최종 주소 변수
                     var extraAddr = ''; // 조합형 주소 변수
-
                     // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
                     if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                         fullAddr = data.roadAddress;
-
                     } else { // 사용자가 지번 주소를 선택했을 경우(J)
                         fullAddr = data.jibunAddress;
                     }
-
                     // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
                     if(data.userSelectedType === 'R'){
                         //법정동명이 있을 경우 추가한다.
@@ -528,12 +494,10 @@
                         // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
                         fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
                     }
-
                     // 우편번호와 주소 정보를 해당 필드에 넣는다.
                     $('#zipCode').val(data.zonecode); //5자리 새우편번호 사용
                     
                     $('#address1').val(fullAddr);
-
                     // 커서를 상세주소 필드로 이동한다.
                     $('#address2').focus();
                 }
