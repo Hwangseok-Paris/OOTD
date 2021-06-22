@@ -152,7 +152,7 @@ table.delivery td{
    padding: 5px 13px;
    margin-right: 10px;
    cursor: pointer;
-   border-radius: 5px;
+   border-radius: unset !important;
    font-weight: bolder;
 }
 
@@ -186,16 +186,27 @@ table.delivery td{
 .footerbtn{
    float: right;
    font-weight: bolder;
-   font-size: 12pt;
+   height : 35px;
    border-radius: 3px;
    background-color: #B7B8B9 !important;
+   font-size: 10pt !important;
 }
 
 .btndelete{
-	border-radius: 3px; 
+	border-radius: unset !important; 
 	width: 90px; 
-	margin-bottom: 3px; 
-	font-size: 11px;"
+	margin-bottom: 3px;
+	font-size: 10pt !important;
+	}
+
+#orderAll, #orderSelected{
+	width: 180px;
+	height: 40px;
+	border-radius: unset !important; 
+	font-size: 10pt !important;
+	letter-spacing: 0.5px;
+	font-weight: 400;
+	
 }
 
 #allProduct, #productClear, #footerbtn{
@@ -266,4 +277,15 @@ input.underline {
 	
 }
 
+#deleteSel, #deleteAll{
+	width: 100px;
+	height: 35px;
+	font-size: 10pt !important;
+}
 
+#continueShopping{
+	width: 100px;
+	height: 35px !important;
+	font-size: 10pt !important;
+	
+}

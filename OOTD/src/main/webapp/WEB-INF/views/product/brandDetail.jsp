@@ -382,7 +382,7 @@
 				}else{
 					 var pp = $('.selectedSize').text();
 					 if(pp == ""){
-			       		  alert('무엇을 사고 싶은 건가?');
+			       		  alert('무엇을 사고 싶은 건데요?');
 			       	  } else {
 						  var buyList = [];
 			        	  $('.selectedPList').each(function(){

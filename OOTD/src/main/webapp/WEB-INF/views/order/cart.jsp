@@ -105,13 +105,13 @@
                <table class="calculation2">
                <tr style="background-color: #fafafa;">
                   <th style="width: 300px;">총 상품금액</th>
-                  <th style="width: 300px;">총 배송비</th>
+                  <th style="width: 300px;">배송비</th>
                   <th style="width: 300px; padding: 22px 0;"><span>총 결제금액</span></th>
                </tr>
                
                <tr style="background-color: #fff;">
                   <td style="padding: 22px 0;"><span class="totalPrice" id="price"></span>원</td>
-                  <td><span class="price" id="price">0</span>원</td>
+                  <td><span class="price" id="price"></span>무료</td>
                   <td><span class="totalPrice" id="price"></span>원</td>
                </tr>
             </table>
@@ -122,7 +122,7 @@
             <div align="center">
                <button type="button" class="btn default orderbtn" id="orderAll">전체상품주문</button>
                <button type="button" class="btn default" id="orderSelected">선택상품주문</button>
-               <button type="button" class="btn default footerbtn" id="footerbtn continueShopping" type="button" onclick="location.href='${pageContext.request.contextPath}'" style="color: white;">쇼핑계속하기</button>
+               <button type="button" class="btn default footerbtn" id="footerbtn continueShopping" type="button" onclick="location.href='${pageContext.request.contextPath}'" style="color: white; font-size:10pt;">쇼핑 계속하기</button>
                <span class="clearboth"></span>
             </div>
             <br /><br /><br /><br />
