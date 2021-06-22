@@ -51,20 +51,15 @@
 			
 			<c:if test="${ ! empty member_id }">
 			
-			<script>
-				$(function() {
-					alert("")
-				})
-			</script>
-			
             <input type="hidden" name="member_id" value="${ member_id }">
                
+            <!-- NAME -->
             <div>
                 <h3 class="join_title">
-                  <span style="color: red;">*</span><label for="nickname">닉네임</label>
+                  <span style="color: red;">*</span><label for="name">이름</label>
                 </h3>
-                <span class="box int_nickName">
-                    <input type="text" id="id" name="member_nickname" class="int" maxlength="20" value="${nickname }">
+                <span class="box int_name">
+                    <input type="text" id="name" name="member_name"class="int" maxlength="20" value="${ name }">
                 </span>
                 <span class="error_next_box"></span>
             </div>
@@ -87,16 +82,18 @@
                 <span class="error_next_box"></span>
             </div>
             
-			<!-- Nickname -->
+            <!-- NAME -->
             <div>
                 <h3 class="join_title">
-                  <span style="color: red;">*</span><label for="nickname">닉네임 ${ nickname }</label>
+                  <span style="color: red;">*</span><label for="name">이름</label>
                 </h3>
-                <span class="box int_nickName">
-                    <input type="text" id="nick" name="member_nickname" class="int" maxlength="20" placeholder="닉네임 입력">
+                <span class="box int_name">
+                    <input type="text" id="name" name="member_name"class="int" maxlength="20" placeholder="이름">
                 </span>
                 <span class="error_next_box"></span>
             </div>
+            
+			
 			
 			
             <!-- PW1 -->
@@ -125,17 +122,30 @@
             </div>
 			</c:if>
 			
-            <!-- NAME -->
+            <!-- Nickname -->
             <div>
                 <h3 class="join_title">
-                  <span style="color: red;">*</span><label for="name">이름</label>
+                  <span style="color: red;">*</span><label for="nickname">닉네임</label>
                 </h3>
-                <span class="box int_name">
-                    <input type="text" id="name" name="member_name"class="int" maxlength="20" placeholder="이름">
+                <span class="box int_nickName">
+                    <input type="text" id="id" name="member_nickname" class="int" maxlength="20" placeholder="닉네임 입력">
                 </span>
                 <span class="error_next_box"></span>
             </div>
-
+			
+			<c:if test="${ ! empty member_id }">
+			<div>
+                <h3 class="join_title">
+                  <span style="color: red;">*</span><label for="email">이메일</label>
+                </h3>
+                <span class="box int_email">
+                    <input type="text" id="email" name="email"class="int" maxlength="100" value="${ email }">
+                </span>
+                <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>    
+            </div>
+			</c:if>
+			
+			<c:if test="${ empty member_id }">
             <!-- EMAIL -->
             <div>
                 <h3 class="join_title">
@@ -146,7 +156,7 @@
                 </span>
                 <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>    
             </div>
-
+			</c:if>
             <!-- PHONE -->
             <div>
                 <h3 class="join_title">

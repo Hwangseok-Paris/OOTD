@@ -86,7 +86,7 @@
 
 			var icon = document.getElementById("logo");
 			var icon_footer = document.getElementById("logo_footer")
-
+			
 			$('ul').children('li').find('.fa-search').click(function() {
 				alert("css개빡치네");
 			})
@@ -94,33 +94,43 @@
 			//  $('ul').children('li').find('.fa-user').click(function() {
 			//       alert("로그인 되있으면 마이페이지 안되있으면 로그인 페이지");
 			//  })
-
+			
+			
+    
+			
 			$('.fa-moon').on('click', function() {
-								document.documentElement.classList.toggle("dark");
+				
+				$('html').toggleClass("dark");
+		        var mode = $('html').attr('class');
+		        localStorage.setItem('darkMode', mode)
+		        
+		        $('.search_input').css('background-color','black');
+				$('.search_input').css('color', 'white');
 
-								$('.search_input').css('background-color','black');
-								$('.search_input').css('color', 'white');
+				icon.src = "${pageContext.request.contextPath }/resources/images/headerdarklogo.png";
+				icon_footer.src = "${pageContext.request.contextPath }/resources/images/footerdarklogo.jpeg";
+				
+				$('.fa-moon').hide();
+				$('.fa-sun').css('visibility', 'visible');
+		        
+			});
 
-								icon.src = "${pageContext.request.contextPath }/resources/images/headerdarklogo.png";
-								icon_footer.src = "${pageContext.request.contextPath }/resources/images/footerdarklogo.jpeg";
-								
-								$('.fa-moon').hide();
-								$('.fa-sun').css('visibility', 'visible');
-
-							})
+							
 
 			$('.fa-sun').on('click', function() {
-								document.documentElement.classList.toggle("dark");
+				$('html').toggleClass("dark");
+		        var mode = $('html').attr('class');
+		        localStorage.setItem('darkMode', mode);
+		        
+		        $('.search_input').css('background-color','white');
+				$('.search_input').css('color', '#bbb');
 
-								$('.search_input').css('background-color','white');
-								$('.search_input').css('color', '#bbb');
-
-								icon.src = "${pageContext.request.contextPath }/resources/images/headerlogo.png";
-								icon_footer.src = "${pageContext.request.contextPath }/resources/images/footerlogo.png";
-								$('.fa-sun').css('visibility', 'hidden');
-								$('.fa-moon').show();
-
-							})
+				icon.src = "${pageContext.request.contextPath }/resources/images/headerlogo.png";
+				icon_footer.src = "${pageContext.request.contextPath }/resources/images/footerlogo.png";
+				$('.fa-sun').css('visibility', 'hidden');
+				$('.fa-moon').show();
+		        
+			});
 
 			$('.header_logo').on('click', function() {
 
@@ -128,7 +138,7 @@
 
 			})
 
-		})
+		});
 		
 	// 카트 아이콘 클릭시 장바구니 이동
 	$(".fa-shopping-cart").click(function(){
@@ -138,6 +148,40 @@
 			location.href = "${pageContext.request.contextPath}/order/cart.or";
 		}
 	});
+	
+	// localStorage에 담긴 darkMode 여부에 따라서 html 에 class 주기
+	$(function() {
+		
+		var icon = document.getElementById("logo");
+		var icon_footer = document.getElementById("logo_footer")
+		
+        console.log(localStorage.getItem('darkMode'));
+        $('html').attr('class', localStorage.getItem('darkMode'));
+        
+        if( $('html').attr('class') == 'dark' ) {
+        	
+        	$('.search_input').css('background-color','black');
+			$('.search_input').css('color', 'white');
+
+			icon.src = "${pageContext.request.contextPath }/resources/images/headerdarklogo.png";
+			icon_footer.src = "${pageContext.request.contextPath }/resources/images/footerdarklogo.jpeg";
+			
+			$('.fa-moon').hide();
+			$('.fa-sun').css('visibility', 'visible');
+        	
+        } else {
+        	
+        	$('.search_input').css('background-color','white');
+			$('.search_input').css('color', '#bbb');
+
+			icon.src = "${pageContext.request.contextPath }/resources/images/headerlogo.png";
+			icon_footer.src = "${pageContext.request.contextPath }/resources/images/footerlogo.png";
+			$('.fa-sun').css('visibility', 'hidden');
+			$('.fa-moon').show();
+        	
+        }
+        
+    });
 	
 	
 	</script>

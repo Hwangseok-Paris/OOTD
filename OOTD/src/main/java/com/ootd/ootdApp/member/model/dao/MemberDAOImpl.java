@@ -53,9 +53,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int selectKakaoCount(String member_id) {
+	public String selectEmailCount(String email) {
 		
-		return sqlSession.selectOne("member-mapper.selectKakaoCount", member_id);
+		return sqlSession.selectOne("member-mapper.selectEmailCheck", email);
 	}
 
 	// 중고회원 아이디 중복 체크

@@ -16,9 +16,11 @@ public interface MemberDAO {
 
 	int updateNewPass(Member member);
 
-	int selectKakaoCount(String id);
-
 	// 중고회원 아이디 중복 체크
 	int checkIdDuplicate(String memberId);
 
+	String selectEmailCount(String email);
+	
 }
+
+	

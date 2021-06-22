@@ -60,9 +60,9 @@
 		WHERE MEMBER_ID = #{member_id}
 	</update>
 	
-	<select id="selectKakaoCount" parameterType="string" resultType="int">
-		SELECT COUNT(*) FROM MEMBER
-		WHERE MEMBER_ID = #{ member_id }
+	<select id="selectEmailCheck" parameterType="string" resultType="string">
+		SELECT MEMBER_ID FROM MEMBER
+		WHERE EMAIL = #{ email }
 	</select>
 	
 	<!-- 현진 끝 -->

@@ -51,9 +51,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int selectKakaoCount(String member_id) {
+	public String selectEmailCount(String email) {
 		
-		return memberDAO.selectKakaoCount(member_id);
+		return memberDAO.selectEmailCount(email);
 	}
 	
 	// 멤버회원 아이디 중복체크
