@@ -54,7 +54,8 @@
 	                  
 	        			 <input type="hidden" class="cart_no" value="${a.cart_no}" />
 	        			 <input type="hidden" class="pType" value=""/>
-	        			 <input type="hidden" class="product_no" />
+	        			 <input type="hidden" class="product_no" value="${a.product_no }" />
+	        			 <input type="hidden" class="product_type" value="${a.product_type}"/>
 	                   
 	                     <!-- Check Btn. Area -->
 	                     <td style="text-align: left; text-align: center; border-right: none;">
@@ -68,7 +69,7 @@
 	                     
 						 <!-- Product Info. Area -->
 	                     <td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;">
-	                     	<span>[${a.brand_name}]</span> <br/><span>${a.product_name} </span> <br /><br />옵션 : <span>${a.cart_size}</span>
+	                     	<span>[${a.brand_name}]</span> <br/><span class="pName">${a.product_name} </span> <br /><br />옵션 : <span>${a.cart_size}</span>
 	                     </td>
 	                     
 	                     <!-- Price Area -->
@@ -377,8 +378,17 @@
    });
    
    
+   
    $('.img').on('click', function(){
-	   location.href = "${pageContext.request.contextPath}"
+	   var pNo = $(this).parent().siblings('.product_no').val();
+	   var pType = $(this).parent().siblings('.product_type').val();
+	   location.href = "${pageContext.request.contextPath}/product/productDetail.do?product_no="+pNo+"&pType="+pType; 
+   })
+   
+   $('.pName').on('click', function(){
+	   var pNo = $(this).parent().siblings('.product_no').val();
+	   var pType = $(this).parent().siblings('.product_type').val();
+  	   location.href = "${pageContext.request.contextPath}/product/productDetail.do?product_no="+pNo+"&pType="+pType; 
    })
 
 </script>

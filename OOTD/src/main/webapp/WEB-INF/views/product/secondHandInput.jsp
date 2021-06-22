@@ -27,21 +27,21 @@
 		<div class="input-area">
 		    <div class="input-img-area">
         <div id="insertArea" class="inputBox1">
-            <div id="contentImgArea1" class="imgInput">
+            <div id="contentImgArea1" class="imgInput iip">
                 <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" 
-                    id="contentImg1" style="height: 150px; width: 120px;"/>
+                    id="contentImg1" class="addImg"/>
             </div>
-            <div id="contentImgArea2" class="imgInput">
+            <div id="contentImgArea2" class="imgInput iip">
                 <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" 
-                    id="contentImg2" style="height: 150px; width: 120px;"/>
+                    id="contentImg2" class="addImg"/>
             </div>
-            <div id="contentImgArea3" class="imgInput">
+            <div id="contentImgArea3" class="imgInput iip">
                 <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" 
-                    id="contentImg3" style="height: 150px; width: 120px;"/>
+                    id="contentImg3" class="addImg"/>
             </div>
-            <div id="contentImgArea4" class="imgInput">
+            <div id="contentImgArea4" class="imgInput iip">
                 <img src="${pageContext.request.contextPath }/resources/images/imgInput.png" 
-                    id="contentImg4" style="height: 150px; width: 120px;"/>
+                    id="contentImg4" class="addImg"/>
             </div>
         </div>
 

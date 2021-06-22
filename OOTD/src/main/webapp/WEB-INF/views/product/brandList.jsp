@@ -47,12 +47,12 @@
                         <!-- 클릭 시 보여줄 영역 (Dropdown) -->
                         <div class="dropArea">
                             <ul class="hiddenArea" id="categoryList">
-                                <li class="prod cate" id="0">All</li>
-                                <li class="prod cate" id="1">Top</li>
-                                <li class="prod cate" id="2">bottom</li>
-                                <li class="prod cate" id="3">Shoes</li>
-                                <li class="prod cate" id="4">Hat</li>
-                                <li class="prod cate" id="5">Bag</li>
+                                <li class="prod cate" id="0"><span>All</span></li>
+                                <li class="prod cate" id="1"><span>Top</span></li>
+                                <li class="prod cate" id="2"><span>bottom</span></li>
+                                <li class="prod cate" id="3"><span>Shoes</span></li>
+                                <li class="prod cate" id="4"><span>Hat</span></li>
+                                <li class="prod cate" id="5"><span>Bag</span></li>
                             </ul>
                         </div> 
                     </li>
@@ -184,8 +184,8 @@
 			});
 	 		
 	 		// 카테고리 클릭시 id 값을 가지고 selectList 로 이동 
-	 		$('#categoryList').children('.prod').on("click",function(){
-				categoryNo = $(this).attr("id");
+	 		$('#categoryList').children('.prod').children().on("click",function(){
+				categoryNo = $(this).parent().attr("id");
 				pType = 1;
 				console.log("categoryNo="+categoryNo);
 				bName = "<%= pr.getBrand_name() %>" ;	

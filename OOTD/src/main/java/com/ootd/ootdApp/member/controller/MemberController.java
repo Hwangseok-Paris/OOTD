@@ -206,7 +206,7 @@ public class MemberController {
 		} else {
 			msg = "아이디를 다시 확인해주세요.";
 		}
-		
+		 
 		model.addAttribute("msg", msg);
 		model.addAttribute("loc", loc);
 		

@@ -463,7 +463,6 @@ function calcPrice(){
 	  							}, 
 	  							
 	  					success: function(data){
-	  							alert("데이터 전송 완료");
 	  							location.href="${pageContext.request.contextPath}/order/orderResult.or"
 	  						}, error : function(){
 	  							console.log("실패");

@@ -108,9 +108,10 @@
                         </div>
                     </dt>
                 </dl>
-
-                <button class="btn" onclick="addCart();">add to cart</button>
-                <button class="btn" onclick="goBuy();">buy now</button>
+				<div class='btnArea'>
+	                <button class="btn" onclick="addCart();">add to cart</button>
+	                <button class="btn" onclick="goBuy();">buy now</button>
+                </div>
 
             </div>
         </div>
@@ -303,6 +304,7 @@
 <c:import url="../common/footer.jsp"/>
     
 	<script>
+	
 		$(function() {
 		    $(document).ready(function(){
 		        $('#ex1').zoom();
@@ -312,7 +314,11 @@
     
     	// 장바구니에 선택상품 담기
 		function addCart() {
-		     
+				if(${empty member}){
+					alert("PLEASE LOGIN")
+				}else{
+					
+				
         		 if(product_size != ""){
         	   	 var product_size = [];
         		 $('.selSize').each(function(){
@@ -347,35 +353,43 @@
 							alert("실패");
 						}
 					});    
-	    }
-
+	   			 }
+    	}
+		
+		
 		  // 상품 상세페이지에서 바로 구매
           function goBuy() {
-        	  var buyList = [];
-        	  $('.selectedPList').each(function(){
-	        	  var product_no = $(this).children('.product_no').val();
-	        	  var cart_quantity = $(this).children('.quantity').val();
-	        	  var cart_size = $(this).children('.selSize').val();
-	        	  var product_name = '<c:out value="${ product.product_name }"/>';
-	        	  var brand_name = '<c:out value="${ product.brand_name }"/>';
-	        	  var product_price = '<c:out value="${ product.product_price}"/>';
-	        	  var att_name = '<c:out value="${ attachment[1].att_name }"/>';
-	        	 
-	        	  if(cart_size != ""){
-		        	 var product = {
-		        			 'product_no' : product_no,
-		        			 'cart_quantity' : cart_quantity,
-		        			 'cart_size' : cart_size,
-		        			 'product_name' : product_name,
-		        			 'brand_name' : brand_name,
-		        			 'product_price' : product_price,
-		        			 'att_name' : att_name
-		        	 }
-		        	 buyList.push(product);
-	        	  }
-        	  })
+        	  if(${empty member}){
+					alert("LOGIN FIRST.");
+				}else{
+				  var buyList = [];
+	        	  $('.selectedPList').each(function(){
+		        	  var product_no = $(this).children('.product_no').val();
+		        	  var cart_quantity = $(this).children('.quantity').val();
+		        	  var cart_size = $(this).children('.selSize').val();
+		        	  var product_name = '<c:out value="${ product.product_name }"/>';
+		        	  var brand_name = '<c:out value="${ product.brand_name }"/>';
+		        	  var product_price = '<c:out value="${ product.product_price}"/>';
+		        	  var att_name = '<c:out value="${ attachment[1].att_name }"/>';
+		        	 
+		        	 
+		        	  if(cart_size != ""){
+			        	 var product = {
+			        			 'product_no' : product_no,
+			        			 'cart_quantity' : cart_quantity,
+			        			 'cart_size' : cart_size,
+			        			 'product_name' : product_name,
+			        			 'brand_name' : brand_name,
+			        			 'product_price' : product_price,
+			        			 'att_name' : att_name
+			        			 
+			        	 }
+			        	  buyList.push(product);
+		        	  }
+        		  })
         	  
-        	  var data = JSON.stringify(buyList);
+        		var data = JSON.stringify(buyList);
+	        
         	  
         	   $.ajax({
        		    method: 'POST',
@@ -389,10 +403,10 @@
 						console.log("실패");
 					}
 				});        	  
-        	  
+        	  }
         	  //JSON을 이용해 String 형식으로 만들어 SessionStorage에 저장
         	  // sessionStorage.setItem("buyList", JSON.stringify(buyList));
-   
+				
 		  }
           
           

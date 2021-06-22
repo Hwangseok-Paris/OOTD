@@ -324,8 +324,7 @@
               Kakao.Auth.setAccessToken(undefined)
             }
           }  
-        
-        
+
       // google login 처음 실행하는 함수
           function init() {
         	gapi.load('auth2', function() { 
