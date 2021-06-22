@@ -69,8 +69,8 @@
                 pause: 5000,
                 infiniteLoop: true,
                 auto: true,
-                controls: false
-                
+                controls: false,
+                pager: false
                 
             });
         });

@@ -206,7 +206,21 @@
 		DELETE FROM ATTACHMENT
 		WHERE PRODUCT_NO = #{ product_no }
 	</delete>
+		
+	<select id="selectSearchResult" parameterType="string" resultType="Product_p">
+		SELECT P.*, M.BRAND_NAME, A.ATT_NAME
+		FROM PRODUCT P, MEMBER M, ATTACHMENT A
+		WHERE P.MEMBER_NO = M.MEMBER_NO
+           AND P.PRODUCT_NO = A.PRODUCT_NO
+           AND A.ATT_LEVEL = 1
+           AND PRODUCT_STATUS = 'Y'
+           AND (PRODUCT_NAME LIKE '%' || #{totalSearch} || '%' OR M.BRAND_NAME LIKE '%' || #{totalSearch} || '%')
+	</select>
 	
-	
-	
+	<select id="selectSearchTotalContents" parameterType="string" resultType="_int">
+		SELECT COUNT(*) 
+		FROM PRODUCT P, MEMBER M 
+		WHERE P.MEMBER_NO = M.MEMBER_NO 
+			AND (PRODUCT_NAME LIKE '%' || #{totalSearch} || '%' OR M.BRAND_NAME LIKE '%' || #{totalSearch} || '%')
+	</select>
 </mapper>

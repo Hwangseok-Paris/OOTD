@@ -29,7 +29,7 @@ public class Product implements Serializable {
 	
 	private String originalFileName;
 	private String renamedFileName;
-
+	
 	// Product Detail 에서 첨부파일 List<Attachment> 를  Product에 한번에 받아오기 위한 변수
 	private List<Attachment> attachment;
 	
@@ -47,4 +47,5 @@ public class Product implements Serializable {
 		this.sortVal = sortVal;
 	}
 	
+
 }

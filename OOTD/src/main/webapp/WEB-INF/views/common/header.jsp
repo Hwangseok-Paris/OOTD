@@ -33,7 +33,7 @@
 						<div>
 
 							<form action="/header/totalSearch.do" method="POST" id="search_main">
-								<input type="text" class="search_input" name="totalSearch"> <i class="fas fa-search fa-lg"></i>
+								<input type="text" class="search_input" name="totalSearch"><i class="fas fa-search fa-lg"></i>
 							</form>
 						</div>
 
@@ -88,7 +88,12 @@
 			var icon_footer = document.getElementById("logo_footer")
 			
 			$('ul').children('li').find('.fa-search').click(function() {
-				alert("css개빡치네");
+				if ($('.search_input').val() != "") { 
+					location.href="${pageContext.request.contextPath}/header/totalSearch.do?totalSearch=" + $('.search_input').val();
+				} else if($('.search_input').val() == "") {
+					alert("원하시는 상품명 또는 브랜드명을 입력해주세요.");
+					$('#search_main').attr('disabled');
+				}
 			})
 
 			//  $('ul').children('li').find('.fa-user').click(function() {
@@ -106,11 +111,11 @@
 		        
 		        $('.search_input').css('background-color','black');
 				$('.search_input').css('color', 'white');
-
-				icon.src = "${pageContext.request.contextPath }/resources/images/headerdarklogo.png";
+			icon.src = "${pageContext.request.contextPath }/resources/images/headerdarklogo.png";
 				icon_footer.src = "${pageContext.request.contextPath }/resources/images/footerdarklogo.jpeg";
 				
 				$('.fa-moon').hide();
+				$('.bx-wrapper').css('background-color', 'black');
 				$('.fa-sun').css('visibility', 'visible');
 		        
 			});

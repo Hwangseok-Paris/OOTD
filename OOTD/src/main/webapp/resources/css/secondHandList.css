@@ -71,6 +71,7 @@ li {
 .filter-text {
     padding: 8px 8px;
     color: gray;
+    margin-left: 576px;
 }
 
 .filter-text:hover {
