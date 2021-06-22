@@ -16,6 +16,7 @@
 		<typeAlias type="com.ootd.ootdApp.order.model.vo.BuyList" alias="BuyList" />
 		<typeAlias type="com.ootd.ootdApp.order.model.vo.OrderList" alias="OrderList" />
 		<typeAlias type="com.ootd.ootdApp.myPage.brand.model.vo.O_Order" alias="O_Order" />
+		<typeAlias type="com.ootd.ootdApp.myPage.brand.model.vo.O_Order_List" alias="O_Order_List" />
 		<typeAlias type="com.ootd.ootdApp.myPage.brand.model.vo.Product" alias="Product_m" />
 		<typeAlias type="com.ootd.ootdApp.product.model.vo.Product" alias="Product_p" />
 		<typeAlias type="com.ootd.ootdApp.product.model.vo.Attachment" alias="Attachment" />

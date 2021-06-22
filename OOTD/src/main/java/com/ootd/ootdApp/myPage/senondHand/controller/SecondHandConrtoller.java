@@ -386,18 +386,26 @@ public class SecondHandConrtoller {
 
 	@RequestMapping("/myPage/reviewEnroll.mp")
 	public String reviewEnroll(Review review, Model model) {
-
+		
+		int pno = review.getProduct_no();
+		
 		System.out.println("review 등록 controller 접근 : " + review);
 
 		String msg = "";
-
+		String loc = "";
+		
 		int result = secondHandService.insertReview(review);
 
 		if (result > 0) {
 			msg = "리뷰가 성공적으로 등록되었습니다.";
+			loc = "/product/productDetail.do?product_no="+pno+"&pType=1";
 		} else {
 			msg = "리뷰 등록에 실패하였습니다.";
 		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
 
 		return "common/msg";
 	}

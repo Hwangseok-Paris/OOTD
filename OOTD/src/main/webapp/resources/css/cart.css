@@ -266,4 +266,10 @@ input.underline {
 	
 }
 
+html.dark .btn {
+	color: #bbb;
+}
 
+html.dark .btn:hover {
+	color: black;
+}
