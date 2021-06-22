@@ -277,15 +277,26 @@ input.underline {
 	
 }
 
+
 #deleteSel, #deleteAll{
 	width: 100px;
 	height: 35px;
 	font-size: 10pt !important;
 }
 
+html.dark .btn {
+	color: #bbb;
+
+}
+
+
 #continueShopping{
 	width: 100px;
 	height: 35px !important;
 	font-size: 10pt !important;
-	
+}	
+
+html.dark .btn:hover {
+	color: black;
+
 }

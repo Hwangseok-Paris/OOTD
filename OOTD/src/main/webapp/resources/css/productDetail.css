@@ -231,6 +231,11 @@ section{
 
 .review {
 	text-decoration: underline;
+	color: grey;
+}
+
+html.dark .dropArea > div {
+	background: #bbb;
 	color: black;
 }
 

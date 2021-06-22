@@ -143,7 +143,9 @@ a:active {
         color: white;
     }
     
-
+html.dark hr {
+	background: #bbb;
+}
     
 #brand, #second_Hand{
 	font-size: 18px;

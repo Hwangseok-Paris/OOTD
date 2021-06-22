@@ -610,13 +610,10 @@
 		$('.review').on('click', function() {
 			$('#FAQ-table').css('display', 'none');
 			$('#review-table').css('display', 'block');
-			$(this).css('color', 'black');
 			$(this).css({
-				color: 'black',
 				'text-decoration': 'underline'
 			});
 			$(this).siblings('.faq').css({
-				color: 'grey',
 				'text-decoration': 'none'
 			});
 		});
@@ -626,11 +623,9 @@
 			$('#review-table').css('display', 'none');
 			$('#FAQ-table').css('display', 'block');
 			$(this).css({
-				color: 'black',
 				'text-decoration': 'underline'
 			});
 			$(this).siblings('.review').css({
-				color: 'grey',
 				'text-decoration': 'none'
 			});
 		});
