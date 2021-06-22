@@ -90,23 +90,23 @@
     				$('.bxslider>li>.img3').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[2].att_name);
     				$('.bxslider>li>.img4').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[3].att_name);
     				$('.bxslider>li>.img5').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[4].att_name);
-    				/* $('.bxslider>li>.img6').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[5].att_name);
+    			    $('.bxslider>li>.img6').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[5].att_name);
     				$('.bxslider>li>.img7').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[6].att_name);
     				$('.bxslider>li>.img8').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[7].att_name);
     				$('.bxslider>li>.img9').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[8].att_name);
-    			  	$('.bxslider>li>.img10').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[9].att_name); */
+    			  	$('.bxslider>li>.img10').attr("src", "${pageContext.request.contextPath}/resources/images/productImgUpload/"+data[9].att_name);
     				
     				$('.bxslider>li>.img1').attr("id", data[0].product_no);
     				$('.bxslider>li>.img2').attr("id", data[1].product_no);
     				$('.bxslider>li>.img3').attr("id", data[2].product_no);
     				$('.bxslider>li>.img4').attr("id", data[3].product_no);
     				$('.bxslider>li>.img5').attr("id", data[4].product_no);
-    			/* 	$('.bxslider>li>.img6').attr("id", data[5].product_no);
+    			 	$('.bxslider>li>.img6').attr("id", data[5].product_no);
     				$('.bxslider>li>.img7').attr("id", data[6].product_no);
     				$('.bxslider>li>.img8').attr("id", data[7].product_no);
     				$('.bxslider>li>.img9').attr("id", data[8].product_no);
     				$('.bxslider>li>.img10').attr("id", data[9].product_no);
-    				 */
+    				
     				
     				
     			},
