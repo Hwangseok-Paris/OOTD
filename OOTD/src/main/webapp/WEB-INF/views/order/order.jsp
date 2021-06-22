@@ -324,11 +324,7 @@ function calcPrice(){
  
    $(document).ready(function(){
 	  emailSpliter();
-	
-			 
-	  
-       
-      // 이메일 선택시, 자동으로 값 들어오게 하기
+	    // 이메일 선택시, 자동으로 값 들어오게 하기
       $("#emailChoice").bind("change", function(){
          $("#domainName").val($(this).val());
       });

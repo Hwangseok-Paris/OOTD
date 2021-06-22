@@ -84,13 +84,13 @@
                     <dt>
                         <b>Select Size</b>
                         <select name="" id="selectSize" style="width: 130px; float: right; margin-right: 30px;">
-                            <option value="">선택안함</option>
+                            <option value=''>선택안함</option>
                             <option value="${ product.product_size }">${ product.product_size }</option>
                         </select> <br>
                     </dt><hr>
                     <dt class="pOrigin">
                         <div id="origin" class="selectedPList">
-                       		<input type="hidden" class="product_no" value="${product.product_no }"/>
+                       		<input type="hidden" class="product_no" value="${product.product_no}"/>
                        		<input type="hidden" class="product_type" value="${product.product_type }"/>
                             <span>${ product.product_name }<b class="selectedSize"></b> </span>
                             <input type="number" class="quantity" id="pQuan" name="pQuan" value="1" min="1" max="1"> <!-- input value 값 ??  -->
@@ -136,13 +136,20 @@
     
     	// 장바구니에 선택상품 담기
 		function addCart() {
-		     
-        		 
-        	   	 var cart_size = '<c:out value="${ product.product_size }"/>';
+      	  if(${empty member}){
+				alert("PLEASE LOGIN");
+			}else{
+        		 var pp = $('.selectedSize').text();
+        	   	 var cart_size = $('#selectSize').val();
         		 var order_quantity =  $('.quantity').val();
         		 var product_no = $('.product_no').val();
         		
-       	   		$.ajax({
+        		
+ 				if(pp == ""){
+		       		  alert('상품의 사이즈를 선택해 주세요');
+		       	  } else {
+        		 
+        	   		$.ajax({
 	       		    method: 'POST',
 	       		    url: "${pageContext.request.contextPath}/order/addCartListSecondHand.or",
 	       		   	data: {
@@ -160,62 +167,63 @@
 						}, error : function(){
 							alert("실패");
 						}
-					});    
-	    }
-        
+					});
+		       	  }
+	    	}
+    	}
         
         
 		 // 상품 상세페이지에서 바로 구매
         function goBuy() {
+      	  if(${empty member}){
+				alert("LOGIN FIRST.");
+      	}else{
       	  var buyList = [];
       	  
        	  var product_no = $('.product_no').val();
        	  var cart_quantity = $('.quantity').val();
-       	  var cart_size = '<c:out value="${ product.product_size }"/>';
+       	  var cart_size = $('#selectSize').val();
        	  var product_name = '<c:out value="${ product.product_name }"/>';
        	  var brand_name = '<c:out value="${ product.brand_name }"/>';
        	  var product_price = '<c:out value="${ product.product_price}"/>';
        	  var att_name = '<c:out value="${ attachment[1].att_name }"/>';
-	        	 
-	        	
-       	 var product = {
-       			 'product_no' : product_no,
-       			 'cart_quantity' : cart_quantity,
-       			 'cart_size' : cart_size,
-       			 'product_name' : product_name,
-       			 'brand_name' : brand_name,
-       			 'product_price' : product_price,
-       			 'att_name' : att_name
-    	      	  };
-		      buyList.push(product);
-      	 
-      	  
-      	  var data = JSON.stringify(buyList);
-      	  
-      	   $.ajax({
-     		    method: 'POST',
-     		    url: '${pageContext.request.contextPath}/order/buyDirectSecondHand.or',
-     		    traditional: true,
-				data: {data}, 
-				success: function(data){
-						console.log("전송 성공")
-						location.href="${pageContext.request.contextPath}/order/order.or?selectedCart_no="+data;
-					}, error : function(){
-						console.log("실패");
-					}
-				});        	  
+	      
+	       	  if(cart_size.length == 0){
+	       		  alert('상품의 사이즈를 선택해 주세요');
+	       	  } else {
+		        	
+	       	  var product = {
+	       			 'product_no' : product_no,
+	       			 'cart_quantity' : cart_quantity,
+	       			 'cart_size' : cart_size,
+	       			 'product_name' : product_name,
+	       			 'brand_name' : brand_name,
+	       			 'product_price' : product_price,
+	       			 'att_name' : att_name
+	    	      	  };
+			  buyList.push(product);
+			  var data = JSON.stringify(buyList);
+	      	  
+	       	   $.ajax({
+	     		    method: 'POST',
+	     		    url: '${pageContext.request.contextPath}/order/buyDirectSecondHand.or',
+	     		    traditional: true,
+					data: {data}, 
+					success: function(data){
+							console.log("전송 성공")
+							location.href="${pageContext.request.contextPath}/order/order.or?selectedCart_no="+data;
+						}, error : function(){
+							console.log("실패");
+						}
+					});      	  
       	  
       	  //JSON을 이용해 String 형식으로 만들어 SessionStorage에 저장
       	  // sessionStorage.setItem("buyList", JSON.stringify(buyList));
- 
-		  }
-        
-         /* $(function() {
-             if($('.totalPD').text()== "") {
-                 console.log("totalPD::" + $('.totalPD').text())
-                 $('#won').text('0')
-             }
-         });  */
+       	  		}
+		  	}
+		 }
+		 
+		 
         
         $('.pResult img').on('click', function() {
         	console.log('test');
