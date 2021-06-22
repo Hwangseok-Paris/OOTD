@@ -17,4 +17,5 @@ public class Review {
 	private String review_title;
 	private int member_no;
 	private int product_no;
+	private int order_no;
 }

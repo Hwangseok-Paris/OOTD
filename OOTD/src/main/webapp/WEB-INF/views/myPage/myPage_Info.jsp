@@ -75,7 +75,7 @@
                         
                         <tr>
                             <td>이름</td>
-                            <td colspan="3">오오티디</td>
+                            <td colspan="3">${ member.member_name }</td>
                         </tr>
                         
                         <tr class='email'>

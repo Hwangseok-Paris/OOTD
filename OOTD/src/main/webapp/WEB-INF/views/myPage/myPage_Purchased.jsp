@@ -51,7 +51,7 @@
 	                                    <span class="product-option">${s.product_size }</span>
 	                                </div>
 	                            </td>
-	                            <td>
+	                            <td id="order_no">
 	                                <div class="order-no" name="order_no" >${s.order_no }</div>
 	                            </td>
 	                            <td class="order-date">${s.order_date }</td>
@@ -194,9 +194,10 @@
     $('.write-review').on('click', function () {
     	
     	var pno = $(this).parent().siblings('#pno').children().children('.product-no').text();
+    	var ono = $(this).parent().siblings('#order_no').children('.order-no').text();
     	console.log(pno);
     	
-    	location.href = '${pageContext.request.contextPath}/myPage/myPage_Review.mp?pno='+pno+'&mno=${member.member_no}';
+    	location.href = '${pageContext.request.contextPath}/myPage/myPage_Review.mp?ono='+ono+'&pno='+pno+'&mno=${member.member_no}';
     });
 </script>
 
