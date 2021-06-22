@@ -46,4 +46,9 @@
             </div>
         </div>
     </footer>
+    <script>
+    $("#logo_footer").on("click",function(){
+		location.href = "${pageContext.request.contextPath}/product/ending.do";
+		});
+    </script>
     

@@ -83,9 +83,24 @@
                         <b>Select Size</b>
                         <select name="" id="selectSize" class="selectSize" style="width: 140px; float: right; margin-right: 30px;" >
                             <option value="">선택안함</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
+                           	<c:if test="${ product.product_stock_s != 0}">
+                            	<option value="S">S</option>
+                            </c:if>
+                            <c:if test="${ product.product_stock_s == 0}">
+                            	<option value="">S - 품절</option>
+                            </c:if>
+                            <c:if test="${ product.product_stock_m != 0}">
+                            	<option value="M">M</option>
+                            </c:if>
+                            <c:if test="${ product.product_stock_m == 0}">
+                            	<option value="">M - 품절</option>
+                            </c:if>
+                            <c:if test="${ product.product_stock_l != 0}">
+                            	<option value="L">L</option>
+                            </c:if>
+                            <c:if test="${ product.product_stock_l == 0}">
+                            	<option value="">L - 품절</option>
+                            </c:if>
                         </select> <br>
                     </dt><hr>
                     <dt class="pOrigin">
