@@ -87,7 +87,7 @@
         $('.sale-status').each(function () {
 
             var ps = $(this).text();
-
+			
             compSend = $(this).parent().next().children('.complete-send');
 
             switch (ps) {
@@ -121,7 +121,7 @@
 					$('.complete-send').hide();
 				} else if (data == 3) {
 					$('.sale-status').text("거래완료");
-					$('complete-send').hide();
+					$('.complete-send').hide();
 				}
 			}, error: function() {
 				alert("상태변환 실패");
@@ -139,7 +139,7 @@
 		$.ajax({
 			type: "POST",
 			url: "${pageContext.request.contextPath}/myPage/myPage_Order_Detail.mp",
-			data: { "orderNo" : orderNo }, 
+			data: { "orderNo" : orderNo, "productNo": productNo }, 
 
 			success: function(data){
 				//alert('주문 상세보기 성공');

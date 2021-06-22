@@ -41,10 +41,26 @@
    </update>
 
 	<select id="selectOrderList" parameterType="string" resultType="O_Order">
-		SELECT M.BRAND_NAME, P.PRODUCT_NO, P.PRODUCT_NAME, OL.ORDER_SIZE AS PRODUCT_SIZE, O.ORDER_NO, O.ORDER_DATE, (OL.ORDER_QUANTITY*P.PRODUCT_PRICE) AS TOTAL_PRICE, OL.ORDER_STATUS 
-		FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P, MEMBER M 
-		WHERE O.ORDER_NO = OL.ORDER_NO AND OL.PRODUCT_NO = P.PRODUCT_NO AND O.MEMBER_NO = M.MEMBER_NO AND M.MEMBER_NAME= #{ member_name }
+		<!-- SELECT M.BRAND_NAME, P.PRODUCT_NO, P.PRODUCT_NAME, OL.ORDER_SIZE AS PRODUCT_SIZE, O.ORDER_NO, O.ORDER_DATE, (OL.ORDER_QUANTITY*P.PRODUCT_PRICE) AS TOTAL_PRICE, OL.ORDER_STATUS 
+		FROM O_ORDER O, O_ORDER_LIST OL, MEMBER M, PRODUCT P , (SELECT BRAND_NAME, PRODUCT_NO
+																FROM MEMBER, PRODUCT, O_ORDER, O_ORDER_LIST
+																WHERE PROCUT_NO = O_ORDER_LIST.PROCUT_NO
+																	AND PRODUCT.MEMBER_NO = MEMBER_NO
+																	AND )
+		WHERE O.ORDER_NO = OL.ORDER_NO 
+			AND OL.PRODUCT_NO = P.PRODUCT_NO 
+			AND O.MEMBER_NO = M.MEMBER_NO 
+			AND M.MEMBER_NAME= #{ member_name }
 		ORDER BY O.ORDER_DATE DESC
+		 -->
+		SELECT M.BRAND_NAME, S.*
+		FROM MEMBER M, PRODUCT P,  (SELECT P.PRODUCT_NO, P.PRODUCT_NAME, OL.ORDER_SIZE AS PRODUCT_SIZE, O.ORDER_NO, O.ORDER_DATE, (OL.ORDER_QUANTITY*P.PRODUCT_PRICE) AS TOTAL_PRICE, OL.ORDER_STATUS
+		                            FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P, MEMBER M 
+		                            WHERE O.ORDER_NO = OL.ORDER_NO AND OL.PRODUCT_NO = P.PRODUCT_NO AND O.MEMBER_NO = M.MEMBER_NO 
+		                            AND M.MEMBER_NAME= #{member_name}
+		                            ORDER BY O.ORDER_DATE DESC) S
+		WHERE M.MEMBER_NO = P.MEMBER_NO
+		AND P.PRODUCT_NO = S.PRODUCT_NO
 	</select>
 	
 	<select id="selectOrderDetail" parameterType="string" resultType="_int">
@@ -64,6 +80,8 @@
 			AND OL.PRODUCT_NO = P.PRODUCT_NO
 			AND M.MEMBER_NAME = #{member_name}
 		ORDER BY O.ORDER_DATE ASC
+		
+		
 	</select>
 	
 	<update id="updateOrderSaleStatus" parameterType="_int">
@@ -100,9 +118,7 @@
 	<insert id="insertReview" parameterType="review">
 		INSERT INTO REVIEW VALUES(SEQ_REVIEW_NO.NEXTVAL, #{ review_contents }, SYSDATE, #{ review_title }, #{ member_no }, #{ product_no }, #{order_no})
 	</insert>
-
-
-
+	
 	<update id="updatePurchaseStatus" parameterType="_int">
 		UPDATE O_ORDER_LIST
 		SET ORDER_STATUS = 3
