@@ -114,8 +114,8 @@ article > .video_content > .video_SHand:hover > p {
 }
 
 .bxslider li {
-    height: 310px;
-    background-color: gray;
+    height: 360px;
+    background-color: #bbb;
 }
 
 .bxslider li img {

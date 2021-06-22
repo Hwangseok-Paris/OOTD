@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ootd.ootdApp.member.model.vo.Member;
-import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
+import com.ootd.ootdApp.product.model.vo.Product;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
 import com.ootd.ootdApp.product.model.vo.Attachment;
@@ -154,6 +154,19 @@ public class SecondHandDAOImpl implements SecondHandDAO {
 	@Override
 	public int selectSaleProductTotalContents() {
 		return sqlSession.selectOne("orderList-mapper.selectSaleProductTotalContents");
+	}
+
+	@Override
+	public List<Map<String, String>> selectSearchResult(int cPage, int numPerPage, String totalSearch) {
+		
+		rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		
+		return sqlSession.selectList("product-mapper.selectSearchResult", totalSearch, rows);
+	}
+
+	@Override
+	public int selectSearchTotalContents(String totalSearch) {
+		return sqlSession.selectOne("product-mapper.selectSearchTotalContents", totalSearch);
 	}
 
 

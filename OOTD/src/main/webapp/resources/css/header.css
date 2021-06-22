@@ -20,7 +20,7 @@ html.dark a {
     color: #bbb;
 }
 
-a {
+a, input {
     color:black;
     text-decoration: none;
 }

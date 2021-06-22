@@ -2,6 +2,7 @@ package com.ootd.ootdApp.myPage.senondHand.controller;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ import com.ootd.ootdApp.common.Utils;
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.senondHand.model.service.SecondHandService;
 import com.ootd.ootdApp.myPage.brand.model.vo.O_Order;
-import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
+import com.ootd.ootdApp.product.model.vo.Product;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
 import com.ootd.ootdApp.product.model.vo.Attachment;
@@ -400,14 +401,35 @@ public class SecondHandConrtoller {
 		return "common/msg";
 	}
 
-	/*
-	 * @RequestMapping("/header/totalSearch.do") public String
-	 * totalSearch(@RequestParam(value = "totalSearch") String totalSearch) {
-	 * 
-	 * String result = secondHandService.selectSearchResult(totalSearch);
-	 * 
-	 * if (totalSearch.equals(result)) { return "myPage/reviewEnroll"; } else if
-	 * (result.equals(result)) { return "myPage/myPage_Info"; } else return ""; }
-	 */
+	@RequestMapping("/header/totalSearch.do")
+	public String totalSearch(@RequestParam(value = "totalSearch") String totalSearch, Model model,
+			@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage) {
+		System.out.println(totalSearch);
+
+		int numPerPage = 12;
+
+		// 현재 페이지의 상품 갯수
+		List<Map<String, String>> result = secondHandService.selectSearchResult(cPage, numPerPage, totalSearch);
+
+		// 전체 상품 갯수
+		int totalContents = secondHandService.selectSearchTotalContents(totalSearch);
+		
+		System.out.println(totalContents);
+
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "myPage_Product.mp");
+		model.addAttribute("pageBar", pageBar);
+
+		//List<Product> result = secondHandService.selectSearchResult(totalSearch);
+
+		System.out.println("중고 검색 결과 -> " + result);
+
+		if (result.size() > 0) {
+			model.addAttribute("list", result);
+			model.addAttribute("numPerPage", numPerPage);
+			model.addAttribute("totalContents", totalContents);
+			return "product/searchProduct";
+		} else
+			return "redirect:/";
+	}
 
 }

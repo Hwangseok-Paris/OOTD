@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.senondHand.model.DAO.SecondHandDAO;
-import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
+import com.ootd.ootdApp.product.model.vo.Product;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
 import com.ootd.ootdApp.product.model.vo.Attachment;
@@ -108,6 +108,16 @@ public class SecondHandServiceImpl implements SecondHandService {
 	@Override
 	public int selectSaleProductTotalContents() {
 		return secondHandDAO.selectSaleProductTotalContents();
+	}
+
+	@Override
+	public List<Map<String, String>> selectSearchResult(int cPage, int numPerPage, String totalSearch) {
+		return secondHandDAO.selectSearchResult(cPage, numPerPage, totalSearch);
+	}
+
+	@Override
+	public int selectSearchTotalContents(String totalSearch) {
+		return secondHandDAO.selectSearchTotalContents(totalSearch);
 	}
 	
 

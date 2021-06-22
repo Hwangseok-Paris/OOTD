@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ootd.ootdApp.member.model.vo.Member;
-import com.ootd.ootdApp.myPage.senondHand.model.vo.Product;
+import com.ootd.ootdApp.product.model.vo.Product;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.Review_ProductInfo;
 import com.ootd.ootdApp.myPage.senondHand.model.vo.myPageOrderList;
 import com.ootd.ootdApp.product.model.vo.Attachment;
@@ -48,5 +48,9 @@ public interface SecondHandDAO {
 	int selectProductTotalContents();
 
 	int selectSaleProductTotalContents();
+
+	List<Map<String, String>> selectSearchResult(int cPage, int numPerPage, String totalSearch);
+
+	int selectSearchTotalContents(String totalSearch);
 
 }
