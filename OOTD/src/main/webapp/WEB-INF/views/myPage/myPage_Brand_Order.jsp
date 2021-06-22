@@ -54,7 +54,7 @@
                                 <div class="order-quantity">${o.order_quantity}</div>
                             </td>
                             <td>
-                                <span class="order-no">${o.order_no}</span>
+                                <span class="order-no" id="${o.product_no}">${o.order_no}</span>
                             </td>
                             <td class="order-date">${o.order_date}</td>
                             <td class="total-price">${o.total_price}&nbsp;&#8361;</td>
@@ -62,7 +62,7 @@
                                 <span class="purchase-status" >${o.order_status}</span> <!-- 값(숫자)에 따라 주문상태, 버튼 변경-->
                             </td>
                             <td>
-                                <button class="complete-send" id="${o.order_no}">발송 완료</button>
+                                <button class="complete-send" id="${o.order_no}" name="${o.product_no}">발송 완료</button>
                             </td>
                         </tr>                                    
                     </tbody>
@@ -114,7 +114,7 @@
             switch (ps) {
                 case "1":
                     $(this).text('결제완료');
-                    compSend.show();
+                    compSend.show();                    
                     break;
                 case "2":
                     $(this).text('구매확정대기');
@@ -125,21 +125,27 @@
             }
         })
     })
+    
+    
       
      $('.complete-send').click(function(){
     	 var orderNo = $(this).attr('id');
+    	 var productNo = $(this).attr('name');
+    	 console.log("pNo", productNo);
     	 
  		$.ajax({
  			type: "POST",
  			url: "${pageContext.request.contextPath}/myPage/myPage_Brand_Send.mp",
- 			data: { "orderNo" : orderNo }, 
+ 			data: { "orderNo" : orderNo, "productNo" : productNo}, 
 
  			success: function(data){
  				if(data == 2){
- 					$('.purchase-status').text('구매확정대기');
- 					$('.complete-send').hide();
+ 					//$(this).parent().siblings().children('.purchase-status').text('구매확정대기');
+ 					//$(this).hide();
+ 					location.reload();
                 } else {
-                    $('.purchase-status').text('결제완료');
+                	//$(this).parent().siblings().children('.purchase-status').text('결제완료');
+                	location.reload();
                 }
  			}, 			
  			error: function(){
@@ -153,11 +159,13 @@
 		 
 		 var orderNo = $(this).text();
 		 console.log(orderNo);
+		 var productNo = $(this).attr('id');
+    	 console.log("pNo", productNo);
 		 
 		$.ajax({
 			type: "POST",
 			url: "${pageContext.request.contextPath}/myPage/myPage_Order_Detail.mp",
-			data: { "orderNo" : orderNo }, 
+			data: { "orderNo" : orderNo, "productNo" : productNo }, 
 
 			success: function(data){
 				//alert('주문 상세보기 성공');

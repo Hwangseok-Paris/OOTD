@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
+import com.ootd.ootdApp.myPage.brand.model.vo.O_Order;
+import com.ootd.ootdApp.myPage.brand.model.vo.O_Order_List;
 import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
@@ -57,9 +59,9 @@ public class BrandDAOImpl implements BrandDAO {
 	}
 
 	@Override
-	public List<MypageOrderList> selectBrandOrderDetail(int orderNo) {
+	public List<MypageOrderList> selectBrandOrderDetail(O_Order tempOrder) {
 		System.out.println("order_detail :: DAO 왔나요");
-		return sqlSession.selectList("orderList-mapper.selectBrandOrderDetail", orderNo);
+		return sqlSession.selectList("orderList-mapper.selectBrandOrderDetail", tempOrder);
 	}
 
 	@Override
@@ -93,10 +95,10 @@ public class BrandDAOImpl implements BrandDAO {
 	}
 
 	@Override
-	public int updateBrandStatus(int orderNo) {
+	public int updateBrandStatus(O_Order_List tempOrder) {
 		System.out.println("send :: DAO 왔나요");
-		int result1 = sqlSession.update("orderList-mapper.updateBrandStatus", orderNo);
-		int result2 = sqlSession.update("orderList-mapper.updateNoBrandStatus", orderNo);
+		int result1 = sqlSession.update("orderList-mapper.updateBrandStatus", tempOrder);
+		int result2 = sqlSession.update("orderList-mapper.updateNoBrandStatus", tempOrder);
 		System.out.println("result1" + result1);
 		System.out.println("result2" + result2);
 

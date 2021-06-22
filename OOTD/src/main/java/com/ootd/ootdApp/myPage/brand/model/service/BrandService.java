@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
+import com.ootd.ootdApp.myPage.brand.model.vo.O_Order;
+import com.ootd.ootdApp.myPage.brand.model.vo.O_Order_List;
 import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
@@ -19,7 +21,7 @@ public interface BrandService {
 	int deleteBrandProductList(int productNo);
 	
 	// 주문 detail
-	List<MypageOrderList> selectBrandOrderDetail(int orderNo);
+	List<MypageOrderList> selectBrandOrderDetail(O_Order tempOrder);
 	
 	// Info update에 관련된 공통 함수
 	int updateBrandInfo(Member tempMember);
@@ -32,7 +34,7 @@ public interface BrandService {
 
 	List<Product> selectBrandProductRankList(int member_no);
 
-	int updateBrandStatus(int orderNo);
+	int updateBrandStatus(O_Order_List tempOrder);
 
 
 	int brandProductSelectTotalContents();

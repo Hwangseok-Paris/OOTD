@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
+import com.ootd.ootdApp.myPage.brand.model.vo.O_Order;
+import com.ootd.ootdApp.myPage.brand.model.vo.O_Order_List;
 import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
@@ -17,7 +19,7 @@ public interface BrandDAO {
 
 	int deleteBrandProductList(int productNo);
 
-	List<MypageOrderList> selectBrandOrderDetail(int orderNo);
+	List<MypageOrderList> selectBrandOrderDetail(O_Order tempOrder);
 
 	int updateBrandInfo(Member tempMember);
 
@@ -29,7 +31,7 @@ public interface BrandDAO {
 
 	List<Product> selectBrandProductRankList(int member_no);
 
-	int updateBrandStatus(int orderNo);
+	int updateBrandStatus(O_Order_List tempOrder);
 
 	int brandSelectTotalContents();
 
