@@ -109,7 +109,7 @@
                        		<input type="hidden" class="product_type" value="${product.product_type }"/>
                             <span>${ product.product_name }<b class="selectedSize"></b> </span>
                             <input type="number" class="quantity" id="pQuan" name="pQuan" value="1" min="1"> <!-- input value 값 ??  -->
-                            <img src="${pageContext.request.contextPath }/resources/images/xx.png" alt="" style="width: 15px; height: 15px; margin-right: 5px;" id="pDelete">
+                            <img src="${pageContext.request.contextPath }/resources/images/xx.png" alt="" style="width: 15px; height: 15px; margin-right: 5px;" class="pdeleteBtn" >
                             <span>￦</span><span class="pPrice">${ product.product_price }</span>
                             <input type="hidden" class="selSize" />
                         </div>
@@ -457,9 +457,11 @@
         //     }
         // });
         
-        $('#pDelete').on('click', function() {
-            $(this).parent().remove()
-        });
+         $('.pResult img').on('click', function() {
+         	console.log('test');
+             $(this).parent().remove();
+         	totalCalc();
+         });
             
         $('#pQuan').on('change', function() {
             var uuu = $(this).val()
@@ -502,6 +504,13 @@
                 var priceTag = quan.siblings('.pPrice');
                 priceTag.text(thousandComma(parseInt((priceTag.text()).replace(',','')) * quan.val()));
             }
+            
+            $('.pResult img').on('click', function() {
+            	console.log('test');
+                $(this).parent().remove();
+            	totalCalc();
+            });
+            
             totalCalc();
             $('#won').text('￦')
             // $('.pResult').$('#selectedSize').text($('#selectSize').val())

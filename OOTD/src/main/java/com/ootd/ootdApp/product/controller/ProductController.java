@@ -390,14 +390,39 @@ public class ProductController {
 			int result = productService.productUpdate(originalProduct, attachList, pType);
 			
 			
-			if( pType == 1 ) {
-				System.out.println("productUpdate 완료");
-				return "myPage/myPage_Brand_Product";		// 상품 수정완료 후 brand 마이페이지로 이동  
-			} else {
-				System.out.println("productUpdate 완료");
+			String loc = "";
+			String msg = "";
+			
+			// 수정 성공 했다면 
+			if (result > 0) {
 				
-				return "myPage/myPage_Product";		// 상품 수정완료 후 second 마이페이지로 이동 
+				if( pType == 1 ) {
+					
+					msg = "브랜드 상품 수정 성공";
+					loc = "/myPage/myPage_Brand_Product.mp";
+					
+					System.out.println("productUpdate 완료");
+				} else {
+					
+					msg = "중고 상품 수정 성공";
+					loc = "/myPage/myPage_Product.mp";
+					
+					System.out.println("productUpdate 완료");
+					
+				}
+			} else {	// 수정 실패 했다면
+				
+				msg = "상품 수정 실패";
+				loc = "/common/error";
+				
 			}
+			
+			
+			model.addAttribute("msg", msg);
+			model.addAttribute("loc", loc);
+			
+			return "common/msg";		// 상품 수정완료 후 마이페이지로 이동 
+			
 
 		}
 	
