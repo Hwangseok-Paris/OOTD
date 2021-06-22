@@ -66,7 +66,7 @@
             
             <!-- PW1 -->
             <input type="hidden" id="pswd1" name="member_pw" value="${ pass }">
-            <input type="hidden" id="pswd2" name="member_pw" value="${ pass }">
+            <input type="hidden" id="pswd2" value="${ pass }">
                 
 			</c:if>
 			
@@ -333,7 +333,24 @@
                 error[1].style.color = "#ff0000";
                 error[1].style.display = "block";
             } else {
-                error[1].style.display = "none";
+            	error[1].style.display = "none";
+            	}
+        }
+            
+        function checkNickname() {
+            var idPattern = /[a-zA-Z0-9_-]{5,20}/;
+            if(nick.value === "") {
+                error[4].innerHTML = "필수 정보입니다.";
+                error[4].style.color = "#ff0000";
+                error[4].style.display = "block";
+            } else if(!idPattern.test(nick.value)) {
+                error[4].innerHTML = "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
+                error[4].style.color = "#ff0000";
+                error[4].style.display = "block";
+            } else {
+                error[4].innerHTML = "사용 가능한 닉네임 형식입니다.";
+                error[4].style.color = "#08A600";
+                error[4].style.display = "block";
             }
         }
         
@@ -379,23 +396,6 @@
             }
         }
 
-        function checkNickname() {
-            var idPattern = /[a-zA-Z0-9_-]{5,20}/;
-            if(nick.value === "") {
-                error[4].innerHTML = "필수 정보입니다.";
-                error[4].style.color = "#ff0000";
-                error[4].style.display = "block";
-            } else if(!idPattern.test(nick.value)) {
-                error[4].innerHTML = "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
-                error[4].style.color = "#ff0000";
-                error[4].style.display = "block";
-            } else {
-                error[4].innerHTML = "사용 가능한 닉네임 형식입니다.";
-                error[4].style.color = "#08A600";
-                error[4].style.display = "block";
-            }
-        }
-        
         /*
         function isBirthCompleted() {
             var yearPattern = /[0-9]{4}/;

@@ -63,6 +63,7 @@
                                     <input type="text" name="review_title" class="input-review-title">
                                     <input type="hidden" name="member_no" value="${ member.member_no }" />
                                     <input type="hidden" name="product_no" value="${ info.product_no }" />
+                                    <input type="hidden" name="order_no" value="${ orderNo }" />
                                 </div>
                                 <div class="review-content">
                                     <span>내용</span>

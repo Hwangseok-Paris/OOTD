@@ -365,12 +365,12 @@ public class SecondHandConrtoller {
 	}
 
 	@RequestMapping("/myPage/myPage_Review.mp")
-	public String myPageReview(@RequestParam int pno, @RequestParam int mno, Model model) {
+	public String myPageReview(@RequestParam int ono, @RequestParam int pno, @RequestParam int mno, Model model) {
 
 		System.out.println("Review Controller access");
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
-
+		
 		map.put("product_no", pno);
 		map.put("member_no", mno);
 
@@ -379,6 +379,7 @@ public class SecondHandConrtoller {
 		Review_ProductInfo info = secondHandService.selectReviewInfo(map);
 
 		model.addAttribute("info", info);
+		model.addAttribute("orderNo", ono);
 
 		return "myPage/myPage_Review";
 	}

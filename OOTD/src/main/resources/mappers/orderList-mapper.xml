@@ -78,7 +78,7 @@
 		WHERE ORDER_NO = #{order_no}
 	</update>
 	
-	<select id="selectOrderStatus" parameterType="string" resultType="O_Order">
+	<select id="selectOrderStatus" parameterType="string" resultType="O_Order_List">
 		SELECT ORDER_STATUS
 		FROM O_ORDER_LIST
 		WHERE ORDER_NO = #{order_no}
@@ -98,7 +98,7 @@
 	</select>
 	
 	<insert id="insertReview" parameterType="review">
-		INSERT INTO REVIEW VALUES(SEQ_REVIEW_NO.NEXTVAL, #{ review_contents }, SYSDATE, #{ review_title }, #{ member_no }, #{ product_no })
+		INSERT INTO REVIEW VALUES(SEQ_REVIEW_NO.NEXTVAL, #{ review_contents }, SYSDATE, #{ review_title }, #{ member_no }, #{ product_no }, #{order_no})
 	</insert>
 
 
