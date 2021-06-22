@@ -52,29 +52,32 @@ public class MemberController {
 		else return "myPage/myPage_Info";
 	}
 	
-	@RequestMapping("/member/kakaoMemberJoin.do")
+	@RequestMapping("/member/snsMemberJoin.do")
 	public String kakaoMemberJoin(
 				@RequestParam String member_id, 
-				@RequestParam String nickname,
+				@RequestParam String name,
+				@RequestParam String email,
 				Model model
 			) {
 		
-		System.out.println("kakao joinForm controller access : " + member_id + "/" + nickname);
+		System.out.println("kakao joinForm controller access : " + member_id + "/" + name + "/" + email);
 		
 		String pass = randomCode();
 		
 		
 		model.addAttribute("member_id", member_id);
-		model.addAttribute("nickname", nickname);
+		model.addAttribute("name", name);
+		model.addAttribute("email", email);
 		model.addAttribute("pass", pass);
 		
 		return "member/memberJoin";
 	}
 	
-	@RequestMapping(value={"member/kakaoLogin.do", "*/member/kakaoLogin.do"})
+	@RequestMapping(value={"member/snsLogin.do", "*/member/snsLogin.do"})
 	public String kakaoLogin(
 				@RequestParam String member_id,
-				Model model
+				Model model,
+				SessionStatus status
 			) {
 		
 		System.out.println("login Access");
@@ -94,6 +97,7 @@ public class MemberController {
 		} else {
 			msg = "아이디를 다시 확인해주세요.";
 		}
+		
 		
 		model.addAttribute("msg", msg);
 		model.addAttribute("loc", loc);
@@ -435,16 +439,16 @@ public class MemberController {
 		return generatedString;
 	}
 
-	@RequestMapping(value={"member/kakaoCheck.do", "*/member/kakaoCheck.do"})
+	@RequestMapping(value={"member/emailCheck.do", "*/member/emailCheck.do"})
 	@ResponseBody
-	public int kakaoCheck(@RequestParam String id) {
+	public String emailCheck(@RequestParam String email) {
 		
 		System.out.println("kakaoCheck Controller Access");
 		
-		int count = memberService.selectKakaoCount(id);
+		String member_id = memberService.selectEmailCount(email);
 		
 		
-		return count;
+		return member_id;
 	}
 	
 	

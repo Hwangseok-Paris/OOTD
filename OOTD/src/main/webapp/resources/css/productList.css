@@ -197,6 +197,7 @@ html.dark .thumbnail-info {
     transition: 0.2s;
 }
 
+
 html.dark #prod-regis {
     float: right;
     border-radius: 5px;
@@ -210,6 +211,14 @@ html.dark #prod-regis:hover {
     background: white;
     color: black;
     transition: 0.2s;
+}
+
+html.dark .showArea:hover {
+	color: white;
+}
+
+html.dark .showArea {
+	color: gray;
 }
 
 .side-bar{

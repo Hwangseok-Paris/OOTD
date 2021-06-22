@@ -40,7 +40,6 @@
                         <button type="button" id="join-btn" class="btn btn-link" onclick="goMyPage()">MYPAGE</button>
                             | 
                     	<button type="button" id="logout-btn" class="btn btn-link" onclick="logout()">LOGOUT</button>
-                    	
                     </div>
                 </div> 
                 <!-- 내 정보 모달 끝 -->
@@ -74,32 +73,36 @@
                             <label for="psw"> Password</label>
                             <input type="password" class="form-control" id="member_pw" name="member_pw"placeholder="Enter password">
                         </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" value="" checked>Remember me</label>
-                        </div>
 
                         <div class="join-btn-group">
                             <button type="button" id="join-btn" class="btn btn-link" onclick="goJoinPage()">JOIN</button>
                             |
-                            <button type="submit" id="login-btn" class="btn btn-link">LOGIN</button>
+                            <button type="submit" id="login-btn" class="btn btn-link" >LOGIN</button>
                         </div>
                     </form>
                 </div>
                 <!-- Modal 내 ID/PW 입력 및 로그인/ 가입 버튼 끝 -->
         
-        	<input type="hidden" id="kakaoCode" value="${ code }" />
-        	<input type="hidden" id="kakaoTocken" value="${ tocken }" />
 
               <!-- 모달 내 메신저 ID 로그인 디자인 시작 -->
               <div id = "login-service">
-                <div id="kakao-box">
+              	<div id="kakao-box">
+                    <img id="icon-img" src="https://t1.daumcdn.net/cfile/tistory/992DA6415B743DB62B">
+                    <p id="kakao_text">로그인</p>
+                </div>
+                <!-- <div id="google-box">
+                    <img id="icon-img" src="https://t1.daumcdn.net/cfile/tistory/99D8AF415B743DB636">
+                    구글로 로그인  -->
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                <!-- </div> -->
+                <%-- <div id="kakao-box">
                     <!-- <img id="icon-img" src="https://t1.daumcdn.net/cfile/tistory/992DA6415B743DB62B"> -->
-                    <img src="${pageContext.request.contextPath }/resources/images/kakao_login_medium_narrow.png" alt="" />
+                    <img id="icon-img kakao" src="${pageContext.request.contextPath }/resources/images/kakao_login_medium_narrow.png" alt="" />
                 </div>
                 <div id="google-box">
-                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                </div>
-                
+                	<img id="icon-img google" src="${pageContext.request.contextPath }/resources/images/btn_google_signin_light_normal_web.png" alt="" />
+                    <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+                </div> --%>
             </div>
             <!-- 메신저 ID 로그인 디자인 끝 -->
 
@@ -233,76 +236,63 @@
         	// SDK 초기화 여부를 판단합니다.
             console.log(Kakao.isInitialized());
         	
-        	// google init
-        	// init();
         });
         
         $('#kakao-box').on('click', function() {
         	loginWithKakao();
         	
-        	/* console.log(code);
-            
-        	if ( code != null ) {
-        		
-        		Kakao.Auth.setAccessToken(code);
-        		
-        		selectMyAccessTockenWithKakao();
-        		
-        		selectMyInfoWithKakao();
-        		
-        		
-        	} */
-        });
-        
-        $('#logout-btn').on('click', function() {
-        	kakaoLogout();
-        	signOut();
         });
         
         $('#google-box').on('click', function() {
         	onSignIn();
-        });
+        }); 
         
         
         
         //카카오 로그인
-        function loginWithKakao() {
-            /* Kakao.Auth.authorize({
-                redirectUri: 'http://localhost:8088/ootdApp'
-              }); */	
+        function loginWithKakao() {	
               
-              
-            	    Kakao.Auth.login({
-            	      success: function (response) {
-            	        Kakao.API.request({
-            	          url: '/v2/user/me',
-            	          success: function (response) {
-            	        	  console.log(response)
-            	        	  console.log(response.id)
-            	        	  console.log(response['kakao_account']['profile']['nickname'])
+        	Kakao.Auth.login({
+            	success: function (response) {
+            	    Kakao.API.request({
+            	        url: '/v2/user/me',
+            	        success: function (response) {
+            	        	console.log(response)
+            	        	console.log(response.id)
+            	        	console.log(response['kakao_account']['profile']['nickname'])
             	        	  
-            	        	  var id = response.id;
-            	        	  var nickname = response['kakao_account']['profile']['nickname'];
+            	        	var id = response.id;
+            	        	var name = response['kakao_account']['profile']['nickname'];
+            	            var email = response['kakao_account']['email'];
             	        	  
+            	            kakaoLogout();
             	        	  
-            	        	  $.ajax({
+            	        	$.ajax({
             	      			type: "POST",
-            	      			url: "${pageContext.request.contextPath}/member/kakaoCheck.do",
-            	      			data: { id : id }, 
+            	      			url: "${pageContext.request.contextPath}/member/emailCheck.do",
+            	      			data: { email : email }, 
             	      			success: function(data){
             	      				console.log(data);
-            	      				console.log("Kakao Id 검사 성공")
+            	      				console.log("Kakao email 검사 성공")
             	      				
-            	      				if ( data == 0 ) {
-            	      					location.href = '${pageContext.request.contextPath}/member/kakaoMemberJoin.do?member_id='+id+'&nickname='+nickname;
-            	      				} else {
-            	      					location.href = '${pageContext.request.contextPath}/member/kakaoLogin.do?member_id='+id;
-            	      				}
+            	      				
+            	      				
+            	      				if ( data == "" ) {
+	      								location.href = '${pageContext.request.contextPath}/member/snsMemberJoin.do?member_id='+id+'&email='+email+'&name='+name;
+	      							} else {
+	      								
+	      								if ( data == id ) {
+	      									location.href = '${pageContext.request.contextPath}/member/snsLogin.do?member_id='+id;
+	      								} else {
+	      									alert("이미 해당 이메일로 가입되어 있는 계정이 존재합니다. 아이디 찾기를 이용해 내일의 옷 계정으로 로그인해주세요.");
+	      								}
+	      					
+	      				}
             	      				
             	      			},
             	      			
             	      			error: function(){
-            	      				alert('Kakao Id 검사 실패');
+            	      				alert('Kakao email 검사 실패');
             	      			}
             	      			
             	      		});
@@ -336,8 +326,8 @@
           }  
         
         
-      //처음 실행하는 함수
-        function init() {
+      // google login 처음 실행하는 함수
+          function init() {
         	gapi.load('auth2', function() { 
         		gapi.auth2.init();
         		options = new gapi.auth2.SigninOptionsBuilder();
@@ -348,30 +338,9 @@
                 // GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
         		gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
         	})
-        }
+        } 
 
-        /* function onSignIn(googleUser) {
-        	var access_token = googleUser.getAuthResponse().access_token
-        	$.ajax({
-            	// people api를 이용하여 프로필 및 생년월일에 대한 선택동의후 가져온다.
-        		url: 'https://people.googleapis.com/v1/people/me'
-                // key에 자신의 API 키를 넣습니다.
-        		, data: {personFields:'birthdays', key:'AIzaSyAhyc0KHqSFMDC6TUNyuv__9YfZR0jzrGk', 'access_token': access_token}
-        		, method:'GET'
-        	})
-        	.done(function(e){
-                //프로필을 가져온다.
-        		var profile = googleUser.getBasicProfile();
-        		console.log(profile)
-        	})
-        	.fail(function(e){
-        		console.log(e);
-        	})
-        }
-        function onSignInFailure(t){		
-        	console.log(t);
-        } */
-        
+       
         // 구글구글구글구글
         function onSignIn(googleUser) {
         	 var profile = googleUser.getBasicProfile();
@@ -382,28 +351,38 @@
         	 var name = profile.getName();
         	 var email = profile.getEmail();
         	 
+        	 signOut();
+        	 
         	 $.ajax({
-	      			type: "POST",
-	      			url: "${pageContext.request.contextPath}/member/GoogleCheck.do",
-	      			data: { email : email }, 
-	      			success: function(data){
-	      				console.log(data);
-	      				console.log("Google Id 검사 성공")
-	      				
-	      				if ( data == 0 ) {
-	      					location.href = '${pageContext.request.contextPath}/member/GoogleMemberJoin.do?member_id='+id+'&email='+email;
-	      				} else {
-	      					alert("이미 해당 이메일로 가입되어 있는 계정이 존재합니다. 아이디 찾기를 이용해 내일의 옷 계정으로 로그인해주세요.");
-	      				}
-	      				
-	      			},
-	      			
-	      			error: function(){
-	      				alert('Kakao Id 검사 실패');
-	      			}
-	      			
-	      		});
+       			type: "POST",
+       			url: "${pageContext.request.contextPath}/member/emailCheck.do",
+       			data: { email : email }, 
+       			success: function(data){
+       				console.log(data);
+       				console.log("Google email 검사 성공");
+       				
+       				if ( data == "" ) {
+       					location.href = '${pageContext.request.contextPath}/member/snsMemberJoin.do?member_id='+id+'&email='+email+'&name='+name;
+       				} else {
+       					if ( data == id ) {
+       						location.href = '${pageContext.request.contextPath}/member/snsLogin.do?member_id='+id;
+       						
+       					} else {
+       						alert("이미 해당 이메일로 가입되어 있는 계정이 존재합니다. 아이디 찾기를 이용해 내일의 옷 계정으로 로그인해주세요.");
+       					}
+       					
+       				}
+       				
+       			},
+       			
+       			error: function(){
+       				alert('Google email 검사 실패');
+       			}
+       			
+       		});
+        	 
         }
+      
         
         function signOut() {
             var auth2 = gapi.auth2.getAuthInstance();
@@ -411,6 +390,10 @@
               console.log('User signed out.');
             });
           }
+        
+        function onSignInFailure(t){		
+        	console.log(t);
+        }
         	
         
         

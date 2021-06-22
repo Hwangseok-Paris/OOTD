@@ -16,5 +16,5 @@ public interface MemberDAO {
 
 	int updateNewPass(Member member);
 
-	int selectKakaoCount(String id);
+	String selectEmailCount(String email);
 }

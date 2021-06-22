@@ -49,6 +49,7 @@ th {
 	color:black;
 }
 
+
 /* 테이블 전체 메뉴 설정 */
 table {
     border-collapse: collapse;
@@ -79,6 +80,11 @@ table {
 
 }
 
+html.dark .member-info tr {
+	line-height: 50px;
+	border-bottom: gray solid 0.5px;
+}
+
 tr>:first-child {
     width: 155px;
     text-align: left;
@@ -107,6 +113,12 @@ tr>:first-child {
     line-height: 50px;
 }
 
+html.dark .member-info th {
+    border-bottom: gray solid 2px;
+    font-size: 15px;
+    line-height: 50px;
+}
+
 .container-myPage button{
     background: black;
     border: black solid 0.5px;
@@ -116,6 +128,12 @@ tr>:first-child {
     position: relative;
     display: inline-block;
     line-height: normal !important;
+}
+
+html.dark .container-myPage button{
+    background: grey;
+    border: grey solid 0.5px;
+    color: white;
 }
 
 .section-title {
