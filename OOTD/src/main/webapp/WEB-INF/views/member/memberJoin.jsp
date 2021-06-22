@@ -30,7 +30,7 @@
 	</script>
 </c:if>
 
-  <form name="memberJoinFrm" action="memberJoinEnd.do" method="post">
+  <form id="memberJoinFrm" action="memberJoinEnd.do" method="post">
     <!-- wrapper -->
     <div id="wrapper">
         <h1 style="text-align: center;">JOIN(개인)</h1>
@@ -51,7 +51,7 @@
 			
 			<c:if test="${ ! empty member_id }">
 			
-            <input type="hidden" name="member_id" value="${ member_id }">
+            <input type="hidden" id="id" name="member_id" value="${ member_id }">
                
             <!-- NAME -->
             <div>
@@ -65,7 +65,8 @@
             </div>
             
             <!-- PW1 -->
-            <input type="hidden" name="member_pw" value="${ pass }">
+            <input type="hidden" id="pswd1" name="member_pw" value="${ pass }">
+            <input type="hidden" id="pswd2" name="member_pw" value="${ pass }">
                 
 			</c:if>
 			
@@ -115,7 +116,7 @@
                   <span style="color: red;">*</span><label for="pswd2">비밀번호 확인</label>
                 </h3>
                 <span class="box int_pass_check">
-                    <input type="password" id="pswd2" name="member_pw_chk" class="int" maxlength="25" placeholder="비밀번호 확인">
+                    <input type="password" id="pswd2" class="int" maxlength="25" placeholder="비밀번호 확인">
                     <img src="${pageContext.request.contextPath }/resources/images/m_icon_check_disable.png" id="pswd2_img1" class="pswdImg">
                 </span>
                 <span class="error_next_box"></span>
@@ -128,7 +129,7 @@
                   <span style="color: red;">*</span><label for="nickname">닉네임</label>
                 </h3>
                 <span class="box int_nickName">
-                    <input type="text" id="id" name="member_nickname" class="int" maxlength="20" placeholder="닉네임 입력">
+                    <input type="text" id="nick" name="member_nickname" class="int" maxlength="20" placeholder="닉네임 입력">
                 </span>
                 <span class="error_next_box"></span>
             </div>
@@ -321,23 +322,21 @@
             }
         }
 
-        function checkNickname() {
-            var idPattern = /[a-zA-Z0-9_-]{5,20}/;
-            if(nick.value === "") {
+        function checkName() {
+            var namePattern = /[a-zA-Z가-힣]/;
+            if(userName.value === "") {
                 error[1].innerHTML = "필수 정보입니다.";
                 error[1].style.color = "#ff0000";
                 error[1].style.display = "block";
-            } else if(!idPattern.test(nick.value)) {
-                error[1].innerHTML = "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
+            } else if(!namePattern.test(userName.value) || userName.value.indexOf(" ") > -1) {
+                error[1].innerHTML = "한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)";
                 error[1].style.color = "#ff0000";
                 error[1].style.display = "block";
             } else {
-                error[1].innerHTML = "사용 가능한 닉네임 형식입니다.";
-                error[1].style.color = "#08A600";
-                error[1].style.display = "block";
+                error[1].style.display = "none";
             }
         }
-
+        
         function checkPw() {
             var pwPattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;
             if(pw1.value === "") {
@@ -380,21 +379,23 @@
             }
         }
 
-        function checkName() {
-            var namePattern = /[a-zA-Z가-힣]/;
-            if(userName.value === "") {
+        function checkNickname() {
+            var idPattern = /[a-zA-Z0-9_-]{5,20}/;
+            if(nick.value === "") {
                 error[4].innerHTML = "필수 정보입니다.";
                 error[4].style.color = "#ff0000";
                 error[4].style.display = "block";
-            } else if(!namePattern.test(userName.value) || userName.value.indexOf(" ") > -1) {
-                error[4].innerHTML = "한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)";
+            } else if(!idPattern.test(nick.value)) {
+                error[4].innerHTML = "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
                 error[4].style.color = "#ff0000";
                 error[4].style.display = "block";
             } else {
-                error[4].style.display = "none";
+                error[4].innerHTML = "사용 가능한 닉네임 형식입니다.";
+                error[4].style.color = "#08A600";
+                error[4].style.display = "block";
             }
         }
-
+        
         /*
         function isBirthCompleted() {
             var yearPattern = /[0-9]{4}/;
@@ -455,7 +456,7 @@
         }
 
         function checkAddr1() {
-            if(userName.value === "") {
+            if(address1.value === "") {
                 error[7].innerHTML = "필수 정보입니다.";
                 error[7].style.color = "#ff0000";
                 error[7].style.display = "block";
@@ -466,7 +467,7 @@
 
         function checkAddr2() {
             var namePattern = /[a-zA-Z가-힣]/;
-            if(userName.value === "") {
+            if(address2.value === "") {
                 error[8].innerHTML = "필수 정보입니다.";
                 error[8].style.color = "#ff0000";
                 error[8].style.display = "block";
@@ -476,7 +477,7 @@
         }
 
         function checkAccount() {
-            if(userName.value === "") {
+            if(account.value === "") {
                 error[9].innerHTML = "필수 정보입니다.";
                 error[9].style.color = "#ff0000";
                 error[9].style.display = "block";
