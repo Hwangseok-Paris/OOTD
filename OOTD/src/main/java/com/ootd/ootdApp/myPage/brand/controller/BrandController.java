@@ -22,6 +22,8 @@ import com.ootd.ootdApp.member.model.service.MemberService;
 import com.ootd.ootdApp.member.model.vo.Member;
 import com.ootd.ootdApp.myPage.brand.model.service.BrandService;
 import com.ootd.ootdApp.myPage.brand.model.vo.MypageOrderList;
+import com.ootd.ootdApp.myPage.brand.model.vo.O_Order;
+import com.ootd.ootdApp.myPage.brand.model.vo.O_Order_List;
 import com.ootd.ootdApp.product.model.vo.Attachment;
 import com.ootd.ootdApp.product.model.vo.Product;
 
@@ -308,9 +310,14 @@ public class BrandController {
 	// 주문 내역 - 소비자가 주문한 주문 내역 - 자세히 보기
 	@RequestMapping("myPage/myPage_Order_Detail.mp")
 	@ResponseBody
-	public List<MypageOrderList> selectBrandOrderDetail(@RequestParam int orderNo) {
-
-		List<MypageOrderList> list = brandService.selectBrandOrderDetail(orderNo);
+	public List<MypageOrderList> selectBrandOrderDetail(@RequestParam int orderNo, @RequestParam int productNo) {
+	
+		O_Order tempOrder = new O_Order();
+		
+		tempOrder.setOrder_no(orderNo);
+		tempOrder.setProduct_no(productNo);
+		
+		List<MypageOrderList> list = brandService.selectBrandOrderDetail(tempOrder);
 		System.out.println("order_detail :: 여기 왔나요");
 		System.out.println("selectBrandOrderDetail [list] : " + list);
 
@@ -320,9 +327,13 @@ public class BrandController {
 	// 주문 내역 - 발송 완료 버튼 눌렀을 때
 	@RequestMapping("myPage/myPage_Brand_Send.mp")
 	@ResponseBody
-	public int myPage_Brand_Send(@RequestParam int orderNo, Model model) {
+	public int myPage_Brand_Send(@RequestParam int orderNo, @RequestParam int productNo, Model model) {
 		
-		int a = brandService.updateBrandStatus(orderNo);
+		O_Order_List tempOrder = new O_Order_List();
+		tempOrder.setOrder_no(orderNo);
+		tempOrder.setProduct_no(productNo);
+				
+		int a = brandService.updateBrandStatus(tempOrder);
 		
 		// 업체가 발송 완료 버튼을 눌렀을때 order_status, purchases_status를 '2'로 바꿔줘야 함
 		// sql update를 통해 정상적으로 변경이 되었다면 result라는 새로운 변수에 '2' 값을 넣어줌(update에 실패한다면 result는 0)

@@ -4,7 +4,7 @@
 <mapper namespace="orderList-mapper"> 
 
    <select id="selectBrandOrderList" resultType="O_Order" parameterType="string">
-	SELECT P.PRODUCT_NAME, OL.ORDER_QUANTITY, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE, OL.ORDER_STATUS
+	SELECT P.PRODUCT_NAME, OL.ORDER_QUANTITY, O.ORDER_NO, O.ORDER_DATE, (OL.ORDER_QUANTITY*P.PRODUCT_PRICE) AS TOTAL_PRICE, OL.ORDER_STATUS, P.PRODUCT_NO
         FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P, MEMBER M
         WHERE O.ORDER_NO = OL.ORDER_NO
         	AND OL.PRODUCT_NO = P.PRODUCT_NO
@@ -20,18 +20,18 @@
 		WHERE O.ORDER_NO = OL.ORDER_NO
 	</select>
 
-   <select id="selectBrandOrderDetail" resultType="O_Order" parameterType="_int">
-   		SELECT A.ORDER_NO, A.MEMBER_NO, C.PRODUCT_NAME, A.ORDER_ADDRESS, A.RECEIVER_NAME, A.ORDER_DATE, B.ORDER_QUANTITY, A.TOTAL_PRICE
+   <select id="selectBrandOrderDetail" resultType="O_Order" parameterType="O_Order">
+   		SELECT A.ORDER_NO, A.MEMBER_NO, C.PRODUCT_NAME, A.ORDER_ADDRESS, A.RECEIVER_NAME, A.ORDER_DATE, B.ORDER_QUANTITY, (B.ORDER_QUANTITY*C.PRODUCT_PRICE) AS TOTAL_PRICE
    		FROM O_ORDER A, O_ORDER_LIST B, PRODUCT C
    		WHERE A.ORDER_NO = B.ORDER_NO
         	AND B.PRODUCT_NO = C.PRODUCT_NO AND 
-   		A.ORDER_NO = #{ order_no }
+   		A.ORDER_NO = #{ order_no } AND C.PRODUCT_NO = #{ product_no }
    </select>
    
    <update id="updateBrandStatus" parameterType="_int">
    		UPDATE O_ORDER_LIST
    		SET ORDER_STATUS = 2
-		WHERE ORDER_NO = #{ order_no }
+		WHERE ORDER_NO = #{ order_no } AND PRODUCT_NO = #{ product_no }
    </update>
    
    <update id="updateNoBrandStatus" parameterType="_int">
