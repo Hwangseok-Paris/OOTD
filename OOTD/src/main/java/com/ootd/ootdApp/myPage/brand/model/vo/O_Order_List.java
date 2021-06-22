@@ -19,5 +19,5 @@ public class O_Order_List implements Serializable {
 	private int order_quantity;
 	private int order_no;
 	private int product_no;
-
+	private int order_status;
 }
