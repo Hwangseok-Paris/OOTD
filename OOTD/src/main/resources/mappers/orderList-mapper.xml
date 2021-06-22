@@ -4,7 +4,7 @@
 <mapper namespace="orderList-mapper"> 
 
    <select id="selectBrandOrderList" resultType="O_Order" parameterType="string">
-	SELECT P.PRODUCT_NAME, OL.ORDER_QUANTITY, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE, O.ORDER_STATUS
+	SELECT P.PRODUCT_NAME, OL.ORDER_QUANTITY, O.ORDER_NO, O.ORDER_DATE, O.TOTAL_PRICE, OL.ORDER_STATUS
         FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P, MEMBER M
         WHERE O.ORDER_NO = OL.ORDER_NO
         	AND OL.PRODUCT_NO = P.PRODUCT_NO
@@ -29,7 +29,7 @@
    </select>
    
    <update id="updateBrandStatus" parameterType="_int">
-   		UPDATE O_ORDER 
+   		UPDATE O_ORDER_LIST
    		SET ORDER_STATUS = 2
 		WHERE ORDER_NO = #{ order_no }
    </update>
@@ -41,7 +41,7 @@
    </update>
 
 	<select id="selectOrderList" parameterType="string" resultType="O_Order">
-		SELECT M.BRAND_NAME, P.PRODUCT_NO, P.PRODUCT_NAME, OL.ORDER_SIZE AS PRODUCT_SIZE, O.ORDER_NO, O.ORDER_DATE, (OL.ORDER_QUANTITY*P.PRODUCT_PRICE) AS TOTAL_PRICE, O.ORDER_STATUS 
+		SELECT M.BRAND_NAME, P.PRODUCT_NO, P.PRODUCT_NAME, OL.ORDER_SIZE AS PRODUCT_SIZE, O.ORDER_NO, O.ORDER_DATE, (OL.ORDER_QUANTITY*P.PRODUCT_PRICE) AS TOTAL_PRICE, OL.ORDER_STATUS 
 		FROM O_ORDER O, O_ORDER_LIST OL, PRODUCT P, MEMBER M 
 		WHERE O.ORDER_NO = OL.ORDER_NO AND OL.PRODUCT_NO = P.PRODUCT_NO AND O.MEMBER_NO = M.MEMBER_NO AND M.MEMBER_NAME= #{ member_name }
 		ORDER BY O.ORDER_DATE DESC
@@ -67,7 +67,7 @@
 	</select>
 	
 	<update id="updateOrderSaleStatus" parameterType="_int">
-		UPDATE O_ORDER
+		UPDATE O_ORDER_LIST
 		SET ORDER_STATUS = 2
 		WHERE ORDER_NO = #{order_no}
 	</update>
@@ -80,7 +80,7 @@
 	
 	<select id="selectOrderStatus" parameterType="string" resultType="O_Order">
 		SELECT ORDER_STATUS
-		FROM O_ORDER
+		FROM O_ORDER_LIST
 		WHERE ORDER_NO = #{order_no}
 	</select>
 	
@@ -104,7 +104,7 @@
 
 
 	<update id="updatePurchaseStatus" parameterType="_int">
-		UPDATE O_ORDER
+		UPDATE O_ORDER_LIST
 		SET ORDER_STATUS = 3
 		WHERE ORDER_NO = #{order_no}
 	</update>
