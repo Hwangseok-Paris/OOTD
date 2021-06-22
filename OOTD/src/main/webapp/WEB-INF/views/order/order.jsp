@@ -90,7 +90,7 @@
             
             <tr style="background-color: #fff;">
                <td style="padding: 22px 0;"><span class="totalPrice price" id="price" ></span>원</td>
-               <td><span class="price" id="price">0</span>원</td>
+               <td><span class="price" id="price"></span>무료</td>
                <td><span class="totalPrice price" id="price "></span>원</td>
             </tr>
          </table>
@@ -273,7 +273,7 @@ function calcPrice(){
 		  } else {
 			 order_memo = $('#memoChoice option:selected').text();
 		  }
-	   });
+	   })
 
 	 
    
@@ -436,7 +436,7 @@ function calcPrice(){
   	    pay_method : pay_method,
   	    merchant_uid : 'merchant_' + new Date().getTime(),
   	    name : 'OOTD',
-  	    amount : 100,
+  	    amount : total_price,
   	    buyer_email : email+"@"+domainName,
   	    buyer_name : receiver_name,
   	    buyer_tel : phone,
