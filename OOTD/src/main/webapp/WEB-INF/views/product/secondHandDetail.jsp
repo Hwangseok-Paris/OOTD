@@ -84,8 +84,15 @@
                     <dt>
                         <b>Select Size</b>
                         <select name="" id="selectSize" style="width: 130px; float: right; margin-right: 30px;">
-                            <option value=''>선택안함</option>
-                            <option value="${ product.product_size }">${ product.product_size }</option>
+
+                            <option value="">선택안함</option>
+                            <c:if test="${ product.product_stock_s == 0 && product.product_stock_m == 0 && product.product_stock_l == 0}">
+                            	<option value="">품절</option>
+                           	 </c:if>
+                            <c:if test="${ product.product_stock_s != 0 || product.product_stock_m != 0 || product.product_stock_l != 0}">
+                            	<option value="${ product.product_size }">${ product.product_size }</option>
+                           	 </c:if>
+
                         </select> <br>
                     </dt><hr>
                     <dt class="pOrigin">

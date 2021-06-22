@@ -76,7 +76,7 @@
                 <span style="margin-left: 180px;" >￦</span><span id="ppPrice">9999999999999</span> <br><hr>
                 
                 <dl>
-                    <dt class="drop"><b>Team</b> 
+                    <dt class="drop"><b>팀 원</b> 
                         <span class="accIcon" style="float: right; margin-right: 30px;"> 
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
@@ -95,7 +95,7 @@
                         홍정완 , 김황석 <br />
                     </span> <br></dd>
                     <hr>
-                    <dt class="drop"><b>Team Detail</b> 
+                    <dt class="drop"><b>마지막 한마디</b> 
                         <span class="accIcon" style="float: right; margin-right: 30px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
@@ -107,20 +107,21 @@
                     </dt>
                     <dd class="ddd"><span class="pInfoText">
                      <br /><br />
-                        박건형 :  , 엄기원 :  <br /><br /> 
-                        
-                        박다인 : ,  김현진 :  <br /><br /> 
-                        
-                        홍정완 : ,  김황석 :  <br />
+                        박건형 :  음.... 저는 다인님이 새벽마다 고의로 제 코드지우시는 부분이 너무 힘들었어요...<br /> <br />
+                        엄기원 :  ㅜㅜ <br /><br />
+                        박다인 :  건형님? 저는 건형님의 코드를 건든적이 없는데요ㅡㅡ<br /><br />
+                        홍정완 :  스프링 쓰지 마세요. 장고 쓰세요.  <br /><br />
+                        김황석 :  그동안 즐거웠고..<br /><br />
+                        김현진 :  죽겠어요^^ <br />
                     </span> <br></dd>
                     <hr>
                     <dt>
-                        <b>Difficulty</b>
+                        <b>마무리</b>
                         <select name="" id="selectSize" class="selectSize" style="width: 140px; float: right; margin-right: 30px;" >
-                            <option value="">choice</option>
-                           	<option value="모두">high</option>
-                           	<option value="고생했어요">middle</option>
-                           	<option value="Good luck">row</option>
+                            <option value="">선택</option>
+                           	<option value="모두">1</option>
+                           	<option value="고생했어요">2</option>
+                           	<option value="Good luck">3</option>
                         </select> <br>
                     </dt><hr>
                     <dt class="pOrigin">
@@ -195,7 +196,7 @@
                 result.removeClass('#origin');
                 result.addClass($('#selectSize').val());
                 result.addClass('frmSize');
-                result.find('.selectedSize').text("[" + $('#selectSize').val() + "]");
+                result.find('.selectedSize').text($('#selectSize').val());
                 result.find('.selSize').val($('#selectSize').val());
                 
                 $('.pResult').append(result);
