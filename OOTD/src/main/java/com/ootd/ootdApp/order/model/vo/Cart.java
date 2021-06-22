@@ -25,5 +25,6 @@ public class Cart implements Serializable{
 	private int product_price;
 	
 	private String att_name;
+	private int product_type;
 	
 }

@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 .imgInput{
-          border: rgb(165, 163, 163) solid;
-          margin-top: 5px;
+          border: black 1px solid;
+          margin: 5px;
     }
-    [id*=ImgArea]:hover {
+[id*=ImgArea]:hover {
 		cursor : pointer;
     }
     .inputBox{
@@ -72,4 +72,19 @@
   #btn:hover{
     cursor : pointer;
     }
+    
+.iip{
+	height: 150px;
+	width: 120px;
+}
+
+.addImg{
+	height : 50px !important;
+	width:  50px !important;
+	margin-left: 35px;
+	margin-top: 50px;
+	
+	
+}
+    
     

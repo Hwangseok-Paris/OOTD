@@ -53,7 +53,6 @@ div[class$=cate]  {
     cursor: pointer;
     color: black;
 }
-
 .category {
     padding-left: -30px;
 }
@@ -97,11 +96,20 @@ div[class$=cate]  {
 
 #prod-li, #brand-li {
     margin-left: -30px;
+
 }
 
 #prod-li, #brand-li:hover {
 	cursor: pointer !important;
 	color: black !important;
+}
+
+.prod, .brand{
+	font-size: 12pt;	
+}
+
+.filter-text{
+	font-size: 12pt;
 }
 
 .content-wrapper {
@@ -140,6 +148,8 @@ div[class$=cate]  {
     display: none;
    	padding : 0px 30px;
     text-align: center;
+    font-size: 11pt;
+    font-weight: 550;
 }
 .thumbnail-list .p_attr:hover{
 	display: inline-block;

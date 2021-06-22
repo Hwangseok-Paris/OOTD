@@ -61,14 +61,32 @@ section{
     .package{
         display: inline;
     }
-    .btn{
-        margin-left: 25px;
-        border-radius: 15%;
-        background-color: white;
-        width: 120px;
-        height: 40px;
-        font-weight: bolder;
-    }
+ .inputBox3 .btn{
+
+ 	border: black solid 0.5px;
+	width: 170px;
+	line-height: 25px;
+	position: relative;
+	display: inline-block;
+	border-radius: unset;
+	margin: 20px 5px;
+	font-size: 10pt;
+	
+     }
+.btnArea{
+	width: auto;
+	text-align:center;
+	margin: 40px auto;
+}
+
+.btn:hover{
+	    box-shadow: 2px 2px 5px gray;
+	    font-weight: 600;
+}
+
+     
+     
+     
     .btn:hover, .dropArea:hoer, .underMenu:hover, {
 		cursor : pointer;
     }

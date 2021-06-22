@@ -337,7 +337,7 @@
         
         
       //처음 실행하는 함수
-        function init() {
+/*         function init() {
         	gapi.load('auth2', function() { 
         		gapi.auth2.init();
         		options = new gapi.auth2.SigninOptionsBuilder();
@@ -348,7 +348,7 @@
                 // GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
         		gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
         	})
-        }
+        } */
 
         /* function onSignIn(googleUser) {
         	var access_token = googleUser.getAuthResponse().access_token
