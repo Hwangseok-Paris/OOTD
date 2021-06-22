@@ -22,7 +22,7 @@
 
 </head>
 <body>
-  <form name="memberJoinFrm" action="memberJoinEnd.do" method="post">
+  <form id="memberJoinFrm" action="memberJoinEnd.do" method="post">
     <!-- wrapper -->
     <div id="wrapper">
         <h1 style="text-align: center;">JOIN(업체)</h1>
@@ -182,7 +182,7 @@
 
             <!-- JOIN BTN-->
             <div class="joinOrCancel">
-                <button type="submit" id="joinBtn" class="btn btn-secondary btn-sm">가입하기</button>
+                <button type="button" id="joinBtn" class="btn btn-secondary btn-sm" onclick="check_form();">가입하기</button>
                 <button type="button" id="cancelBtn" class="btn btn-secondary btn-sm">작성 취소</button>
             </div>
             <br />
@@ -274,7 +274,7 @@
 
         function checkNickname() {
             var idPattern = /[a-zA-Z0-9_-]{5,20}/;
-            if(id.value === "") {
+            if(nick.value === "") {
                 error[1].innerHTML = "필수 정보입니다.";
                 error[1].style.color = "#ff0000";
                 error[1].style.display = "block";
@@ -407,7 +407,7 @@
         }
 
         function checkAddr1() {
-            if(userName.value === "") {
+            if(address1.value === "") {
                 error[7].innerHTML = "필수 정보입니다.";
                 error[7].style.color = "#ff0000";
                 error[7].style.display = "block";
@@ -418,7 +418,7 @@
 
         function checkAddr2() {
             var namePattern = /[a-zA-Z가-힣]/;
-            if(userName.value === "") {
+            if(address2.value === "") {
                 error[8].innerHTML = "필수 정보입니다.";
                 error[8].style.color = "#ff0000";
                 error[8].style.display = "block";
@@ -428,7 +428,7 @@
         }
 
         function checkAccount() {
-            if(userName.value === "") {
+            if(account.value === "") {
                 error[9].innerHTML = "필수 정보입니다.";
                 error[9].style.color = "#ff0000";
                 error[9].style.display = "block";

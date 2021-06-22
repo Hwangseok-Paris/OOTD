@@ -30,7 +30,7 @@
 	</script>
 </c:if>
 
-  <form name="memberJoinFrm" action="memberJoinEnd.do" method="post">
+  <form id="memberJoinFrm" action="memberJoinEnd.do" method="post">
     <!-- wrapper -->
     <div id="wrapper">
         <h1 style="text-align: center;">JOIN(개인)</h1>
@@ -51,7 +51,7 @@
 			
 			<c:if test="${ ! empty member_id }">
 			
-            <input type="hidden" name="member_id" value="${ member_id }">
+            <input type="hidden" id="id" name="member_id" value="${ member_id }">
                
             <!-- NAME -->
             <div>
@@ -65,7 +65,8 @@
             </div>
             
             <!-- PW1 -->
-            <input type="hidden" name="member_pw" value="${ pass }">
+            <input type="hidden" id="pswd1" name="member_pw" value="${ pass }">
+            <input type="hidden" id="pswd2" name="member_pw" value="${ pass }">
                 
 			</c:if>
 			
@@ -115,7 +116,7 @@
                   <span style="color: red;">*</span><label for="pswd2">비밀번호 확인</label>
                 </h3>
                 <span class="box int_pass_check">
-                    <input type="password" id="pswd2" name="member_pw_chk" class="int" maxlength="25" placeholder="비밀번호 확인">
+                    <input type="password" id="pswd2" class="int" maxlength="25" placeholder="비밀번호 확인">
                     <img src="${pageContext.request.contextPath }/resources/images/m_icon_check_disable.png" id="pswd2_img1" class="pswdImg">
                 </span>
                 <span class="error_next_box"></span>
@@ -128,7 +129,7 @@
                   <span style="color: red;">*</span><label for="nickname">닉네임</label>
                 </h3>
                 <span class="box int_nickName">
-                    <input type="text" id="id" name="member_nickname" class="int" maxlength="20" placeholder="닉네임 입력">
+                    <input type="text" id="nick" name="member_nickname" class="int" maxlength="20" placeholder="닉네임 입력">
                 </span>
                 <span class="error_next_box"></span>
             </div>
@@ -455,7 +456,7 @@
         }
 
         function checkAddr1() {
-            if(userName.value === "") {
+            if(address1.value === "") {
                 error[7].innerHTML = "필수 정보입니다.";
                 error[7].style.color = "#ff0000";
                 error[7].style.display = "block";
@@ -466,7 +467,7 @@
 
         function checkAddr2() {
             var namePattern = /[a-zA-Z가-힣]/;
-            if(userName.value === "") {
+            if(address2.value === "") {
                 error[8].innerHTML = "필수 정보입니다.";
                 error[8].style.color = "#ff0000";
                 error[8].style.display = "block";
@@ -476,7 +477,7 @@
         }
 
         function checkAccount() {
-            if(userName.value === "") {
+            if(account.value === "") {
                 error[9].innerHTML = "필수 정보입니다.";
                 error[9].style.color = "#ff0000";
                 error[9].style.display = "block";
