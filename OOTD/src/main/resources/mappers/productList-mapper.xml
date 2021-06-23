@@ -51,6 +51,7 @@
 		WHERE OL.PRODUCT_NO(+) = P.PRODUCT_NO
    			AND P.MEMBER_NO = #{ member_no }
    			AND PRODUCT_STATUS = 'Y' 
+   			AND QUANTITY > 0
 	</select>
 	
 	<!-- 건형 -->

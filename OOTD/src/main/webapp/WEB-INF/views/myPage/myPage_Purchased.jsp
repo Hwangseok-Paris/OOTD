@@ -187,7 +187,6 @@
 				$('.modal-quantity>div.order-quantity').text(data[0].order_quantity);
 				$('.price-area>span.price-amount').text(data[0].total_price);
 			},
-			
 			error: function(){
 				alert('주문 상세보기 실패');
 			}

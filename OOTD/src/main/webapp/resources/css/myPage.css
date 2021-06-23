@@ -376,7 +376,7 @@ textarea{
 .pagination_r {
 	display: inline-block;
     text-align: center;
-    padding-left: 45%;
+    padding-left: 43% !important;
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px;
