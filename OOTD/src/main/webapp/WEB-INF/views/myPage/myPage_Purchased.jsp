@@ -52,7 +52,7 @@
 	                                </div>
 	                            </td>
 	                            <td id="order_no">
-	                                <div class="order-no" name="order_no" >${s.order_no }</div>
+	                                <div class="order-no" name="order_no" id="${s.product_no}">${s.order_no }</div>
 	                            </td>
 	                            <td class="order-date">${s.order_date }</td>
 	                            <td class="total-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${s.total_price}" />&#8361;</td>
@@ -164,6 +164,8 @@
 		 
 		 var orderNo = $(this).text();
 		 console.log(orderNo);
+		 var productNo = $(this).attr('id');
+    	 console.log("pNo", productNo);
 		 
 		$.ajax({
 			type: "POST",
