@@ -47,7 +47,6 @@
                             <td>
                                 <div class="product-info">
                                     <span class="product-name">${o.product_name}</span>
-                                    <span class="product-option">(small)</span>
                                 </div>
                             </td>
                             <td>
