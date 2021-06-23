@@ -122,6 +122,9 @@
                 case "3":
                     $(this).text('거래완료');
                     break;
+                case "4":
+                    $(this).text('거래완료');
+                    break;
             }
         })
     })

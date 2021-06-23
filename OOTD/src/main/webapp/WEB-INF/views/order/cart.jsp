@@ -122,7 +122,7 @@
             <div align="center">
                <button type="button" class="btn default orderbtn" id="orderAll">전체상품주문</button>
                <button type="button" class="btn default" id="orderSelected">선택상품주문</button>
-               <button type="button" class="btn default footerbtn" id="footerbtn continueShopping" type="button" onclick="location.href='${pageContext.request.contextPath}'" style="color: white; font-size:10pt;">쇼핑 계속하기</button>
+               <button type="button" class="btn default footerbtn continueShopping" id="footerbtn" type="button" onclick="location.href='${pageContext.request.contextPath}'" >쇼핑 계속하기</button>
                <span class="clearboth"></span>
             </div>
             <br /><br /><br /><br />
