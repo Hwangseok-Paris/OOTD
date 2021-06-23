@@ -81,6 +81,8 @@
 				console.log("productNo="+productNo);
 				location.href = "${pageContext.request.contextPath}/myPage/myPage_Product_Delete.mp?productNo="+productNo;
 				});
+			
+			$('.pagination_r').css('padding-left', '35%');
 		});
 
     </script>
